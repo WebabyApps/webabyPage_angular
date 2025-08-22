@@ -1,0 +1,11 @@
+
+.hero{position:relative;min-height:100vh;display:grid;place-items:center;padding-top:64px;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:url('../../../assets/hero-bg.jpg') center/cover no-repeat, radial-gradient(100% 100% at 50% 0%, #0b0f14, #071018 70%); filter:saturate(1.1) contrast(1.05)}
+.hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.55),rgba(0,0,0,0) 25%,rgba(0,0,0,0) 75%,rgba(0,0,0,.7))}
+.hero-center{position:relative;z-index:1;text-align:center;display:grid;gap:12px;place-items:center}
+.hero-logo{width:min(320px,60vw);filter:drop-shadow(0 10px 30px rgba(0,0,0,.5));cursor:pointer;transition:transform .2s}
+.hero-logo:hover{transform:scale(1.02)}
+.tagline{opacity:.9}
+.btn{display:inline-block;padding:.8rem 1.25rem;border:1px solid rgba(255,255,255,.6);border-radius:999px;background:rgba(0,0,0,.25);transition:transform .15s,border-color .15s,background .15s}
+.btn:hover{transform:translateY(-2px);border-color:#fff;background:rgba(255,255,255,.08)}
+.scroll-indicator{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);opacity:.7;font-size:.9rem}

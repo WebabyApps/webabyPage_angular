@@ -1,0 +1,24 @@
+
+.site-header{position:fixed;top:0;left:0;right:0;z-index:50;transition:background .25s,border-color .25s,color .25s}
+.site-header.transparent{background:transparent;border-bottom:1px solid transparent}
+.site-header.scrolled{background:rgba(255,255,255,.5);backdrop-filter:saturate(130%) blur(6px);border-bottom:1px solid rgba(255,255,255,.65);color:#111}
+.site-header .brand img{height:40px}
+.nav-row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0}
+.main-nav{display:flex;gap:20px;font-weight:600}
+.main-nav a{padding:8px 10px;border-radius:8px}
+.site-header.scrolled .main-nav a{color:#111}
+.main-nav a:hover{background:rgba(255,255,255,.08)}
+.hamburger{display:none;position:relative;width:42px;height:34px;background:transparent;border:none;cursor:pointer;color:#fff;z-index:60}
+.hamburger span{position:absolute;left:8px;right:8px;height:3px;background:currentColor;border-radius:2px;transition:transform .25s, top .25s, opacity .2s}
+.hamburger span:nth-child(1){top:9px}
+.hamburger span:nth-child(2){top:16px}
+.hamburger span:nth-child(3){top:23px}
+.hamburger.active span:nth-child(1){top:16px;transform:rotate(45deg)}
+.hamburger.active span:nth-child(2){opacity:0}
+.hamburger.active span:nth-child(3){top:16px;transform:rotate(-45deg)}
+#navMenu.open{display:flex}
+@media (max-width: 900px){
+  .main-nav{display:none;position:absolute;top:64px;right:20px;left:20px;flex-direction:column;background:rgba(0,0,0,.9);border:1px solid var(--line);border-radius:12px;padding:10px;z-index:55}
+  .main-nav a{padding:12px;border-radius:8px;color:#fff !important;}
+  .hamburger{display:block}
+}

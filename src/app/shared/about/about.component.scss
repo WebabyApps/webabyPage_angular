@@ -1,0 +1,6 @@
+
+.about-grid{display:grid;grid-template-columns:1.1fr 1.5fr;gap:24px;align-items:center}
+.about-hero{border-radius:16px;border:1px solid var(--line);background:#0f1520}
+.about-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+.about-strip img{border-radius:10px;border:1px solid var(--line);aspect-ratio:16/9;object-fit:cover}
+@media (max-width: 900px){ .about-grid{grid-template-columns:1fr} }

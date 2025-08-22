@@ -1,0 +1,17 @@
+
+<header id="top" class="site-header" [class.transparent]="!scrolled" [class.scrolled]="scrolled">
+  <div class="container nav-row">
+    <a href="#home" class="brand" aria-label="Webaby Home">
+      <img src="assets/logo.png" alt="Webaby logo" />
+    </a>
+    <button class="hamburger" aria-label="Open menu" [attr.aria-expanded]="menuOpen" (click)="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="navMenu" class="main-nav" [class.open]="menuOpen">
+      <a href="#home" (click)="closeMenu()">Home</a>
+      <a href="#products" (click)="closeMenu()">Products</a>
+      <a href="#about" (click)="closeMenu()">About Us</a>
+      <a href="#contact" (click)="closeMenu()">Contact</a>
+    </nav>
+  </div>
+</header>

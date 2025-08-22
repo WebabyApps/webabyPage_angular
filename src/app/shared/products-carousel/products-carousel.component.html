@@ -1,0 +1,14 @@
+
+<div class="carousel">
+  <button class="car-arrow left" aria-label="Previous" (mouseenter)="hover(-1)" (mouseleave)="stopHover()" (click)="spring(-1)">&#10094;</button>
+  <div #track class="car-track">
+    <article class="card" *ngFor="let p of products">
+      <img [src]="p.img" [alt]="p.title">
+      <div class="card-body">
+        <h3>{{p.title}}</h3>
+        <p>{{p.desc}}</p>
+      </div>
+    </article>
+  </div>
+  <button class="car-arrow right" aria-label="Next" (mouseenter)="hover(1)" (mouseleave)="stopHover()" (click)="spring(1)">&#10095;</button>
+</div>

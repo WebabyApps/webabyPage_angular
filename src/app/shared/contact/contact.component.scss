@@ -1,0 +1,9 @@
+
+.contact{margin-top:10px}
+.contact .contact-line{display:grid;grid-template-columns:120px 1fr;gap:12px;align-items:center;margin-bottom:8px}
+.contact label{opacity:.9}
+.contact input, .contact textarea{width:100%;padding:.7rem .9rem;border-radius:10px;border:1px solid var(--line);background:#0f1520;color:var(--text)}
+.contact .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.contact-expand{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .4s ease}
+.contact-expand.show{max-height:700px;padding-top:8px}
+@media (max-width: 900px){ .contact .row{grid-template-columns:1fr} }

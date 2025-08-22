@@ -1,0 +1,16 @@
+
+:host{display:block}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:grid;grid-template-columns:1fr;transition:transform .25s, box-shadow .25s; min-width: var(--slide-w-desktop);}
+.card:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.card img{aspect-ratio:16/9;object-fit:cover}
+.card-body{padding:14px}
+:host{--gap:18px; --slide-w-desktop: 360px; --slide-w-mobile: calc(100% - 40px);}
+.carousel{position:relative;margin-top:12px}
+.car-track{display:flex;gap:var(--gap);overflow:hidden;scroll-behavior:auto;padding:2px}
+.car-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:5;border:none;background:rgba(255,255,255,.85);color:#111;width:40px;height:40px;border-radius:50%;cursor:pointer;display:grid;place-items:center;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+.car-arrow.left{left:-8px} .car-arrow.right{right:-8px}
+.car-arrow:hover{background:#fff}
+@media (max-width: 900px){
+  .card{min-width: var(--slide-w-mobile);}
+  .car-arrow.left{left:4px} .car-arrow.right{right:4px}
+}

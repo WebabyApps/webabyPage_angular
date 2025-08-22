@@ -1,0 +1,24 @@
+
+<form class="contact" (submit)="onSubmit($event)">
+  <div class="contact-line">
+    <label for="email">Email</label>
+    <input id="email" name="email" type="email" placeholder="you@domain.com" required (focus)="expand()" (input)="expand()">
+  </div>
+  <div class="contact-expand" [class.show]="expanded">
+    <div class="row">
+      <div class="field">
+        <label for="name">Name</label>
+        <input id="name" name="name" type="text" placeholder="Your name">
+      </div>
+      <div class="field">
+        <label for="topic">Topic</label>
+        <input id="topic" name="topic" type="text" placeholder="What is it about?">
+      </div>
+    </div>
+    <div class="field">
+      <label for="message">Message</label>
+      <textarea id="message" name="message" rows="5" placeholder="Write your message..."></textarea>
+    </div>
+    <button class="btn" type="submit">Send</button>
+  </div>
+</form>
