@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common'; 
 @Component({
     selector: 'app-contact',
     templateUrl: './contact.component.html',
     styleUrls: ['./contact.component.scss'],
-    standalone: false
+    imports: [CommonModule],
+    standalone: true
 })
 export class ContactComponent{
   expanded=false;

@@ -1,5 +1,8 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+//import { Product } from '../models/products';  
+import { ProductDialogComponent } from '../product-dialog/product-dialog.component';
 type Product = { title: string; img: string; desc: string };
 @Component({
     selector: 'app-products-carousel',

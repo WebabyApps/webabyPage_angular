@@ -11,3 +11,19 @@ h1,h2,h3{margin:0 0 12px} h2{font-size:clamp(1.6rem,3vw,2rem)} h3{font-size:1.25
 .social a{display:inline-grid;place-items:center;width:36px;height:36px;border-radius:8px;border:1px solid var(--line);margin-left:8px;transition:transform .15s, background .15s, border-color .15s}
 .social a:hover{transform:translateY(-2px);background:#121a24;border-color:#2a3a4c}
 .social svg{width:18px;height:18px;fill:currentColor;color:#fff}
+.blurred-backdrop {
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+  .glass-panel .mdc-dialog__surface {
+    /* Angular Material 15+ */
+    background: transparent !important; /* bo panel sam ma tło w komponencie */
+    box-shadow: none !important;
+  }
+.mdc-dialog__actions {
+    display: flex;
+    justify-content: flex-end;
+    padding: 16px;
+    border-top: 1px solid var(--line);
+  }   
