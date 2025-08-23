@@ -2,9 +2,14 @@ import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Product } from '../models/products';
 import { Router } from '@angular/router';
+import { QRCodeComponent } from 'angularx-qrcode'; //
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-product-dialog',
+  standalone: true, 
+  imports: [QRCodeComponent, CommonModule, MatButtonModule],
   template: `
   <div class="dialog">
     <button class="close" aria-label="Close" (click)="close()">×</button>
@@ -21,9 +26,11 @@ import { Router } from '@angular/router';
       </div>
     </div>
 
-    <button mat-raised-button color="primary" (click)="goToDetails()">
+<div class="dialog-actions">
+    <button mat-raised-button color="primary" class="glow-btn" (click)="goToDetails()">
       Detailed tutorial
     </button>
+  </div>
   </div>
   `,
   styles: [`

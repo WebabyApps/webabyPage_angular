@@ -1,26 +1,54 @@
+// src/app/shared/products-carousel/products-carousel.component.ts
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatDialog } from '@angular/material/dialog';
-//import { Product } from '../models/products';  
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ProductDialogComponent } from '../product-dialog/product-dialog.component';
-type Product = { title: string; img: string; desc: string };
+
+type CardProduct = { title: string; img: string; desc: string };
+
 @Component({
-    selector: 'app-products-carousel',
-    templateUrl: './products-carousel.component.html',
-    styleUrls: ['./products-carousel.component.scss'],
-    imports: [CommonModule],
-    standalone: true
+  selector: 'app-products-carousel',
+  standalone: true,
+  templateUrl: './products-carousel.component.html',
+  styleUrls: ['./products-carousel.component.scss'],
+  imports: [CommonModule, MatDialogModule]
 })
-export class ProductsCarouselComponent implements AfterViewInit{
-  @ViewChild('track',{static:true}) trackRef!: ElementRef<HTMLDivElement>;
-  products: Product[] = [
-    { title:'Bubble Word', img:'assets/bubble.jpg', desc:'Fast-paced word puzzler bursting with color and combos. Train vocabulary and reflexes.'},
-    { title:'Basketball Shots', img:'assets/basket.jpg', desc:'Arcade-style hoops with comic visuals. Shoot, swipe, and chase high scores with friends.'},
-    { title:'System of Equations Trainer', img:'assets/equations.jpg', desc:'Make algebra click with interactive drills and visual challenges that build intuition.'},
-    { title:'Abecadlowo', img:'assets/scene1.jpg', desc:'Alphabet adventures — playful letter quests that spark reading and spelling joy.'},
-    { title:'Lucky Draw', img:'assets/scene2.jpg', desc:'Spin, pick, celebrate! Party‑friendly mini‑game for fair choices and quick fun.'},
-    { title:'Bibble Echo', img:'assets/scene3.jpg', desc:'Rhythm & memory mashup — echo the pattern, level up your flow and focus.'},
+export class ProductsCarouselComponent implements AfterViewInit {
+  @ViewChild('track', { static: true }) trackRef!: ElementRef<HTMLDivElement>;
+
+  products: CardProduct[] = [
+    { title:'Bubble Word', img:'assets/bubble.jpg', desc:'Fast-paced word puzzler...' },
+    { title:'Basketball Shots', img:'assets/basket.jpg', desc:'Arcade-style hoops...' },
+    { title:'System of Equations Trainer', img:'assets/equations.jpg', desc:'Make algebra click...' },
+    { title:'Abecadlowo', img:'assets/scene1.jpg', desc:'Alphabet adventures...' },
+    { title:'Lucky Draw', img:'assets/scene2.jpg', desc:'Spin, pick, celebrate!' },
+    { title:'Bibble Echo', img:'assets/scene3.jpg', desc:'Rhythm & memory mashup...' },
   ];
+
+  constructor(private dialog: MatDialog) {}
+
+  openDialog(p: CardProduct) {
+    console.log('[carousel] card clicked:', p.title); // ✅ sanity check
+    this.dialog.open(ProductDialogComponent, {
+      panelClass: 'transparent-dialog', // <-- półprzezroczysty panel
+      width: '800px',
+      autoFocus: true,
+      data: {
+        title: p.title,
+        imageUrl: p.img,                         // map img -> imageUrl
+        appUrl: 'https://example.com',           // TODO: set real link
+        slug: p.title.toLowerCase().replace(/\s+/g, '-')
+      },     
+      // backdropClass: 'no-dim-backdrop', // <-- odkomentuj, jeśli NIE chcesz przyciemnienia tła
+      maxWidth: '90vw'
+    });
+  }
+
+  
+
+
+
+  
   private autoplayId:any=null; private hoverId:any=null;
   ngAfterViewInit(){ this.startAutoplay(); window.addEventListener('resize',()=>this.nudge()); }
   private track(){ return this.trackRef.nativeElement; }

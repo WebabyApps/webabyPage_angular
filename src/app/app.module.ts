@@ -7,7 +7,6 @@ import { ProductsCarouselComponent } from './shared/products-carousel/products-c
 import { AboutComponent } from './shared/about/about.component';
 import { ContactComponent } from './shared/contact/contact.component';
 import { FooterComponent } from './shared/footer/footer.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 // app.module.ts
@@ -32,7 +31,6 @@ import { QRCodeComponent } from 'angularx-qrcode';
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
     MatDialogModule,
     MatButtonModule,
     QRCodeComponent // Import the QRCodeComponent here

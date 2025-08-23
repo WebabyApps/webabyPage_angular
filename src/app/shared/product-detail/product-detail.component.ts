@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { NgIf } from '@angular/common';
+import { NgIf ,TitleCasePipe } from '@angular/common';
 
 @Component({
   standalone: true,
   selector: 'app-product-detail',
-  imports: [NgIf, RouterLink],
+  imports: [NgIf, RouterLink, TitleCasePipe],
   template: `
     <div class="container">
       <h1>{{ slug | titlecase }} – Tutorial</h1>

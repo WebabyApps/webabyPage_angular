@@ -14,6 +14,17 @@
   .card{min-width: var(--slide-w-mobile);}
   .car-arrow.left{left:4px} .car-arrow.right{right:4px}
 }
+:host {
+  display: block;
+  max-width: 100%;
+}
+
+.hero {
+  width: 100%;
+  height: auto;
+  object-fit: contain; // albo 'cover' jeśli ma wypełniać całość
+  display: block;
+}
 .grid {
   display: grid;
   gap: 16px;

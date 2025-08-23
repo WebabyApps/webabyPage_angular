@@ -1,8 +1,17 @@
-
 <div class="carousel">
-  <button class="car-arrow left" aria-label="Previous" (mouseenter)="hover(-1)" (mouseleave)="stopHover()" (click)="spring(-1)">&#10094;</button>
+  <button class="car-arrow left"
+          aria-label="Previous"
+          (mouseenter)="hover(-1)"
+          (mouseleave)="stopHover()"
+          (click)="spring(-1)">&#10094;</button>
+
   <div #track class="car-track">
-    <article class="card" *ngFor="let p of products">
+    <article class="card"
+             *ngFor="let p of products"
+             (click)="openDialog(p)"
+             (keyup.enter)="openDialog(p)"
+             role="button"
+             tabindex="0">
       <img [src]="p.img" [alt]="p.title">
       <div class="card-body">
         <h3>{{p.title}}</h3>
@@ -10,5 +19,10 @@
       </div>
     </article>
   </div>
-  <button class="car-arrow right" aria-label="Next" (mouseenter)="hover(1)" (mouseleave)="stopHover()" (click)="spring(1)">&#10095;</button>
+
+  <button class="car-arrow right"
+          aria-label="Next"
+          (mouseenter)="hover(1)"
+          (mouseleave)="stopHover()"
+          (click)="spring(1)">&#10095;</button>
 </div>
