@@ -52,7 +52,6 @@
       }
     }
   },
-  "defaultProject": "webaby-angular",
   "cli": {
     "analytics": false
   }
