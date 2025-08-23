@@ -7,9 +7,36 @@ import { ProductsCarouselComponent } from './shared/products-carousel/products-c
 import { AboutComponent } from './shared/about/about.component';
 import { ContactComponent } from './shared/contact/contact.component';
 import { FooterComponent } from './shared/footer/footer.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+// app.module.ts
+import { QRCodeComponent } from 'angularx-qrcode';
+
 @NgModule({
-  declarations:[AppComponent,HeaderComponent,HeroComponent,ProductsCarouselComponent,AboutComponent,ContactComponent,FooterComponent],
-  imports:[BrowserModule],
-  bootstrap:[AppComponent]
+  imports: [
+    // ...
+    QRCodeComponent, // ✅ standalone component
+  ],
 })
-export class AppModule{}
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    HeroComponent,
+    ProductsCarouselComponent,
+    AboutComponent,
+    ContactComponent,
+    FooterComponent
+  ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
+    MatButtonModule,
+    QRCodeComponent // Import the QRCodeComponent here
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule {}
