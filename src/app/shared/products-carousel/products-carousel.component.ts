@@ -1,10 +1,12 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { CommonModule } from '@angular/common';
 type Product = { title: string; img: string; desc: string };
 @Component({
     selector: 'app-products-carousel',
     templateUrl: './products-carousel.component.html',
     styleUrls: ['./products-carousel.component.scss'],
-    standalone: false
+    imports: [CommonModule],
+    standalone: true
 })
 export class ProductsCarouselComponent implements AfterViewInit{
   @ViewChild('track',{static:true}) trackRef!: ElementRef<HTMLDivElement>;

@@ -1,7 +1,28 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterOutlet } from '@angular/router';
+
+import { HeaderComponent } from './shared/header/header.component';
+import { HeroComponent } from './shared/hero/hero.component';
+import { ProductsCarouselComponent } from './shared/products-carousel/products-carousel.component';
+import { AboutComponent } from './shared/about/about.component';
+import { ContactComponent } from './shared/contact/contact.component';
+import { FooterComponent } from './shared/footer/footer.component';
+
 @Component({
-    selector: 'app-root',
-    template: `
+  selector: 'app-root',
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterOutlet,
+    HeaderComponent,
+    HeroComponent,
+    ProductsCarouselComponent,
+    AboutComponent,
+    ContactComponent,
+    FooterComponent
+  ],
+  template: `
     <app-header></app-header>
     <app-hero></app-hero>
     <main id="content">
@@ -25,7 +46,6 @@ import { Component } from '@angular/core';
       </section>
     </main>
     <app-footer></app-footer>
-  `,
-    standalone: false
+  `
 })
-export class AppComponent{}
+export class AppComponent {}

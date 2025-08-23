@@ -1,9 +1,12 @@
 import { Component, HostListener } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
 @Component({
     selector: 'app-header',
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.scss'],
-    standalone: false
+    imports: [CommonModule],
+    standalone: true
 })
 export class HeaderComponent{
   scrolled=false; menuOpen=false;
