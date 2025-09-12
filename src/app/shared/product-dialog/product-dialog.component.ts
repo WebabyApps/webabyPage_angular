@@ -23,6 +23,7 @@ import { MatButtonModule } from '@angular/material/button';
       <div class="qr-caption">
         <a [href]="data.appUrl" target="_blank" rel="noopener">Open app link</a>
         <p>Scan the QR code to open the app on your phone</p>
+         <p></p>
       </div>
     </div>
 

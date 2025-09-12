@@ -1,10 +1,38 @@
+<section class="hero" [class.compact]="compact">
+  <!-- background layer (keeps your starry bg, etc.) -->
+  <div class="hero-bg"></div>
 
-<section id="home" class="hero">
-  <div class="hero-bg" role="img" aria-label="Abstract network background"></div>
-  <div class="hero-center">
-    <img src="assets/logo_white.png" alt="Webaby Logo" class="hero-logo" (click)="scrollToProducts()"/>
-    <p class="tagline">Play • Learn • Imagine</p>
-    <a href="#products" class="btn">Explore Products</a>
+  <div class="hero-content">
+    <!-- BIG LOGO (hidden on compact pages) -->
+   <!-- <img class="hero-logo"
+         src="/assets/logo_white.png"  
+         alt="Webaby logo" /> -->
+        <!--   <img class="hero-logo"
+     src="assets/logo_white.png"
+     alt="Webaby logo" /> -->
+     <a class="hero-logo-link"
+     [routerLink]="'/'"
+     fragment="about"
+     aria-label="Go to About section">
+    <img class="hero-logo" src="assets/logo_white.png" alt="Webaby logo" />
+  </a>
+
+   <!-- <h1>{{ title }}</h1> -->
+    <p>{{ subtitle }}</p>
+    <!-- Scroll version (home) -->
+    <button *ngIf="!ctaLink" class="cta" (click)="scrollToProducts()">
+      {{ ctaText }}
+    </button>
+
+
+
+      <a *ngIf="ctaLink"
+   [routerLink]="ctaLink"
+   [fragment]="ctaFragment"
+   class="cta">
+    {{ ctaText }}
+    </a>
+     
   </div>
-  <div class="scroll-indicator">↓ Scroll</div>
 </section>
+

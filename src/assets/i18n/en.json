@@ -1,0 +1,7 @@
+
+{
+    "nav": { "home": "Home", "products": "Products", "about": "About", "contact": "Contact" },
+    "social": { "youtube": "YouTube", "discord": "Discord", "twitter": "Twitter / X" },
+    "aria": { "home": "Webaby Home" }
+  }
+  

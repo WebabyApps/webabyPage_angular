@@ -1,0 +1,71 @@
+/* existing grid + mobile ordering stays as you already have */
+
+/* Responsive 16:9 YouTube wrapper */
+.yt-wrap{
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 */
+  overflow: hidden;
+  border-radius: 12px;
+  border: 1px solid var(--line, rgba(255,255,255,.12));
+}
+.yt-wrap iframe{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+  border-radius: 12px;
+}
+
+.fade-in-section { opacity: 0; transform: translateY(40px);
+  transition: opacity .8s ease-out, transform .8s ease-out; will-change: opacity, transform; }
+.fade-in-section.visible { opacity: 1; transform: translateY(0); }
+
+
+.tut-row{
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 24px;
+  align-items: start;
+  margin: 32px 0;
+}
+
+/* Desktop default: text left, image right */
+.tut-text { order: 1; }
+.tut-media { order: 2; }
+
+/* Optional: alternate on desktop when [reverse]="true" */
+.tut-row.reverse{
+  grid-template-columns: 1fr 1.2fr;
+}
+.tut-row.reverse .tut-text{ order: 2; }
+.tut-row.reverse .tut-media{ order: 1; }
+
+.tut-media{ margin: 0; }
+.tut-media img{
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid var(--line, rgba(255,255,255,.12));
+}
+
+/* Mobile: single column AND image first always */
+@media (max-width: 900px){
+  .tut-row{
+    grid-template-columns: 1fr;
+  }
+  .tut-media{ order: 1; }
+  .tut-text { order: 2; }
+
+  /* ignore reverse on mobile */
+  .tut-row.reverse .tut-text,
+  .tut-row.reverse .tut-media{
+    order: initial; /* reset first… */
+  }
+  .tut-media{ order: 1; }  /* …then enforce image first */
+  .tut-text { order: 2; }
+}

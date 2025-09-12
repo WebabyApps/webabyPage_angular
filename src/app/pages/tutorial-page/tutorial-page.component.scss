@@ -1,0 +1,57 @@
+:host { display:block; }
+
+
+  /* ⬇️ More space under the compact hero */
+  .tutorial { 
+    margin-top: clamp(56px, 9vh, 160px); /* was ~24–56px; now much roomier */
+  }
+
+  /* optional: tidy the title spacing */
+  .tutorial h1 {
+    margin-top: 0;
+    margin-bottom: clamp(12px, 2vw, 18px);
+  }
+
+  /* page width + spacing */
+  .tutorial.narrow { max-width: 980px; margin: 0 auto; }
+  
+  .section { padding: clamp(16px,2vw,24px) 0; }
+  .section + .section { border-top: 1px solid var(--line); }
+  .lead { opacity:.9; margin-top:.25rem; }
+
+  /* steps */
+  ol.steps { margin: .5rem 0 0; padding-left: 1.25rem; }
+  ol.steps li { margin: .25rem 0; }
+
+  /* gallery as neat cards */
+  .media-grid {
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 14px;
+    margin-top: 10px;
+  }
+  .media-grid figure {
+    margin:0; border:1px solid var(--line);
+    border-radius:12px; overflow:hidden; background:#0f1520;
+    box-shadow: 0 8px 22px rgba(0,0,0,.25);
+  }
+  .media-grid img { display:block; width:100%; height:auto; }
+  .media-grid figcaption { padding:8px 10px; font-size:.9rem; opacity:.8; }
+
+  /* Responsive YouTube sizes */
+  .yt { --w: 640px; width: min(100%, var(--w)); margin: 12px auto; }
+  .yt iframe { width: 100%; aspect-ratio: 16 / 9; display:block; border:0; border-radius:12px; }
+
+  /* size presets */
+  .yt--sm { --w: 420px; }   /* smaller */
+  .yt--md { --w: 640px; }   /* default */
+  .yt--lg { --w: 820px; }   /* larger */
+  .app-header {
+    width: 100%;
+    height: auto;
+    margin: 12px 0 20px;
+    border-radius: 12px;
+    border: 1px solid var(--line, #ddd);
+    box-shadow: 0 4px 16px rgba(0,0,0,.15);
+    object-fit: cover;
+  }

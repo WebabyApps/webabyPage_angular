@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ProductDialogComponent } from '../product-dialog/product-dialog.component';
 
-type CardProduct = { title: string; img: string; desc: string };
+type CardProduct = { title: string; img: string; desc: string,appUrl?:string,deatailsUrl?:string };   
 
 @Component({
   selector: 'app-products-carousel',
@@ -17,12 +17,12 @@ export class ProductsCarouselComponent implements AfterViewInit {
   @ViewChild('track', { static: true }) trackRef!: ElementRef<HTMLDivElement>;
 
   products: CardProduct[] = [
-    { title:'Bubble Word', img:'assets/bubble.jpg', desc:'Fast-paced word puzzler...' },
-    { title:'Basketball Shots', img:'assets/basket.jpg', desc:'Arcade-style hoops...' },
-    { title:'System of Equations Trainer', img:'assets/equations.jpg', desc:'Make algebra click...' },
-    { title:'Abecadlowo', img:'assets/scene1.jpg', desc:'Alphabet adventures...' },
-    { title:'Lucky Draw', img:'assets/scene2.jpg', desc:'Spin, pick, celebrate!' },
-    { title:'Bibble Echo', img:'assets/scene3.jpg', desc:'Rhythm & memory mashup...' },
+    { title:'Bubble Word', img:'assets/bubble.jpg', desc:'Fast-paced word puzzler...', appUrl:'https://webaby.io/details/bubble-word' },
+    { title:'Basketball Shots', img:'assets/basket.jpg', desc:'Fun Arcade-style hoops...' , appUrl:'https://lucky-draw.webaby.io'},
+    { title:'System of Equations Trainer', img:'assets/equations.jpg', desc:'Make algebra easy...' , appUrl:'https://lucky-draw.webaby.io'},
+    { title:'ABC Land', img:'assets/scene1.jpg', desc:'Faboulus adventure to learn the alphabeth', appUrl:'https://play.google.com/store/apps/details?id=abecadlowo.webaby.io'},
+    { title:'Lucky Draw', img:'assets/lucky_draw.png', desc:'Spin, pick, celebrate!', appUrl:'https://lucky-draw.webaby.io' }, 
+    { title:'Bibble Echo', img:'assets/bibble_echo2.jpeg', desc:'Spirit upgrade...',appUrl:'https://bibbleecho.webaby.io/' },  
   ];
 
   constructor(private dialog: MatDialog) {}
@@ -36,8 +36,9 @@ export class ProductsCarouselComponent implements AfterViewInit {
       data: {
         title: p.title,
         imageUrl: p.img,                         // map img -> imageUrl
-        appUrl: 'https://example.com',           // TODO: set real link
-        slug: p.title.toLowerCase().replace(/\s+/g, '-')
+        appUrl: p.appUrl,           // TODO: set real link
+        slug: p.title.toLowerCase().replace(/\s+/g, '-'),
+        desc: p.desc  
       },     
       // backdropClass: 'no-dim-backdrop', // <-- odkomentuj, jeśli NIE chcesz przyciemnienia tła
       maxWidth: '90vw'

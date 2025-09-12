@@ -5,7 +5,7 @@ import { NgIf ,TitleCasePipe } from '@angular/common';
 @Component({
   standalone: true,
   selector: 'app-product-detail',
-  imports: [NgIf, RouterLink, TitleCasePipe],
+  imports: [RouterLink, TitleCasePipe],
   template: `
     <div class="container">
       <h1>{{ slug | titlecase }} – Tutorial</h1>

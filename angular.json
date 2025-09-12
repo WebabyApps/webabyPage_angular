@@ -37,8 +37,14 @@
                 }
               ],
               "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "serve": {
           "builder": "@angular/build:dev-server",
@@ -48,8 +54,12 @@
           "configurations": {
             "production": {
               "buildTarget": "webaby-angular:build:production"
+            },
+            "development": {
+              "buildTarget": "webaby-angular:build:development"
             }
-          }
+          },
+          "defaultConfiguration": "development"
         }
       }
     }

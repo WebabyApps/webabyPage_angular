@@ -120,6 +120,20 @@ h1,h2,h3{margin:0 0 12px} h2{font-size:clamp(1.6rem,3vw,2rem)} h3{font-size:1.25
     justify-content: center;         /* wyśrodkowanie w poziomie */
     padding: 16px;                   /* trochę miejsca od krawędzi */
   }
+
+  /* === Fade-in on scroll animation === */
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  will-change: opacity, transform;
+}
+
+.fade-in-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
   
   
  

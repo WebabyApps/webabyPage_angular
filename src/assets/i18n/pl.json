@@ -1,0 +1,8 @@
+
+{
+
+    "nav": { "home": "Start", "products": "Produkty", "about": "O nas", "contact": "Kontakt" },
+    "social": { "youtube": "YouTube", "discord": "Discord", "twitter": "Twitter / X" },
+    "aria": { "home": "Strona główna Webaby" }
+  }
+  

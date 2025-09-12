@@ -1,0 +1,29 @@
+<section class="tut-row" [ngClass]="{ 'reverse': reverse }">
+  <div class="tut-text">
+    <li><h3 *ngIf="title">{{ title }}</h3></li>
+    <ng-content></ng-content>
+  </div>
+
+  <!-- VIDEO -->
+  <figure class="tut-media" *ngIf="showVideo" fadeInOnScroll>
+    <div class="yt-wrap">
+      <iframe
+        [src]="embedUrl"
+        title="{{ title || 'Tutorial video' }}"
+        [attr.loading]="lazyVideo ? 'lazy' : null"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen>
+      </iframe>
+    </div>
+    <figcaption *ngIf="caption">{{ caption }}</figcaption>
+  </figure>
+
+  <!-- IMAGE -->
+  <figure class="tut-media" *ngIf="!showVideo && img" fadeInOnScroll>
+    <img [src]="img"
+         [alt]="alt || title || 'Tutorial image'"
+         [attr.loading]="lazyImg ? 'lazy' : 'eager'">
+    <figcaption *ngIf="caption">{{ caption }}</figcaption>
+  </figure>
+</section>

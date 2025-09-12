@@ -1,0 +1,246 @@
+<div class="tutorial narrow">
+  <app-hero
+    [title]="productTitle + ' Tutorial'"
+    subtitle="Step-by-step guide"
+    ctaText="Back to Products"
+    [ctaLink]="'/'"
+    [ctaFragment]="'products'"
+    [compact]="true">
+  </app-hero>
+ <section class="container tutorial narrow">
+    <h1>{{ productTitle }}</h1>
+    <ng-container [ngSwitch]="slug">
+<!-- ========== ABC-land ========== -->
+<div *ngSwitchCase="'abc-land'">
+<img class="app-header" src="assets/tutorials/abc-land/scene2_800.webp" alt="ABC-Land App Header" fadeInOnScroll/>
+<h2>Description</h2>
+<p class="lead">
+  ABC-Land is an adventure and education game where the Hero must save the world of words after
+  all the letters were stolen. As you explore fairy-tale locations, you help
+  the Hero recover letters, repair items, and rebuild meaning — learning the
+  alphabet along the way. This is new education during faboulous world game play.
+</p>
+<app-tutorial-section
+title="Start Menu"
+[img]="'assets/tutorials/abc-land/screenshoot2.jpg'"
+[lazyImg]="true"  
+alt="Start menu"
+caption="Start menu"
+reverse="true">
+ 
+         Opening the app and start menu
+            <ul>
+              <li>Play Button</li>
+              <li>Intro selection</li>
+              <li>Audio: Music, SFX, Voice-over levels</li>
+              <li>Quit Button</li>
+            </ul>
+       
+    
+</app-tutorial-section>
+
+<app-tutorial-section
+title="Sound Settings"
+[img]="'assets/tutorials/abc-land/sound-settings.jpg'"
+[lazyImg]="true"
+alt="Sound menu screen"
+caption="Adjust Music / SFX / VO levels"
+reverse="true">
+
+ <p>Use the sliders to set Music, SFX, and Voice-over. Changes are saved automatically.</p>
+
+</app-tutorial-section>
+
+<app-tutorial-section
+title="Intro"
+[img]="'assets/tutorials/abc-land/screenshoot3.jpg'"
+[lazyImg]="true"
+alt="Intro"
+caption="Adjust Music / SFX / VO levels"
+reverse="true">
+
+<p>
+    A short intro story describing the world of ABC-Land, describin main characters and why letters were important and  the Hero have to do.
+  </p>
+</app-tutorial-section>
+
+<app-tutorial-section
+title="Steering buttons"
+[img]="'assets/tutorials/abc-land/screenshoot7.jpg'"
+[lazyImg]="true"
+alt="Steering buttons"
+caption="Steering buttons"
+reverse="true">
+
+
+<p>Steering buttons are used to move the Hero in the game.</p>
+<p>Joystick is on the right.</p>
+<p>Attack  button is on the left.</p>
+
+
+</app-tutorial-section>
+
+<app-tutorial-section
+title="Hero Tasks"
+[img]="'assets/tutorials/abc-land/screenshoot1.jpg'"
+[lazyImg]="true"
+alt="Hero tasks"
+caption="Hero tasks"
+reverse="true">
+
+
+<p>Complete mini-tasks to unlock the world of ABC-Land</p>
+<section id="main-game" class="section">
+  <p>Saving Grutek Example</p>
+
+</section>
+</app-tutorial-section>
+
+<app-tutorial-section
+title="Lighter Friend"
+[img]="'assets/tutorials/abc-land/Lighter.png'"
+[lazyImg]="true"
+alt="Lighter friend"
+caption="Lighter friend"
+reverse="true">  
+<p>Lighter friend helps Hero when it is Dark. Also you can buy some letters from Him. </p>
+</app-tutorial-section>
+
+<app-tutorial-section
+title="Fixing items"
+[img]="'assets/tutorials/abc-land/fixing_items.png'"
+[lazyImg]="true"
+alt="Fixing items"
+caption="Fixing items"
+reverse="true">  
+<p>Fixing items can be helpfull. Sword is needed to get into the tree as it gives more power.</p>
+</app-tutorial-section>
+
+<app-tutorial-section
+title="Buying items"
+[img]="'assets/tutorials/abc-land/Buying_items.png'"
+[lazyImg]="true"
+alt="Buying items"
+caption="Buying items"
+reverse="true">  
+<p>Buying  items is optional but shows some intresting items powers.</p>
+</app-tutorial-section>
+
+<app-tutorial-section
+  title="Map usage"
+  youtubeId="p2_UkiHcRmQ"
+  [autoplay]="false"
+  [start]="0"
+  [reverse]="true"
+  [lazyVideo]="false"
+  caption="Map usage">
+  <p>Learn how to use map to navigate in the game.</p>
+</app-tutorial-section>
+
+
+
+<!-- SCREENSHOTS (your original part) -->
+<section id="gallery" class="section">
+  <h3>Screenshots</h3>
+  <div class="media-grid">
+    <figure>
+      <picture>
+        <source srcset="assets/tutorials/abc-land/screenshoot2.jpg" type="image/jpeg">
+        <img src="assets/tutorials/abc-land/screenshoot2.jpg" alt="Main menu" loading="lazy" decoding="async">
+      </picture>
+      <figcaption>Main menu</figcaption>
+    </figure>
+    <figure>
+      <picture>
+        <source srcset="assets/tutorials/abc-land/screenshoot3.jpg" type="image/jpeg">
+        <img src="assets/tutorials/abc-land/screenshoot3.jpg" alt="Intro" loading="lazy" decoding="async">
+      </picture>
+      <figcaption>Intro</figcaption>
+    </figure>
+       <figure>
+      <picture>
+        <source srcset="assets/tutorials/abc-land/screenshoot1.jpg" type="image/jpeg">
+        <img src="assets/tutorials/abc-land/screenshoot1.jpg" alt="Tasks resolving" loading="lazy" decoding="async">
+      </picture>
+      <figcaption>Tasks resolving</figcaption>
+    </figure>
+  </div>
+</section>
+<!-- DEMO VIDEO (your original part) -->
+<section id="video" class="section">
+  <h3>Demo video</h3>
+  <div class="video">
+    <figure class="yt yt--md">
+      <iframe
+        src="https://www.youtube-nocookie.com/embed/5Q6ibSmZLxs?si=I9jAXtzt8k9WFRFR"
+        title="ABC-Land demo"
+        loading="lazy"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen>
+      </iframe>
+      <figcaption>Short walkthrough</figcaption>
+    </figure>
+    <small class="caption">Short walkthrough</small>
+  </div>
+</section>
+<!-- NEW SECTIONS -->
+
+
+
+
+</div>
+
+
+      <!-- ========== Abecadłowo content ========== -->
+      <div *ngSwitchCase="'abecadlowo'">
+        <p>Abecadłowo pomaga dzieciom poznawać litery i dźwięki. Poniżej krótka instrukcja.</p>
+        <h3>Jak korzystać</h3>
+        <ol>
+          <li>Wybierz literę z planszy.</li>
+          <li>Dotknij ikony głośnika, aby usłyszeć głoskę.</li>
+          <li>Powtórz i spróbuj narysować literę.</li>
+        </ol>
+        <!-- (opcjonalnie) zrzuty ekranu -->
+        <div class="gallery">
+          <img src="assets/tutorials/abecadlowo/home.png" alt="Ekran główny" />
+          <img src="assets/tutorials/abecadlowo/alphabet-grid.png" alt="Siatka liter" />
+        </div>
+        <!-- YouTube (zamień ID na swój) -->
+        <h3>Krótka prezentacja</h3>
+        <iframe
+          src="https://www.youtube-nocookie.com/embed/5Q6ibSmZLxs?si=I9jAXtzt8k9WFRFR"
+          title="Abecadłowo - prezentacja"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen>
+        </iframe>
+      </div>
+      <!-- ========== Basketball-shots content ========== -->
+      <div *ngSwitchCase="'basketball-shots'">
+        <p>Opanuj <b>celowanie</b>, <b>moc</b> i <b>moment wypuszczenia</b>.</p>
+        <h3>How to use</h3>
+        <ol>
+          <li><b>Aim:</b> przeciągnij, by ustawić łuk lotu.</li>
+          <li><b>Power:</b> dłuższe przeciągnięcie = większa moc.</li>
+          <li><b>Release:</b> puść na szczycie łuku.</li>
+        </ol>
+        <!-- przykładowe obrazy (wrzuć swoje pliki) -->
+        <div class="gallery">
+          <img src="assets/tutorials/basketball-shots/aim.png" alt="Celowanie" />
+          <img src="assets/tutorials/basketball-shots/power.png" alt="Moc" />
+          <img src="assets/tutorials/basketball-shots/release.png" alt="Wypuszczenie" />
+        </div>
+        <h3>Video tips</h3>
+        <iframe
+          src="https://www.youtube-nocookie.com/embed/5Q6ibSmZLxs?si=I9jAXtzt8k9WFRFR"
+          title="Basketball Shots – tips"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen>
+        </iframe>
+      </div>
+      <!-- ========== Default (no content yet) ========== -->
+      <div *ngSwitchDefault>
+        No detailed tutorial yet for: {{ slug }}
+      </div>
+    </ng-container>
+  </section>
+</div>  
