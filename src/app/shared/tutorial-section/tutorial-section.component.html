@@ -1,6 +1,8 @@
 <section class="tut-row" [ngClass]="{ 'reverse': reverse }">
   <div class="tut-text">
-    <li><h3 *ngIf="title">{{ title }}</h3></li>
+    <h3 *ngIf="title">
+      {{ title | transloco : {} : (scope ? { scope: scope } : undefined) }}
+    </h3>
     <ng-content></ng-content>
   </div>
 
@@ -9,21 +11,38 @@
     <div class="yt-wrap">
       <iframe
         [src]="embedUrl"
-        title="{{ title || 'Tutorial video' }}"
+        [attr.title]="
+          (title
+            ? (title | transloco : {} : (scope ? { scope: scope } : undefined))
+            : ('tutorial.common.videoTitle' | transloco)
+          )
+        "
         [attr.loading]="lazyVideo ? 'lazy' : null"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
         referrerpolicy="strict-origin-when-cross-origin"
         allowfullscreen>
       </iframe>
     </div>
-    <figcaption *ngIf="caption">{{ caption }}</figcaption>
+    <figcaption *ngIf="caption">
+      {{ caption | transloco : {} : (scope ? { scope: scope } : undefined) }}
+    </figcaption>
   </figure>
 
   <!-- IMAGE -->
   <figure class="tut-media" *ngIf="!showVideo && img" fadeInOnScroll>
-    <img [src]="img"
-         [alt]="alt || title || 'Tutorial image'"
-         [attr.loading]="lazyImg ? 'lazy' : 'eager'">
-    <figcaption *ngIf="caption">{{ caption }}</figcaption>
+    <img
+      [src]="img"
+      [attr.alt]="
+        alt
+          ? (alt | transloco : {} : (scope ? { scope: scope } : undefined))
+          : (title
+              ? (title | transloco : {} : (scope ? { scope: scope } : undefined))
+              : ('tutorial.common.imageAlt' | transloco)
+            )
+      "
+      [attr.loading]="lazyImg ? 'lazy' : 'eager'">
+    <figcaption *ngIf="caption">
+      {{ caption | transloco : {} : (scope ? { scope: scope } : undefined) }}
+    </figcaption>
   </figure>
 </section>

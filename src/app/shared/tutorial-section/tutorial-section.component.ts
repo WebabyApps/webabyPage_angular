@@ -2,11 +2,13 @@ import { Component, Input } from '@angular/core';
 import { NgIf, NgClass } from '@angular/common';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { FadeInOnScrollDirective } from '../directives/fade-in-on-scroll.directive';
+import { TranslocoModule } from '@jsverse/transloco';
+
 
 @Component({
   selector: 'app-tutorial-section',
   standalone: true,
-  imports: [NgIf, NgClass, FadeInOnScrollDirective],
+  imports: [NgIf, NgClass, FadeInOnScrollDirective, TranslocoModule],
   templateUrl: './tutorial-section.component.html',
   styleUrls: ['./tutorial-section.component.scss'],
 })
@@ -27,6 +29,8 @@ export class TutorialSectionComponent {
   @Input() modestBranding = true;
   @Input() rel = 0;              // show related vids (0/1)
   @Input() lazyVideo = false;  // ⬅️ New: disable lazy-loading by default
+  @Input() scope?: string; // np. "tutorials/abc-land"
+
 
   constructor(private sanitizer: DomSanitizer) {}
 

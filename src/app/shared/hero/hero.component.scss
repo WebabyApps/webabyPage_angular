@@ -156,6 +156,7 @@ html, body { overflow-x: clip; } /* use hidden if clip isn't supported */
   width: 120px;
   margin-bottom: 10px;
   display: block;
+  margin-top: 160px; 
 }
 
 .hero.compact :where(a.cta, button.cta) {

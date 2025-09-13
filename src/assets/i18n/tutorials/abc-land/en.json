@@ -1,0 +1,74 @@
+{
+    "title": "ABC Land",
+    "hero": {
+      "title": "ABC Land Tutorial",
+      "subtitle": "Step-by-step guide",
+      "back": "Back to Products"
+    },
+    "description": {
+      "title": "Description",
+      "lead": "ABC-Land is an adventure and education game where the Hero must save the world of words after all the letters were stolen. As you explore fairy-tale locations, you help the Hero recover letters, repair items, and rebuild meaning — learning the alphabet along the way. This is new education during fabulous world gameplay."
+    },
+    "sections": {
+      "startMenu": {
+        "title": "Start Menu",
+        "caption": "Start menu",
+        "items": ["Play Button", "Intro selection", "Audio: Music, SFX, Voice-over levels", "Quit Button"],
+        "intro": "Opening the app and start menu"
+      },
+      "sound": {
+        "title": "Sound Settings",
+        "caption": "Adjust Music / SFX / VO levels",
+        "p": "Use the sliders to set Music, SFX, and Voice-over. Changes are saved automatically."
+      },
+      "intro": {
+        "title": "Intro",
+        "caption": "Story intro",
+        "p": "A short intro story about the world of ABC-Land, main characters and why letters matter — and what the Hero must do."
+      },
+      "steering": {
+        "title": "Steering buttons",
+        "caption": "Steering buttons",
+        "p1": "Steering buttons are used to move the Hero in the game.",
+        "p2": "Joystick is on the right.",
+        "p3": "Attack button is on the left."
+      },
+      "tasks": {
+        "title": "Hero Tasks",
+        "caption": "Hero tasks",
+        "p1": "Complete mini-tasks to unlock the world of ABC-Land",
+        "savingExample": "Saving Grutek Example"
+      },
+      "lighter": {
+        "title": "Lighter Friend",
+        "caption": "Lighter friend",
+        "p": "Lighter friend helps the Hero when it is dark. You can also buy some letters from him."
+      },
+      "fixing": {
+        "title": "Fixing items",
+        "caption": "Fixing items",
+        "p": "Fixing items can be helpful. The sword is needed to get into the tree as it gives more power."
+      },
+      "buying": {
+        "title": "Buying items",
+        "caption": "Buying items",
+        "p": "Buying items is optional but shows some interesting powers."
+      },
+      "map": {
+        "title": "Map usage",
+        "caption": "Map usage",
+        "videoCaption": "Learn how to use the map to navigate in the game."
+      }
+    },
+    "gallery": {
+      "title": "Screenshots",
+      "mainMenu": "Main menu",
+      "intro": "Intro",
+      "tasks": "Tasks resolving"
+    },
+    "video": {
+      "title": "Demo video",
+      "walkthrough": "Short walkthrough"
+    }
+  }
+  

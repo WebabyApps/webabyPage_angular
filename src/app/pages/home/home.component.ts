@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TranslocoModule } from '@jsverse/transloco'; 
 
 // Shared (standalone) components you already have:
 import { HeroComponent } from '../../shared/hero/hero.component';
@@ -15,7 +16,8 @@ import { ContactComponent } from '../../shared/contact/contact.component';
     HeroComponent,
     ProductsCarouselComponent,
     AboutComponent,
-    ContactComponent
+    ContactComponent,
+    TranslocoModule 
   ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'] // you can delete this line if you don't want a scss file

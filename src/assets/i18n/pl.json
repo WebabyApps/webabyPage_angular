@@ -1,8 +1,88 @@
-
 {
+  "nav": { "home": "Start", "products": "Produkty", "about": "O Nas", "contact": "Kontakt" },
+  "social": { "youtube": "YouTube", "discord": "Discord", "twitter": "Twitter / X" },
+  "aria": { "home": "Strona główna Webaby" },
 
-    "nav": { "home": "Start", "products": "Produkty", "about": "O nas", "contact": "Kontakt" },
-    "social": { "youtube": "YouTube", "discord": "Discord", "twitter": "Twitter / X" },
-    "aria": { "home": "Strona główna Webaby" }
+  "home": {
+    "products": {
+      "dialog": {
+        "openLink": "Otwórz link do aplikacji",
+        "qrInstruction": "Zeskanuj kod QR, aby otworzyć aplikację w telefonie",
+        "detailsCta": "Szczegółowy poradnik",
+        "close": "Zamknij okno"
+      },
+      "cta": { "more": "Zobacz więcej" },
+
+      "bubbleWord": {
+        "title": "Bubble Word",
+        "desc": "Szybka układanka słowna — przebijaj, układaj i walcz z czasem!",
+        "imgAlt": "Gra Bubble Word"
+      },
+      "basketballShots": {
+        "title": "Basketball Shots",
+        "desc": "Koszykówka w stylu arcade — celuj, machnij, trafiaj!",
+        "imgAlt": "Gra Basketball Shots"
+      },
+      "equationsTrainer": {
+        "title": "Trener układów równań",
+        "desc": "Ułatw sobie algebrę — ćwicz rozwiązywanie układów krok po kroku.",
+        "imgAlt": "Aplikacja do równań"
+      },
+      "abcLand": {
+        "title": "Abecadłowo",
+        "desc": "Wspaniała przygoda do nauki alfabetu.",
+        "imgAlt": "Gra ABC Land"
+      },
+      "luckyDraw": {
+        "title": "Lucky Draw",
+        "desc": "Zakręć, wylosuj, świętuj!",
+        "imgAlt": "Aplikacja Lucky Draw"
+      },
+      "bibbleEcho": {
+        "title": "Bibble Echo",
+        "desc": "Ulepsz ducha — eksploruj uważne echa i refleksję.",
+        "imgAlt": "Aplikacja Bibble Echo"
+      }
+    },
+    "hero": {
+      "title": "",
+      "lead": "Graj • Ucz się • Odkrywaj",
+      "cta": "Zobacz produkty"
+    },
+    "about": {
+      "title": "Cele Webaby",
+      "mission": {
+        "title": "Nasza misja",
+        "p1": "Wierzymy, że technologia i zabawa są potężnymi narzędziami rozwoju. Naszą misją jest edukacja dzieci i dorosłych poprzez interaktywne doświadczenia, w których rozrywka nie jest celem samym w sobie, lecz mostem do wiedzy.",
+        "p2": "Nie chcemy uzależniać — chcemy inspirować. Zastępujemy bierną konsumpcję aktywnym odkrywaniem. Pielęgnujemy kreatywność, myślenie krytyczne i radość z odkrywania."
+      },
+      "dev": {
+        "title": "Oprogramowanie i nauka przez zabawę",
+        "p1": "W Webaby projektujemy oprogramowanie, które łączy zabawę z wiedzą. Nasze produkcje obejmują łamigłówki zmuszające do myślenia oraz przygodowe gry pełne akcji — każda wypełniona wyobraźnią, fabułą i barwnymi światami.",
+        "p2": "Każdy produkt powstaje po to, by rozpalać ciekawość i sprawiać, że nauka staje się zabawą."
+      },
+      "innovation": {
+        "title": "Innowacje i technologia",
+        "p1": "Innowacja jest w sercu wszystkiego, co robimy. Badamy najnowsze możliwości sztucznej inteligencji, blockchainu, gier i interaktywnego opowiadania historii oraz nowoczesnej inżynierii oprogramowania.",
+        "p2": "Nasza pasja do technologii napędza naszą zdolność do wymyślania nowych sposobów uczenia się i wprowadzania na rynek odważnych, wartościowych produktów."
+      },
+      "vision": {
+        "title": "Wizja długoterminowa",
+        "p1": "Chcemy stać się globalnym hubem, w którym spotykają się edukacja, kreatywność i innowacje. Łącząc technologię z ludzką wyobraźnią, Webaby tworzy narzędzia, które angażują do nauki w każdym wieku, oraz buduje społeczności wokół wiedzy i zabawy.",
+        "p2": "Nieustannie eksperymentujemy z nowymi cyfrowymi możliwościami, aby dostarczać doświadczenia, które mają znaczenie."
+      },
+      "alt": {
+        "scene2": "Ilustracja edukacji i rozwoju",
+        "software": "Tworzenie oprogramowania",
+        "grow": "Natychmiastowy rozwój",
+        "future": "Technologie przyszłości"
+      }
+    },
+    "sections": {
+      "products": { "title": "Produkty" },
+      "contact": { "title": "Kontakt" }
+    }
   }
+}
+
   

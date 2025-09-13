@@ -4,35 +4,27 @@
 
   <div class="hero-content">
     <!-- BIG LOGO (hidden on compact pages) -->
-   <!-- <img class="hero-logo"
-         src="/assets/logo_white.png"  
-         alt="Webaby logo" /> -->
-        <!--   <img class="hero-logo"
-     src="assets/logo_white.png"
-     alt="Webaby logo" /> -->
-     <a class="hero-logo-link"
-     [routerLink]="'/'"
-     fragment="about"
-     aria-label="Go to About section">
-    <img class="hero-logo" src="assets/logo_white.png" alt="Webaby logo" />
-  </a>
+    <a class="hero-logo-link"
+       [routerLink]="'/'"
+       fragment="about"
+       [attr.aria-label]="'home.hero.logoAria' | transloco">
+      <img class="hero-logo" src="assets/logo_white.png" [attr.alt]="'aria.home' | transloco" />
+    </a>
 
-   <!-- <h1>{{ title }}</h1> -->
-    <p>{{ subtitle }}</p>
+    <!-- <h1>{{ title || ('home.hero.title' | transloco) }}</h1>-->
+    <p class="lead">{{ subtitle || ('home.hero.lead' | transloco) }}</p>
+
     <!-- Scroll version (home) -->
     <button *ngIf="!ctaLink" class="cta" (click)="scrollToProducts()">
-      {{ ctaText }}
+      {{ ctaText || ('home.hero.cta' | transloco) }}
     </button>
 
-
-
-      <a *ngIf="ctaLink"
-   [routerLink]="ctaLink"
-   [fragment]="ctaFragment"
-   class="cta">
-    {{ ctaText }}
+    <!-- Link version -->
+    <a *ngIf="ctaLink"
+       [routerLink]="ctaLink"
+       [fragment]="ctaFragment"
+       class="cta">
+      {{ ctaText || ('home.hero.cta' | transloco) }}
     </a>
-     
   </div>
 </section>
-

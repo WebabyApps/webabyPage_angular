@@ -3,58 +3,78 @@ import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ProductDialogComponent } from '../product-dialog/product-dialog.component';
+import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 
-type CardProduct = { title: string; img: string; desc: string,appUrl?:string,deatailsUrl?:string };   
+type CardProduct = {
+  id: string;        // klucz i18n (np. "abcLand")
+  slug: string;      // stabilny slug do routów (np. "abc-land")
+  img: string;
+  appUrl?: string;
+  detailsUrl?: string;
+};
+
 
 @Component({
   selector: 'app-products-carousel',
   standalone: true,
   templateUrl: './products-carousel.component.html',
   styleUrls: ['./products-carousel.component.scss'],
-  imports: [CommonModule, MatDialogModule]
+  imports: [CommonModule, MatDialogModule, TranslocoModule] // ← dodany TranslocoModule
 })
 export class ProductsCarouselComponent implements AfterViewInit {
-  @ViewChild('track', { static: true }) trackRef!: ElementRef<HTMLDivElement>;
+  @ViewChild('track', { static: false }) trackRef!: ElementRef<HTMLDivElement>;
 
   products: CardProduct[] = [
-    { title:'Bubble Word', img:'assets/bubble.jpg', desc:'Fast-paced word puzzler...', appUrl:'https://webaby.io/details/bubble-word' },
-    { title:'Basketball Shots', img:'assets/basket.jpg', desc:'Fun Arcade-style hoops...' , appUrl:'https://lucky-draw.webaby.io'},
-    { title:'System of Equations Trainer', img:'assets/equations.jpg', desc:'Make algebra easy...' , appUrl:'https://lucky-draw.webaby.io'},
-    { title:'ABC Land', img:'assets/scene1.jpg', desc:'Faboulus adventure to learn the alphabeth', appUrl:'https://play.google.com/store/apps/details?id=abecadlowo.webaby.io'},
-    { title:'Lucky Draw', img:'assets/lucky_draw.png', desc:'Spin, pick, celebrate!', appUrl:'https://lucky-draw.webaby.io' }, 
-    { title:'Bibble Echo', img:'assets/bibble_echo2.jpeg', desc:'Spirit upgrade...',appUrl:'https://bibbleecho.webaby.io/' },  
+    { id: 'bubbleWord',       slug: 'bubble-word',                   img: 'assets/bubble.jpg',        appUrl: 'https://webaby.io/details/bubble-word' },
+    { id: 'basketballShots',  slug: 'basketball-shots',              img: 'assets/basket.jpg',        appUrl: 'https://lucky-draw.webaby.io' },
+    { id: 'equationsTrainer', slug: 'system-of-equations-trainer',   img: 'assets/equations.jpg',     appUrl: 'https://lucky-draw.webaby.io' },
+    { id: 'abcLand',          slug: 'abc-land',                      img: 'assets/scene1.jpg',        appUrl: 'https://play.google.com/store/apps/details?id=abecadlowo.webaby.io' },
+    { id: 'luckyDraw',        slug: 'lucky-draw',                    img: 'assets/lucky_draw.png',    appUrl: 'https://lucky-draw.webaby.io' },
+    { id: 'bibbleEcho',       slug: 'bibble-echo',                   img: 'assets/bibble_echo2.jpeg', appUrl: 'https://bibbleecho.webaby.io/' }
   ];
-
-  constructor(private dialog: MatDialog) {}
+  
+  constructor(private dialog: MatDialog, private transloco: TranslocoService) {}
 
   openDialog(p: CardProduct) {
-    console.log('[carousel] card clicked:', p.title); // ✅ sanity check
+    const base = `home.products.${p.id}`;
     this.dialog.open(ProductDialogComponent, {
-      panelClass: 'transparent-dialog', // <-- półprzezroczysty panel
+      panelClass: 'transparent-dialog',
       width: '800px',
       autoFocus: true,
       data: {
-        title: p.title,
-        imageUrl: p.img,                         // map img -> imageUrl
-        appUrl: p.appUrl,           // TODO: set real link
-        slug: p.title.toLowerCase().replace(/\s+/g, '-'),
-        desc: p.desc  
-      },     
-      // backdropClass: 'no-dim-backdrop', // <-- odkomentuj, jeśli NIE chcesz przyciemnienia tła
+        title: this.transloco.translate(`${base}.title`),
+        imageUrl: p.img,
+        appUrl: p.appUrl,
+        slug: p.slug,                                // ✅ używaj stabilnego sluga
+        desc: this.transloco.translate(`${base}.desc`)
+      },
       maxWidth: '90vw'
     });
   }
 
-  
-
-
-
-  
+  // --- autoplay / carousel logic (bez zmian) ---
   private autoplayId:any=null; private hoverId:any=null;
-  ngAfterViewInit(){ this.startAutoplay(); window.addEventListener('resize',()=>this.nudge()); }
-  private track(){ return this.trackRef.nativeElement; }
+  
+  ngAfterViewInit() {
+    this.startAutoplay();
+    window.addEventListener('resize', () => this.nudge());
+  }
+  
+  private track(): HTMLDivElement {
+    const el = this.trackRef?.nativeElement;
+    if (!el) throw new Error('Track element not ready yet');
+    return el;
+  }
+  
+  private cardWidth() {
+    const c = this.track().querySelector('.card') as HTMLElement | null;
+    return (c?.getBoundingClientRect().width ?? 320) + this.gap();
+  }
+  
+  
+  
   private gap(){ return 18; }
-  private cardWidth(){ const c=this.track().querySelector('.card') as HTMLElement|null; if(!c) return 320+this.gap(); return c.getBoundingClientRect().width + this.gap(); }
+  
   private move(px:number){ const t=this.track(); t.scrollLeft+=px; const max=t.scrollWidth-t.clientWidth; if(t.scrollLeft<=0)t.scrollLeft=max-2; else if(t.scrollLeft>=max-1) t.scrollLeft=1; }
   private easeOutCubic=(t:number)=>1-Math.pow(1-t,3);
   private easeInOutCubic=(t:number)=> t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;

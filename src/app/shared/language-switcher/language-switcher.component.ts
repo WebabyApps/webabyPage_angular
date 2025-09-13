@@ -13,24 +13,47 @@ type Lang = 'en' | 'pl';
   imports: [CommonModule, TranslocoModule],
   styles: [`
     .lang-switch { position: relative; }
+  
+    /* default (transparent header) = light-on-dark */
     .lang-btn {
       display:flex; align-items:center; gap:.5rem;
-      padding:.4rem .7rem; border:1px solid var(--line, #2a2a2a);
-      border-radius:999px; background:transparent; cursor:pointer;
+      padding:.4rem .7rem;
+      border:1px solid rgba(255,255,255,.25);
+      border-radius:999px;
+      background:transparent;
+      cursor:pointer;
       font-weight:600; font-size:.95rem;
+      color:#fff;
     }
     .menu {
       position:absolute; top:110%; right:0; min-width:140px;
-      border:1px solid var(--line, #2a2a2a); border-radius:12px;
-      background: var(--panel, #10131a); padding:.25rem;
-      box-shadow: 0 6px 24px rgba(0,0,0,.35); z-index: 50;
+      border:1px solid rgba(255,255,255,.25);
+      border-radius:12px;
+      background: rgba(0,0,0,.75);
+      padding:.25rem;
+      box-shadow: 0 6px 24px rgba(0,0,0,.35);
+      z-index: 50;
+      color:#fff;
     }
-    .item { display:flex; align-items:center; gap:.5rem;
-      padding:.5rem .75rem; border-radius:10px; cursor:pointer; }
-    .item:hover { background: rgba(255,255,255,.06); }
-    .flag { font-size:1.1rem; }
-    .active { font-weight:700; }
+    .item { padding:.5rem .75rem; border-radius:10px; cursor:pointer; }
+    .item:hover { background: rgba(255,255,255,.08); }
+  
+    /* when header is scrolled = dark-on-light */
+    :host-context(.site-header.scrolled) .lang-btn {
+      color:#111;
+      border-color: rgba(0,0,0,.25);
+      background: transparent;
+    }
+    :host-context(.site-header.scrolled) .menu {
+      color:#111;
+      background: rgba(255,255,255,.95);
+      border-color: rgba(0,0,0,.2);
+    }
+    :host-context(.site-header.scrolled) .item:hover {
+      background: rgba(0,0,0,.06);
+    }
   `],
+  
   template: `
     <div class="lang-switch" (keydown.escape)="open=false">
       <button class="lang-btn" (click)="open = !open" aria-haspopup="menu" [attr.aria-expanded]="open">

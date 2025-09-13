@@ -1,6 +1,6 @@
-<div class="carousel">
+<div class="carousel" *transloco="let t">
   <button class="car-arrow left"
-          aria-label="Previous"
+          [attr.aria-label]="t('home.products.aria.prev')"
           (mouseenter)="hover(-1)"
           (mouseleave)="stopHover()"
           (click)="spring(-1)">&#10094;</button>
@@ -12,16 +12,18 @@
              (keyup.enter)="openDialog(p)"
              role="button"
              tabindex="0">
-      <img [src]="p.img" [alt]="p.title">
+      <img [src]="p.img"
+           [attr.alt]="t('home.products.' + p.id + '.imgAlt') || t('home.products.' + p.id + '.title')">
+
       <div class="card-body">
-        <h3>{{p.title}}</h3>
-        <p>{{p.desc}}</p>
+        <h3>{{ t('home.products.' + p.id + '.title') }}</h3>
+        <p class="desc">{{ t('home.products.' + p.id + '.desc') }}</p>
       </div>
     </article>
   </div>
 
   <button class="car-arrow right"
-          aria-label="Next"
+          [attr.aria-label]="t('home.products.aria.next')"
           (mouseenter)="hover(1)"
           (mouseleave)="stopHover()"
           (click)="spring(1)">&#10095;</button>
