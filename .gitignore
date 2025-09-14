@@ -1,2 +1,30 @@
-node_modules
+# -------- OS / system --------
 .DS_Store
+Thumbs.db
+
+# -------- Node --------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+package-lock.json
+
+# -------- Angular / build --------
+dist/
+tmp/
+out-tsc/
+coverage/
+
+# -------- IDE / edytory --------
+.vscode/
+.idea/
+*.swp
+
+# -------- Misc --------
+*.log
+*.tmp
+
+# -------- Environment --------
+.env
+.env.*.local
