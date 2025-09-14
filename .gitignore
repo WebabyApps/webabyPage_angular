@@ -2,6 +2,9 @@
 .DS_Store
 Thumbs.db
 
+# Angular cache
+.angular/cache
+
 # -------- Node --------
 node_modules/
 npm-debug.log*
