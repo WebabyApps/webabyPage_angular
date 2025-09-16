@@ -23,4 +23,4 @@ npm start
 3. The included workflow builds and deploys automatically.
    It uses `--base-href ./` and creates a `404.html` for SPA fallback.
 # webabyPage_angular
-## CI/CD automated deploy 
+## CI/CD automated deployment 
