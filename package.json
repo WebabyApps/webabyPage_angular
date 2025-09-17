@@ -29,4 +29,8 @@
     "@angular/compiler-cli": "^17.3.0",
     "typescript": "~5.3.3"
   }
+  {
+  "engines": { "node": ">=20 <21" },
+  "packageManager": "npm@10"
+}
 }
