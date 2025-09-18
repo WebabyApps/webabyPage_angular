@@ -5,12 +5,15 @@
   <small class="debug">slug = {{ sp }}</small> -->
 
   <!-- HERO -->
-  <app-hero
-    [scope]="sp"
-    [title]="'hero.title'"
-    [subtitle]="'hero.subtitle'"
-    [ctaText]="'hero.back'">
-  </app-hero>
+<!-- HERO -->
+<app-hero
+  [scope]="sp"
+  [title]="'hero.title'"
+  [subtitle]="'hero.subtitle'"
+  [ctaText]="'hero.back'"
+  [ctaLink]="['/']"
+  [ctaFragment]="'products'">
+</app-hero>
 
   <section class="container tutorial narrow">
     <ng-container *transloco="let _; scope: sp"></ng-container>

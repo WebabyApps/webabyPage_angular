@@ -2,8 +2,10 @@
   "name": "webaby-angular",
   "version": "0.0.1",
   "private": true,
-
-  "engines": { "node": ">=20 <21", "npm": ">=10" },
+  "engines": {
+    "node": ">=20 <21",
+    "npm": ">=10"
+  },
   "packageManager": "npm@10.8.3",
   "scripts": {
     "ng": "ng",
@@ -38,6 +40,7 @@
     "@angular/cli": "^20.2.0",
     "@angular/compiler-cli": "^20.2.1",
     "@types/jasmine": "^5.1.9",
+    "ajv-formats": "^3.0.1",
     "typescript": "~5.9.2"
   }
 }
