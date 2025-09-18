@@ -1,74 +1,96 @@
 {
+  "title": "ABC Land",
+  "hero": {
     "title": "ABC Land",
+    "subtitle": "Step-by-step guide",
+    "back": "Back to products"
+  },
+"home": {
     "hero": {
-      "title": "ABC Land Tutorial",
-      "subtitle": "Step-by-step guide",
-      "back": "Back to Products"
+      "logoAria": "Webaby logo"},
+      "title": "Playful tech for learning",
+      "lead": "Play • Learn • Imagine",
+      "cta": "Explore Products"
     },
-    "description": {
-      "title": "Description",
-      "lead": "ABC-Land is an adventure and education game where the Hero must save the world of words after all the letters were stolen. As you explore fairy-tale locations, you help the Hero recover letters, repair items, and rebuild meaning — learning the alphabet along the way. This is new education during fabulous world gameplay."
-    },
-    "sections": {
-      "startMenu": {
-        "title": "Start Menu",
-        "caption": "Start menu",
-        "items": ["Play Button", "Intro selection", "Audio: Music, SFX, Voice-over levels", "Quit Button"],
-        "intro": "Opening the app and start menu"
-      },
-      "sound": {
-        "title": "Sound Settings",
-        "caption": "Adjust Music / SFX / VO levels",
-        "p": "Use the sliders to set Music, SFX, and Voice-over. Changes are saved automatically."
-      },
-      "intro": {
-        "title": "Intro",
-        "caption": "Story intro",
-        "p": "A short intro story about the world of ABC-Land, main characters and why letters matter — and what the Hero must do."
-      },
-      "steering": {
-        "title": "Steering buttons",
-        "caption": "Steering buttons",
-        "p1": "Steering buttons are used to move the Hero in the game.",
-        "p2": "Joystick is on the right.",
-        "p3": "Attack button is on the left."
-      },
-      "tasks": {
-        "title": "Hero Tasks",
-        "caption": "Hero tasks",
-        "p1": "Complete mini-tasks to unlock the world of ABC-Land",
-        "savingExample": "Saving Grutek Example"
-      },
-      "lighter": {
-        "title": "Lighter Friend",
-        "caption": "Lighter friend",
-        "p": "Lighter friend helps the Hero when it is dark. You can also buy some letters from him."
-      },
-      "fixing": {
-        "title": "Fixing items",
-        "caption": "Fixing items",
-        "p": "Fixing items can be helpful. The sword is needed to get into the tree as it gives more power."
-      },
-      "buying": {
-        "title": "Buying items",
-        "caption": "Buying items",
-        "p": "Buying items is optional but shows some interesting powers."
-      },
-      "map": {
-        "title": "Map usage",
-        "caption": "Map usage",
-        "videoCaption": "Learn how to use the map to navigate in the game."
+    "products": {
+      "aria": {
+        "prev": "Previous product",
+        "next": "Next product"
       }
+    },  
+  "description": {
+    "title": "Description",
+    "lead": "ABC-Land is an adventure and education game where the Hero must save the world of words after all the letters were stolen."
+  },
+  "sections": {
+    "startMenu": {
+      "title": "Start Menu",
+      "intro": "Opening the app and start menu",
+      "caption": "Start menu",
+      "items": [
+        "Launch the app from the home screen",
+        "Pick your profile",
+        "Choose difficulty",
+        "Press Play"
+      ]
     },
-    "gallery": {
-      "title": "Screenshots",
-      "mainMenu": "Main menu",
-      "intro": "Intro",
-      "tasks": "Tasks resolving"
+    "sound": {
+      "title": "Sound Settings",
+      "caption": "Adjust Music / SFX / VO levels",
+      "p": "Use the sliders to adjust volume levels.",
+      "items": [
+        "Music volume",
+        "SFX volume",
+        "Voice-over volume"
+      ]
     },
-    "video": {
-      "title": "Demo video",
-      "walkthrough": "Short walkthrough"
+    "intro": {
+      "title": "Intro",
+      "caption": "Welcome to the world",
+      "p": "Your journey begins in the village..."
+    },
+    "steering": {
+      "title": "Controls",
+      "caption": "How to move",
+      "p1": "Use the left stick to move.",
+      "p2": "Press Jump to hop over obstacles.",
+      "p3": "Hold Run to move faster."
+    },
+    "tasks": {
+      "title": "Tasks",
+      "caption": "Quests and missions",
+      "p1": "Complete tasks to earn letters.",
+      "savingExample": "Progress is saved after each completed task."
+    },
+    "lighter": {
+      "title": "Lighter",
+      "caption": "Light your way",
+      "p": "Use the lighter to see in dark places."
+    },
+    "fixing": {
+      "title": "Fixing Items",
+      "caption": "Repair broken objects",
+      "p": "Collect parts to repair items and restore meaning."
+    },
+    "buying": {
+      "title": "Buying",
+      "caption": "Spend coins wisely",
+      "p": "Visit shops to buy helpful items."
+    },
+    "map": {
+      "title": "Map",
+      "caption": "World overview",
+      "videoCaption": "Watch the map overview."
     }
+  },
+  "gallery": {
+    "title": "Gallery",
+    "mainMenu": "Main menu",
+    "intro": "Intro",
+    "tasks": "Tasks"
+  },
+  "video": {
+    "title": "Walkthrough",
+    "walkthrough": "ABC-Land walkthrough"
   }
-  
+}

@@ -1,11 +1,32 @@
-{
-  "nav": { "home": "Home", "products": "Products", "about": "About Us", "contact": "Contact Us" },
-  "social": { "youtube": "YouTube", "discord": "Discord", "twitter": "Twitter / X" },
-  "aria": { "home": "Webaby Home" },
+{ "title": "Webaby",
+  "nav": {
+    "home": "Home",
+    "products": "Products",
+    "about": "About Us",
+    "contact": "Contact Us"
+  },
+  "social": {
+    "youtube": "YouTube",
+    "discord": "Discord",
+    "twitter": "Twitter / X"
+  },
+  "aria": {
+    "home": "Webaby Home"
+  },
 
   "home": {
-    
+    "hero": {
+      "logoAria": "Webaby logo",
+      "title": "Playful tech for learning",
+      "lead": "Play • Learn • Imagine",
+      "cta": "Explore Products"
+    },
+
     "products": {
+      "aria": {
+        "prev": "Previous product",
+        "next": "Next product"
+      },
       "dialog": {
         "openLink": "Open app link",
         "qrInstruction": "Scan the QR code to open the app on your phone",
@@ -45,11 +66,7 @@
         "imgAlt": "Bibble Echo app"
       }
     },
-    "hero": {
-      "title": "Playful tech for learning",
-      "lead": "Play • Learn • Imagine",
-      "cta": "Explore Products"
-    },
+
     "about": {
       "title": "Webaby Goals",
       "mission": {
@@ -79,6 +96,7 @@
         "future": "Future Technology"
       }
     },
+
     "sections": {
       "products": { "title": "Products" },
       "contact": { "title": "Contact" }

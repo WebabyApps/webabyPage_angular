@@ -1,0 +1,96 @@
+{
+  "title": "ABC Land",
+  "hero": {
+    "title": "ABC Land",
+    "subtitle": "Step-by-step guide",
+    "back": "Back to products"
+  },
+  "description": {
+    "title": "Description",
+    "lead": "ABC-Land is an adventure and education game where the Hero must save the world of words after all the letters were stolen."
+  },
+"home": {
+    "hero": {
+      "logoAria": "Webaby logo"},
+      "title": "Playful tech for learning",
+      "lead": "Play • Learn • Imagine",
+      "cta": "Explore Products"
+    },
+    "products": {
+      "aria": {
+        "prev": "Previous product",
+        "next": "Next product"
+      }
+    },
+  "sections": {
+    "startMenu": {
+      "title": "Start Menu",
+      "intro": "Opening the app and start menu",
+      "caption": "Start menu",
+      "items": [
+        "Launch the app from the home screen",
+        "Pick your profile",
+        "Choose difficulty",
+        "Press Play"
+      ]
+    },
+    "sound": {
+      "title": "Sound Settings",
+      "caption": "Adjust Music / SFX / VO levels",
+      "p": "Use the sliders to adjust volume levels.",
+      "items": [
+        "Music volume",
+        "SFX volume",
+        "Voice-over volume"
+      ]
+    },
+    "intro": {
+      "title": "Intro",
+      "caption": "Welcome to the world",
+      "p": "Your journey begins in the village..."
+    },
+    "steering": {
+      "title": "Controls",
+      "caption": "How to move",
+      "p1": "Use the left stick to move.",
+      "p2": "Press Jump to hop over obstacles.",
+      "p3": "Hold Run to move faster."
+    },
+    "tasks": {
+      "title": "Tasks",
+      "caption": "Quests and missions",
+      "p1": "Complete tasks to earn letters.",
+      "savingExample": "Progress is saved after each completed task."
+    },
+    "lighter": {
+      "title": "Lighter",
+      "caption": "Light your way",
+      "p": "Use the lighter to see in dark places."
+    },
+    "fixing": {
+      "title": "Fixing Items",
+      "caption": "Repair broken objects",
+      "p": "Collect parts to repair items and restore meaning."
+    },
+    "buying": {
+      "title": "Buying",
+      "caption": "Spend coins wisely",
+      "p": "Visit shops to buy helpful items."
+    },
+    "map": {
+      "title": "Map",
+      "caption": "World overview",
+      "videoCaption": "Watch the map overview."
+    }
+  },
+  "gallery": {
+    "title": "Gallery",
+    "mainMenu": "Main menu",
+    "intro": "Intro",
+    "tasks": "Tasks"
+  },
+  "video": {
+    "title": "Walkthrough",
+    "walkthrough": "ABC-Land walkthrough"
+  }
+}

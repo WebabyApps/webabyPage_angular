@@ -3,42 +3,48 @@ import { Injectable, NgModule } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {
   TranslocoModule, TranslocoLoader, Translation,
-  translocoConfig, provideTransloco
+  translocoConfig, provideTransloco,
 } from '@jsverse/transloco';
+import { DebugMissingHandler } from './debug-missing.handler';
+
 
 @Injectable({ providedIn: 'root' })
 export class TranslocoHttpLoader implements TranslocoLoader {
   constructor(private http: HttpClient) {}
- 
 
   getTranslation(lang: string, data?: any) {
-    // 1) Czasem lang przychodzi jako 'tutorials/abc-land/en'
-    let actualLang = lang;
-    let scopeFromLang = '';
-    if (lang.includes('/')) {
-      const parts = lang.split('/');
-      actualLang = parts.pop()!;                 // 'en' / 'pl'
-      scopeFromLang = parts.join('/');           // 'tutorials/abc-land'
-    }
-
-    // 2) Scope może też przyjść w data.scope
-    let scopePath: string | undefined;
-    const s = data?.scope;
-    if (typeof s === 'string') scopePath = s;
-    else if (Array.isArray(s)) scopePath = s.join('/');
-    else if (s && typeof s === 'object' && typeof s.scope === 'string') scopePath = s.scope;
-
-    // 3) Jeśli scope nie przyszedł w data, użyj tego z lang
-    if (!scopePath && scopeFromLang) scopePath = scopeFromLang;
-   // ⬇⬇⬇ TU WŁAŚNIE
-    
-    const url = scopePath
-      ? `/assets/i18n/${scopePath}/${actualLang}.json`
-      : `/assets/i18n/${actualLang}.json`;
-    console.debug('[Transloco] load:', { lang, data, resolvedUrl: url });
-    return this.http.get<Translation>(url);
+    // 1) Normalize lang: support "en" or "abc-land/en" or "tutorials/abc-land/en"
+    const parts = String(lang).split('/');
+    const realLang = parts.pop()!;              // → "en"
+    const scopeFromLang = parts.join('/');      // → "abc-land" or "tutorials/abc-land" or ""
+  
+    // 2) Prefer explicit scope from data, else use the scope encoded in lang (if any)
+    const scope =
+      (typeof data?.scope === 'string' && data.scope) ||
+      (typeof data?.scopePath === 'string' && data.scopePath) ||
+      (scopeFromLang || null);
+  if(data?.scope)
+      console.warn('[i18n loader] data  scope', data.scope);
+    else
+      console.warn('[i18n loader] no scope in data', data);
+    // 3) Build URL
+    const url = scope
+      ? `assets/i18n/${scope}/${realLang}.json`
+      : `assets/i18n/${realLang}.json`;
+  
+    console.log('[i18n loader] request', {
+      url,
+      scopePath: scope,
+      actualLang: realLang,
+      fromLangArg: lang,
+      data
+    });
+  
+    return this.http.get(url);
   }
+  
 }
+
 
 @NgModule({
   imports: [TranslocoModule],
@@ -51,9 +57,20 @@ export class TranslocoHttpLoader implements TranslocoLoader {
         fallbackLang: 'en',
         reRenderOnLangChange: true,
         prodMode: true,
+       /* missingHandler: {
+          logMissingKey: true,
+          useFallbackTranslation: false,
+          allowEmpty: false,
+        },*/
+      
       }),
       loader: TranslocoHttpLoader,
     }),
+      // ⬇️ This is where your custom handler is actually plugged in
+  
+      //  { provide: TRANSLOCO_MISSING_HANDLER, useClass: DebugMissingHandler }
+     
+      
   ],
 })
 export class TranslocoRootModule {}

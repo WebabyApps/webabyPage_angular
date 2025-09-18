@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { TranslocoService } from '@jsverse/transloco';
+import { take } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { TranslocoModule } from '@jsverse/transloco';
@@ -11,9 +13,67 @@ import { TranslocoModule } from '@jsverse/transloco';
   styleUrls: ['./hero.component.scss'],
 })
 export class HeroComponent {
-  @Input() title?: string;                // ⬅️ bez wartości domyślnej
-  @Input() subtitle?: string;             // ⬅️ j.w.
-  @Input() ctaText?: string;              // ⬅️ j.w.
+  private _scope?: string;
+  private _title?: string;
+  private _subtitle?: string;
+  private _ctaText?: string;
+
+  resolvedTitle?: string;
+  resolvedSubtitle?: string;
+  resolvedCtaText?: string;
+
+  constructor(private transloco: TranslocoService) {}
+
+
+  @Input() set scope(value: string | undefined) {
+    this._scope = value || undefined;
+    this.resolveAll();
+  }
+
+  @Input() set title(value: string | undefined) {
+    this._title = value || undefined;
+    this.resolveAll();
+  }
+
+  @Input() set subtitle(value: string | undefined) {
+    this._subtitle = value || undefined;
+    this.resolveAll();
+  }
+
+  @Input() set ctaText(value: string | undefined) {
+    this._ctaText = value || undefined;
+    this.resolveAll();
+  }
+
+  private isKey(str?: string): boolean {
+    return !!str && str.includes('.') && !/\s/.test(str);
+  }
+
+  private trMaybeAsync(str?: string, setter?: (v: string) => void) {
+    if (!str || !setter) return;
+    if (!this.isKey(str)) { setter(str); return; }
+
+    const svc: any = this.transloco as any;
+    if (typeof svc.selectTranslate === 'function') {
+      const obs = this._scope ? svc.selectTranslate(str, {}, this._scope)
+                              : svc.selectTranslate(str);
+      obs.pipe(take(1)).subscribe((v: string) => setter(v));
+      return;
+    }
+
+    const v = this._scope ? this.transloco.translate(str, {}, this._scope)
+                          : this.transloco.translate(str);
+    setter(v);
+  }
+
+  private resolveAll() {
+    this.trMaybeAsync(this._title, v => this.resolvedTitle = v);
+    this.trMaybeAsync(this._subtitle, v => this.resolvedSubtitle = v);
+    this.trMaybeAsync(this._ctaText, v => this.resolvedCtaText = v);
+  }
+// ⬅️ bez wartości domyślnej
+// ⬅️ j.w.
+// ⬅️ j.w.
   @Input() ctaLink: string | any[] | null = null;   // '/' lub ['/']
   @Input() ctaFragment?: string;                    // 'products'
   @Input() compact = false;

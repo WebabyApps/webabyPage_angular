@@ -1,75 +1,93 @@
 {
-  "nav": { "home": "Start", "products": "Produkty", "about": "O Nas", "contact": "Kontakt" },
-  "social": { "youtube": "YouTube", "discord": "Discord", "twitter": "Twitter / X" },
-  "aria": { "home": "Strona główna Webaby" },
+  "nav": {
+    "home": "Strona główna",
+    "products": "Produkty",
+    "about": "O nas",
+    "contact": "Kontakt"
+  },
+  "social": {
+    "youtube": "YouTube",
+    "discord": "Discord",
+    "twitter": "Twitter / X"
+  },
+  "aria": {
+    "home": "Webaby Strona główna"
+  },
 
   "home": {
+    "hero": {
+      "logoAria": "Logo Webaby",
+      "title": "Technologia w służbie nauki",
+      "lead": "Graj • Ucz się • Wyobrażaj",
+      "cta": "Zobacz produkty"
+    },
+
     "products": {
+      "aria": {
+        "prev": "Poprzedni produkt",
+        "next": "Następny produkt"
+      },
       "dialog": {
         "openLink": "Otwórz link do aplikacji",
-        "qrInstruction": "Zeskanuj kod QR, aby otworzyć aplikację w telefonie",
-        "detailsCta": "Szczegółowy poradnik",
+        "qrInstruction": "Zeskanuj kod QR, aby otworzyć aplikację na telefonie",
+        "detailsCta": "Szczegółowy tutorial",
         "close": "Zamknij okno"
       },
-      "cta": { "more": "Zobacz więcej" },
+      "cta": { "more": "Dowiedz się więcej" },
 
       "bubbleWord": {
         "title": "Bubble Word",
-        "desc": "Szybka układanka słowna — przebijaj, układaj i walcz z czasem!",
+        "desc": "Szybka gra słowna… układaj słowa i walcz z czasem!",
         "imgAlt": "Gra Bubble Word"
       },
       "basketballShots": {
         "title": "Basketball Shots",
-        "desc": "Koszykówka w stylu arcade — celuj, machnij, trafiaj!",
+        "desc": "Zręcznościowa koszykówka — celuj, rzucaj, zdobywaj punkty!",
         "imgAlt": "Gra Basketball Shots"
       },
       "equationsTrainer": {
         "title": "Trener układów równań",
-        "desc": "Ułatw sobie algebrę — ćwicz rozwiązywanie układów krok po kroku.",
-        "imgAlt": "Aplikacja do równań"
+        "desc": "Ułatwiamy algebrę — ćwicz rozwiązywanie układów liniowych krok po kroku.",
+        "imgAlt": "Aplikacja do nauki równań"
       },
       "abcLand": {
-        "title": "Abecadłowo",
-        "desc": "Wspaniała przygoda do nauki alfabetu.",
+        "title": "ABC Land",
+        "desc": "Niezwykła przygoda w nauce alfabetu.",
         "imgAlt": "Gra ABC Land"
       },
       "luckyDraw": {
         "title": "Lucky Draw",
-        "desc": "Zakręć, wylosuj, świętuj!",
-        "imgAlt": "Aplikacja Lucky Draw"
+        "desc": "Zakręć, wybierz, świętuj!",
+        "imgAlt": "Gra Lucky Draw"
       },
       "bibbleEcho": {
         "title": "Bibble Echo",
-        "desc": "Ulepsz ducha — eksploruj uważne echa i refleksję.",
-        "imgAlt": "Aplikacja Bibble Echo"
+        "desc": "Podróż duchowa… eksploruj uważność i refleksję.",
+        "imgAlt": "Gra Bibble Echo"
       }
     },
-    "hero": {
-      "title": "",
-      "lead": "Graj • Ucz się • Odkrywaj",
-      "cta": "Zobacz produkty"
-    },
+
     "about": {
       "title": "Cele Webaby",
       "mission": {
         "title": "Nasza misja",
-        "p1": "Wierzymy, że technologia i zabawa są potężnymi narzędziami rozwoju. Naszą misją jest edukacja dzieci i dorosłych poprzez interaktywne doświadczenia, w których rozrywka nie jest celem samym w sobie, lecz mostem do wiedzy.",
-        "p2": "Nie chcemy uzależniać — chcemy inspirować. Zastępujemy bierną konsumpcję aktywnym odkrywaniem. Pielęgnujemy kreatywność, myślenie krytyczne i radość z odkrywania."
+        "p1": "Wierzymy, że technologia i zabawa to potężne narzędzia rozwoju. Naszą misją jest edukacja dzieci i dorosłych poprzez interaktywne doświadczenia, gdzie rozrywka nie jest celem samym w sobie, ale mostem do wiedzy.",
+        "p2": "Nie chcemy uzależniać, ale inspirować. Zastępujemy bierną konsumpcję aktywną eksploracją. Rozwijamy kreatywność, krytyczne myślenie i radość odkrywania."
       },
       "dev": {
-        "title": "Oprogramowanie i nauka przez zabawę",
-        "p1": "W Webaby projektujemy oprogramowanie, które łączy zabawę z wiedzą. Nasze produkcje obejmują łamigłówki zmuszające do myślenia oraz przygodowe gry pełne akcji — każda wypełniona wyobraźnią, fabułą i barwnymi światami.",
-        "p2": "Każdy produkt powstaje po to, by rozpalać ciekawość i sprawiać, że nauka staje się zabawą."
+        "title": "Tworzenie oprogramowania i nauka przez zabawę",
+        "p1": "W Webaby projektujemy oprogramowanie łączące zabawę z wiedzą. Nasze gry i aplikacje — od łamigłówek po przygody akcji — pełne są wyobraźni, fabuły i kolorowych światów.",
+        "p2": "Każdy produkt powstaje, aby rozbudzać ciekawość i sprawiać, że nauka staje się zabawą."
       },
       "innovation": {
-        "title": "Innowacje i technologia",
-        "p1": "Innowacja jest w sercu wszystkiego, co robimy. Badamy najnowsze możliwości sztucznej inteligencji, blockchainu, gier i interaktywnego opowiadania historii oraz nowoczesnej inżynierii oprogramowania.",
-        "p2": "Nasza pasja do technologii napędza naszą zdolność do wymyślania nowych sposobów uczenia się i wprowadzania na rynek odważnych, wartościowych produktów."
+        "title": "Innowacja i technologia",
+        "p1": "Innowacja jest sercem wszystkiego, co robimy. Badamy najnowsze technologie: sztuczną inteligencję, blockchain, gry i interaktywne opowieści, a także nowoczesne inżynierie oprogramowania.",
+        "p2": "Nasza pasja do technologii pozwala nam tworzyć nowe sposoby uczenia się i wprowadzać odważne, wartościowe produkty na rynek."
       },
       "vision": {
         "title": "Wizja długoterminowa",
-        "p1": "Chcemy stać się globalnym hubem, w którym spotykają się edukacja, kreatywność i innowacje. Łącząc technologię z ludzką wyobraźnią, Webaby tworzy narzędzia, które angażują do nauki w każdym wieku, oraz buduje społeczności wokół wiedzy i zabawy.",
-        "p2": "Nieustannie eksperymentujemy z nowymi cyfrowymi możliwościami, aby dostarczać doświadczenia, które mają znaczenie."
+        "p1": "Chcemy stać się globalnym centrum, gdzie edukacja, kreatywność i innowacja spotykają się. Łącząc technologię z ludzką wyobraźnią, Webaby pragnie tworzyć narzędzia, które czynią naukę angażującą dla wszystkich i budować społeczności wokół wiedzy i zabawy.",
+        "p2": "Stale eksperymentujemy z nowymi obszarami cyfrowymi, aby dostarczać doświadczeń, które mają znaczenie."
       },
       "alt": {
         "scene2": "Ilustracja edukacji i rozwoju",
@@ -78,11 +96,10 @@
         "future": "Technologie przyszłości"
       }
     },
+
     "sections": {
       "products": { "title": "Produkty" },
       "contact": { "title": "Kontakt" }
     }
   }
 }
-
-  

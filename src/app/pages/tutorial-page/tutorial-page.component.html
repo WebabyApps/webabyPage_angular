@@ -1,168 +1,170 @@
-<!-- TOP HERO + H1 -->
-<ng-container *ngIf="scopePath as scope">
-  <ng-container *transloco="let t; scope: scope">
-    <app-hero
-      [title]="t('hero.title')"
-      [subtitle]="t('hero.subtitle')"
-      [ctaText]="t('hero.back')"
-      [ctaLink]="'/'"
-      [ctaFragment]="'products'"
-      [compact]="true">
-    </app-hero>
+<!-- Guard: render only when scopePath is a non-empty string -->
+<ng-container *ngIf="scopePath as sp">
+  <!-- Optional debug -->
+ <!-- <small class="debug">scope = {{ sp }}</small>
+  <small class="debug">slug = {{ sp }}</small> -->
 
-    <section class="container tutorial narrow">
-    <h1>{{ t('title') }}</h1>
-    <!-- dalej ngSwitch -->
+  <!-- HERO -->
+  <app-hero
+    [scope]="sp"
+    [title]="'hero.title'"
+    [subtitle]="'hero.subtitle'"
+    [ctaText]="'hero.back'">
+  </app-hero>
+
+  <section class="container tutorial narrow">
+    <ng-container *transloco="let _; scope: sp"></ng-container>
+    <h1>{{ tr('title') }}</h1>
+
+
     <ng-container [ngSwitch]="slug">
-<!-- ========== ABC-land ========== -->
-<div *ngSwitchCase="'abc-land'">
+      <!-- ========== ABC-land ========== -->
+   
 
-  <img class="app-header"
-       src="assets/tutorials/abc-land/scene2_800.webp"
-       [attr.alt]="'title' | transloco : {} : { scope: scope }"
-       fadeInOnScroll />
+        <img
+          class="app-header"
+          src="assets/tutorials/abc-land/scene2_800.webp"
+          [attr.alt]="tr('title')"
+          fadeInOnScroll />
 
-  <h2>{{ 'description.title' | transloco : {} : { scope: scope } }}</h2>
-  <p class="lead">{{ 'description.lead' | transloco : {} : { scope: scope } }}</p>
+        <h2>{{ tr('description.title') }}</h2>
+        <p class="lead">{{ tr('description.lead') }}</p>
 
-  <app-tutorial-section
-    [title]="'sections.startMenu.title'"
-    [img]="'assets/tutorials/abc-land/screenshoot2.jpg'"
-    [lazyImg]="true"
-    [alt]="'sections.startMenu.caption'"
-    [caption]="'sections.startMenu.caption'"
-    [reverse]="true"
-    [scope]="scope">
-    <p>{{ 'sections.startMenu.intro' | transloco : {} : { scope: scope } }}</p>
-    <ul>
-      <li *ngFor="let item of ('sections.startMenu.items' | transloco : {} : { scope: scope })">
-        {{ item }}
-      </li>
-    </ul>
-  </app-tutorial-section>
+    
 
-  <app-tutorial-section
-    [title]="'sections.sound.title'"
-    [img]="'assets/tutorials/abc-land/sound-settings.jpg'"
-    [lazyImg]="true"
-    [alt]="'sections.sound.caption'"
-    [caption]="'sections.sound.caption'"
-    [reverse]="true"
-    [scope]="scope">
-    <p>{{ 'sections.sound.p' | transloco : {} : { scope: scope } }}</p>
-  </app-tutorial-section>
+<app-tutorial-section
+            [title]="tr('sections.startMenu.title')"
+            [img]="'assets/tutorials/abc-land/screenshoot2.jpg'"
+            [lazyImg]="true"
+            [alt]="tr('sections.startMenu.caption')"
+            [caption]="tr('sections.startMenu.caption')"
+            [reverse]="true"
+            [scope]="sp">
+            <p>{{ tr('sections.startMenu.intro') }}</p>
+            <ul>
+              <li *ngFor="let item of tr('sections.startMenu.items')">{{ item }}</li>
+            </ul>
+          </app-tutorial-section>
 
-  <app-tutorial-section
-    [title]="'sections.intro.title'"
-    [img]="'assets/tutorials/abc-land/screenshoot3.jpg'"
-    [lazyImg]="true"
-    [alt]="'sections.intro.caption'"
-    [caption]="'sections.intro.caption'"
-    [reverse]="true"
-    [scope]="scope">
-    <p>{{ 'sections.intro.p' | transloco : {} : { scope: scope } }}</p>
-  </app-tutorial-section>
+          <app-tutorial-section
+            [title]="tr('sections.sound.title')"
+            [img]="'assets/tutorials/abc-land/sound-settings.jpg'"
+            [lazyImg]="true"
+            [alt]="tr('sections.sound.caption')"
+            [caption]="tr('sections.sound.caption')"
+            [reverse]="true"
+            [scope]="sp">
+            <p>{{ tr('sections.sound.p') }}</p>
+          </app-tutorial-section>
 
-  <app-tutorial-section
-    [title]="'sections.steering.title'"
-    [img]="'assets/tutorials/abc-land/screenshoot7.jpg'"
-    [lazyImg]="true"
-    [alt]="'sections.steering.caption'"
-    [caption]="'sections.steering.caption'"
-    [reverse]="true"
-    [scope]="scope">
-    <p>{{ 'sections.steering.p1' | transloco : {} : { scope: scope } }}</p>
-    <p>{{ 'sections.steering.p2' | transloco : {} : { scope: scope } }}</p>
-    <p>{{ 'sections.steering.p3' | transloco : {} : { scope: scope } }}</p>
-  </app-tutorial-section>
+          <app-tutorial-section
+            [title]="tr('sections.intro.title')"
+            [img]="'assets/tutorials/abc-land/screenshoot3.jpg'"
+            [lazyImg]="true"
+            [alt]="tr('sections.intro.caption')"
+            [caption]="tr('sections.intro.caption')"
+            [reverse]="true"
+            [scope]="sp">
+            <p>{{ tr('sections.intro.p') }}</p>
+          </app-tutorial-section>
 
-  <app-tutorial-section
-    [title]="'sections.tasks.title'"
-    [img]="'assets/tutorials/abc-land/screenshoot1.jpg'"
-    [lazyImg]="true"
-    [alt]="'sections.tasks.caption'"
-    [caption]="'sections.tasks.caption'"
-    [reverse]="true"
-    [scope]="scope">
-    <p>{{ 'sections.tasks.p1' | transloco : {} : { scope: scope } }}</p>
-    <section id="main-game" class="section">
-      <p>{{ 'sections.tasks.savingExample' | transloco : {} : { scope: scope } }}</p>
-    </section>
-  </app-tutorial-section>
+          <app-tutorial-section
+            [title]="tr('sections.steering.title')"
+            [img]="'assets/tutorials/abc-land/screenshoot7.jpg'"
+            [lazyImg]="true"
+            [alt]="tr('sections.steering.caption')"
+            [caption]="tr('sections.steering.caption')"
+            [reverse]="true"
+            [scope]="sp">
+            <p>{{ tr('sections.steering.p1') }}</p>
+            <p>{{ tr('sections.steering.p2') }}</p>
+            <p>{{ tr('sections.steering.p3') }}</p>
+          </app-tutorial-section>
 
-  <app-tutorial-section
-    [title]="'sections.lighter.title'"
-    [img]="'assets/tutorials/abc-land/Lighter.png'"
-    [lazyImg]="true"
-    [alt]="'sections.lighter.caption'"
-    [caption]="'sections.lighter.caption'"
-    [reverse]="true"
-    [scope]="scope">
-    <p>{{ 'sections.lighter.p' | transloco : {} : { scope: scope } }}</p>
-  </app-tutorial-section>
+          <app-tutorial-section
+            [title]="tr('sections.tasks.title')"
+            [img]="'assets/tutorials/abc-land/screenshoot1.jpg'"
+            [lazyImg]="true"
+            [alt]="tr('sections.tasks.caption')"
+            [caption]="tr('sections.tasks.caption')"
+            [reverse]="true"
+            [scope]="sp">
+            <p>{{ tr('sections.tasks.p1') }}</p>
+            <section id="main-game" class="section">
+              <p>{{ tr('sections.tasks.savingExample') }}</p>
+            </section>
+          </app-tutorial-section>
 
-  <app-tutorial-section
-    [title]="'sections.fixing.title'"
-    [img]="'assets/tutorials/abc-land/fixing_items.png'"
-    [lazyImg]="true"
-    [alt]="'sections.fixing.caption'"
-    [caption]="'sections.fixing.caption'"
-    [reverse]="true"
-    [scope]="scope">
-    <p>{{ 'sections.fixing.p' | transloco : {} : { scope: scope } }}</p>
-  </app-tutorial-section>
+          <app-tutorial-section
+            [title]="tr('sections.lighter.title')"
+            [img]="'assets/tutorials/abc-land/Lighter.png'"
+            [lazyImg]="true"
+            [alt]="tr('sections.lighter.caption')"
+            [caption]="tr('sections.lighter.caption')"
+            [reverse]="true"
+            [scope]="sp">
+            <p>{{ tr('sections.lighter.p') }}</p>
+          </app-tutorial-section>
 
-  <app-tutorial-section
-    [title]="'sections.buying.title'"
-    [img]="'assets/tutorials/abc-land/Buying_items.png'"
-    [lazyImg]="true"
-    [alt]="'sections.buying.caption'"
-    [caption]="'sections.buying.caption'"
-    [reverse]="true"
-    [scope]="scope">
-    <p>{{ 'sections.buying.p' | transloco : {} : { scope: scope } }}</p>
-  </app-tutorial-section>
+          <app-tutorial-section
+            [title]="tr('sections.fixing.title')"
+            [img]="'assets/tutorials/abc-land/fixing_items.png'"
+            [lazyImg]="true"
+            [alt]="tr('sections.fixing.caption')"
+            [caption]="tr('sections.fixing.caption')"
+            [reverse]="true"
+            [scope]="sp">
+            <p>{{ tr('sections.fixing.p') }}</p>
+          </app-tutorial-section>
 
-  <app-tutorial-section
-    [title]="'sections.map.title'"
-    youtubeId="p2_UkiHcRmQ"
-    [autoplay]="false"
-    [start]="0"
-    [reverse]="true"
-    [lazyVideo]="false"
-    [caption]="'sections.map.caption'"
-    [scope]="scope">
-    <p>{{ 'sections.map.videoCaption' | transloco : {} : { scope: scope } }}</p>
-  </app-tutorial-section>
+          <app-tutorial-section
+            [title]="tr('sections.buying.title')"
+            [img]="'assets/tutorials/abc-land/Buying_items.png'"
+            [lazyImg]="true"
+            [alt]="tr('sections.buying.caption')"
+            [caption]="tr('sections.buying.caption')"
+            [reverse]="true"
+            [scope]="sp">
+            <p>{{ tr('sections.buying.p') }}</p>
+          </app-tutorial-section>
+
+          <app-tutorial-section
+            [title]="tr('sections.map.title')"
+            youtubeId="p2_UkiHcRmQ"
+            [autoplay]="false"
+            [start]="0"
+            [reverse]="true"
+            [lazyVideo]="false"
+            [caption]="tr('sections.map.caption')"
+            [scope]="sp">
+            <p>{{ tr('sections.map.videoCaption') }}</p>
+          </app-tutorial-section>
+
 
   <!-- GALLERY -->
   <section id="gallery" class="section">
-    <h3>{{ 'gallery.title' | transloco : {} : { scope: scope } }}</h3>
+    <h3>{{ tr('gallery.title') }}</h3>
     <div class="media-grid">
       <figure>
         <img src="assets/tutorials/abc-land/screenshoot2.jpg"
-             [attr.alt]="'gallery.mainMenu' | transloco : {} : { scope: scope }"
-             loading="lazy" decoding="async">
-        <figcaption>{{ 'gallery.mainMenu' | transloco : {} : { scope: scope } }}</figcaption>
+             [attr.alt]="tr('gallery.mainMenu')" loading="lazy" decoding="async">
+        <figcaption>{{ tr('gallery.mainMenu') }}</figcaption>
       </figure>
       <figure>
         <img src="assets/tutorials/abc-land/screenshoot3.jpg"
-             [attr.alt]="'gallery.intro' | transloco : {} : { scope: scope }"
-             loading="lazy" decoding="async">
-        <figcaption>{{ 'gallery.intro' | transloco : {} : { scope: scope } }}</figcaption>
+             [attr.alt]="tr('gallery.intro')" loading="lazy" decoding="async">
+        <figcaption>{{ tr('gallery.intro') }}</figcaption>
       </figure>
       <figure>
         <img src="assets/tutorials/abc-land/screenshoot1.jpg"
-             [attr.alt]="'gallery.tasks' | transloco : {} : { scope: scope }"
-             loading="lazy" decoding="async">
-        <figcaption>{{ 'gallery.tasks' | transloco : {} : { scope: scope } }}</figcaption>
+             [attr.alt]="tr('gallery.tasks')" loading="lazy" decoding="async">
+        <figcaption>{{ tr('gallery.tasks') }}</figcaption>
       </figure>
     </div>
   </section>
-
-  <!-- VIDEO -->
-  <section id="video" class="section">
-    <h3>{{ 'video.title' | transloco : {} : { scope: scope } }}</h3>
+   <!-- VIDEO -->
+   <section id="video" class="section">
+    <h3>{{ tr('video.title') }}</h3>
     <div class="video">
       <figure class="yt yt--md">
         <iframe
@@ -170,65 +172,13 @@
           title="ABC-Land demo" loading="lazy"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowfullscreen></iframe>
-        <figcaption>{{ 'video.walkthrough' | transloco : {} : { scope: scope } }}</figcaption>
+        <figcaption>{{ tr('video.walkthrough') }}</figcaption>
       </figure>
-      <small class="caption">{{ 'video.walkthrough' | transloco : {} : { scope: scope } }}</small>
+      <small class="caption">{{ tr('video.walkthrough') }}</small>
     </div>
   </section>
-</div>
+</ng-container>
 
 
-      <!-- ========== Abecadłowo content ========== -->
-      <div *ngSwitchCase="'abecadlowo'">
-        <p>Abecadłowo pomaga dzieciom poznawać litery i dźwięki. Poniżej krótka instrukcja.</p>
-        <h3>Jak korzystać</h3>
-        <ol>
-          <li>Wybierz literę z planszy.</li>
-          <li>Dotknij ikony głośnika, aby usłyszeć głoskę.</li>
-          <li>Powtórz i spróbuj narysować literę.</li>
-        </ol>
-        <!-- (opcjonalnie) zrzuty ekranu -->
-        <div class="gallery">
-          <img src="assets/tutorials/abecadlowo/home.png" alt="Ekran główny" />
-          <img src="assets/tutorials/abecadlowo/alphabet-grid.png" alt="Siatka liter" />
-        </div>
-        <!-- YouTube (zamień ID na swój) -->
-        <h3>Krótka prezentacja</h3>
-        <iframe
-          src="https://www.youtube-nocookie.com/embed/5Q6ibSmZLxs?si=I9jAXtzt8k9WFRFR"
-          title="Abecadłowo - prezentacja"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen>
-        </iframe>
-      </div>
-      <!-- ========== Basketball-shots content ========== -->
-      <div *ngSwitchCase="'basketball-shots'">
-        <p>Opanuj <b>celowanie</b>, <b>moc</b> i <b>moment wypuszczenia</b>.</p>
-        <h3>How to use</h3>
-        <ol>
-          <li><b>Aim:</b> przeciągnij, by ustawić łuk lotu.</li>
-          <li><b>Power:</b> dłuższe przeciągnięcie = większa moc.</li>
-          <li><b>Release:</b> puść na szczycie łuku.</li>
-        </ol>
-        <!-- przykładowe obrazy (wrzuć swoje pliki) -->
-        <div class="gallery">
-          <img src="assets/tutorials/basketball-shots/aim.png" alt="Celowanie" />
-          <img src="assets/tutorials/basketball-shots/power.png" alt="Moc" />
-          <img src="assets/tutorials/basketball-shots/release.png" alt="Wypuszczenie" />
-        </div>
-        <h3>Video tips</h3>
-        <iframe
-          src="https://www.youtube-nocookie.com/embed/5Q6ibSmZLxs?si=I9jAXtzt8k9WFRFR"
-          title="Basketball Shots – tips"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen>
-        </iframe>
-      </div>
-      <!-- ========== Default (no content yet) ========== -->
-      <div *ngSwitchDefault>
-        No detailed tutorial yet for: {{ slug }}
-      </div>
-    </ng-container>
   </section>
-</ng-container>  
-</ng-container>   
+</ng-container>

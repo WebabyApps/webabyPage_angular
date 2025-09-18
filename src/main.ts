@@ -13,43 +13,27 @@ registerLocaleData(localePl);
 
 // Transloco core
 import { TranslocoModule } from '@jsverse/transloco';
-import { TranslocoRootModule } from './app/i18n/transloco-root.module';
-
-// Transloco Locale (nowe API – provider funkcyjny)
 import { TranslocoLocaleModule, provideTranslocoLocale } from '@jsverse/transloco-locale';
-
-// Twój token
-import { TUTORIALS } from './app/tutorials/tutorial.token';
+import { TranslocoRootModule } from './app/i18n/transloco-root.module';
 
 bootstrapApplication(AppComponent, {
   providers: [
-    provideHttpClient(),
     provideAnimations(),
     provideRouter(
       routes,
       withInMemoryScrolling({
         anchorScrolling: 'enabled',
-        scrollPositionRestoration: 'enabled',
+        scrollPositionRestoration: 'enabled'
       })
     ),
-
-    // ⬇️ Globalne providery modułów
-    importProvidersFrom(
-      TranslocoModule,        // bazowe providery Transloco (pipe, service, itd.)
-      TranslocoRootModule,    // Twój config + loader
-      TranslocoLocaleModule   // dyrektywy/pipes locale
-    ),
-
-    // ⬇️ Kluczowe: rejestruje wszystkie tokeny locale, w tym LANG_MAPPING
+    provideHttpClient(),
+    importProvidersFrom(TranslocoModule, TranslocoRootModule, TranslocoLocaleModule),
     provideTranslocoLocale({
       langToLocaleMapping: {
         en: 'en-US',
         pl: 'pl-PL',
       },
-      // opcjonalnie: globalne formaty
-      // localeConfig: { global: { date: { dateStyle: 'long', timeStyle: 'short' } } }
+      defaultLocale: 'en-US',
     }),
-
-    { provide: TUTORIALS, useValue: {} },
   ],
 }).catch(err => console.error(err));

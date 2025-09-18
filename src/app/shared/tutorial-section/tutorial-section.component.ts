@@ -1,9 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { NgIf, NgClass } from '@angular/common';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { FadeInOnScrollDirective } from '../directives/fade-in-on-scroll.directive';
-import { TranslocoModule } from '@jsverse/transloco';
-
+import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-tutorial-section',
@@ -12,32 +11,88 @@ import { TranslocoModule } from '@jsverse/transloco';
   templateUrl: './tutorial-section.component.html',
   styleUrls: ['./tutorial-section.component.scss'],
 })
-export class TutorialSectionComponent {
-  @Input() title = '';
-  @Input() caption = '';
+export class TutorialSectionComponent implements OnChanges {
+  @Input() scope?: string;
+
+  @Input() title?: string;
+  @Input() caption?: string;
+  @Input() alt?: string;
+
+  resolvedTitle?: string;
+  resolvedCaption?: string;
+  resolvedAlt?: string;
+
   @Input() reverse = false;
-
-  // Image inputs
   @Input() img = '';
-  @Input() alt = '';
+  @Input() lazyImg = true;
 
-  // YouTube inputs (provide either youtubeId OR youtubeUrl)
   @Input() youtubeId = '';
   @Input() youtubeUrl = '';
-  @Input() start = 0;            // seconds
+  @Input() start = 0;
   @Input() autoplay = false;
   @Input() modestBranding = true;
-  @Input() rel = 0;              // show related vids (0/1)
-  @Input() lazyVideo = false;  // ⬅️ New: disable lazy-loading by default
-  @Input() scope?: string; // np. "tutorials/abc-land"
+  @Input() rel = 0;
+  @Input() lazyVideo = false;
 
+  constructor(
+    private sanitizer: DomSanitizer,
+    private transloco: TranslocoService   // ⬅️ injected here
+  ) {}
 
-  constructor(private sanitizer: DomSanitizer) {}
+  ngOnChanges(): void {
+    this.resolveAll();
+  }
+
+  private isKey(str?: string): boolean {
+    return !!str && str.includes('.') && !/\s/.test(str);
+  }
+
+  private trMaybeAsync(str?: string, setter?: (v: string) => void) {
+    if (!str || !setter) return;
+    if (!this.isKey(str)) { setter(str); return; }
+
+    const svc: any = this.transloco as any;
+    if (typeof svc.selectTranslate === 'function') {
+      const obs = this.scope
+        ? svc.selectTranslate(str, {}, this.scope)
+        : svc.selectTranslate(str);
+      obs.pipe().subscribe((v: string) => setter(v));
+      return;
+    }
+    const v = this.scope
+      ? this.transloco.translate(str, {}, this.scope)
+      : this.transloco.translate(str);
+    setter(v);
+  }
+
+  private resolveAll() {
+    this.trMaybeAsync(this.title, v => (this.resolvedTitle = v));
+    this.trMaybeAsync(this.caption, v => (this.resolvedCaption = v));
+    this.trMaybeAsync(this.alt, v => (this.resolvedAlt = v));
+  }
+
+  /** ⬇️ NEW scope-aware helpers */
+  tr(key: string, params: Record<string, any> = {}): string {
+    return this.transloco.translate(key, params, this.scope);
+  }
+
+  tro(key: string, params: Record<string, any> = {}) {
+    const svc: any = this.transloco as any;
+    if (typeof svc.selectTranslate === 'function') {
+      return svc.selectTranslate(key, params, this.scope);
+    }
+    return {
+      subscribe: (fn: (v: string) => void) => {
+        fn(this.transloco.translate(key, params, this.scope));
+        return { unsubscribe() {} };
+      },
+    };
+  }
+  /** ⬆️ END of helpers */
 
   get videoId(): string | null {
     if (this.youtubeId) return this.youtubeId.trim();
     if (!this.youtubeUrl) return null;
-    // Extract ID from common YouTube URL forms
     const m =
       this.youtubeUrl.match(/[?&]v=([^&#]+)/) ||
       this.youtubeUrl.match(/youtu\.be\/([^?&#/]+)/) ||
@@ -53,18 +108,14 @@ export class TutorialSectionComponent {
       start: String(this.start || 0),
       modestbranding: this.modestBranding ? '1' : '0',
       rel: String(this.rel ?? 0),
-      playsinline: '1'
+      playsinline: '1',
     }).toString();
-    // Use the no-cookie domain
     return this.sanitizer.bypassSecurityTrustResourceUrl(
       `https://www.youtube-nocookie.com/embed/${id}?${params}`
     );
   }
 
-  // Convenience: if both are provided, video wins.
   get showVideo(): boolean {
     return !!this.embedUrl;
   }
 }
-
-
