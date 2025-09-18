@@ -32,5 +32,4 @@
     "@angular/compiler-cli": "^17.3.0",
     "typescript": "~5.3.3"
   }
-  
 }
