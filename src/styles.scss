@@ -11,3 +11,129 @@ h1,h2,h3{margin:0 0 12px} h2{font-size:clamp(1.6rem,3vw,2rem)} h3{font-size:1.25
 .social a{display:inline-grid;place-items:center;width:36px;height:36px;border-radius:8px;border:1px solid var(--line);margin-left:8px;transition:transform .15s, background .15s, border-color .15s}
 .social a:hover{transform:translateY(-2px);background:#121a24;border-color:#2a3a4c}
 .social svg{width:18px;height:18px;fill:currentColor;color:#fff}
+.blurred-backdrop {
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+  .glass-panel .mdc-dialog__surface {
+    /* Angular Material 15+ */
+    background: transparent !important; /* bo panel sam ma tło w komponencie */
+    box-shadow: none !important;
+  }
+.mdc-dialog__actions {
+    display: flex;
+    justify-content: flex-end;
+    padding: 16px;
+    border-top: 1px solid var(--line);
+  } 
+  .cdk-overlay-container { z-index: 2000; }
+  .custom-dialog-backdrop {
+    background: rgba(0, 0, 0, 0.7); // 70% przyciemnienia
+  }
+
+  .mat-mdc-dialog-surface {
+    border: none !important;
+    box-shadow: none !important; 
+    border-radius: 12px !important;
+    background: rgba(255, 255, 255, 0.9) !important; /* lub całkiem transparent */
+  }
+ 
+  /* GLOBAL: usuń białą obwódkę w KAŻDYM dialogu (MDC) */
+.mat-mdc-dialog-container {
+    /* ustawienia przez CSS variables (pewne w nowych Materialach) */
+    --mdc-dialog-container-color: rgba(255,255,255,0.9);
+    --mdc-dialog-container-elevation-shadow: 0 8px 24px rgba(0,0,0,.35);
+    --mdc-dialog-container-shape: 12px;
+  }
+  
+  .mat-mdc-dialog-container .mdc-dialog__surface {
+    background: var(--mdc-dialog-container-color) !important;
+    border: 0 !important;
+    outline: 0 !important;
+    box-shadow: var(--mdc-dialog-container-elevation-shadow) !important;
+    border-radius: var(--mdc-dialog-container-shape) !important;
+    background-clip: padding-box; /* żeby antyaliasing nie dawał jasnej obwódki */
+  }
+  
+  /* niektóre tematy rysują “ramkę” pseudo-elementem */
+  .mat-mdc-dialog-container .mdc-dialog__surface::before,
+  .mat-mdc-dialog-container .mdc-dialog__surface::after {
+    content: none !important;
+  }
+  
+  /* (opcjonalnie) zero paddingu wewnątrz, bo bywa mylone z obwódką */
+  .mat-mdc-dialog-content { padding: 0 !important; }
+
+  /* Ustaw globalnie tło kontenera dialogu */
+.mat-mdc-dialog-container {
+    background: transparent !important; /* zamiast domyślnego białego */
+    padding: 0 !important;              /* usuń domyślne marginesy */
+  }
+
+  .mat-mdc-dialog-surface {
+    background: rgba(40, 40, 40, 0.95) !important; /* Twój kolor/tło z opacity */
+    border-radius: 12px !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,.35) !important;
+    background-clip: padding-box;
+  }
+
+  /* Usuń białe tła/obwódki gdziekolwiek Material je dodaje */
+.transparent-dialog .mat-mdc-dialog-container,
+.transparent-dialog .mdc-dialog__container,
+.transparent-dialog .mdc-dialog__surface,
+.transparent-dialog .mat-mdc-dialog-surface {
+  background: transparent !important;
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  border: none !important;
+  border-radius: 12px;                   /* zaokrąglenia */
+}
+
+.glow-btn {
+    animation: glow-pulse 2s ease-in-out infinite alternate;
+    box-shadow: 0 0 6px rgba(0, 150, 255, 0.6),
+                0 0 12px rgba(0, 150, 255, 0.4);
+  }
+  
+  @keyframes glow-pulse {
+    from {
+      box-shadow: 0 0 4px rgba(0, 150, 255, 0.5),
+                  0 0 8px rgba(0, 150, 255, 0.3);
+    }
+    to {
+      box-shadow: 0 0 14px rgba(0, 150, 255, 0.9),
+                  0 0 28px rgba(0, 150, 255, 0.6);
+    }
+  }
+  .dialog-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  
+  .dialog-actions {
+    margin-top: auto;                /* spycha do dołu */
+    display: flex;
+    justify-content: center;         /* wyśrodkowanie w poziomie */
+    padding: 16px;                   /* trochę miejsca od krawędzi */
+  }
+
+  /* === Fade-in on scroll animation === */
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  will-change: opacity, transform;
+}
+
+.fade-in-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+  
+  
+ 

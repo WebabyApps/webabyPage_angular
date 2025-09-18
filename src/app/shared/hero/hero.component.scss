@@ -1,11 +1,180 @@
+:host {
+  display: block;
+}
 
-.hero{position:relative;min-height:100vh;display:grid;place-items:center;padding-top:64px;overflow:hidden}
-.hero-bg{position:absolute;inset:0;background:url('../../../assets/hero-bg.jpg') center/cover no-repeat, radial-gradient(100% 100% at 50% 0%, #0b0f14, #071018 70%); filter:saturate(1.1) contrast(1.05)}
-.hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.55),rgba(0,0,0,0) 25%,rgba(0,0,0,0) 75%,rgba(0,0,0,.7))}
-.hero-center{position:relative;z-index:1;text-align:center;display:grid;gap:12px;place-items:center}
-.hero-logo{width:min(320px,60vw);filter:drop-shadow(0 10px 30px rgba(0,0,0,.5));cursor:pointer;transition:transform .2s}
-.hero-logo:hover{transform:scale(1.02)}
-.tagline{opacity:.9}
-.btn{display:inline-block;padding:.8rem 1.25rem;border:1px solid rgba(255,255,255,.6);border-radius:999px;background:rgba(0,0,0,.25);transition:transform .15s,border-color .15s,background .15s}
-.btn:hover{transform:translateY(-2px);border-color:#fff;background:rgba(255,255,255,.08)}
-.scroll-indicator{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);opacity:.7;font-size:.9rem}
+/* ========== Base hero ========== */
+.hero {
+  position: relative;
+  min-height: 100vh;      /* full-screen on home */
+  overflow: hidden;
+}
+
+/* Background (behind everything) */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  /* keep your bg; adjust path if needed */
+  background:
+    radial-gradient(80% 60% at 50% 0%, rgba(255,255,255,0.06), rgba(0,0,0,0) 70%),
+    url('/assets/hero-bg.jpg') center/cover no-repeat;
+  opacity: 0.9;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Optional overlay gradient – still behind content */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,.55),
+    rgba(0,0,0,0) 25%,
+    rgba(0,0,0,0) 75%,
+    rgba(0,0,0,.7)
+  );
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Foreground content (always above bg/overlay) */
+.hero-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding-top: 26vh;      /* pushes logo down on home */
+  padding-bottom: 8vh;
+  padding-left: 16px;
+  padding-right: 16px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Logo */
+.hero-logo {
+  width: clamp(140px, 22vw, 320px);
+  height: auto;
+  margin: 0 auto 16px;
+  display: block;
+  filter: drop-shadow(0 8px 24px rgba(0,0,0,.45));
+  transition: transform .2s ease;
+}
+.hero-logo:hover {
+  transform: scale(1.02);
+}
+
+/* Optional small text */
+.tagline {
+  opacity: .9;
+}
+
+/* Scroll hint (if you use it) */
+.scroll-indicator {
+  position: absolute;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: .7;
+  font-size: .9rem;
+  z-index: 1;
+}
+
+/* ========== CTA buttons (anchor + button) ========== */
+:where(a.cta, button.cta) {
+  -webkit-appearance: none;
+  appearance: none;
+  display: inline-block;
+  padding: .8rem 1.25rem;
+  border: 1px solid rgba(255,255,255,.6);
+  border-radius: 999px;
+  background: rgba(0,0,0,.25);
+  color: #fff;
+  text-decoration: none;
+  text-decoration-color: #fff;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+  transition: transform .15s, border-color .15s, background .15s;
+}
+
+:where(a.cta, button.cta):hover {
+  background: rgba(255,255,255,0.14);
+  border-color: rgba(255,255,255,0.55);
+}
+
+:where(a.cta, button.cta):active {
+  transform: translateY(1px);
+}
+
+:where(a.cta, button.cta):focus-visible {
+  outline: 2px solid rgba(255,255,255,0.7);
+  outline-offset: 2px;
+}
+
+/* --- Compact variant (subpages) --- */
+/* make the background taller on compact pages */
+/*
+.hero.compact {
+  
+  min-height: clamp(360px, 56vh, 620px);
+  padding-top: 0;
+  padding-bottom: 0;
+}*/
+
+/* Make the COMPACT hero full-bleed even if it's inside a .container */
+.hero.compact {
+  position: relative;
+  overflow: hidden;
+
+  /* full-bleed trick */
+  width: 100vw;
+  max-width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+/* Avoid accidental horizontal scroll due to the negative margins.
+   Put this in your global styles.css if you prefer. */
+html, body { overflow-x: clip; } /* use hidden if clip isn't supported */
+
+
+.hero.compact .hero-content {
+  /* move content down inside the taller bg */
+  padding-top: clamp(12vh, 18vh, 22vh);
+  padding-bottom: clamp(8px, 2vw, 20px);
+}
+
+.hero.compact .hero-logo {
+  width: 120px;
+  margin-bottom: 10px;
+  display: block;
+  margin-top: 160px; 
+}
+
+.hero.compact :where(a.cta, button.cta) {
+  padding: 8px 16px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+}
+
+/* ========== (Old utility styles you used) ========== */
+.btn {
+  display: inline-block;
+  padding: .8rem 1.25rem;
+  border: 1px solid rgba(255,255,255,.6);
+  border-radius: 999px;
+  background: rgba(0,0,0,.25);
+  transition: transform .15s, border-color .15s, background .15s;
+}
+.btn:hover {
+  transform: translateY(-2px);
+  border-color: #fff;
+  background: rgba(255,255,255,.08);
+}

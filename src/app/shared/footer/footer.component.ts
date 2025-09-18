@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 @Component({
-  selector:'app-footer',
-  templateUrl:'./footer.component.html',
-  styleUrls:['./footer.component.scss']
+    selector: 'app-footer',
+    templateUrl: './footer.component.html',
+    styleUrls: ['./footer.component.scss'],
+    imports: [CommonModule],
+    standalone: true
 })
 export class FooterComponent{ year=new Date().getFullYear(); }

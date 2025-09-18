@@ -1,10 +1,32 @@
+<ng-container *transloco="let t; scope: scope">
+<section class="hero" [class.compact]="compact">
+  <!-- background layer (keeps your starry bg, etc.) -->
+  <div class="hero-bg"></div>
 
-<section id="home" class="hero">
-  <div class="hero-bg" role="img" aria-label="Abstract network background"></div>
-  <div class="hero-center">
-    <img src="assets/logo_white.png" alt="Webaby Logo" class="hero-logo" (click)="scrollToProducts()"/>
-    <p class="tagline">Play • Learn • Imagine</p>
-    <a href="#products" class="btn">Explore Products</a>
+  <div class="hero-content">
+    <!-- BIG LOGO (hidden on compact pages) -->
+    <a class="hero-logo-link"
+       [routerLink]="'/'"
+       fragment="about"
+       [attr.aria-label]="t('home.hero.logoAria')">
+      <img class="hero-logo" src="assets/logo_white.png" [attr.alt]="t('aria.home')" />
+    </a>
+
+    <!-- <h1>{{ resolvedTitle || t('home.hero.title') }}</h1>-->
+    <p class="lead">{{ resolvedSubtitle || t('home.hero.lead') }}</p>
+
+    <!-- Scroll version (home) -->
+    <button *ngIf="!ctaLink" class="cta" (click)="scrollToProducts()">
+      {{ resolvedCtaText || t('home.hero.cta') }}
+    </button>
+
+    <!-- Link version -->
+    <a *ngIf="ctaLink"
+       [routerLink]="ctaLink"
+       [fragment]="ctaFragment"
+       class="cta">
+      {{ resolvedCtaText || t('home.hero.cta') }}
+    </a>
   </div>
-  <div class="scroll-indicator">↓ Scroll</div>
 </section>
+</ng-container>

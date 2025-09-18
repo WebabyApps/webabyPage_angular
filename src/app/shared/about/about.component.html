@@ -1,12 +1,35 @@
+<!-- ABOUT -->
+<div class="about-grid" *transloco="let t">
+  <!-- obraz główny -->
+  <img
+    class="test"
+    src="assets/education_and_grow_small.jpg"
+    [attr.alt]="t('home.about.alt.scene2')"
+  />
 
-<div class="about-grid">
-  <img class="about-hero" src="assets/logo.png" alt="Character">
-  <div class="about-copy">
-    <p>We craft playful experiences where imagination meets learning. From brainy puzzles to action‑packed arcade, our worlds are painted with story and color.</p>
+  <div class="about">
+    <section class="webaby-goals">
+      <h2>{{ t('home.about.mission.title') }}</h2>
+      <p>{{ t('home.about.mission.p1') }}</p>
+      <p>{{ t('home.about.mission.p2') }}</p>
+
+      <h2>{{ t('home.about.dev.title') }}</h2>
+      <p>{{ t('home.about.dev.p1') }}</p>
+      <p>{{ t('home.about.dev.p2') }}</p>
+
+      <h2>{{ t('home.about.innovation.title') }}</h2>
+      <p>{{ t('home.about.innovation.p1') }}</p>
+      <p>{{ t('home.about.innovation.p2') }}</p>
+
+      <h2>{{ t('home.about.vision.title') }}</h2>
+      <p>{{ t('home.about.vision.p1') }}</p>
+      <p>{{ t('home.about.vision.p2') }}</p>
+    </section>
+
     <div class="about-strip">
-      <img src="assets/scene1.jpg" alt="Scene 1">
-      <img src="assets/scene2.jpg" alt="Scene 2">
-      <img src="assets/scene3.jpg" alt="Scene 3">
+      <img src="assets/software.png" [attr.alt]="t('home.about.alt.software')" />
+      <img src="assets/grow.png"     [attr.alt]="t('home.about.alt.grow')" />
+      <img src="assets/future.png"   [attr.alt]="t('home.about.alt.future')" />
     </div>
   </div>
 </div>

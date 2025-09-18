@@ -1,25 +1,80 @@
+// src/app/shared/products-carousel/products-carousel.component.ts
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
-type Product = { title: string; img: string; desc: string };
+import { CommonModule } from '@angular/common';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { ProductDialogComponent } from '../product-dialog/product-dialog.component';
+import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
+
+type CardProduct = {
+  id: string;        // klucz i18n (np. "abcLand")
+  slug: string;      // stabilny slug do routów (np. "abc-land")
+  img: string;
+  appUrl?: string;
+  detailsUrl?: string;
+};
+
+
 @Component({
-  selector:'app-products-carousel',
-  templateUrl:'./products-carousel.component.html',
-  styleUrls:['./products-carousel.component.scss']
+  selector: 'app-products-carousel',
+  standalone: true,
+  templateUrl: './products-carousel.component.html',
+  styleUrls: ['./products-carousel.component.scss'],
+  imports: [CommonModule, MatDialogModule, TranslocoModule] // ← dodany TranslocoModule
 })
-export class ProductsCarouselComponent implements AfterViewInit{
-  @ViewChild('track',{static:true}) trackRef!: ElementRef<HTMLDivElement>;
-  products: Product[] = [
-    { title:'Bubble Word', img:'assets/bubble.jpg', desc:'Fast-paced word puzzler bursting with color and combos. Train vocabulary and reflexes.'},
-    { title:'Basketball Shots', img:'assets/basket.jpg', desc:'Arcade-style hoops with comic visuals. Shoot, swipe, and chase high scores with friends.'},
-    { title:'System of Equations Trainer', img:'assets/equations.jpg', desc:'Make algebra click with interactive drills and visual challenges that build intuition.'},
-    { title:'Abecadlowo', img:'assets/scene1.jpg', desc:'Alphabet adventures — playful letter quests that spark reading and spelling joy.'},
-    { title:'Lucky Draw', img:'assets/scene2.jpg', desc:'Spin, pick, celebrate! Party‑friendly mini‑game for fair choices and quick fun.'},
-    { title:'Bibble Echo', img:'assets/scene3.jpg', desc:'Rhythm & memory mashup — echo the pattern, level up your flow and focus.'},
+export class ProductsCarouselComponent implements AfterViewInit {
+  @ViewChild('track', { static: false }) trackRef!: ElementRef<HTMLDivElement>;
+
+  products: CardProduct[] = [
+    { id: 'bubbleWord',       slug: 'bubble-word',                   img: 'assets/bubble.jpg',        appUrl: 'https://webaby.io/details/bubble-word' },
+    { id: 'basketballShots',  slug: 'basketball-shots',              img: 'assets/basket.jpg',        appUrl: 'https://lucky-draw.webaby.io' },
+    { id: 'equationsTrainer', slug: 'system-of-equations-trainer',   img: 'assets/equations.jpg',     appUrl: 'https://lucky-draw.webaby.io' },
+    { id: 'abcLand',          slug: 'abc-land',                      img: 'assets/scene1.jpg',        appUrl: 'https://play.google.com/store/apps/details?id=abecadlowo.webaby.io' },
+    { id: 'luckyDraw',        slug: 'lucky-draw',                    img: 'assets/lucky_draw.png',    appUrl: 'https://lucky-draw.webaby.io' },
+    { id: 'bibbleEcho',       slug: 'bibble-echo',                   img: 'assets/bibble_echo2.jpeg', appUrl: 'https://bibbleecho.webaby.io/' }
   ];
+  
+  constructor(private dialog: MatDialog, private transloco: TranslocoService) {}
+
+  openDialog(p: CardProduct) {
+    const base = `home.products.${p.id}`;
+    this.dialog.open(ProductDialogComponent, {
+      panelClass: 'transparent-dialog',
+      width: '800px',
+      autoFocus: true,
+      data: {
+        title: this.transloco.translate(`${base}.title`),
+        imageUrl: p.img,
+        appUrl: p.appUrl,
+        slug: p.slug,                                // ✅ używaj stabilnego sluga
+        desc: this.transloco.translate(`${base}.desc`)
+      },
+      maxWidth: '90vw'
+    });
+  }
+
+  // --- autoplay / carousel logic (bez zmian) ---
   private autoplayId:any=null; private hoverId:any=null;
-  ngAfterViewInit(){ this.startAutoplay(); window.addEventListener('resize',()=>this.nudge()); }
-  private track(){ return this.trackRef.nativeElement; }
+  
+  ngAfterViewInit() {
+    this.startAutoplay();
+    window.addEventListener('resize', () => this.nudge());
+  }
+  
+  private track(): HTMLDivElement {
+    const el = this.trackRef?.nativeElement;
+    if (!el) throw new Error('Track element not ready yet');
+    return el;
+  }
+  
+  private cardWidth() {
+    const c = this.track().querySelector('.card') as HTMLElement | null;
+    return (c?.getBoundingClientRect().width ?? 320) + this.gap();
+  }
+  
+  
+  
   private gap(){ return 18; }
-  private cardWidth(){ const c=this.track().querySelector('.card') as HTMLElement|null; if(!c) return 320+this.gap(); return c.getBoundingClientRect().width + this.gap(); }
+  
   private move(px:number){ const t=this.track(); t.scrollLeft+=px; const max=t.scrollWidth-t.clientWidth; if(t.scrollLeft<=0)t.scrollLeft=max-2; else if(t.scrollLeft>=max-1) t.scrollLeft=1; }
   private easeOutCubic=(t:number)=>1-Math.pow(1-t,3);
   private easeInOutCubic=(t:number)=> t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;

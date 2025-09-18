@@ -1,0 +1,105 @@
+{ "title": "Webaby",
+  "nav": {
+    "home": "Home",
+    "products": "Products",
+    "about": "About Us",
+    "contact": "Contact Us"
+  },
+  "social": {
+    "youtube": "YouTube",
+    "discord": "Discord",
+    "twitter": "Twitter / X"
+  },
+  "aria": {
+    "home": "Webaby Home"
+  },
+
+  "home": {
+    "hero": {
+      "logoAria": "Webaby logo",
+      "title": "Playful tech for learning",
+      "lead": "Play • Learn • Imagine",
+      "cta": "Explore Products"
+    },
+
+    "products": {
+      "aria": {
+        "prev": "Previous product",
+        "next": "Next product"
+      },
+      "dialog": {
+        "openLink": "Open app link",
+        "qrInstruction": "Scan the QR code to open the app on your phone",
+        "detailsCta": "Detailed tutorial",
+        "close": "Close dialog"
+      },
+      "cta": { "more": "Learn more" },
+
+      "bubbleWord": {
+        "title": "Bubble Word",
+        "desc": "Fast-paced word puzzler… pop, spell, and race the clock!",
+        "imgAlt": "Bubble Word game"
+      },
+      "basketballShots": {
+        "title": "Basketball Shots",
+        "desc": "Fun arcade-style hoops — aim, swipe, score!",
+        "imgAlt": "Basketball Shots game"
+      },
+      "equationsTrainer": {
+        "title": "System of Equations Trainer",
+        "desc": "Make algebra easy — practice solving linear systems step by step.",
+        "imgAlt": "Equations trainer app"
+      },
+      "abcLand": {
+        "title": "ABC land",
+        "desc": "A fabulous adventure to learn the alphabet.",
+        "imgAlt": "ABC Land game"
+      },
+      "luckyDraw": {
+        "title": "Lucky Draw",
+        "desc": "Spin, pick, celebrate!",
+        "imgAlt": "Lucky Draw app"
+      },
+      "bibbleEcho": {
+        "title": "Bibble Echo",
+        "desc": "Spirit upgrade… explore mindful echoes and reflection.",
+        "imgAlt": "Bibble Echo app"
+      }
+    },
+
+    "about": {
+      "title": "Webaby Goals",
+      "mission": {
+        "title": "Our Mission",
+        "p1": "We believe that technology and play are powerful tools for growth. Our mission is to educate kids and adults through interactive experiences, where entertainment is not an end in itself but a bridge to knowledge.",
+        "p2": "We do not seek to addict, but to inspire. We replace passive consumption with active exploration. We nurture creativity, critical thinking, and joy in discovery."
+      },
+      "dev": {
+        "title": "Software Development & Playful Learning",
+        "p1": "At Webaby, we design software that blends fun with knowledge. Our creations range from brain-teasing puzzles to action-packed adventures, each filled with imagination, story, and vibrant worlds.",
+        "p2": "Every product is built to spark curiosity and make learning feel like play."
+      },
+      "innovation": {
+        "title": "Innovation & Technology",
+        "p1": "Innovation is at the heart of everything we do. We explore the cutting edge of artificial intelligence, blockchain, gaming and interactive storytelling, and modern software engineering.",
+        "p2": "Our passion for technology fuels our ability to invent fresh ways of learning and to bring bold, meaningful products to the market."
+      },
+      "vision": {
+        "title": "Long-Term Vision",
+        "p1": "We aim to become a global hub where education, creativity, and innovation meet. By uniting technology with human imagination, Webaby seeks to create tools that make learning engaging for all ages and to build communities around knowledge and play.",
+        "p2": "We continuously experiment with new digital frontiers to deliver experiences that matter."
+      },
+      "alt": {
+        "scene2": "Education and growth illustration",
+        "software": "Software Development",
+        "grow": "Instant Growth",
+        "future": "Future Technology"
+      }
+    },
+
+    "sections": {
+      "products": { "title": "Products" },
+      "contact": { "title": "Contact" }
+    }
+  }
+}
