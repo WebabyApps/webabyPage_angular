@@ -133,6 +133,19 @@ h1,h2,h3{margin:0 0 12px} h2{font-size:clamp(1.6rem,3vw,2rem)} h3{font-size:1.25
   opacity: 1;
   transform: translateY(0);
 }
+/* przez panelClass */
+.transparent-dialog .mat-mdc-dialog-container .mdc-dialog__surface {
+  background: transparent;
+  box-shadow: none;
+  padding: 0;                     /* padding robimy w środku komponentu */
+  overflow: hidden;               /* resztą zarządza ProductDialogComponent */
+}
+
+/* na wszelki wypadek: nie ograniczaj domyślnie contentu Materiala */
+.wb-product-dialog .mat-mdc-dialog-content {
+  max-height: none;
+  overflow: visible;
+}
 
   
   

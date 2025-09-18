@@ -37,18 +37,21 @@ export class ProductsCarouselComponent implements AfterViewInit {
 
   openDialog(p: CardProduct) {
     const base = `home.products.${p.id}`;
+  
     this.dialog.open(ProductDialogComponent, {
-      panelClass: 'transparent-dialog',
-      width: '800px',
-      autoFocus: true,
+      panelClass: ['wb-product-dialog', 'transparent-dialog'], // własne style
+      width: '720px',
+      maxWidth: '96vw',
+      maxHeight: '96vh',          // ⬅️ najważniejsze: limit wysokości modala
+      autoFocus: false,           // ⬅️ bez skoków scrolla
+      restoreFocus: true,
       data: {
         title: this.transloco.translate(`${base}.title`),
         imageUrl: p.img,
         appUrl: p.appUrl,
-        slug: p.slug,                                // ✅ używaj stabilnego sluga
+        slug: p.slug,
         desc: this.transloco.translate(`${base}.desc`)
-      },
-      maxWidth: '90vw'
+      }
     });
   }
 
