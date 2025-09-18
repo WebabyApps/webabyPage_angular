@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { take, switchMap } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
+import { map, distinctUntilChanged } from 'rxjs/operators';
 
 import { HeroComponent } from '../../shared/hero/hero.component';
 import { TutorialSectionComponent } from '../../shared/tutorial-section/tutorial-section.component';
@@ -23,6 +24,10 @@ export class TutorialPageComponent implements OnInit {
   startMenuItems$ = new BehaviorSubject<string[]>([]);
   soundItems$     = new BehaviorSubject<string[]>([]);
 
+ 
+  normalizedSlug = '';
+
+
   constructor(
     private route: ActivatedRoute,
     private transloco: TranslocoService
@@ -30,7 +35,10 @@ export class TutorialPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.scopePath = this.route.snapshot.data['slug'] as string;
-
+  
+    //this.slug = this.scopePath;
+    
+    
     
   // ⬇️ załaduje /assets/i18n/abc-land/<lang>.json
   this.transloco.selectTranslation(this.scopePath).pipe(take(1)).subscribe();

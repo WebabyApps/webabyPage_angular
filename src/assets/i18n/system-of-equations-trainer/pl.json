@@ -1,13 +1,13 @@
 {
-    "title": "ABC Land",
+    "title": "System rownan matematycznych",
     "hero": {
-      "title": "Tutorial ABC Land",
+      "title": "System rownan matematycznych",
       "subtitle": "Krok po kroku",
       "back": "Powrót do produktów"
     },
     "description": {
       "title": "Opis",
-      "lead": "ABC-Land to przygodowo-edukacyjna gra, w której Bohater musi uratować świat słów po kradzieży liter. Zwiedzając baśniowe krainy, pomagasz odzyskiwać litery, naprawiać przedmioty i przywracać znaczenia — ucząc się alfabetu po drodze."
+      "lead": "Systemy rownan matematycznych to aplikacja do nauki matematyki, która pomaga uczniom w nauce matematyki poprzez gry i ćwiczenia."
     },
     "sections": {
       "startMenu": {
