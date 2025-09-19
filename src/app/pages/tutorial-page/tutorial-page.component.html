@@ -175,6 +175,7 @@
           </div>
         </section>
       </ng-container>
+
       <!-- /ABC-land -->
 
       <!-- ========== Basketball Shots ========== -->
@@ -191,15 +192,98 @@
 
       <!-- ========== Lucky Draw ========== -->
       <ng-container *ngSwitchCase="'lucky-draw'">
-        <!-- TODO: wstaw własną treść/komponenty dla Lucky draw -->
-        <h2>{{ tr('description.title') }}</h2>
-        <p class="lead">{{ tr('description.lead') }}</p>
-        <!-- przykład: -->
+        <!-- Header image -->
         <img class="app-header"
-             src="assets/tutorials/lucky-draw/header.jpg"
-             [attr.alt]="tr('title')" loading="lazy" decoding="async">
-        <!-- kolejne sekcje / video / galeria specyficzne dla tej gry -->
-      </ng-container>
+        src="assets/tutorials/lucky-draw/header.jpg"
+        [attr.alt]="tr('title')"
+        loading="lazy" decoding="async" />
+        
+        
+        <!-- HOW IT WORKS -->
+        <app-tutorial-section
+        [title]="tr('sections.how.title')"
+        [img]="'assets/tutorials/lucky-draw/how.jpg'"
+        [lazyImg]="true"
+        [alt]="tr('sections.how.caption')"
+        [caption]="tr('sections.how.caption')"
+        [reverse]="false"
+        [scope]="sp">
+        <p>{{ tr('sections.how.intro') }}</p>
+        <ul>
+        <li *ngFor="let step of tr('sections.how.items')">{{ step }}</li>
+        </ul>
+        </app-tutorial-section>
+        
+        
+        <!-- LIVE SHARING (UNIQUE) -->
+        <app-tutorial-section
+        [title]="tr('sections.sharing.title')"
+        [img]="'assets/tutorials/lucky-draw/sharing.jpg'"
+        [lazyImg]="true"
+        [alt]="tr('sections.sharing.caption')"
+        [caption]="tr('sections.sharing.caption')"
+        [reverse]="true"
+        [scope]="sp">
+        <p>{{ tr('sections.sharing.intro') }}</p>
+        <ul>
+        <li *ngFor="let s of tr('sections.sharing.items')">{{ s }}</li>
+        </ul>
+        </app-tutorial-section>
+        
+        
+        <!-- USE CASES -->
+        <app-tutorial-section
+        [title]="tr('sections.useCases.title')"
+        [img]="'assets/tutorials/lucky-draw/use-cases.jpg'"
+        [lazyImg]="true"
+        [alt]="tr('sections.useCases.caption')"
+        [caption]="tr('sections.useCases.caption')"
+        [reverse]="false"
+        [scope]="sp">
+        <p>{{ tr('sections.useCases.intro') }}</p>
+        <ul>
+        <li *ngFor="let u of tr('sections.useCases.items')">{{ u }}</li>
+        </ul>
+        </app-tutorial-section>
+        
+        
+        <!-- FEATURES -->
+        <app-tutorial-section
+        [title]="tr('sections.features.title')"
+        [img]="'assets/tutorials/lucky-draw/features.jpg'"
+        [lazyImg]="true"
+        [alt]="tr('sections.features.caption')"
+        [caption]="tr('sections.features.caption')"
+        [reverse]="true"
+        [scope]="sp">
+        <p>{{ tr('sections.features.p') }}</p>
+        <ul>
+        <li *ngFor="let f of tr('sections.features.items')">{{ f }}</li>
+        </ul>
+        </app-tutorial-section>
+          <!-- VIDEO -->
+          <section id="video" class="section">
+            <h3>{{ tr('video.title') }}</h3>
+            <div class="video">
+              <figure class="yt yt--md">
+                <iframe
+                  src="https://www.youtube-nocookie.com/embed/qDd80xRXoTE"
+                  title="Lucky Draw demo" loading="lazy"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen></iframe>
+                <figcaption>{{ tr('video.walkthrough') }}</figcaption>
+              </figure>
+              <small class="caption">{{ tr('video.walkthrough') }}</small>
+            </div>
+          </section>
+    
+        
+        
+        <!-- FOOTNOTE / KEYWORDS (optional) -->
+        <section class="keywords">
+        <small>{{ tr('keywords') }}</small>
+        </section>
+        </ng-container>
 
 
         <!-- ========== System of Equations Trainer ========== -->
