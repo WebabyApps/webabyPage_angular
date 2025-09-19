@@ -1,6 +1,17 @@
 
 <footer class="site-footer">
   <div class="container footer-row">
+    
+    <button
+      type="button"
+      mat-button
+      class="privacy-link"
+      (click)="openPrivacyPolicy()"
+      aria-label="Open privacy policy"
+      title="Privacy policy">
+      Privacy policy
+    </button>
+
     <p>© <span>{{year}}</span> Webaby</p>
     <div class="social">
       <a href="https://www.youtube.com/@webabygames9383" aria-label="YouTube" title="YouTube">
