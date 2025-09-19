@@ -41,3 +41,5 @@ coverage/
 .env.*.local
 
 #
+.DS_Store
+.angular/cache/
