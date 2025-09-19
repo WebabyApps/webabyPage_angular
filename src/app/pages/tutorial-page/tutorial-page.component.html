@@ -213,17 +213,92 @@
                [attr.alt]="tr('title')" loading="lazy" decoding="async">
           <!-- kolejne sekcje / video / galeria specyficzne dla tej gry -->
         </ng-container>
-       <!-- ========== Bible Echo ========== -->
-       <ng-container *ngSwitchCase="'bibble-echo'">
-        <!-- TODO: wstaw własną treść/komponenty dla Lucky draw -->
-        <h2>{{ tr('description.title') }}</h2>
-        <p class="lead">{{ tr('description.lead') }}</p>
-        <!-- przykład: -->
-        <img class="app-header"
-             src="assets/tutorials/bibble-echo/header.jpg"
-             [attr.alt]="tr('title')" loading="lazy" decoding="async">
-        <!-- kolejne sekcje / video / galeria specyficzne dla tej gry -->
-      </ng-container>
+       
+        <!-- ========== Bible Echo ========== -->
+     <!-- File: bible-echo.component.html (template snippet adapted to *ngFor list usage) -->
+<ng-container *ngSwitchCase="'bibble-echo'">
+<!-- Title + lead -->
+<h2>{{ tr('description.title') }}</h2>
+<p class="lead">{{ tr('description.lead') }}</p>
+
+
+<!-- Header image -->
+<img class="app-header"
+src="assets/tutorials/bibble-echo/header.jpg"
+[attr.alt]="tr('title')"
+loading="lazy" decoding="async" />
+
+
+<!-- HOW IT WORKS (uses list with *ngFor over array) -->
+<app-tutorial-section
+[title]="tr('sections.how.title')"
+[img]="'assets/tutorials/bibble-echo/how.jpg'"
+[lazyImg]="true"
+[alt]="tr('sections.how.caption')"
+[caption]="tr('sections.how.caption')"
+[reverse]="false"
+[scope]="sp">
+<p>{{ tr('sections.how.intro') }}</p>
+<ul>
+<li *ngFor="let step of tr('sections.how.items')">{{ step }}</li>
+</ul>
+</app-tutorial-section>
+
+
+<!-- FEATURES (list with *ngFor) -->
+<app-tutorial-section
+[title]="tr('sections.features.title')"
+[img]="'assets/tutorials/bibble-echo/features.jpg'"
+[lazyImg]="true"
+[alt]="tr('sections.features.caption')"
+[caption]="tr('sections.features.caption')"
+[reverse]="true"
+[scope]="sp">
+<p>{{ tr('sections.features.p') }}</p>
+<ul>
+<li *ngFor="let f of tr('sections.features.items')">{{ f }}</li>
+</ul>
+</app-tutorial-section>
+
+
+<!-- WHY (list with *ngFor) -->
+<app-tutorial-section
+[title]="tr('sections.why.title')"
+[img]="'assets/tutorials/bibble-echo/why.jpg'"
+[lazyImg]="true"
+[alt]="tr('sections.why.caption')"
+[caption]="tr('sections.why.caption')"
+[reverse]="false"
+[scope]="sp">
+<p>{{ tr('sections.why.intro') }}</p>
+<ul>
+<li *ngFor="let w of tr('sections.why.items')">{{ w }}</li>
+</ul>
+</app-tutorial-section>
+ <!-- VIDEO -->
+ <section id="video" class="section">
+  <h3>{{ tr('video.title') }}</h3>
+  <div class="video">
+    <figure class="yt yt--md">
+      <iframe
+        src="https://www.youtube-nocookie.com/embed/dPNyGkylsS4"
+        title="Bibble echo demo" loading="lazy"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen></iframe>
+      <figcaption>{{ tr('video.walkthrough') }}</figcaption>
+    </figure>
+    <small class="caption">{{ tr('video.walkthrough') }}</small>
+  </div>
+</section>
+
+
+
+<!-- KEYWORDS (optional) -->
+<section class="keywords">
+<small>{{ tr('keywords') }}</small>
+</section>
+</ng-container>
+      
       <!-- ========== Bubble World ========== -->
       <ng-container *ngSwitchCase="'bubble-world'">
         <!-- TODO: wstaw własną treść/komponenty dla Lucky draw -->
