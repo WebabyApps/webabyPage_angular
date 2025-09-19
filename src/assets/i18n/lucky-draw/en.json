@@ -1,9 +1,13 @@
 {
-  "title": "ABC Land",
+  "title": "Lucky Draw",
   "hero": {
-    "title": "ABC Land",
+    "title": "Lucky Draw",
     "subtitle": "Step-by-step guide",
     "back": "Back to products"
+  },
+  "description": {
+    "title": "Description",
+    "lead": "Lucky Draw is app for drawing."
   },
 "home": {
     "hero": {
@@ -17,11 +21,7 @@
         "prev": "Previous product",
         "next": "Next product"
       }
-    },  
-  "description": {
-    "title": "Description",
-    "lead": "ABC-Land is an adventure and education game where the Hero must save the world of words after all the letters were stolen."
-  },
+    },
   "sections": {
     "startMenu": {
       "title": "Start Menu",

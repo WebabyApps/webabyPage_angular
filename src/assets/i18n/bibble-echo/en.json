@@ -1,0 +1,50 @@
+{
+  "title": "Bibble Echo",
+  "hero": {
+  "title": "Bibble Echo",
+  "subtitle": "Step-by-step guide",
+  "back": "Back to products"
+  },
+  "description": {
+  "title": "Description",
+  "lead": "Biblical Echo is a Bible app designed for daily prayer, meditation, and spiritual growth."
+  },
+  "sections": {
+  "how": {
+  "title": "How it works",
+  "caption": "Three simple steps",
+  "intro": "Each day the app guides you through a short, meaningful reflection.",
+  "items": [
+  "A random Bible passage is selected.",
+  "A related verse from the Old or New Testament with similar meaning is found.",
+  "A reflection is created – the essence that emerges from combining both passages."
+  ]
+  },
+  "features": {
+  "title": "Features",
+  "caption": "What you get",
+  "p": "Tools to help you reflect on Scripture every day:",
+  "items": [
+  "Daily Bible readings and reflections",
+  "Pairing verses from the Old and the New Testament",
+  "Inspiring Christian meditations",
+  "Simple, clear and user-friendly design"
+  ]
+  },
+  "why": {
+  "title": "Why Biblical Echo?",
+  "caption": "Purpose",
+  "intro": "Discover the value behind the unique pairing of Scripture passages:",
+  "items": [
+  "More than Bible reading – a tool for Christian prayer, daily meditation, and spiritual development.",
+  "Unique pairing of passages helps you discover new insights.",
+  "Live more deeply with the Word of God."
+  ]
+  }
+  },
+  "keywords": "Keywords: Bible, Holy Scripture, prayer, meditation, reflections, liturgical readings, Old Testament, New Testament, spiritual growth, Christian app.",
+  "video": {
+    "title": "Walkthrough",
+    "walkthrough": "ABC-Land walkthrough"
+  }
+  }

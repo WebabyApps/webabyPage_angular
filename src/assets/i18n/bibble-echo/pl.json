@@ -1,0 +1,50 @@
+{
+  "title": "Bibble Echo",
+  "hero": {
+  "title": "Bibble Echo",
+  "subtitle": "Przewodnik krok po kroku",
+  "back": "Wróć do produktów"
+  },
+  "description": {
+  "title": "Opis",
+  "lead": "Biblical Echo to aplikacja biblijna do codziennej modlitwy, medytacji i rozwoju duchowego."
+  },
+  "sections": {
+  "how": {
+  "title": "Jak to działa",
+  "caption": "Trzy proste kroki",
+  "intro": "Każdego dnia aplikacja prowadzi Cię przez krótką, znaczącą refleksję.",
+  "items": [
+  "Losowo wybierany jest fragment Biblii.",
+  "Aplikacja wyszukuje powiązany werset ze Starego lub Nowego Testamentu o podobnym znaczeniu.",
+  "Powstaje refleksja – esencja z połączenia obu fragmentów."
+  ]
+  },
+  "features": {
+  "title": "Funkcje",
+  "caption": "Co zyskujesz",
+  "p": "Narzędzia wspierające codzienną refleksję nad Pismem:",
+  "items": [
+  "Codzienne czytania i rozważania biblijne",
+  "Łączenie fragmentów Starego i Nowego Testamentu",
+  "Inspirujące medytacje chrześcijańskie",
+  "Prosty, przejrzysty i intuicyjny interfejs"
+  ]
+  },
+  "why": {
+  "title": "Dlaczego Biblical Echo?",
+  "caption": "Cel",
+  "intro": "Poznaj wartość unikalnego łączenia fragmentów Pisma:",
+  "items": [
+  "To więcej niż czytanie Biblii – narzędzie do modlitwy, codziennej medytacji i rozwoju duchowego.",
+  "Unikalne łączenie fragmentów pomaga odkrywać nowe znaczenia.",
+  "Głębsze życie Słowem Bożym na co dzień."
+  ]
+  }
+  },
+  "keywords": "Słowa kluczowe: Biblia, Pismo Święte, modlitwa, medytacja, refleksje, czytania liturgiczne, Nowy Testament, Stary Testament, rozwój duchowy, aplikacja chrześcijańska.",
+  "video": {
+    "title": "Film demo",
+    "walkthrough": "Krótki spacer po grze"
+  }
+  }

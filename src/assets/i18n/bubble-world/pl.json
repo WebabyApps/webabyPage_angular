@@ -1,0 +1,74 @@
+{
+    "title": "Bąbelki słowne",
+    "hero": {
+      "title": "Bąbelki słowne",
+      "subtitle": "Bąbelki słowne",
+      "back": "Powrót do produktów"
+    },
+    "description": {
+      "title": "Opis",
+      "lead": "Bąbelki słowne to aplikacja do nauki języka polskiego, która pomaga uczniom w nauce języka poprzez gry i ćwiczenia.  "
+    },
+    "sections": {
+      "startMenu": {
+        "title": "Menu startowe",
+        "caption": "Menu startowe",
+        "items": ["Przycisk Play", "Wybór intro", "Audio: muzyka, efekty, lektor", "Wyjście"],
+        "intro": "Uruchomienie aplikacji i menu startowe"
+      },
+      "sound": {
+        "title": "Ustawienia dźwięku",
+        "caption": "Regulacja muzyki / efektów / lektora",
+        "p": "Użyj suwaków, aby ustawić poziomy. Zmiany zapisują się automatycznie."
+      },
+      "intro": {
+        "title": "Wprowadzenie",
+        "caption": "Wprowadzenie fabularne",
+        "p": "Krótkie intro opisujące świat ABC-Land, głównych bohaterów oraz cel misji."
+      },
+      "steering": {
+        "title": "Przyciski sterowania",
+        "caption": "Przyciski sterowania",
+        "p1": "Przyciski służą do poruszania Bohaterem.",
+        "p2": "Joystick po prawej.",
+        "p3": "Atak po lewej."
+      },
+      "tasks": {
+        "title": "Zadania Bohatera",
+        "caption": "Zadania Bohatera",
+        "p1": "Wykonuj minizadania, by odblokować świat ABC-Land.",
+        "savingExample": "Przykład: uratowanie Grutka"
+      },
+      "lighter": {
+        "title": "Świetlik",
+        "caption": "Świetlik",
+        "p": "Świetlik pomaga, gdy jest ciemno. Możesz też kupić u niego litery."
+      },
+      "fixing": {
+        "title": "Naprawa przedmiotów",
+        "caption": "Naprawa przedmiotów",
+        "p": "Naprawy bywają pomocne. Miecz pozwala wejść do drzewa, dodając mocy."
+      },
+      "buying": {
+        "title": "Kupowanie przedmiotów",
+        "caption": "Kupowanie przedmiotów",
+        "p": "Zakupy są opcjonalne, ale pokazują ciekawe moce przedmiotów."
+      },
+      "map": {
+        "title": "Korzystanie z mapy",
+        "caption": "Korzystanie z mapy",
+        "videoCaption": "Poznaj mapę i nawiguj po świecie gry."
+      }
+    },
+    "gallery": {
+      "title": "Zrzuty ekranu",
+      "mainMenu": "Menu główne",
+      "intro": "Wprowadzenie",
+      "tasks": "Rozwiązywanie zadań"
+    },
+    "video": {
+      "title": "Film demo",
+      "walkthrough": "Krótki spacer po grze"
+    }
+  }
+  

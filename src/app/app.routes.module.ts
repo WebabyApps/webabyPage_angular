@@ -18,9 +18,15 @@ export const routes: Routes = [
     loadChildren: () => import('./tutorials/system-of-equations-trainer/tutorial.route') },
   { path: 'products/abecadlowo',
     loadChildren: () => import('./tutorials/abecadlowo/tutorial.route') },  
+  { path: 'products/bibble-echo',
+    loadChildren: () => import('./tutorials/bibble-echo/tutorial.route') }, 
+  { path: 'products/lucky-draw',
+    loadChildren: () => import('./tutorials/lucky-draw/tutorial.route') }, 
   { path: 'products/abc-land',
     loadChildren: () => import('./tutorials/abc-land/tutorial.route') },
-  
+    { path: 'products/bubble-world',
+      loadChildren: () => import('./tutorials/bubble-world/tutorial.route') },
+    
   // --- Fallbacks (match AFTER specific routes) ---
   { path: 'products/:slug', component: TutorialPageComponent },  // generic
   { path: 'tutorial/:slug', component: TutorialPageComponent },  // optional alias
