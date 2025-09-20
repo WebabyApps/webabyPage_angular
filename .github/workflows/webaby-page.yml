@@ -33,7 +33,7 @@ jobs:
         run: npm ci
 
       - name: Build Angular (production)
-        run: npm run build -- --configuration production
+        run: npm run build 
 
       # Ustal, który katalog z dist jest „tym właściwym” (Angular 17+ bywa w dist/*/browser)
       - name: Detect build output dir
