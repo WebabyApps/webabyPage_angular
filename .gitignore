@@ -1,17 +1,14 @@
 # -------- OS / system --------
 .DS_Store
+**/.DS_Store
 Thumbs.db
-### Angular ###
-# compiled output
-dist/
-tmp/
-app/*/.js
-app/*/.js.map
-
 
 # Angular cache
 .angular/cache
-.angular/cache/
+
+#app
+app/*/.js
+app/*/.js.map
 
 # -------- Node --------
 node_modules/
@@ -40,6 +37,4 @@ coverage/
 .env
 .env.*.local
 
-#
-.DS_Store
-.angular/cache/
+#                       
