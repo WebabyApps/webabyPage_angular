@@ -16,7 +16,7 @@ export class FooterComponent{
 
   openPrivacyPolicy() {
     this.dialog.open(PrivacyPolicyEnComponent, {
-      width: '800px',
+      width: '800 px',
       maxWidth: '95vw',
       autoFocus: false,
       restoreFocus: true,
