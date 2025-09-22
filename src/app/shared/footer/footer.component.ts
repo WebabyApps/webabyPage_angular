@@ -32,7 +32,7 @@ openPrivacyPolicy() {
       showQr: false,
       showCloseButton: true,
     },
-    width: '800px',
+   
     maxWidth: '95vw',
     maxHeight: '90vh',
     autoFocus: false,
