@@ -5,23 +5,24 @@ on:
     branches: [ "main", "master" ]
   workflow_dispatch:
 
-# (opcjonalnie) blokuje równoległe deploye do prod
 concurrency:
   group: webaby-page-prod
   cancel-in-progress: true
 
 jobs:
   build-deploy:
-    # nowy self-hosted runner, który dodałeś w tym repo
     runs-on: self-hosted
     timeout-minutes: 60
 
     env:
-      # ŚCIEŻKA docelowa musi odpowiadać rootowi w Nginx:
-      DEST_DIR: /home/ubuntu/webaby-page/actions-runner/_work/webabyPage_angular/webabyPage_angular/webaby-page
+      # >>> ZMIANA: docelowy docroot POZA _work
+      DEST_DIR: /var/www/webaby-page/current
 
     steps:
       - uses: actions/checkout@v4
+        # (opcjonalnie – jeśli kiedyś zostałbyś przy _work, można dodać clean:false)
+        # with:
+        #   clean: false
 
       - name: Use Node.js 20
         uses: actions/setup-node@v4
@@ -33,9 +34,8 @@ jobs:
         run: npm ci
 
       - name: Build Angular (production)
-        run: npm run build 
+        run: npm run build
 
-      # Ustal, który katalog z dist jest „tym właściwym” (Angular 17+ bywa w dist/*/browser)
       - name: Detect build output dir
         id: outdir
         shell: bash
@@ -45,7 +45,7 @@ jobs:
           echo "BUILD_OUT=$OUT" >> $GITHUB_ENV
           echo "Build output: $OUT"
 
-      # (opcjonalnie) jeżeli kiedyś dołożysz PWA z innego repo pod /basketball-pwa, odkomentuj i dostosuj:
+      # --- PWA (opcjonalnie) – ZOSTAWIAM dokładnie jak u Ciebie, tylko działa z nowym BUILD_OUT ---
       # - uses: actions/checkout@v4
       #   with:
       #     repository: maciejmar/basketball-game
@@ -66,27 +66,33 @@ jobs:
       #     mkdir -p "$BUILD_OUT/basketball-pwa"
       #     rsync -a --delete "$PWA_DIR/" "$BUILD_OUT/basketball-pwa/"
 
-      # --- DEPLOY do workspacu NOWEGO runnera na VPS (tak jak w starej, tylko inna ścieżka) ---
       - name: Setup SSH agent
         uses: webfactory/ssh-agent@v0.9.0
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-          # jeśli klucz ma passphrase:
-          # ssh-passphrase: ${{ secrets.SSH_PASSPHRASE }}
 
       - name: Trust server host key
         run: ssh-keyscan -Hv ${{ secrets.OVH_VPS_IP }} >> ~/.ssh/known_hosts
 
-      # (opcjonalny) szybki ping po SSH — ułatwia diagnozę
       - name: SSH smoke test
         run: ssh -o BatchMode=yes ubuntu@${{ secrets.OVH_VPS_IP }} "echo CONNECTED && hostname"
 
-      - name: Create dest dir
-        run: ssh ubuntu@${{ secrets.OVH_VPS_IP }} "mkdir -p '${{ env.DEST_DIR }}'"
+      - name: Create dest dir (sudo)
+        run: ssh ubuntu@${{ secrets.OVH_VPS_IP }} "sudo mkdir -p '${{ env.DEST_DIR }}'"
 
-      - name: Rsync build → runner workspace
+      - name: Rsync build → /var/www/webaby-page/current (sudo)
         run: |
-          rsync -az --delete "${BUILD_OUT}/" ubuntu@${{ secrets.OVH_VPS_IP }}:"${{ env.DEST_DIR }}/"
+          rsync -az --delete \
+            --rsync-path="sudo rsync" \
+            "${BUILD_OUT}/" \
+            ubuntu@${{ secrets.OVH_VPS_IP }}:"${{ env.DEST_DIR }}/"
+
+      - name: Fix perms (opcjonalnie, ale polecane)
+        run: |
+          ssh ubuntu@${{ secrets.OVH_VPS_IP }} "\
+            sudo find '${{ env.DEST_DIR }}' -type d -exec chmod 755 {} \; && \
+            sudo find '${{ env.DEST_DIR }}' -type f -exec chmod 644 {} \; && \
+            sudo chown -R root:root '${{ env.DEST_DIR }}'"
 
       - name: Reload Nginx
         run: ssh ubuntu@${{ secrets.OVH_VPS_IP }} "sudo nginx -t && sudo systemctl reload nginx"
