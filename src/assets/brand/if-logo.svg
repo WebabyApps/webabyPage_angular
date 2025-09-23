@@ -1,0 +1,43 @@
+<!-- file: src/assets/brand/if-logo.svg -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <!-- opcjonalny subtelny gradient do wypełnienia (możesz zmienić na #fff) -->
+    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#e8f4ff"></stop>
+      <stop offset="1" stop-color="#bcdcff"></stop>
+    </linearGradient>
+  </defs>
+
+  <!-- TŁO PRZEZROCZYSTE: nic nie rysujemy w tle -->
+
+  <!-- KÓŁKO (główka „i”) -->
+  <circle cx="340" cy="260" r="140" fill="url(#g)"></circle>
+
+  <!-- GÓRNY GRUBY HORYZONTALNY BELK „F” -->
+  <rect x="520" y="260" width="400" height="110" rx="55" ry="55" fill="url(#g)"></rect>
+
+  <!-- ŚRODKOWA HORYZONTALNA BELKA „F” -->
+  <rect x="560" y="430" width="360" height="100" rx="50" ry="50" fill="url(#g)"></rect>
+
+  <!-- PIONOWE SZTACHETY „i” (dwie) -->
+  <rect x="320" y="420" width="120" height="520" rx="60" ry="60" fill="url(#g)"></rect>
+  <rect x="470" y="420" width="120" height="520" rx="60" ry="60" fill="url(#g)"></rect>
+
+  <!-- PIONOWY TRZPIEŃ „F” -->
+  <rect x="620" y="410" width="120" height="540" rx="60" ry="60" fill="url(#g)"></rect>
+
+  <!-- DOLNA NOGA „F” (L-ka w prawo) -->
+  <rect x="620" y="730" width="320" height="120" rx="60" ry="60" fill="url(#g)"></rect>
+
+  <!-- DOLNA STOPKA „i” (łagodny łuk w lewo w dół) – jedna bryła U-kształtna -->
+  <path d="
+    M 320 820
+    a 60 60 0 0 0 60 60
+    h 150
+    a 60 60 0 0 0 60 -60
+    v -80
+    a 60 60 0 0 0 -60 -60
+    h -150
+    a 60 60 0 0 0 -60 60
+    z" fill="url(#g)"></path>
+</svg>
