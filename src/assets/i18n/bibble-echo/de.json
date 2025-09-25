@@ -1,0 +1,51 @@
+{
+    "title": "Bibble Echo",
+    "hero": {
+      "title": "Bibble Echo",
+      "subtitle": "Schritt-für-Schritt-Anleitung",
+      "back": "Zurück zu den Produkten"
+    },
+    "description": {
+      "title": "Beschreibung",
+      "lead": "Bibble Echo ist eine Bibel-App für tägliches Gebet, Meditation und geistliches Wachstum."
+    },
+    "sections": {
+      "how": {
+        "title": "So funktioniert’s",
+        "caption": "Drei einfache Schritte",
+        "intro": "Jeden Tag führt dich die App durch eine kurze, sinnvolle Betrachtung.",
+        "items": [
+          "Ein zufälliger Bibelabschnitt wird ausgewählt.",
+          "Ein dazu passender Vers aus Altem oder Neuem Testament mit ähnlicher Aussage wird gefunden.",
+          "Eine Betrachtung entsteht – die Essenz, die sich aus der Verbindung beider Texte ergibt."
+        ]
+      },
+      "features": {
+        "title": "Funktionen",
+        "caption": "Was du bekommst",
+        "p": "Werkzeuge, die dir helfen, täglich über die Schrift nachzudenken:",
+        "items": [
+          "Tägliche Bibellesungen und Betrachtungen",
+          "Paarung von Versen aus Altem und Neuem Testament",
+          "Inspirierende christliche Meditationen",
+          "Einfaches, klares und benutzerfreundliches Design"
+        ]
+      },
+      "why": {
+        "title": "Warum Bibble Echo?",
+        "caption": "Zweck",
+        "intro": "Entdecke den Wert der einzigartigen Paarung von Schriftstellen:",
+        "items": [
+          "Mehr als nur Bibellesen – ein Werkzeug für christliches Gebet, tägliche Meditation und geistliche Entwicklung.",
+          "Die einzigartige Verbindung von Texten hilft, neue Einsichten zu gewinnen.",
+          "Mit dem Wort Gottes tiefer leben."
+        ]
+      }
+    },
+    "keywords": "Schlüsselwörter: Bibel, Heilige Schrift, Gebet, Meditation, Betrachtungen, liturgische Lesungen, Altes Testament, Neues Testament, geistliches Wachstum, christliche App.",
+    "video": {
+      "title": "Komplettlösung",
+      "walkthrough": "Bibble-Echo-Walkthrough"
+    }
+  }
+  

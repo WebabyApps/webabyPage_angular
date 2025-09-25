@@ -52,7 +52,11 @@ export class TranslocoHttpLoader implements TranslocoLoader {
   providers: [
     provideTransloco({
       config: translocoConfig({
-        availableLangs: ['en','pl'],
+        availableLangs: [
+          { id: 'en', label: 'English' },
+          { id: 'pl', label: 'Polski' },
+          { id: 'de', label: 'Deutsch' }   // ⬅️ add this
+        ],
         defaultLang: 'en',
         fallbackLang: 'en',
         reRenderOnLangChange: true,

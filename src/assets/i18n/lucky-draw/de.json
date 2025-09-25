@@ -1,0 +1,63 @@
+{
+    "title": "Lucky Draw",
+    "hero": {
+      "title": "Lucky Draw",
+      "subtitle": "Gemeinsam am Glücksrad drehen",
+      "back": "Zurück zu den Produkten"
+    },
+    "description": {
+      "title": "Beschreibung",
+      "lead": "Erstelle ein Thema, füge Teilnehmende hinzu und drehe das Glücksrad – mit Echtzeit-Freigabe auf mehreren Handys, damit alle denselben Spin sehen."
+    },
+    "sections": {
+      "how": {
+        "title": "So funktioniert’s",
+        "caption": "Drei schnelle Schritte",
+        "intro": "Richte in Sekunden eine gemeinsame Auslosung ein – das Rad entscheidet.",
+        "items": [
+          "Lege ein Auslosungs-Thema fest (beliebig).",
+          "Füge Teilnehmende oder Optionen zum Rad hinzu.",
+          "Teile den Link und drehe das Glücksrad."
+        ]
+      },
+      "sharing": {
+        "title": "Live-Freigabe (einzigartig)",
+        "caption": "Gleicher Spin auf allen Handys",
+        "intro": "Teile einen Live-Link, damit alle synchron denselben Spin verfolgen.",
+        "items": [
+          "Ein Link, der auf allen Mobilgeräten funktioniert.",
+          "Echtzeit-Synchronisierung – kein Reload nötig.",
+          "Ideal für Gruppen im selben Raum oder aus der Ferne."
+        ]
+      },
+      "useCases": {
+        "title": "Was kann ich auslosen?",
+        "caption": "Beliebte Ideen",
+        "intro": "Lucky Draw hilft bei schnellen Entscheidungen und kleinen Streitfragen.",
+        "items": [
+          "Wer saugt heute?",
+          "Wer zahlt das Bier?",
+          "Was kochen/bestellen wir gemeinsam?",
+          "Welches Spiel/ welchen Film wählen wir?",
+          "Wer präsentiert als Erste:r in der Klasse?"
+        ]
+      },
+      "features": {
+        "title": "Funktionen",
+        "caption": "Warum es dir gefallen wird",
+        "p": "Einfach, fair und spaßig für Gruppen:",
+        "items": [
+          "Eigene Themen und Teilnehmenden-Listen",
+          "Teilbarer Link für Live-Spins auf mehreren Handys",
+          "Klarer Ergebnis-Screen – Gewinner leicht verkünden",
+          "Responsive UI, schneller Start und kein Konto erforderlich"
+        ]
+      }
+    },
+    "keywords": "Schlüsselwörter: glücksrad, auslosung, gruppenentscheidung, zufallsgenerator, auswahltool, partyspiel, live-teilen",
+    "video": {
+      "title": "Komplettlösung",
+      "walkthrough": "Lucky-Draw-Walkthrough"
+    }
+  }
+  

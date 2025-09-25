@@ -1,0 +1,106 @@
+{
+  "title": "Webaby",
+  "nav": {
+    "home": "Startseite",
+    "products": "Produkte",
+    "about": "Über uns",
+    "contact": "Kontakt"
+  },
+  "social": {
+    "youtube": "YouTube",
+    "discord": "Discord",
+    "twitter": "Twitter / X"
+  },
+  "aria": {
+    "home": "Webaby-Startseite"
+  },
+
+  "home": {
+    "hero": {
+      "logoAria": "Webaby-Logo",
+      "title": "Spielerische Technik fürs Lernen",
+      "lead": "Spielen • Lernen • Fantasieren",
+      "cta": "Produkte entdecken"
+    },
+
+    "products": {
+      "aria": {
+        "prev": "Vorheriges Produkt",
+        "next": "Nächstes Produkt"
+      },
+      "dialog": {
+        "openLink": "App-Link öffnen",
+        "qrInstruction": "Scanne den QR-Code, um die App auf deinem Handy zu öffnen",
+        "detailsCta": "Ausführliches Tutorial",
+        "close": "Dialog schließen"
+      },
+      "cta": { "more": "Mehr erfahren" },
+
+      "bubbleWord": {
+        "title": "Bubble Word",
+        "desc": "Rasantes Wortpuzzle – Bubbles platzen, buchstabieren und gegen die Uhr antreten!",
+        "imgAlt": "Bubble-Word-Spiel"
+      },
+      "basketballShots": {
+        "title": "Basketball Shots",
+        "desc": "Arcade-Basketball – zielen, wischen, treffen!",
+        "imgAlt": "Basketball-Shots-Spiel"
+      },
+      "equationsTrainer": {
+        "title": "Trainer für Gleichungssysteme",
+        "desc": "Algebra leicht gemacht – übe das Lösen linearer Systeme Schritt für Schritt.",
+        "imgAlt": "App zum Training von Gleichungssystemen"
+      },
+      "abcLand": {
+        "title": "ABC Land",
+        "desc": "Ein fabelhaftes Abenteuer zum Erlernen des Alphabets.",
+        "imgAlt": "ABC-Land-Spiel"
+      },
+      "luckyDraw": {
+        "title": "Lucky Draw",
+        "desc": "Drehen, wählen, feiern!",
+        "imgAlt": "Lucky-Draw-App"
+      },
+      "bibbleEcho": {
+        "title": "Bibble Echo",
+        "desc": "Spirit-Upgrade – entdecke achtsame Echos und Reflexion.",
+        "imgAlt": "Bibble-Echo-App"
+      }
+    },
+
+    "about": {
+      "title": "Webaby-Ziele",
+      "mission": {
+        "title": "Unsere Mission",
+        "p1": "Wir glauben, dass Technologie und Spiel kraftvolle Werkzeuge für Wachstum sind. Unsere Mission ist es, Kinder und Erwachsene durch interaktive Erlebnisse zu bilden, bei denen Unterhaltung nicht Selbstzweck ist, sondern eine Brücke zum Wissen.",
+        "p2": "Wir wollen nicht abhängig machen, sondern inspirieren. Wir ersetzen passiven Konsum durch aktives Entdecken. Wir fördern Kreativität, kritisches Denken und die Freude am Entdecken."
+      },
+      "dev": {
+        "title": "Softwareentwicklung & spielerisches Lernen",
+        "p1": "Bei Webaby entwerfen wir Software, die Spaß mit Wissen verbindet. Unsere Werke reichen von kniffligen Denkpuzzles bis zu actiongeladenen Abenteuern – voller Fantasie, Story und lebendiger Welten.",
+        "p2": "Jedes Produkt weckt Neugier und lässt Lernen wie Spielen fühlen."
+      },
+      "innovation": {
+        "title": "Innovation & Technologie",
+        "p1": "Innovation steht im Zentrum unseres Handelns. Wir erkunden die Spitze von künstlicher Intelligenz, Blockchain, Gaming und interaktivem Storytelling sowie moderner Softwareentwicklung.",
+        "p2": "Unsere Leidenschaft für Technologie treibt uns an, neue Lernwege zu erfinden und mutige, sinnvolle Produkte auf den Markt zu bringen."
+      },
+      "vision": {
+        "title": "Langfristige Vision",
+        "p1": "Wir wollen zu einem globalen Knotenpunkt werden, an dem Bildung, Kreativität und Innovation zusammenfinden. Indem wir Technologie mit menschlicher Vorstellungskraft vereinen, schafft Webaby Werkzeuge, die Lernen für alle Altersgruppen spannend machen und Gemeinschaften rund um Wissen und Spiel aufbauen.",
+        "p2": "Wir experimentieren kontinuierlich mit neuen digitalen Grenzen, um Erlebnisse zu liefern, die zählen."
+      },
+      "alt": {
+        "scene2": "Illustration zu Bildung und Wachstum",
+        "software": "Softwareentwicklung",
+        "grow": "Schnelles Wachstum",
+        "future": "Zukunftstechnologie"
+      }
+    },
+
+    "sections": {
+      "products": { "title": "Produkte" },
+      "contact": { "title": "Kontakt" }
+    }
+  }
+}
