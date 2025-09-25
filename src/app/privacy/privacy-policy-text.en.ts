@@ -1,0 +1,3 @@
+export const PRIVACY_POLICY_EN = `
+... tutaj cały długi tekst globalnej polityki prywatności ...
+`;
