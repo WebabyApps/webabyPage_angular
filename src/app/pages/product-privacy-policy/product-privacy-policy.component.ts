@@ -1,9 +1,10 @@
 import { Component, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 import { PolicyService } from '../../privacy/policy.service';
 
 @Component({
-  selector: 'app-privacy-policy-en',
+  selector: 'app-product-privacy-policy',
   standalone: true,
   imports: [CommonModule],
   template: `
@@ -12,9 +13,14 @@ import { PolicyService } from '../../privacy/policy.service';
       <pre>{{ policyText() }}</pre>
     </section>
   `,
-  styles: [`.policy-page{padding:2rem; white-space:pre-wrap}`]
+  styles: [`.policy-page { padding: 2rem; white-space: pre-wrap; }`]
 })
-export class PrivacyPolicyEnComponent {
+export class ProductPrivacyPolicyComponent {
+  private route = inject(ActivatedRoute);
   private policy = inject(PolicyService);
-  policyText = computed(() => this.policy.getPolicyFor(null)); // globalna wg języka
+
+  policyText = computed(() => {
+    const slug = this.route.snapshot.paramMap.get('slug');
+    return this.policy.getPolicyFor(slug); // globalna lub produktowa
+  });
 }

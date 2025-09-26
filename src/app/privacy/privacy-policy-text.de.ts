@@ -1,0 +1,3 @@
+export const PRIVACY_POLICY_DE = `
+...hier ganze privat Politik auf Deutsch einsetzen (tekst)...
+`;
