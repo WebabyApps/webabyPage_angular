@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { TranslocoService } from '@ngneat/transloco';
+import { TranslocoService } from '@jsverse/transloco';
 import { getPolicyEnForSlug } from './policy-registry.en';
 import { getPolicyPlForSlug } from './policy-registry.pl';
 

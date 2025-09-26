@@ -24,9 +24,11 @@ export class TranslocoHttpLoader implements TranslocoLoader {
       (typeof data?.scopePath === 'string' && data.scopePath) ||
       (scopeFromLang || null);
   if(data?.scope)
-      console.warn('[i18n loader] data  scope', data.scope);
+      //console.warn('[i18n loader] data  scope', data.scope);
+      console.log('no data scope')
     else
-      console.warn('[i18n loader] no scope in data', data);
+      //console.warn('[i18n loader] no scope in data', data);
+      console.log('no scope in data')
     // 3) Build URL
     const url = scope
       ? `assets/i18n/${scope}/${realLang}.json`
