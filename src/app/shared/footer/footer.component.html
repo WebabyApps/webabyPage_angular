@@ -1,16 +1,20 @@
-
 <footer class="site-footer">
   <div class="container footer-row">
-    
-    <button
-      type="button"
-      mat-button
-      class="privacy-link"
-      (click)="openPrivacyPolicy()"
-      aria-label="Open privacy policy"
-      title="Privacy policy">
+
+    <!-- Jeśli jesteśmy na stronie produktu, pokaż link do polityki tego produktu -->
+    <a *ngIf="productSlug; else globalPolicy"
+       mat-button
+       class="privacy-link"
+       [routerLink]="['/products', productSlug, 'privacy-policy']">
       Privacy policy
-    </button>
+    </a>
+
+    <!-- Globalna polityka -->
+    <ng-template #globalPolicy>
+      <a mat-button class="privacy-link" [routerLink]="['/privacy-policy']">
+        Privacy policy
+      </a>
+    </ng-template>
 
     <p>© <span>{{year}}</span> Webaby</p>
     <div class="social">
