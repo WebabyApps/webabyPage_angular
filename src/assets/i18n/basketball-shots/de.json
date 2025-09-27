@@ -1,98 +1,57 @@
+
 {
-    "title": "Basketball Shots",
-    "hero": {
-      "title": "Basketball Shots",
-      "subtitle": "Schritt-für-Schritt-Anleitung",
-      "back": "Zurück zu den Produkten"
-    },
-    "description": {
-      "title": "Beschreibung",
-      "lead": "Basketball Shots ist ein Spiel, in dem die Spieler:innen möglichst viele Punkte erzielen, indem sie den Ball in den Korb werfen."
-    },
-    "home": {
-      "hero": {
-        "logoAria": "Webaby-Logo"
-      },
-      "title": "Spielerische Technik fürs Lernen",
-      "lead": "Spielen • Lernen • Fantasieren",
-      "cta": "Produkte entdecken"
-    },
-    "products": {
-      "aria": {
-        "prev": "Vorheriges Produkt",
-        "next": "Nächstes Produkt"
-      }
-    },
-    "sections": {
-      "startMenu": {
-        "title": "Startmenü",
-        "intro": "App öffnen und Startmenü",
-        "caption": "Startmenü",
-        "items": [
-          "Starte die App vom Homescreen",
-          "Wähle dein Profil",
-          "Wähle den Schwierigkeitsgrad",
-          "Drücke „Spielen“"
-        ]
-      },
-      "sound": {
-        "title": "Toneinstellungen",
-        "caption": "Musik- / SFX- / VO-Pegel anpassen",
-        "p": "Verwende die Schieberegler, um die Lautstärken anzupassen.",
-        "items": [
-          "Musiklautstärke",
-          "SFX-Lautstärke",
-          "Sprachausgabe-Lautstärke"
-        ]
-      },
-      "intro": {
-        "title": "Intro",
-        "caption": "Willkommen in der Welt",
-        "p": "Deine Reise beginnt im Dorf …"
-      },
-      "steering": {
-        "title": "Steuerung",
-        "caption": "So bewegst du dich",
-        "p1": "Verwende den linken Stick zum Bewegen.",
-        "p2": "Drücke „Springen“, um Hindernisse zu überwinden.",
-        "p3": "Halte „Laufen“, um dich schneller zu bewegen."
-      },
-      "tasks": {
-        "title": "Aufgaben",
-        "caption": "Quests und Missionen",
-        "p1": "Schließe Aufgaben ab, um Buchstaben zu verdienen.",
-        "savingExample": "Der Fortschritt wird nach jeder abgeschlossenen Aufgabe gespeichert."
-      },
-      "lighter": {
-        "title": "Feuerzeug",
-        "caption": "Erhelle deinen Weg",
-        "p": "Benutze das Feuerzeug, um in dunklen Bereichen zu sehen."
-      },
-      "fixing": {
-        "title": "Gegenstände reparieren",
-        "caption": "Kaputte Objekte reparieren",
-        "p": "Sammle Teile, um Objekte zu reparieren und ihre Bedeutung wiederherzustellen."
-      },
-      "buying": {
-        "title": "Einkaufen",
-        "caption": "Münzen klug ausgeben",
-        "p": "Besuche Läden, um hilfreiche Gegenstände zu kaufen."
-      },
-      "map": {
-        "title": "Karte",
-        "caption": "Weltübersicht",
-        "videoCaption": "Sieh dir die Kartenübersicht an."
-      }
-    },
-    "gallery": {
-      "title": "Galerie",
-      "mainMenu": "Hauptmenü",
-      "intro": "Intro",
-      "tasks": "Aufgaben"
-    },
-    "video": {
-      "title": "Komplettlösung",
-      "walkthrough": "ABC-Land-Komplettlösung"
-    }
+"title": "Basketball Shots",
+"hero": {
+"title": "Basketball Shots",
+"subtitle": "Werfen und punkten",
+"back": "Zurück zu den Produkten"
+},
+"description": {
+"title": "Beschreibung",
+"lead": "Ziele den Ball, wähle Winkel und Kraft und wirf, um möglichst viele Punkte zu holen. Einfache Steuerung, überzeugende Physik, kurzer Spielspaß."
+},
+"sections": {
+"how": {
+"title": "So spielst du",
+"caption": "Drei einfache Schritte",
+"intro": "Beherrsche die Basics und lege sofort los:",
+"items": [
+"Ziehen, um Winkel und Wurfkraft festzulegen.",
+"Loslassen, um den Ball Richtung Korb zu werfen.",
+"Anpassen und wiederholen, um deinen Highscore zu knacken."
+]
+},
+"tips": {
+"title": "Punkte & Tipps",
+"caption": "Bessere Würfe",
+"intro": "Kleine Anpassungen, große Wirkung:",
+"items": [
+"Auf die Flugkurve achten – höherer Bogen hilft bei weiten Würfen.",
+"Finde deinen Rhythmus und einen gleichmäßigen Release.",
+"Etwas über den Ring zielen für saubere Treffer."
+]
+},
+"features": {
+"title": "Funktionen",
+"caption": "Darum macht es Spaß",
+"p": "Schnell zu lernen, schwer aufzuhören:",
+"items": [
+"Ein-Finger-Steuerung",
+"Überzeugende Ballphysik",
+"Eigene Bestleistung jagen",
+"Klarer Look und kurze Sessions"
+]
+}
+},
+"keywords": "Stichwörter: Basketball-Spiel, Korbwurf, Arcade-Sport, Ballphysik, Casual"
+,  "gallery": {
+    "title": "Galerie",
+    "mainMenu": "Hauptmenü",
+    "intro": "Intro",
+    "tasks": "Aufgaben"
+  },
+  "video": {
+    "title": "Komplettlösung",
+    "walkthrough": "ABC-Land-Komplettlösung"
   }
-  
+}

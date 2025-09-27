@@ -179,16 +179,109 @@
       <!-- /ABC-land -->
 
       <!-- ========== Basketball Shots ========== -->
-      <ng-container *ngSwitchCase="'basketball-shots'">
-        <!-- TODO: wstaw własną treść/komponenty dla Basketball Shots -->
-        <h2>{{ tr('description.title') }}</h2>
-        <p class="lead">{{ tr('description.lead') }}</p>
-        <!-- przykład: -->
-        <img class="app-header"
-             src="assets/tutorials/basketball-shots/header.jpg"
-             [attr.alt]="tr('title')" loading="lazy" decoding="async">
-        <!-- kolejne sekcje / video / galeria specyficzne dla tej gry -->
-      </ng-container>
+     <!-- File: basketball-shots.component.html (template snippet with Transloco tags) -->
+<ng-container *ngSwitchCase="'basketball-shots'">
+  <!-- Title + lead -->
+  <h2>{{ tr('description.title') }}</h2>
+  <p class="lead">{{ tr('description.lead') }}</p>
+  
+  
+  <!-- Header image -->
+  <img class="app-header"
+  src="assets/tutorials/basketball-shots/header.jpg"
+  [attr.alt]="tr('title')"
+  loading="lazy" decoding="async" />
+  
+  
+  <!-- HOW TO PLAY -->
+  <app-tutorial-section
+  [title]="tr('sections.how.title')"
+  [img]="'assets/tutorials/basketball-shots/how.jpg'"
+  [lazyImg]="true"
+  [alt]="tr('sections.how.caption')"
+  [caption]="tr('sections.how.caption')"
+  [reverse]="false"
+  [scope]="sp">
+  <p>{{ tr('sections.how.intro') }}</p>
+  <ul>
+  <li *ngFor="let step of tr('sections.how.items')">{{ step }}</li>
+  </ul>
+  </app-tutorial-section>
+  
+  
+  <!-- SCORING / TIPS -->
+  <app-tutorial-section
+  [title]="tr('sections.tips.title')"
+  [img]="'assets/tutorials/basketball-shots/tips.jpg'"
+  [lazyImg]="true"
+  [alt]="tr('sections.tips.caption')"
+  [caption]="tr('sections.tips.caption')"
+  [reverse]="true"
+  [scope]="sp">
+  <p>{{ tr('sections.tips.intro') }}</p>
+  <ul>
+  <li *ngFor="let tip of tr('sections.tips.items')">{{ tip }}</li>
+  </ul>
+  </app-tutorial-section>
+  
+  
+  <!-- FEATURES -->
+  <app-tutorial-section
+  [title]="tr('sections.features.title')"
+  [img]="'assets/tutorials/basketball-shots/features.jpg'"
+  [lazyImg]="true"
+  [alt]="tr('sections.features.caption')"
+  [caption]="tr('sections.features.caption')"
+  [reverse]="false"
+  [scope]="sp">
+  <p>{{ tr('sections.features.p') }}</p>
+  <ul>
+  <li *ngFor="let f of tr('sections.features.items')">{{ f }}</li>
+  </ul>
+  </app-tutorial-section>
+  
+   <!-- GALLERY -->
+   <section id="gallery" class="section">
+    <h3>{{ tr('gallery.title') }}</h3>
+    <div class="media-grid">
+      <figure>
+        <img src="assets/tutorials/basketball-shots/screenshoot2.jpg"
+             [attr.alt]="tr('gallery.mainMenu')" loading="lazy" decoding="async">
+        <figcaption>{{ tr('gallery.mainMenu') }}</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/tutorials/basketball-shots/screenshoot3.jpg"
+             [attr.alt]="tr('gallery.intro')" loading="lazy" decoding="async">
+        <figcaption>{{ tr('gallery.intro') }}</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/tutorials/basketball-shots/screenshoot1.jpg"
+             [attr.alt]="tr('gallery.tasks')" loading="lazy" decoding="async">
+        <figcaption>{{ tr('gallery.tasks') }}</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- VIDEO -->
+  <section id="video" class="section">
+    <h3>{{ tr('video.title') }}</h3>
+    <div class="video">
+      <figure class="yt yt--md">
+        <iframe
+          src="https://www.youtube-nocookie.com/embed/5Q6ibSmZLxs?si=I9jAXtzt8k9WFRFR"
+          title="Basketball Shots demo" loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen></iframe>
+        <figcaption>{{ tr('video.walkthrough') }}</figcaption>
+      </figure>
+      <small class="caption">{{ tr('video.walkthrough') }}</small>
+    </div>
+  </section>
+  <!-- KEYWORDS (optional) -->
+  <section class="keywords">
+  <small>{{ tr('keywords') }}</small>
+  </section>
+  </ng-container>
 
       <!-- ========== Lucky Draw ========== -->
       <ng-container *ngSwitchCase="'lucky-draw'">
@@ -383,17 +476,88 @@ loading="lazy" decoding="async" />
 </section>
 </ng-container>
       
-      <!-- ========== Bubble World ========== -->
-      <ng-container *ngSwitchCase="'bubble-world'">
-        <!-- TODO: wstaw własną treść/komponenty dla Lucky draw -->
-        <h2>{{ tr('description.title') }}</h2>
-        <p class="lead">{{ tr('description.lead') }}</p>
-        <!-- przykład: -->
-        <img class="app-header"
-             src="assets/tutorials/bubble-world/header.jpg"
-             [attr.alt]="tr('title')" loading="lazy" decoding="async">
-        <!-- kolejne sekcje / video / galeria specyficzne dla tej gry -->
-      </ng-container>
+    <!-- File: bubble-world.component.html (template snippet with Transloco tags) -->
+<ng-container *ngSwitchCase="'bubble-world'">
+  <!-- Title + lead -->
+  <h2>{{ tr('description.title') }}</h2>
+  <p class="lead">{{ tr('description.lead') }}</p>
+  
+  
+  <!-- Header image -->
+  <img class="app-header"
+  src="assets/tutorials/bubble-world/header.jpg"
+  [attr.alt]="tr('title')"
+  loading="lazy" decoding="async" />
+  
+  
+  <!-- HOW TO PLAY -->
+  <app-tutorial-section
+  [title]="tr('sections.how.title')"
+  [img]="'assets/tutorials/bubble-world/how.jpg'"
+  [lazyImg]="true"
+  [alt]="tr('sections.how.caption')"
+  [caption]="tr('sections.how.caption')"
+  [reverse]="false"
+  [scope]="sp">
+  <p>{{ tr('sections.how.intro') }}</p>
+  <ul>
+  <li *ngFor="let step of tr('sections.how.items')">{{ step }}</li>
+  </ul>
+  </app-tutorial-section>
+  
+  
+  <!-- STRATEGY / SCORING -->
+  <app-tutorial-section
+  [title]="tr('sections.strategy.title')"
+  [img]="'assets/tutorials/bubble-world/strategy.jpg'"
+  [lazyImg]="true"
+  [alt]="tr('sections.strategy.caption')"
+  [caption]="tr('sections.strategy.caption')"
+  [reverse]="true"
+  [scope]="sp">
+  <p>{{ tr('sections.strategy.intro') }}</p>
+  <ul>
+  <li *ngFor="let tip of tr('sections.strategy.items')">{{ tip }}</li>
+  </ul>
+  </app-tutorial-section>
+  
+  
+  <!-- FEATURES -->
+  <app-tutorial-section
+  [title]="tr('sections.features.title')"
+  [img]="'assets/tutorials/bubble-world/features.jpg'"
+  [lazyImg]="true"
+  [alt]="tr('sections.features.caption')"
+  [caption]="tr('sections.features.caption')"
+  [reverse]="false"
+  [scope]="sp">
+  <p>{{ tr('sections.features.p') }}</p>
+  <ul>
+  <li *ngFor="let f of tr('sections.features.items')">{{ f }}</li>
+  </ul>
+  </app-tutorial-section>
+  
+  
+ <section id="video" class="section">
+  <h3>{{ tr('video.title') }}</h3>
+  <div class="video">
+    <figure class="yt yt--md">
+      <iframe
+        src="https://www.youtube-nocookie.com/embed/dPNyGkylsS4"
+        title="Bubble world demo" loading="lazy"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen></iframe>
+      <figcaption>{{ tr('video.walkthrough') }}</figcaption>
+    </figure>
+    <small class="caption">{{ tr('video.walkthrough') }}</small>
+  </div>
+</section>
+
+  <!-- KEYWORDS (optional) -->
+  <section class="keywords">
+  <small>{{ tr('keywords') }}</small>
+  </section>
+  </ng-container>
       <!-- ========== Fallback (nieznany slug) ========== -->
       <ng-container *ngSwitchDefault>
         <p class="muted">Nie znaleziono treści dla tego produktu.</p>

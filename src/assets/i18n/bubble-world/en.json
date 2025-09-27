@@ -1,89 +1,49 @@
 {
   "title": "Bubble World",
-  "hero":  {
-    "title": "Bubble World",
-    "subtitle": "Step-by-step guide",
-    "back": "Back to products"
+  "hero": {
+  "title": "Bubble World",
+  "subtitle": "Words that float",
+  "back": "Back to products"
   },
   "description": {
-    "title": "Description",
-    "lead": "Bubble World is a game for children to learn about the worlds."
+  "title": "Description",
+  "lead": "Build the longest words from letters hidden in bubbles that gently float upwards. The faster you think, the higher you score — levels get harder as time shortens."
   },
-"home": {
-    "hero": {
-      "logoAria": "Webaby logo"},
-      "title": "Playful tech for learning",
-      "lead": "Play • Learn • Imagine",
-      "cta": "Explore Products"
-    },
-    "products": {
-      "aria": {
-        "prev": "Previous product",
-        "next": "Next product"
-      }
-    },
   "sections": {
-    "startMenu": {
-      "title": "Start Menu",
-      "intro": "Opening the app and start menu",
-      "caption": "Start menu",
-      "items": [
-        "Launch the app from the home screen",
-        "Pick your profile",
-        "Choose difficulty",
-        "Press Play"
-      ]
-    },
-    "sound": {
-      "title": "Sound Settings",
-      "caption": "Adjust Music / SFX / VO levels",
-      "p": "Use the sliders to adjust volume levels.",
-      "items": [
-        "Music volume",
-        "SFX volume",
-        "Voice-over volume"
-      ]
-    },
-    "intro": {
-      "title": "Intro",
-      "caption": "Welcome to the world",
-      "p": "Your journey begins in the village..."
-    },
-    "steering": {
-      "title": "Controls",
-      "caption": "How to move",
-      "p1": "Use the left stick to move.",
-      "p2": "Press Jump to hop over obstacles.",
-      "p3": "Hold Run to move faster."
-    },
-    "tasks": {
-      "title": "Tasks",
-      "caption": "Quests and missions",
-      "p1": "Complete tasks to earn letters.",
-      "savingExample": "Progress is saved after each completed task."
-    },
-    "lighter": {
-      "title": "Lighter",
-      "caption": "Light your way",
-      "p": "Use the lighter to see in dark places."
-    },
-    "fixing": {
-      "title": "Fixing Items",
-      "caption": "Repair broken objects",
-      "p": "Collect parts to repair items and restore meaning."
-    },
-    "buying": {
-      "title": "Buying",
-      "caption": "Spend coins wisely",
-      "p": "Visit shops to buy helpful items."
-    },
-    "map": {
-      "title": "Map",
-      "caption": "World overview",
-      "videoCaption": "Watch the map overview."
-    }
+  "how": {
+  "title": "How to play",
+  "caption": "Catch, combine, score",
+  "intro": "Master the basics and start making big words:",
+  "items": [
+  "Tap or drag to catch floating letter bubbles.",
+  "Combine letters to form the longest words you can.",
+  "Confirm the word before bubbles drift away to score points."
+  ]
   },
-  "gallery": {
+  "strategy": {
+  "title": "Strategy & scoring",
+  "caption": "Think fast, think long",
+  "intro": "Longer words mean more points — speed matters as levels advance:",
+  "items": [
+  "Prioritize rare letters to boost your total.",
+  "Plan ahead: keep a vowel ready to extend words.",
+  "Higher levels shorten the time — stay focused and react quickly."
+  ]
+  },
+  "features": {
+  "title": "Features",
+  "caption": "Why you'll like it",
+  "p": "Playful learning meets smooth arcade action:",
+  "items": [
+  "Smooth, satisfying bubble animations",
+  "Points scale with word length",
+  "Progressive difficulty with faster bubbles",
+  "Train letters, words and quick thinking"
+  ]
+  }
+  },
+  "keywords": "Keywords: word game, letters, vocabulary, bubbles, educational, reflex, quick thinking, arcade word puzzle"
+  ,"gallery": {
     "title": "Gallery",
     "mainMenu": "Main menu",
     "intro": "Intro",
@@ -91,6 +51,6 @@
   },
   "video": {
     "title": "Walkthrough",
-    "walkthrough": "ABC-Land walkthrough"
-  }
+    "walkthrough": "Bubble World walkthrough"
+  }    
 }

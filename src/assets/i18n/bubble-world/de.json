@@ -1,89 +1,49 @@
 {
     "title": "Bubble World",
     "hero": {
-      "title": "Bubble World",
-      "subtitle": "Schritt-für-Schritt-Anleitung",
-      "back": "Zurück zu den Produkten"
+    "title": "Bubble World",
+    "subtitle": "Wörter, die sanft aufsteigen",
+    "back": "Zurück zu den Produkten"
     },
     "description": {
-      "title": "Beschreibung",
-      "lead": "Bubble World ist ein Spiel, in dem Kinder die Welten kennenlernen."
-    },
-    "home": {
-      "hero": {
-        "logoAria": "Webaby-Logo"
-      },
-      "title": "Spielerische Technik fürs Lernen",
-      "lead": "Spielen • Lernen • Fantasieren",
-      "cta": "Produkte entdecken"
-    },
-    "products": {
-      "aria": {
-        "prev": "Vorheriges Produkt",
-        "next": "Nächstes Produkt"
-      }
+    "title": "Beschreibung",
+    "lead": "Bilde die längsten Wörter aus Buchstaben, die in Bläschen sanft nach oben steigen. Je schneller du denkst, desto mehr Punkte — auf höheren Levels wird die Zeit knapper."
     },
     "sections": {
-      "startMenu": {
-        "title": "Startmenü",
-        "intro": "App öffnen und Startmenü",
-        "caption": "Startmenü",
-        "items": [
-          "Starte die App vom Homescreen",
-          "Wähle dein Profil",
-          "Wähle den Schwierigkeitsgrad",
-          "Drücke „Spielen“"
-        ]
-      },
-      "sound": {
-        "title": "Toneinstellungen",
-        "caption": "Musik- / SFX- / VO-Pegel anpassen",
-        "p": "Verwende die Schieberegler, um die Lautstärken anzupassen.",
-        "items": [
-          "Musiklautstärke",
-          "SFX-Lautstärke",
-          "Sprachausgabe-Lautstärke"
-        ]
-      },
-      "intro": {
-        "title": "Intro",
-        "caption": "Willkommen in der Welt",
-        "p": "Deine Reise beginnt im Dorf …"
-      },
-      "steering": {
-        "title": "Steuerung",
-        "caption": "So bewegst du dich",
-        "p1": "Verwende den linken Stick zum Bewegen.",
-        "p2": "Drücke „Springen“, um Hindernisse zu überwinden.",
-        "p3": "Halte „Laufen“, um dich schneller zu bewegen."
-      },
-      "tasks": {
-        "title": "Aufgaben",
-        "caption": "Quests und Missionen",
-        "p1": "Schließe Aufgaben ab, um Buchstaben zu verdienen.",
-        "savingExample": "Der Fortschritt wird nach jeder abgeschlossenen Aufgabe gespeichert."
-      },
-      "lighter": {
-        "title": "Feuerzeug",
-        "caption": "Erhelle deinen Weg",
-        "p": "Benutze das Feuerzeug, um in dunklen Bereichen zu sehen."
-      },
-      "fixing": {
-        "title": "Gegenstände reparieren",
-        "caption": "Kaputte Objekte reparieren",
-        "p": "Sammle Teile, um Objekte zu reparieren und ihre Bedeutung wiederherzustellen."
-      },
-      "buying": {
-        "title": "Einkaufen",
-        "caption": "Münzen klug ausgeben",
-        "p": "Besuche Läden, um hilfreiche Gegenstände zu kaufen."
-      },
-      "map": {
-        "title": "Karte",
-        "caption": "Weltübersicht",
-        "videoCaption": "Sieh dir die Kartenübersicht an."
-      }
+    "how": {
+    "title": "So spielst du",
+    "caption": "Fangen, kombinieren, punkten",
+    "intro": "Beherrsche die Basics und bilde lange Wörter:",
+    "items": [
+    "Tippen oder ziehen, um aufsteigende Buchstaben‑Bläschen zu fangen.",
+    "Buchstaben kombinieren, um die längsten Wörter zu bilden.",
+    "Wort bestätigen, bevor die Bläschen davondriften, um Punkte zu erhalten."
+    ]
     },
+    "strategy": {
+    "title": "Strategie & Punkte",
+    "caption": "Schnell denken, lang bauen",
+    "intro": "Längere Wörter bringen mehr Punkte — mit steigender Stufe wird die Zeit kürzer:",
+    "items": [
+    "Seltene Buchstaben priorisieren, um die Punktzahl zu erhöhen.",
+    "Vorausplanen: Ein Vokal auf Reserve hilft beim Verlängern.",
+    "Höhere Levels beschleunigen — konzentriert bleiben und schnell reagieren."
+    ]
+    },
+    "features": {
+    "title": "Funktionen",
+    "caption": "Darum macht es Spaß",
+    "p": "Verspieltes Lernen mit sanften Animationen:",
+    "items": [
+    "Sanft aufsteigende Bläschen",
+    "Punkte skalieren mit der Wortlänge",
+    "Steigender Schwierigkeitsgrad mit schnelleren Bläschen",
+    "Training für Buchstaben, Wörter und schnelles Denken"
+    ]
+    }
+    },
+    "keywords": "Stichwörter: Wortspiel, Buchstaben, Wortschatz, Blasen, Lernspiel, Reaktion, schnelles Denken, Worträtsel"
+    ,
     "gallery": {
       "title": "Galerie",
       "mainMenu": "Hauptmenü",
@@ -92,7 +52,7 @@
     },
     "video": {
       "title": "Komplettlösung",
-      "walkthrough": "ABC-Land-Komplettlösung"
+      "walkthrough": "BubbleWorld-Komplettlösung"
     }
   }
   

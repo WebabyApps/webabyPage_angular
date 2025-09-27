@@ -1,66 +1,49 @@
 {
-    "title": "Abecadłowo",
-    "hero": {
-      "title": "Tutorial ABC Land",
-      "subtitle": "Krok po kroku",
-      "back": "Powrót do produktów"
-    },
-    "description": {
-      "title": "Opis",
-      "lead": "ABC-Land to przygodowo-edukacyjna gra, w której Bohater musi uratować świat słów po kradzieży liter. Zwiedzając baśniowe krainy, pomagasz odzyskiwać litery, naprawiać przedmioty i przywracać znaczenia — ucząc się alfabetu po drodze."
-    },
-    "sections": {
-      "startMenu": {
-        "title": "Menu startowe",
-        "caption": "Menu startowe",
-        "items": ["Przycisk Play", "Wybór intro", "Audio: muzyka, efekty, lektor", "Wyjście"],
-        "intro": "Uruchomienie aplikacji i menu startowe"
-      },
-      "sound": {
-        "title": "Ustawienia dźwięku",
-        "caption": "Regulacja muzyki / efektów / lektora",
-        "p": "Użyj suwaków, aby ustawić poziomy. Zmiany zapisują się automatycznie."
-      },
-      "intro": {
-        "title": "Wprowadzenie",
-        "caption": "Wprowadzenie fabularne",
-        "p": "Krótkie intro opisujące świat ABC-Land, głównych bohaterów oraz cel misji."
-      },
-      "steering": {
-        "title": "Przyciski sterowania",
-        "caption": "Przyciski sterowania",
-        "p1": "Przyciski służą do poruszania Bohaterem.",
-        "p2": "Joystick po prawej.",
-        "p3": "Atak po lewej."
-      },
-      "tasks": {
-        "title": "Zadania Bohatera",
-        "caption": "Zadania Bohatera",
-        "p1": "Wykonuj minizadania, by odblokować świat ABC-Land.",
-        "savingExample": "Przykład: uratowanie Grutka"
-      },
-      "lighter": {
-        "title": "Świetlik",
-        "caption": "Świetlik",
-        "p": "Świetlik pomaga, gdy jest ciemno. Możesz też kupić u niego litery."
-      },
-      "fixing": {
-        "title": "Naprawa przedmiotów",
-        "caption": "Naprawa przedmiotów",
-        "p": "Naprawy bywają pomocne. Miecz pozwala wejść do drzewa, dodając mocy."
-      },
-      "buying": {
-        "title": "Kupowanie przedmiotów",
-        "caption": "Kupowanie przedmiotów",
-        "p": "Zakupy są opcjonalne, ale pokazują ciekawe moce przedmiotów."
-      },
-      "map": {
-        "title": "Korzystanie z mapy",
-        "caption": "Korzystanie z mapy",
-        "videoCaption": "Poznaj mapę i nawiguj po świecie gry."
-      }
-    },
-    "gallery": {
+  "title": "Basketball Shots",
+  "hero": {
+  "title": "Basketball Shots",
+  "subtitle": "Rzuć i zdobywaj punkty",
+  "back": "Wróć do produktów"
+  },
+  "description": {
+  "title": "Opis",
+  "lead": "Wyceluj piłkę, ustaw kąt i siłę, a potem rzuć, by zdobyć jak najwięcej punktów. Proste sterowanie, satysfakcjonująca fizyka, szybka zabawa."
+  },
+  "sections": {
+  "how": {
+  "title": "Jak grać",
+  "caption": "Trzy proste kroki",
+  "intro": "Opanuj podstawy i zacznij trafiać od razu:",
+  "items": [
+  "Przeciągnij, aby ustawić kąt i siłę rzutu.",
+  "Puść, by posłać piłkę w kierunku kosza.",
+  "Koryguj i powtarzaj, bijąc własny rekord."
+  ]
+  },
+  "tips": {
+  "title": "Punktacja i wskazówki",
+  "caption": "Celuj lepiej",
+  "intro": "Drobne zmiany dają duży efekt:",
+  "items": [
+  "Zwracaj uwagę na łuk — wyższy pomoże przy dłuższych rzutach.",
+  "Znajdź rytm i trzymaj równy moment wypuszczenia.",
+  "Celuj nieco ponad obręcz, by trafić czysto."
+  ]
+  },
+  "features": {
+  "title": "Funkcje",
+  "caption": "Dlaczego warto",
+  "p": "Łatwo zacząć, trudno przestać:",
+  "items": [
+  "Sterowanie jednym palcem",
+  "Satysfakcjonująca fizyka piłki",
+  "Ściganie własnego rekordu",
+  "Czysta oprawa i krótkie sesje"
+  ]
+  }
+  },
+  "keywords": "Słowa kluczowe: gra w koszykówkę, rzuty do kosza, zręcznościówka sportowa, fizyka piłki, casual"
+,"gallery": {
       "title": "Zrzuty ekranu",
       "mainMenu": "Menu główne",
       "intro": "Wprowadzenie",
@@ -69,6 +52,5 @@
     "video": {
       "title": "Film demo",
       "walkthrough": "Krótki spacer po grze"
-    }
-  }
-  
+    }  
+}

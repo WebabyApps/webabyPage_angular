@@ -1,66 +1,49 @@
 {
-    "title": "Bąbelki słowne",
-    "hero": {
-      "title": "Bąbelki słowne",
-      "subtitle": "Bąbelki słowne",
-      "back": "Powrót do produktów"
-    },
-    "description": {
-      "title": "Opis",
-      "lead": "Bąbelki słowne to aplikacja do nauki języka polskiego, która pomaga uczniom w nauce języka poprzez gry i ćwiczenia.  "
-    },
-    "sections": {
-      "startMenu": {
-        "title": "Menu startowe",
-        "caption": "Menu startowe",
-        "items": ["Przycisk Play", "Wybór intro", "Audio: muzyka, efekty, lektor", "Wyjście"],
-        "intro": "Uruchomienie aplikacji i menu startowe"
-      },
-      "sound": {
-        "title": "Ustawienia dźwięku",
-        "caption": "Regulacja muzyki / efektów / lektora",
-        "p": "Użyj suwaków, aby ustawić poziomy. Zmiany zapisują się automatycznie."
-      },
-      "intro": {
-        "title": "Wprowadzenie",
-        "caption": "Wprowadzenie fabularne",
-        "p": "Krótkie intro opisujące świat ABC-Land, głównych bohaterów oraz cel misji."
-      },
-      "steering": {
-        "title": "Przyciski sterowania",
-        "caption": "Przyciski sterowania",
-        "p1": "Przyciski służą do poruszania Bohaterem.",
-        "p2": "Joystick po prawej.",
-        "p3": "Atak po lewej."
-      },
-      "tasks": {
-        "title": "Zadania Bohatera",
-        "caption": "Zadania Bohatera",
-        "p1": "Wykonuj minizadania, by odblokować świat ABC-Land.",
-        "savingExample": "Przykład: uratowanie Grutka"
-      },
-      "lighter": {
-        "title": "Świetlik",
-        "caption": "Świetlik",
-        "p": "Świetlik pomaga, gdy jest ciemno. Możesz też kupić u niego litery."
-      },
-      "fixing": {
-        "title": "Naprawa przedmiotów",
-        "caption": "Naprawa przedmiotów",
-        "p": "Naprawy bywają pomocne. Miecz pozwala wejść do drzewa, dodając mocy."
-      },
-      "buying": {
-        "title": "Kupowanie przedmiotów",
-        "caption": "Kupowanie przedmiotów",
-        "p": "Zakupy są opcjonalne, ale pokazują ciekawe moce przedmiotów."
-      },
-      "map": {
-        "title": "Korzystanie z mapy",
-        "caption": "Korzystanie z mapy",
-        "videoCaption": "Poznaj mapę i nawiguj po świecie gry."
-      }
-    },
-    "gallery": {
+  "title": "Bubble World",
+  "hero": {
+  "title": "Bubble World",
+  "subtitle": "Słowa, które unoszą się lekko",
+  "back": "Wróć do produktów"
+  },
+  "description": {
+  "title": "Opis",
+  "lead": "Układaj jak najdłuższe słowa z literek ukrytych w bąbelkach, które płynnie unoszą się do góry. Im szybciej myślisz, tym więcej punktów — z każdym poziomem czasu jest mniej."
+  },
+  "sections": {
+  "how": {
+  "title": "Jak grać",
+  "caption": "Łap, łącz, punktuj",
+  "intro": "Opanuj podstawy i zacznij tworzyć długie słowa:",
+  "items": [
+  "Stuknij lub przeciągnij, aby łapać unoszące się literowe bąbelki.",
+  "Łącz litery, by zbudować jak najdłuższe słowa.",
+  "Zatwierdź słowo, zanim bąbelki odpłyną, aby zdobyć punkty."
+  ]
+  },
+  "strategy": {
+  "title": "Strategia i punktacja",
+  "caption": "Myśl szybko, celuj w długość",
+  "intro": "Dłuższe słowa to więcej punktów — z czasem poziomy przyspieszają:",
+  "items": [
+  "Priorytetowo łap rzadkie litery, podbijesz wynik.",
+  "Planuj: trzymaj samogłoskę w zapasie, by wydłużyć słowo.",
+  "Wyższe poziomy skracają czas — skup się i reaguj szybko."
+  ]
+  },
+  "features": {
+  "title": "Funkcje",
+  "caption": "Dlaczego warto",
+  "p": "Nauka przez zabawę z płynnymi animacjami:",
+  "items": [
+  "Płynnie unoszące się bąbelki",
+  "Punkty rosną wraz z długością słowa",
+  "Rosnąca trudność i szybsze bąbelki",
+  "Trening liter, słów i szybkiego myślenia"
+  ]
+  }
+  },
+  "keywords": "Słowa kluczowe: gra słowna, litery, słownictwo, bąbelki, edukacyjna, refleks, szybkie myślenie, łamigłówka słowna"
+,"gallery": {
       "title": "Zrzuty ekranu",
       "mainMenu": "Menu główne",
       "intro": "Wprowadzenie",
@@ -69,6 +52,5 @@
     "video": {
       "title": "Film demo",
       "walkthrough": "Krótki spacer po grze"
-    }
-  }
-  
+    }    
+}
