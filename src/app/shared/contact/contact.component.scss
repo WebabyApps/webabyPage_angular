@@ -1,4 +1,4 @@
-
+/* Twoje style */
 .contact{margin-top:10px}
 .contact .contact-line{display:grid;grid-template-columns:120px 1fr;gap:12px;align-items:center;margin-bottom:8px}
 .contact label{opacity:.9}
@@ -7,3 +7,9 @@
 .contact-expand{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .4s ease}
 .contact-expand.show{max-height:700px;padding-top:8px}
 @media (max-width: 900px){ .contact .row{grid-template-columns:1fr} }
+
+/* Dodatki */
+.hp{position:absolute!important;left:-9999px;top:-9999px;height:0;width:0;opacity:0;pointer-events:none}
+.ok{color:#2a7;margin-top:.5rem;font-size:.9rem}
+.err{color:#e66;margin-top:.5rem;font-size:.9rem}
+.btn[disabled]{opacity:.6;cursor:not-allowed}
