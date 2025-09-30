@@ -13,3 +13,17 @@
 .ok{color:#2a7;margin-top:.5rem;font-size:.9rem}
 .err{color:#e66;margin-top:.5rem;font-size:.9rem}
 .btn[disabled]{opacity:.6;cursor:not-allowed}
+.contact .status {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    opacity: 0.95;
+  }
+  
+  .contact .status.success {
+    color: #4caf50; // zielony
+  }
+  
+  .contact .status.error {
+    color: #ff6b6b; // czerwony
+  }
+  

@@ -14,6 +14,7 @@ export class ContactComponent {
   expanded = false;
   loading = false;
   success = false;
+  message = '';   // <- pole na komunikat do usera
   error: string | null = null;
 
   private api = inject(ContactService);
@@ -24,6 +25,7 @@ export class ContactComponent {
     e.preventDefault();
     this.error = null;
     this.success = false;
+
 
     const form = e.target as HTMLFormElement;
     const fd = new FormData(form);
