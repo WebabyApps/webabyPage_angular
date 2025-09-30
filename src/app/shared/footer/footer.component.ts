@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { Router} from '@angular/router';
 import { RouterModule } from '@angular/router';  
 import { MatButtonModule } from '@angular/material/button';
 
@@ -13,12 +13,12 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class FooterComponent {
   year = new Date().getFullYear();
-  private route = inject(ActivatedRoute);
+  private router = inject(Router);
 
-  /** Pobiera slug produktu, jeśli jesteśmy na stronie /products/:slug */
+ 
+  /** slug z URL, np. /products/basketball-shots/... -> "basketball-shots" */
   get productSlug(): string | null {
-    let snap = this.route.snapshot;
-    while (snap.firstChild) snap = snap.firstChild;
-    return snap.paramMap.get('slug');
+    const m = this.router.url.match(/^\/products\/([^\/]+)/);
+    return m ? decodeURIComponent(m[1]) : null;
   }
 }
