@@ -1,4 +1,5 @@
-{ "title": "Webaby",
+{ 
+  "title": "Webaby",
   "nav": {
     "home": "Home",
     "products": "Products",
@@ -101,5 +102,16 @@
       "products": { "title": "Products" },
       "contact": { "title": "Contact" }
     }
+  
+  },
+  "policy": {
+    "global": {
+      "bodyHtml": "<h1>Privacy Policy</h1><p>Last updated: April 10, 2024</p><p>...full global policy for Webaby.io (EN)...</p>"
+    },
+    "product": {
+      "bodyHtml": "<h1>Privacy Policy for {{appName}}</h1><p>Last updated: April 10, 2024</p><p>This Privacy Policy describes how {{appName}} (a Webaby product) collects, uses and discloses your information.</p><h2>Definitions</h2><ul><li><strong>Service</strong> means the {{appName}} application.</li><li><strong>Company</strong> means Webaby...</li></ul><h2>Data we collect</h2><p>...</p><h2>Cookies</h2><p>...</p><h2>Use of data</h2><p>...</p><h2>Contact</h2><p>If you have any questions about this Privacy Policy, contact us at <a href=\"https://webaby.io\" target=\"_blank\" rel=\"noopener\">webaby.io</a>.</p>"
+    }
   }
 }
+
+

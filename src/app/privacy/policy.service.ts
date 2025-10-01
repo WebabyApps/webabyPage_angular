@@ -1,44 +1,44 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { TranslocoService } from '@jsverse/transloco';
-import { getPolicyEnForSlug, tryPolicyEn } from './policy-registry.en';
-import { getPolicyPlForSlug, tryPolicyPl } from './policy-registry.pl';
-import { getPolicyDeForSlug, tryPolicyDe } from './policy-registry.de';
+import { PRODUCT_APP_NAME_EN, PRODUCT_APP_NAME_PL, PRODUCT_APP_NAME_DE } from './product-meta';
 
 type Lang = 'en' | 'pl' | 'de';
+const norm = (s?: string | null) => (s ?? '').trim().toLowerCase();
 
 @Injectable({ providedIn: 'root' })
 export class PolicyService {
-  private lang = signal<Lang>('en');
+  private t = inject(TranslocoService);
 
-  constructor(private transloco: TranslocoService) {
-    this.lang.set(this.toLang(this.transloco.getActiveLang()));
-    this.transloco.langChanges$.subscribe((l:string) => this.lang.set(this.toLang(l)));
+  private getLang(): Lang {
+    const l = (this.t.getActiveLang() || '').toLowerCase();
+    if (l.startsWith('pl')) return 'pl';
+    if (l.startsWith('de')) return 'de';
+    return 'en';
   }
 
-  getPolicyFor(slug?: string | null): string {
-  const l = this.lang();
-
-  // najpierw sprawdź produktowe wersje w 3 językach
-  const enP = tryPolicyEn(slug);
-  const plP = tryPolicyPl(slug);
-  const deP = tryPolicyDe(slug);
-
-  switch (l) {
-    case 'pl':
-      // priorytet: PL produktowa → EN produktowa → EN globalna → PL globalna → DE produktowa → DE globalna
-      return plP ?? enP ?? getPolicyEnForSlug(slug) ?? getPolicyPlForSlug(null) ?? deP ?? getPolicyDeForSlug(null);
-
-    case 'de':
-      // priorytet: DE produktowa → EN produktowa → EN globalna → DE globalna → PL produktowa → PL globalna
-      return deP ?? enP ?? getPolicyEnForSlug(slug) ?? getPolicyDeForSlug(null) ?? plP ?? getPolicyPlForSlug(null);
-
-    default: // 'en'
-      // priorytet: EN produktowa → EN globalna → (opcjonalnie inne)
-      return enP ?? getPolicyEnForSlug(slug) ?? plP ?? getPolicyPlForSlug(null) ?? deP ?? getPolicyDeForSlug(null);
+  /** Nazwa aplikacji wg języka, z fallbackiem do EN, a jak brak — slug. */
+  getAppName(slug?: string | null): string {
+    const s = norm(slug);
+    if (!s) return 'Webaby App';
+    const en = (PRODUCT_APP_NAME_EN as any)[s];
+    const pl = (PRODUCT_APP_NAME_PL as any)[s];
+    const de = (PRODUCT_APP_NAME_DE as any)[s];
+    switch (this.getLang()) {
+      case 'pl': return pl ?? en ?? s;
+      case 'de': return de ?? en ?? s;
+      default:   return en ?? s;
+    }
   }
-}
 
-  private toLang(l: string): Lang {
-    return l?.toLowerCase().startsWith('pl') ? 'pl' : 'en';
+  /** Globalna polityka (HTML z Transloco). */
+  getGlobalPolicyHtml(): string {
+    // Transloco samo zrobi fallback do EN, jeśli w pl/de nie będzie klucza
+    return this.t.translate('policy.global.bodyHtml');
+  }
+
+  /** Produktowa polityka (HTML z Transloco + parametry). */
+  getProductPolicyHtml(slug: string): string {
+    const appName = this.getAppName(slug);
+    return this.t.translate('policy.product.bodyHtml', { appName });
   }
 }
