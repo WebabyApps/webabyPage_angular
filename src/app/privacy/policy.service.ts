@@ -1,5 +1,7 @@
+// src/app/privacy/policy.service.ts
 import { Injectable, inject } from '@angular/core';
 import { TranslocoService } from '@jsverse/transloco';
+import { startWith, switchMap, map } from 'rxjs';
 import { PRODUCT_APP_NAME_EN, PRODUCT_APP_NAME_PL, PRODUCT_APP_NAME_DE } from './product-meta';
 
 type Lang = 'en' | 'pl' | 'de';
@@ -16,7 +18,6 @@ export class PolicyService {
     return 'en';
   }
 
-  /** Nazwa aplikacji wg języka, z fallbackiem do EN, a jak brak — slug. */
   getAppName(slug?: string | null): string {
     const s = norm(slug);
     if (!s) return 'Webaby App';
@@ -30,15 +31,18 @@ export class PolicyService {
     }
   }
 
-  /** Globalna polityka (HTML z Transloco). */
-  getGlobalPolicyHtml(): string {
-    // Transloco samo zrobi fallback do EN, jeśli w pl/de nie będzie klucza
-    return this.t.translate('policy.global.bodyHtml');
+  // ✅ globalna jako Observable (na wzór działającej już /privacy-policy)
+  getGlobalPolicyHtml$() {
+    return this.t.selectTranslate('policy.global.bodyHtml');
   }
 
-  /** Produktowa polityka (HTML z Transloco + parametry). */
-  getProductPolicyHtml(slug: string): string {
-    const appName = this.getAppName(slug);
-    return this.t.translate('policy.product.bodyHtml', { appName });
+  // ✅ produktowa jako Observable z parametrem appName
+  getProductPolicyHtml$(slug: string) {
+    const s = norm(slug);
+    return this.t.langChanges$.pipe(
+      startWith(this.getLang()),
+      map(() => ({ appName: this.getAppName(s) })),
+      switchMap(params => this.t.selectTranslate('policy.product.bodyHtml', params))
+    );
   }
 }

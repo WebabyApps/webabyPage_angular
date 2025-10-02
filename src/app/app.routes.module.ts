@@ -6,6 +6,13 @@ import { ContactComponent } from './shared/contact/contact.component';
 import { TutorialPageComponent } from './pages/tutorial-page/tutorial-page.component';
 import { PrivacyPolicyEnComponent } from './pages/privacy-policy-en/privacy-policy-en.component';
 import { ProductPrivacyPolicyComponent } from './pages/product-privacy-policy/product-privacy-policy.component';
+import { inject } from '@angular/core';
+import { TranslocoService } from '@jsverse/transloco';
+const i18nResolver = () => {
+  const t = inject(TranslocoService);
+  const lang = (t.getActiveLang() || 'en').toLowerCase();
+  return t.load(lang);
+};
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -13,8 +20,8 @@ export const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'contact', component: ContactComponent },
   
-  { path: 'privacy-policy', component: PrivacyPolicyEnComponent },                   // globalna
-  { path: 'products/:slug/privacy-policy', component: ProductPrivacyPolicyComponent }, // per produkt
+  { path: 'privacy-policy', component: PrivacyPolicyEnComponent, resolve: { i18n: i18nResolver } },
+  { path: 'products/:slug/privacy-policy', component: ProductPrivacyPolicyComponent, resolve: { i18n: i18nResolver } },
   // --- Per-tutorial lazy "modules" (specific slugs first) ---
   { path: 'products/basketball-shots',
     loadChildren: () => import('./tutorials/basketball-shots/tutorial.route') },
