@@ -1,4 +1,4 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PolicyService } from '../../privacy/policy.service';
 
@@ -8,13 +8,17 @@ import { PolicyService } from '../../privacy/policy.service';
   imports: [CommonModule],
   template: `
     <section class="container policy-page">
-      <h1>Privacy Policy</h1>
-      <pre>{{ policyText() }}</pre>
+      <div [innerHTML]="html"></div>
     </section>
   `,
-  styles: [`.policy-page{padding:2rem; white-space:pre-wrap}`]
+  styles: [`.policy-page{padding:2rem}`]
 })
-export class PrivacyPolicyEnComponent {
+export class PrivacyPolicyEnComponent implements OnInit {
   private policy = inject(PolicyService);
-  policyText = computed(() => this.policy.getPolicyFor(null)); // globalna wg języka
+  html = '';
+
+  ngOnInit() {
+    // globalna polityka (z Transloco), z zachowaniem formatowania HTML
+    this.html = this.policy.getGlobalPolicyHtml();
+  }
 }

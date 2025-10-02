@@ -32,6 +32,7 @@ bootstrapApplication(AppComponent, {
       langToLocaleMapping: {
         en: 'en-US',
         pl: 'pl-PL',
+        de: 'de-DE',
       },
       defaultLocale: 'en-US',
     }),

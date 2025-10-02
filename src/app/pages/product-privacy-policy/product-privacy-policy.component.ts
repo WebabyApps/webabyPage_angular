@@ -1,4 +1,4 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { PolicyService } from '../../privacy/policy.service';
@@ -9,18 +9,22 @@ import { PolicyService } from '../../privacy/policy.service';
   imports: [CommonModule],
   template: `
     <section class="container policy-page">
-      <h1>Privacy Policy</h1>
-      <pre>{{ policyText() }}</pre>
+      <div [innerHTML]="html"></div>
     </section>
   `,
-  styles: [`.policy-page { padding: 2rem; white-space: pre-wrap; }`]
+  styles: [`.policy-page{
+              padding: 2rem;
+              margin-top: 5rem;  /* ⬅️ odsuwa treść od góry */
+              white-space: pre-wrap;
+    }`]
 })
-export class ProductPrivacyPolicyComponent {
+export class ProductPrivacyPolicyComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private policy = inject(PolicyService);
+  html = '';
 
-  policyText = computed(() => {
-    const slug = this.route.snapshot.paramMap.get('slug');
-    return this.policy.getPolicyFor(slug); // globalna lub produktowa
-  });
+  ngOnInit() {
+    const slug = this.route.snapshot.paramMap.get('slug') || '';
+    this.html = this.policy.getProductPolicyHtml(slug);
+  }
 }

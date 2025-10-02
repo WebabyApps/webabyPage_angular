@@ -25,9 +25,9 @@ export class ProductsCarouselComponent implements AfterViewInit {
   @ViewChild('track', { static: false }) trackRef!: ElementRef<HTMLDivElement>;
 
   products: CardProduct[] = [
-    { id: 'bubbleWord',       slug: 'bubble-world',                   img: 'assets/bubble.jpg',        appUrl: 'https://webaby.io/details/bubble-word' },
-    { id: 'basketballShots',  slug: 'basketball-shots',              img: 'assets/basket.jpg',        appUrl: 'https://lucky-draw.webaby.io' },
-    { id: 'equationsTrainer', slug: 'system-of-equations-trainer',   img: 'assets/equations.jpg',     appUrl: 'https://lucky-draw.webaby.io' },
+    { id: 'bubbleWord',       slug: 'bubble-world',                  img: 'assets/bubble.jpg',       appUrl: 'https://webaby.io/details/bubble-word' },
+    { id: 'basketballShots',  slug: 'basketball-shots',              img: 'assets/basket.jpg',        appUrl: 'https://play.google.com/store/apps/details?id=com.basketballshots.app&hl=pl' },
+    { id: 'equationsTrainer', slug: 'system-of-equations',           img: 'assets/equations.jpg',     appUrl: 'https://lucky-draw.webaby.io' },
     { id: 'abcLand',          slug: 'abc-land',                      img: 'assets/scene1.jpg',        appUrl: 'https://play.google.com/store/apps/details?id=abecadlowo.webaby.io' },
     { id: 'luckyDraw',        slug: 'lucky-draw',                    img: 'assets/lucky_draw.png',    appUrl: 'https://lucky-draw.webaby.io' },
     { id: 'bibbleEcho',       slug: 'bibble-echo',                   img: 'assets/bibble_echo2.jpeg', appUrl: 'https://biblecho.webaby.io/' }
