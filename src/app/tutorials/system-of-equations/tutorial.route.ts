@@ -3,7 +3,7 @@ import { TUTORIALS } from '../tutorial.token';
 import type { TutorialContent } from '../tutorial.model';
 
 const DATA: Record<string, TutorialContent> = {
-  'system-of-equations-trainer': {
+  'system-of-equations': {
     title: 'System of Equations - Tutorial',
     intro: 'Quick guide with UI shots and a short demo.',
     blocks: [
@@ -26,7 +26,7 @@ const DATA: Record<string, TutorialContent> = {
 export default [
   {
     path: '',
-    data: { slug: 'system-of-equations-trainer' },
+    data: { slug: 'system-of-equations' },
     providers: [{ provide: TUTORIALS, useValue: DATA }],
     loadComponent: () =>
       import('../../pages/tutorial-page/tutorial-page.component')

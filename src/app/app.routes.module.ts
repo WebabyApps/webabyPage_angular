@@ -18,8 +18,8 @@ export const routes: Routes = [
   // --- Per-tutorial lazy "modules" (specific slugs first) ---
   { path: 'products/basketball-shots',
     loadChildren: () => import('./tutorials/basketball-shots/tutorial.route') },
-  { path: 'products/system-of-equations-trainer',
-    loadChildren: () => import('./tutorials/system-of-equations-trainer/tutorial.route') },
+  { path: 'products/system-of-equations',
+    loadChildren: () => import('./tutorials/system-of-equations/tutorial.route') },
   { path: 'products/abecadlowo',
     loadChildren: () => import('./tutorials/abecadlowo/tutorial.route') },  
   { path: 'products/bibble-echo',
