@@ -31,36 +31,34 @@ export class IntroSplashComponent {
   private endedOnce = false;
 
   constructor() {
-    // 1) Czy to home?
-    const current = this.router.url.split('?')[0] || '/';
-    const isHome = HOME_URLS.includes(current);
-
-    // 2) Force przez query param
     const url = new URL(window.location.href);
     this.force = url.searchParams.get('intro') === '1';
-
-    // 3) Respect reduced motion
+  
+    // ścieżka i hash z prawdziwego location (nie z routera)
+    const path = location.pathname || '/';
+    const hash = location.hash || '';
+  
+    // home’owe ścieżki
+    const isHome = path === '/' || path === '/home';
+  
+    // szanuj prefers-reduced-motion
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    // 4) Warunek pokazania
-    const shouldShow = (isHome || this.force) && !reduce && !this.svc.alreadySeen();
-
+  
+    // ⬇️ NOWE: intro tylko na HOME **bez** hash-a (/#products itp. blokuje pokazywanie)
+    const shouldShow = ((isHome && !hash) || this.force) && !reduce && !this.svc.alreadySeen();
+  
     if (shouldShow) {
       document.documentElement.classList.add('intro-active');
       this.visible.set(true);
-
-      // Start animacji po następnym frame
       requestAnimationFrame(() => {
         this.startedAt = performance.now();
         this.playing.set(true);
-
-        if (AUTO_DISMISS_AFTER > 0) {
+        if (AUTO_DISMISS_AFTER > 0){
           const wait = Math.max(AUTO_DISMISS_AFTER, MIN_SHOW_MS);
           this.autoTimer = setTimeout(() => this.dismiss(), wait);
         }
       });
     }
-
     // ESC -> zamknij
     const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') this.dismiss(true); };
     window.addEventListener('keydown', onKey);

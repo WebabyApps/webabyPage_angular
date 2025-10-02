@@ -13,8 +13,8 @@ import { Observable } from 'rxjs';
   standalone: true,
   imports: [CommonModule, RouterOutlet, HeaderComponent, FooterComponent, IntroSplashComponent],
   template: `
-    <!-- Intro tylko na HOME -->
-    <app-intro-splash *ngIf="isHome$ | async"></app-intro-splash>
+    <!-- Intro tylko na HOME bez hash-a; ?intro=1 zawsze wymusza -->
+    <app-intro-splash *ngIf="isHomeNoHash$ | async"></app-intro-splash>
 
     <app-header></app-header>
     <router-outlet></router-outlet>
@@ -22,21 +22,25 @@ import { Observable } from 'rxjs';
   `
 })
 export class AppComponent {
-  isHome$: Observable<boolean>;
+  isHomeNoHash$: Observable<boolean>;
 
   constructor(private router: Router){
-    this.isHome$ = this.router.events.pipe(
-      // dajemy też stan początkowy
+    this.isHomeNoHash$ = this.router.events.pipe(
       startWith(null),
       filter(e => !e || e instanceof NavigationEnd),
-      map(() => this.router.url.split('?')[0].split('#')[0]),
-      map(path => this.isHomePath(path)),
+      // bierzemy pełny URL z przeglądarki, bo Router nie zawsze zawiera fragment
+      map(() => ({
+        path: this.router.url.split('?')[0],      // /, /home, /privacy-policy itd.
+        hasHash: !!window.location.hash,          // #products, #about itd.
+        force: new URL(window.location.href).searchParams.get('intro') === '1'
+      })),
+      map(({ path, hasHash, force }) => (this.isHomePath(path) && !hasHash) || force),
       distinctUntilChanged()
     );
   }
 
   private isHomePath(path: string): boolean {
-    // dodaj tu swoje aliasy home jeśli masz (np. '/pl')
+    // dodaj swoje aliasy home jeśli masz (np. '/pl')
     return path === '/' || path === '' || path === '/home';
   }
 }
