@@ -1,0 +1,98 @@
+name: Angular SSR CI/CD
+ 
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install deps
+        run: npm ci
+
+      # jeśli nie masz jeszcze SSR dodanego, lokalnie zrób: ng add @angular/ssr
+      - name: Build SSR (browser  server)
+        run: npm run build:ssr || npx ng run webaby-page:build-ssr
+        # ^ próbuje najpierw skryptu z package.json; jeśli brak, odpala builder bezpośrednio
+
+      - name: Archive artifacts
+        run: |
+          APP_DIR="$(ls -1 dist | head -n1)"   # bierze pierwszy katalog z dist, np. nazwa app
+          mkdir -p out
+          tar -C "dist/$APP_DIR" -czf out/browser.tgz browser
+          tar -C "dist/$APP_DIR" -czf out/server.tgz server
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ssr-build
+          path: out/*.tgz
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: ssr-build
+          path: out
+
+      - name: Copy to server (rsync over SSH)
+        uses: burnett01/rsync-deployments@6.0.0
+        with:
+          switches: -avz --delete
+          path: out/
+          remote_path: /home/ubuntu/deploy/tmp/
+          remote_host: ${{ secrets.SSH_HOST }}
+          remote_user: ${{ secrets.SSH_USER }}
+          remote_key: ${{ secrets.SSH_KEY }}
+
+      - name: SSH - unpack & reload PM2
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            set -e
+            APP_NAME="webaby-page"                  # dowolna etykieta
+            TARGET="/var/www/$APP_NAME"             # statyki dla Nginx
+            SSR_DIR="/opt/$APP_NAME"                # bundle Node SSR
+            PM2_NAME="webaby-ssr"
+            PORT=4000
+
+            sudo mkdir -p "$TARGET" "$SSR_DIR"
+            sudo chown -R $USER:$USER "$TARGET" "$SSR_DIR"
+
+            tar -xzf /home/ubuntu/deploy/tmp/browser.tgz -C "$TARGET"
+            tar -xzf /home/ubuntu/deploy/tmp/server.tgz  -C "$SSR_DIR"
+
+            # jeśli Angular wygenerował package.json w dist/<app>/server — doinstaluj prod deps:
+            if [ -f "$SSR_DIR/server/package.json" ]; then
+              cd "$SSR_DIR/server"
+              npm ci --omit=dev
+            fi
+
+            # start/reload PM2 (Angular 17 generuje server.mjs)
+            if pm2 list | grep -q "$PM2_NAME"; then
+              pm2 reload "$PM2_NAME" --update-env --kill-timeout 3000 -- --port=$PORT
+            else
+              pm2 start "$SSR_DIR/server/server.mjs" --name "$PM2_NAME" -- --port=$PORT
+            fi
+            pm2 save
+
+            # sprzątanie
+            rm -rf /home/ubuntu/deploy/tmp/*

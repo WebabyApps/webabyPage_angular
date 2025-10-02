@@ -1,0 +1,171 @@
+/* TIMING — jedno źródło prawdy */
+:host {
+    /* obrót */
+    --spin-dur: 1.8s;
+  
+    /* kiedy zacząć obrys po obrocie */
+    --draw-gap: 0.15s;
+  
+    /* rysowanie (obie ścieżki) */
+    --draw-dur: 1.6s;
+  
+    /* odstęp pomiędzy p1 i p2 */
+    --draw-stagger: 0.12s;
+  
+    /* dodatkowe czekanie po pełnym obrysie */
+    --wait-after-draw: 1s;
+  
+    /* kąt startowy „ludzika” (koło u góry) */
+    --start-rot: 45deg;
+  
+    /* WYLICZENIA */
+    /* p1 startuje po obrocie + gap */
+    --d1-begin: calc(var(--spin-dur) + var(--draw-gap));
+    /* p2 startuje nieco później */
+    --d2-begin: calc(var(--spin-dur) + var(--draw-gap) + var(--draw-stagger));
+    /* p2 kończy: jego start + draw-dur */
+    --d2-end:   calc(var(--d2-begin) + var(--draw-dur));
+    /* wyniesienie w górę zaczyna się dopiero po pełnym obrysie + 1s */
+    --lift-begin: calc(var(--d2-end) + var(--wait-after-draw));
+      /* szerokość LOGO w całym intro */
+    --logo-w: min(52vmin, 420px);
+  
+    /* ile razy napis ma być szerszy od logo (1.00 = tyle samo, 1.2 = 20% większy) */
+    --wordmark-scale: 1.15;
+  
+    /* kiedy pojawia się napis (po obrysie) */
+    --hero-begin: var(--d2-end); /* albo calc(var(--d2-end) + var(--wait-after-draw)) */
+ 
+    --wm-draw: .9s;    /* było .55s */
+    --wm-stagger: .18s;/* było .12s */
+    --wm-chunk-gap: .6s;  /* pauza między "Web" i "baby" */
+}
+
+  
+  /* LOGO */
+  .logo { width: var(--logo-w); height: auto; }
+  
+  /* NAPIS (SVG lub PNG) */
+  .wordmark{
+    display:block;
+    width: calc(var(--logo-w) * var(--wordmark-scale));
+    height: auto;
+    margin: 1.4rem auto 0;        /* odstęp pod logo */
+    opacity: 0;
+    transform: translateY(8px);
+    animation: wmIn .6s cubic-bezier(.22,1,.36,1) forwards;
+    animation-delay: var(--hero-begin);
+  }
+
+  .wordmark--draw .letter .stroke path{
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: wmDraw var(--wm-draw) cubic-bezier(.22,1,.36,1) forwards;
+    animation-delay: calc(var(--hero-begin,0s) + var(--chunk,0)*var(--wm-chunk-gap) + var(--j,0)*var(--wm-stagger));
+  }
+  @keyframes wmDraw { to { stroke-dashoffset: 0; } }
+  
+  /* wypełnienie chwilę po obrysie */
+  .wordmark--draw .letter .fill{
+    opacity: 0;
+    animation: wmFill .25s linear forwards;
+    animation-delay: calc(var(--hero-begin,0s) + var(--chunk,0)*var(--wm-chunk-gap) + var(--j,0)*var(--wm-stagger) + var(--wm-draw) - .1s);
+  }
+  @keyframes wmFill { to { opacity: 1; } }
+  
+  /* Jeśli używasz PNG – popraw ostrość skalowania */
+  .wordmark:is(img){ image-rendering: -webkit-optimize-contrast; }
+  
+  /* Jeśli robisz prosty fade */
+  .wordmark--fade{
+    -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 72%, rgba(0,0,0,0) 100%);
+            mask-image: linear-gradient(to top, rgba(0,0,0,1) 72%, rgba(0,0,0,0) 100%);
+  }
+  
+  @keyframes wmIn { to { opacity: 1; transform: translateY(0); } }
+  
+  
+  /* CENTROWANIE / kosmetyka */
+  .intro {
+    display: grid;
+    place-items: center;
+    min-height: 70vh;
+    overflow: hidden;
+  }
+  
+//  .logo {
+//    width: min(52vmin, 420px);
+//    height: auto;
+//  }
+  
+  /* 1) OBRÓT całości */
+  .logo-shape {
+    transform-box: view-box;
+    transform-origin: 50% 50%;
+    transform: rotate(var(--start-rot));
+    animation: spin var(--spin-dur) cubic-bezier(.22,1,.36,1) forwards;
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(0deg); }
+  }
+  
+  /* 2) PRZYGOTOWANIE obrysu: ukryty dopóki nie zaczniemy rysować */
+  .outline {
+    stroke-width: 4;            /* zmień na 2 jeśli chcesz cieńszą */
+  }
+  
+  .draw {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    /* niech nic nie „mrugnie” przed startem: */
+    opacity: 1;
+    animation-name: drawLine;
+    animation-timing-function: cubic-bezier(.22,1,.36,1);
+    animation-fill-mode: forwards;
+    animation-duration: var(--draw-dur);
+  }
+  
+  /* p1 zaczyna po obrocie */
+  .draw.d1 { animation-delay: var(--d1-begin); }
+  /* p2 zaczyna jeszcze później */
+  .draw.d2 { animation-delay: var(--d2-begin); }
+  
+  @keyframes drawLine {
+    to { stroke-dashoffset: 0; }
+  }
+
+
+  .intro {
+    position: fixed; inset: 0;  /* overlay nad stroną */
+    background: var(--intro-bg, #0b0b0c); /* albo 'transparent' jeśli nie chcesz tła */
+    display: grid; place-items: center;
+    z-index: 9999;  /* nad całą stroną */
+    overflow: hidden;
+  }
+  
+  /* ...reszta Twoich zmiennych i keyframes... */
+  
+  /* to wyzwala liftUp — po wyliczonym opóźnieniu */
+  .intro.playing {
+    pointer-events: none;
+    will-change: transform, opacity;
+    animation: liftUp .7s cubic-bezier(.22,1,.36,1) forwards;
+    animation-delay: var(--lift-begin);
+  }
+  
+  @keyframes liftUp {
+    to { transform: translateY(-24vh); opacity: 0; }
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    app-intro-splash { display: none !important; }
+  }
+  
+
+
+  
+
+  
+  @keyframes wmIn { to { opacity:1; transform: translateY(0); } }
+  

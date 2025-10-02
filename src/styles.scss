@@ -147,6 +147,46 @@ h1,h2,h3{margin:0 0 12px} h2{font-size:clamp(1.6rem,3vw,2rem)} h3{font-size:1.25
   overflow: visible;
 }
 
+/* ——— PUSH-UP STRONY SPOD INTRO ——— */
+
+/* Bezpieczny default: strona od razu widoczna (gdy intro się NIE pokazuje) */
+.site{
+  transform: none;
+  opacity: 1;
+  transition:
+    transform .70s cubic-bezier(.22,1,.36,1),
+    opacity   .45s ease-out;
+  will-change: transform, opacity;
+}
+
+/* Gdy intro jest aktywne — trzymaj stronę lekko pod ekranem i schowaną */
+html.intro-active .site{
+  transform: translateY(22vh);
+  opacity: 0;
+}
+
+/* Gdy zaczynamy „lift” (ustawiane w TS) — strona wjeżdża do góry i pokazuje się */
+html.intro-lift .site{
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* (Opcjonalnie) delikatniejszy efekt na dużych ekranach */
+@media (min-width: 992px){
+  html.intro-active .site{ transform: translateY(26vh); }
+}
+
+/* (Opcjonalnie) jeśli chcesz zablokować przewijanie tylko podczas intro */
+html.intro-active,
+html.intro-lift {
+  /* overflow-y: hidden; */ /* odkomentuj, jeśli potrzebujesz */
+}
+
+/* Preferencje dostępności: bez ruchu = bez animacji push-up */
+@media (prefers-reduced-motion: reduce){
+  .site{ transition: none !important; transform: none !important; opacity: 1 !important; }
+}
+
   
   
  

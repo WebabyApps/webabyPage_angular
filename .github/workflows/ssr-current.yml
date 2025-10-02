@@ -1,0 +1,146 @@
+name: webaby-page runner (NEW on domain, SSR)
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+
+concurrency:
+  group: webaby-page-prod
+  cancel-in-progress: true
+
+jobs:
+  build-deploy:
+    runs-on: self-hosted
+    timeout-minutes: 60
+
+    env:
+      # Statyki dla Nginx (browser/)
+      DEST_DIR: /var/www/webaby-page/current
+      # Bundle SSR (server/)
+      SSR_DIR: /opt/webaby-page/current
+      # PM2 i port SSR
+      PM2_NAME: webaby-ssr
+      SSR_PORT: "4000"
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Build Angular SSR (browser + server)
+        run: |
+          # Jeśli masz już skrypt w package.json:
+          if npm run | grep -q "build:ssr"; then
+            npm run build:ssr
+          else
+            # fallback: spróbuj wykryć nazwę projektu i odpalić builder
+            APP_NAME=$(node -e "const j=require('./angular.json');console.log(Object.keys(j.projects||{})[0]||'');")
+            if [ -z "$APP_NAME" ]; then
+              echo "Nie mogę wykryć nazwy projektu z angular.json"; exit 1
+            fi
+            npx ng run "$APP_NAME:build-ssr"
+          fi
+
+      - name: Detect SSR outputs
+        id: outdir
+        shell: bash
+        run: |
+          set -e
+          BROWSER_OUT=$(ls -d dist/*/browser 2>/dev/null || true)
+          SERVER_OUT=$(ls -d dist/*/server 2>/dev/null || true)
+          if [ -z "$BROWSER_OUT" ] || [ -z "$SERVER_OUT" ]; then
+            echo "Nie znaleziono katalogów dist/*/browser lub dist/*/server"; exit 1
+          fi
+          echo "BROWSER_OUT=$BROWSER_OUT" >> $GITHUB_ENV
+          echo "SERVER_OUT=$SERVER_OUT" >> $GITHUB_ENV
+          echo "Build browser: $BROWSER_OUT"
+          echo "Build server : $SERVER_OUT"
+
+      # --- PWA (opcjonalnie) – jeśli chcesz coś dograć do builda: użyj $BROWSER_OUT ---
+      # - uses: actions/checkout@v4
+      #   with:
+      #     repository: maciejmar/basketball-game
+      #     path: basketball-pwa
+      # - uses: actions/setup-node@v4
+      #   with:
+      #     node-version: 20
+      #     cache: 'npm'
+      #     cache-dependency-path: basketball-pwa/package-lock.json
+      # - name: Build PWA (/basketball-pwa)
+      #   working-directory: basketball-pwa
+      #   run: npx ng build --configuration production --base-href /basketball-pwa/ --deploy-url /basketball-pwa/
+      # - name: Copy PWA into site's build
+      #   shell: bash
+      #   run: |
+      #     PWA_DIR=$(ls -d basketball-pwa/dist/*/browser 2>/dev/null || ls -d basketball-pwa/dist/*)
+      #     mkdir -p "$BROWSER_OUT/basketball-pwa"
+      #     rsync -a --delete "$PWA_DIR/" "$BROWSER_OUT/basketball-pwa/"
+
+      - name: Setup SSH agent
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Trust server host key
+        run: ssh-keyscan -Hv ${{ secrets.OVH_VPS_IP }} >> ~/.ssh/known_hosts
+
+      - name: SSH smoke test
+        run: ssh -o BatchMode=yes ubuntu@${{ secrets.OVH_VPS_IP }} "echo CONNECTED && hostname"
+
+      - name: Create dest dirs (sudo)
+        run: |
+          ssh ubuntu@${{ secrets.OVH_VPS_IP }} "\
+            sudo mkdir -p '${{ env.DEST_DIR }}' && \
+            sudo mkdir -p '${{ env.SSR_DIR }}'"
+
+      - name: Rsync browser → $DEST_DIR (sudo)
+        run: |
+          rsync -az --delete \
+            --rsync-path="sudo rsync" \
+            "${BROWSER_OUT}/" \
+            ubuntu@${{ secrets.OVH_VPS_IP }}:"${{ env.DEST_DIR }}/"
+
+      - name: Rsync server → $SSR_DIR (sudo)
+        run: |
+          rsync -az --delete \
+            --rsync-path="sudo rsync" \
+            "${SERVER_OUT}/" \
+            ubuntu@${{ secrets.OVH_VPS_IP }}:"${{ env.SSR_DIR }}/"
+
+      - name: Post-deploy (perms, deps w/server, PM2 reload)
+        run: |
+          ssh ubuntu@${{ secrets.OVH_VPS_IP }} "\
+            set -e; \
+            # uprawnienia
+            sudo find '${{ env.DEST_DIR }}' -type d -exec chmod 755 {} \; && \
+            sudo find '${{ env.DEST_DIR }}' -type f -exec chmod 644 {} \; && \
+            sudo chown -R root:root '${{ env.DEST_DIR }}' && \
+            sudo find '${{ env.SSR_DIR }}' -type d -exec chmod 755 {} \; && \
+            sudo find '${{ env.SSR_DIR }}' -type f -exec chmod 644 {} \; && \
+            sudo chown -R root:root '${{ env.SSR_DIR }}' && \
+            \
+            # jeśli Angular wygenerował package.json w server/ to doinstaluj prod deps
+            if [ -f '${{ env.SSR_DIR }}/package.json' ]; then \
+              cd '${{ env.SSR_DIR }}'; \
+              npm ci --omit=dev; \
+            fi; \
+            \
+            # uruchom/odśwież PM2 (plik server.mjs)
+            if pm2 list | grep -q '${{ env.PM2_NAME }}'; then \
+              pm2 reload '${{ env.PM2_NAME }}' --update-env --kill-timeout 3000 -- --port=${{ env.SSR_PORT }}; \
+            else \
+              pm2 start '${{ env.SSR_DIR }}/server.mjs' --name '${{ env.PM2_NAME }}' -- --port=${{ env.SSR_PORT }}; \
+            fi; \
+            pm2 save \
+          "
+
+      - name: Reload Nginx (optional but safe)
+        run: ssh ubuntu@${{ secrets.OVH_VPS_IP }} "sudo nginx -t && sudo systemctl reload nginx"
