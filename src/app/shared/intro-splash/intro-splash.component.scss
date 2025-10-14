@@ -1,5 +1,7 @@
 /* TIMING — jedno źródło prawdy */
 :host {
+
+    --outline-w: 8;  /* np. 2, 3, 6 – co chcesz */
     /* obrót */
     --spin-dur: 1.8s;
   
@@ -112,8 +114,10 @@
   
   /* 2) PRZYGOTOWANIE obrysu: ukryty dopóki nie zaczniemy rysować */
   .outline {
-    stroke-width: 4;            /* zmień na 2 jeśli chcesz cieńszą */
+    stroke-width: var(--outline-w);            /* zmień na 2 jeśli chcesz cieńszą */
   }
+
+  .outline use { vector-effect: non-scaling-stroke; }
   
   .draw {
     stroke-dasharray: 1;

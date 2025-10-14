@@ -1,6 +1,54 @@
 :host {
   display: block;
+  --hero-hover-rot: 42.5deg;
+  --hero-hover-dur: .35s;
+  --logo-stroke: 2; /* grubość konturu w hero */
+  --hero-logo-w: clamp(100px, 12vw, 180px);
 }
+
+/* Nowe SVG logo w hero */
+.hero-logo-svg{
+    width: var(--hero-logo-w);
+  height: auto;
+  display: block;
+  margin: 0 auto 16px;
+  filter: drop-shadow(0 8px 24px rgba(0,0,0,.45));
+}
+
+
+
+
+/* Kontur i odporność na skalowanie */
+.hero-logo-svg .outline{ stroke-width: var(--logo-stroke); }
+.hero-logo-svg .outline use{ vector-effect: non-scaling-stroke; }
+
+/* Przygotuj punkt obrotu */
+.hero-logo-svg .logo-shape{
+  transform-box: view-box;
+  transform-origin: 50% 50%;
+  transition: transform var(--hero-hover-dur) cubic-bezier(.22,1,.36,1);
+}
+
+/* Obrót na hover/focus linka */
+.hero-logo-link:hover  .logo-shape,
+.hero-logo-link:focus-visible .logo-shape{
+  transform: rotate(var(--hero-hover-rot));
+}
+
+/* (opcjonalnie) lekki scale jak wcześniej na PNG */
+.hero-logo-link:hover .hero-logo-svg{
+  transform: scale(1.02);
+  transition: transform .2s ease;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .hero-logo-svg .logo-shape{ transition: none; }
+  .hero-logo-link:hover .hero-logo-svg{ transform: none; }
+}
+
+/* Jeśli używasz wariantu compact, możesz zmniejszyć stroke: */
+.hero.compact .hero-logo-svg .outline{ stroke-width: calc(var(--logo-stroke) - 1); }
 
 /* ========== Base hero ========== */
 .hero {
@@ -56,7 +104,7 @@
 
 /* Logo */
 .hero-logo {
-  width: clamp(140px, 22vw, 320px);
+  width: var(--hero-logo-w);
   height: auto;
   margin: 0 auto 16px;
   display: block;

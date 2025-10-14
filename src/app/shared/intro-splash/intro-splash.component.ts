@@ -66,7 +66,7 @@ export class IntroSplashComponent {
     // Scroll -> opcjonalnie zamknij
     if (DISMISS_ON_SCROLL) {
       const onScroll = () => { if (this.visible()) this.dismiss(); };
-      setTimeout(() => window.addEventListener('scroll', onScroll, { passive: true, capture: true }), 600);
+      setTimeout(() => window.addEventListener('scroll', onScroll, { passive: true, capture: true }), 300);
       this.destroyRef.onDestroy(() => window.removeEventListener('scroll', onScroll as any, { capture: true } as any));
     }
 
