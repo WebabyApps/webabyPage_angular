@@ -4,6 +4,7 @@
   --hero-hover-dur: .35s;
   --logo-stroke: 2; /* grubość konturu w hero */
   --hero-logo-w: clamp(100px, 12vw, 180px);
+  --wm-scale: 1.44;   
 }
 
 /* Nowe SVG logo w hero */
@@ -230,4 +231,45 @@ html, body { overflow-x: clip; } /* use hidden if clip isn't supported */
   transform: translateY(-2px);
   border-color: #fff;
   background: rgba(255,255,255,.08);
+}
+
+
+/* USTAWIENIA BAZOWE */
+.hero-logo-svg,
+.wordmark{
+  display:block;
+  margin: 0 auto;
+  transform-box: view-box;      /* ważne dla SVG */
+  transform-origin: 50% 50%;
+  transition:
+    transform var(--hero-hover-dur) cubic-bezier(.22,1,.36,1),
+    filter var(--hero-hover-dur) ease;
+}
+
+/* odstęp między symbolem a napisem */
+.wordmark{ margin-top: 8px; }
+
+/* niech kontur skaluje się ładnie */
+.hero-logo-svg .outline use,
+.wordmark .stroke path{ vector-effect: non-scaling-stroke; }
+
+/* HOVER na CAŁY link: obrót symbolu + powiększenie napisu */
+.hero-logo-link:hover  .logo-shape,
+.hero-logo-link:focus-visible .logo-shape{
+  transform: rotate(var(--hero-hover-rot));
+}
+
+.hero-logo-link:hover  .wordmark,
+.hero-logo-link:focus-visible .wordmark{
+  transform: scale(var(--wm-scale));
+  filter: drop-shadow(0 0 10px rgba(255,255,255,.55));
+}
+
+/* (opcjonalnie) w hoverze podbij też wypełnienie/obrys napisu gradientem */
+.hero-logo-link:hover  .wordmark .stroke { stroke: url(#wm-grad); }
+.hero-logo-link:hover  .wordmark .fill   { fill:   url(#wm-grad); }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .hero-logo-svg, .wordmark{ transition: none; }
 }
