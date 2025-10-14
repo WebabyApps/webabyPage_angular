@@ -27,12 +27,17 @@
   transform-box: view-box;
   transform-origin: 50% 50%;
   transition: transform var(--hero-hover-dur) cubic-bezier(.22,1,.36,1);
+ 
 }
 
 /* Obrót na hover/focus linka */
 .hero-logo-link:hover  .logo-shape,
 .hero-logo-link:focus-visible .logo-shape{
   transform: rotate(var(--hero-hover-rot));
+}
+
+.hero-logo-link{
+margin-top: 50px;
 }
 
 /* (opcjonalnie) lekki scale jak wcześniej na PNG */
