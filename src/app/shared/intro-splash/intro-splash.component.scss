@@ -1,6 +1,10 @@
 /* TIMING — jedno źródło prawdy */
 :host {
-
+ --glow-blur: 16px;            /* rozmycie poświaty */
+  --glow-alpha: .9;             /* maksymalna jasność w piku */
+  --glow-width-mul: 2.6;        /* ile razy grubszy od obrysu */
+  --glow-fade: .85;             /* docelowa, „spoczynkowa” jasność po rysowaniu */
+  --glow-pulse-dur: 5s;        /* lekki puls po skończeniu rysowania */
     --outline-w: 8;  /* np. 2, 3, 6 – co chcesz */
     /* obrót */
     --spin-dur: 1.8s;

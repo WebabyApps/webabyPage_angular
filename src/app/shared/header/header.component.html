@@ -1,4 +1,8 @@
-<header id="top" class="site-header" [class.transparent]="!scrolled" [class.scrolled]="scrolled">
+<header id="top"
+        class="site-header"
+        [class.transparent]="!scrolled"
+        [class.scrolled]="scrolled"
+        [class.hide-on-scroll]="hideOnScroll">
   <div class="container nav-row">
     <!-- BRAND -->
     <a
@@ -34,14 +38,19 @@
     </div>
 
     
+ 
     <!-- HAMBURGER -->
-    <button class="hamburger" aria-label="Open menu" [attr.aria-expanded]="menuOpen" (click)="toggleMenu()">
-      <span></span><span></span><span></span>
-    </button>
+<button class="hamburger"
+        aria-label="Open menu"
+        [attr.aria-expanded]="menuOpen"
+        (click)="toggleMenu()"
+        [class.active]="menuOpen">
+  <span></span><span></span><span></span>
+</button>
 
-    <!-- NAV -->
-    <nav id="navMenu" class="main-nav" [class.open]="menuOpen">
-      <a
+<!-- NAV -->
+<nav id="navMenu" class="main-nav" [class.open]="menuOpen" #navMenu>
+   <a
         [routerLink]="['/']"
         fragment="main"
         routerLinkActive="active"
@@ -63,10 +72,16 @@
         {{ 'nav.contact' | transloco }}
       </a>
 
-      <!-- Switcher także w menu (na mobile) -->
-      <div class="lang-in-menu">
-        <app-language-switcher></app-language-switcher>
-      </div>
-    </nav>
+  <div class="lang-in-menu">
+    <app-language-switcher></app-language-switcher>
+  </div>
+</nav>
+
+<!-- BACKDROP (pokazuje się tylko gdy menu otwarte) -->
+<div class="menu-backdrop" *ngIf="menuOpen" (click)="closeMenu()"></div>
+
+
+    <!-- NAV -->
+ 
   </div>
 </header>
