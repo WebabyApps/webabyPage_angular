@@ -29,6 +29,14 @@ export class IntroSplashComponent {
   private autoTimer: any = null;
   private force = false;
   private endedOnce = false;
+private fireIntroDoneOnce = (() => {
+  let fired = false;
+  return () => {
+    if (fired) return;
+    fired = true;
+    try { window.dispatchEvent(new CustomEvent('webaby:intro:done')); } catch {}
+  };
+})();
 
   constructor() {
     const url = new URL(window.location.href);
@@ -58,6 +66,9 @@ export class IntroSplashComponent {
           this.autoTimer = setTimeout(() => this.dismiss(), wait);
         }
       });
+    } else{
+      
+      this.fireIntroDoneOnce();
     }
     // ESC -> zamknij
     const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') this.dismiss(true); };

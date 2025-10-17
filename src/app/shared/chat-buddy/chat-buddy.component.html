@@ -1,0 +1,89 @@
+<div class="buddy-root" [class.open]="open()">
+  <!-- PRZYCISK / LUDZIK -->
+  <button class="buddy-btn" (click)="toggle()" aria-label="Otwórz czat">
+    <!-- SVG ludzika: oczy to oddzielne „powieki” sterowane klasą .blink -->
+   <!-- <svg class="buddy-svg" viewBox="0 0 120 120" role="img" aria-label="Webaby Bot">
+    
+      <circle cx="60" cy="60" r="56" class="body" />
+     
+      <g class="eyes" [class.blink]="blink()">
+        <circle cx="42" cy="52" r="6" class="eye"/>
+        <circle cx="78" cy="52" r="6" class="eye"/>
+     
+        <rect x="36" y="46" width="12" height="12" class="lid"/>
+        <rect x="72" y="46" width="12" height="12" class="lid"/>
+      </g>
+
+      <path d="M40,78 C52,92 68,92 80,78" class="smile"/>
+
+      <g class="wobble" [class.on]="wobble()"></g>
+    </svg> -->
+
+     <svg class="robot-svg" viewBox="0 0 120 120" role="img" aria-label="Webaby Bot">
+    <!-- cień -->
+    <ellipse cx="60" cy="105" rx="26" ry="6" class="shadow"/>
+    <!-- antena -->
+    <line x1="60" y1="18" x2="60" y2="8" class="antenna-stick"/>
+    <circle cx="60" cy="6" r="4" class="antenna-ball"/>
+    <!-- głowa -->
+    <rect x="28" y="28" width="64" height="52" rx="10" class="head"/>
+    <!-- uszy -->
+    <rect x="22" y="40" width="6" height="24" rx="3" class="ear"/>
+    <rect x="92" y="40" width="6" height="24" rx="3" class="ear"/>
+    <!-- oczy -->
+    <g class="eyes" [class.blink]="blink()">
+      <rect x="42" y="48" width="10" height="10" rx="3" class="eye"/>
+      <rect x="68" y="48" width="10" height="10" rx="3" class="eye"/>
+      <rect x="42" y="48" width="10" height="10" rx="3" class="lid"/>
+      <rect x="68" y="48" width="10" height="10" rx="3" class="lid"/>
+    </g>
+    <!-- usta/ekran — ZAMIANA na uśmiech -->
+   <path d="M40,68 C52,82 68,82 80,68" class="smile"/>
+
+    <!-- <rect x="40" y="66" width="40" height="8" rx="4" class="mouth"/> -->
+    <!-- korpus -->
+    <rect x="36" y="82" width="48" height="26" rx="8" class="body"/>
+    <!-- lekka kołyska -->
+    <g class="wobble" [class.on]="wobble()"></g>
+  </svg>
+  </button>
+
+  <!-- PANEL CZATU -->
+  <section class="panel" aria-live="polite">
+    <header class="panel__hd">
+      <div class="hd__title">Webaby Bot</div>
+      <button class="hd__voice"
+        (click)="enableVoice.set(!enableVoice())"
+        [attr.aria-pressed]="enableVoice()"
+        [title]="enableVoice() ? 'Wycisz bota' : 'Włącz głos bota'">
+  {{ enableVoice() ? '🔊' : '🔇' }}
+</button>
+
+      <button class="hd__close" (click)="toggle()" aria-label="Zamknij czat">✕</button>
+    </header>
+
+    <div class="panel__messages">
+      <div *ngFor="let m of messages()" class="msg" [class.-user]="m.from==='user'">
+        <div class="bubble">{{ m.text }}</div>
+      </div>
+      <div class="msg" *ngIf="typing()">
+        <div class="bubble bubble--typing">
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        </div>
+      </div>
+    </div>
+
+ <form class="panel__input" (submit)="onSubmit($event)">
+  <input
+    #el
+    type="text"
+    [value]="input()"
+    (input)="input.set(el.value)"
+    placeholder="Napisz wiadomość…"
+    aria-label="Wpisz wiadomość"
+  />
+  <button type="submit" class="send">Wyślij</button>
+</form>
+
+  </section>
+</div>

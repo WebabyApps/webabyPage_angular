@@ -1,0 +1,189 @@
+:host {
+  position: fixed;
+  right: 16px;        /* prawy dolny róg */
+  left: auto;
+  bottom: 16px;
+  z-index: 9999;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+
+  /* startowo ukryty + animacja wejścia */
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+  transition: opacity .25s ease, transform .25s ease;
+}
+:host.visible {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+
+
+/* ROOT */
+.buddy-root {
+  display: grid;
+  align-items: end;
+  gap: 10px;
+}
+
+/* PRZYCISK — ROBOT */
+.buddy-btn {
+  width: 72px;
+  height: 72px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, .18);
+  transition: transform .12s ease, filter .12s ease;
+
+  &:hover { transform: translateY(-1px); filter: brightness(1.02); }
+  &:active { transform: translateY(0); }
+}
+
+.robot-svg { width: 100%; height: 100%; display: block; }
+.shadow { fill: rgba(0,0,0,.12); }
+.antenna-stick { stroke:#94a3b8; stroke-width:2; }
+.antenna-ball { fill:#22d3ee; }
+
+.head { fill:#f8fafc; stroke:#e2e8f0; stroke-width:2; }
+.ear  { fill:#e2e8f0; }
+
+.eye  { fill:#111827; }
+.lid  { fill:#f8fafc; transform-origin:center; transform: scaleY(0); transition: transform .08s; }
+.eyes.blink .lid { transform: scaleY(1); }
+
+.mouth { fill:#0ea5e9; opacity:.85; }
+.body  { fill:#e2e8f0; }
+
+/* delikatne kołysanie całego przycisku */
+@keyframes wobble {
+  0%,100% { transform: rotate(0deg); }
+  50%     { transform: rotate(-3deg) translateY(-1px); }
+}
+.buddy-btn:has(.wobble.on) { animation: wobble .9s ease; }
+
+/* PANEL */
+.panel {
+  width: min(360px, calc(100vw - 32px));
+  height: 440px;
+  border-radius: 16px;
+  background: #0b1220; /* ciemny nocny */
+  color: #e5ecff;
+  box-shadow: 0 16px 48px rgba(0,0,0,.35);
+  display: none;
+  grid-template-rows: auto 1fr auto;
+  overflow: hidden;
+}
+.buddy-root.open .panel { display: grid; }
+
+.panel__hd {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  background: linear-gradient(180deg,#0e1729,#0b1220);
+
+  .hd__title { font-weight: 700; letter-spacing:.2px; }
+
+  .hd__actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .hd__voice {
+    background: transparent;
+    border: 0;
+    color: #cbd5e1;
+    font-size: 18px;
+    cursor: pointer;
+    line-height: 1;
+
+    &:hover { color:#e2e8f0; }
+  }
+
+  .hd__close {
+    background: transparent;
+    border: 0;
+    color: #94a3b8;
+    font-size: 18px;
+    cursor: pointer;
+
+    &:hover { color: #cbd5e1; }
+  }
+}
+
+.panel__messages {
+  padding: 12px;
+  overflow: auto;
+  display: grid;
+  gap: 8px;
+
+  .msg { display: flex; }
+  .msg.-user { justify-content: flex-end; }
+
+  .bubble {
+    max-width: 80%;
+    padding: 10px 12px;
+    border-radius: 14px;
+    background: #111a2e;
+    border: 1px solid #1f2a44;
+  }
+  .msg.-user .bubble { background: #14532d; border-color: #166534; }
+}
+
+.panel__input {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  padding: 10px;
+  background: #0a1020;
+  border-top: 1px solid #1f2a44;
+
+  input {
+    background: #0f172a;
+    border: 1px solid #1f2a44;
+    color: #e5ecff;
+    border-radius: 10px;
+    padding: 10px 12px;
+    outline: none;
+
+    &::placeholder { color:#64748b; }
+  }
+
+  .send {
+    border: 0;
+    border-radius: 10px;
+    padding: 10px 14px;
+    cursor: pointer;
+    background: linear-gradient(180deg,#22d3ee,#0ea5e9);
+    color: #05223b;
+    font-weight: 700;
+  }
+}
+
+/* typing bubbles */
+.bubble--typing { display: inline-flex; gap: 5px; align-items: center; }
+.dot { width: 6px; height: 6px; border-radius: 50%; background: #93c5fd; opacity: .4; }
+@keyframes dots { 0% {opacity:.2; transform: translateY(0)} 50% {opacity:1; transform: translateY(-2px)} 100% {opacity:.2; transform: translateY(0)} }
+.dot:nth-child(1){ animation: dots 1s ease infinite .0s }
+.dot:nth-child(2){ animation: dots 1s ease infinite .15s }
+.dot:nth-child(3){ animation: dots 1s ease infinite .3s }
+
+/* mobile tune */
+@media (max-width: 480px) {
+  .panel { height: 60vh; }
+  .buddy-btn { width: 64px; height: 64px; }
+}
+.smile {
+  fill: none;
+  stroke: #0ea5e9;
+  stroke-width: 4;
+  stroke-linecap: round;
+  opacity: .95;
+  transform: translateY(-2px); /* podnieś o 4 px */
+}
+

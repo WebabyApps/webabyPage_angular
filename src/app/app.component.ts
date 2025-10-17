@@ -2,6 +2,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, NavigationEnd, RouterOutlet } from '@angular/router';
+import { ChatBuddyComponent } from './shared/chat-buddy/chat-buddy.component';  
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { IntroSplashComponent } from './shared/intro-splash/intro-splash.component';
@@ -11,12 +12,13 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, HeaderComponent, FooterComponent, IntroSplashComponent],
+  imports: [CommonModule, RouterOutlet, HeaderComponent, FooterComponent, IntroSplashComponent, ChatBuddyComponent],
   template: `
     <!-- Intro tylko na HOME bez hash-a; ?intro=1 zawsze wymusza -->
     <app-intro-splash *ngIf="isHomeNoHash$ | async"></app-intro-splash>
 
     <app-header></app-header>
+    <app-chat-buddy></app-chat-buddy>
     <router-outlet></router-outlet>
     <app-footer></app-footer>
   `
