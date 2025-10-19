@@ -67,7 +67,7 @@ private fireIntroDoneOnce = (() => {
         }
       });
     } else{
-      
+
       this.fireIntroDoneOnce();
     }
     // ESC -> zamknij
@@ -145,7 +145,7 @@ private fireIntroDoneOnce = (() => {
     else setTimeout(() => this.dismiss(), left);
   }
 
-  dismiss(_userInitiated = false){
+ /* dismiss(_userInitiated = false){
     if (!this.visible()) return;
 
     if (this.autoTimer) { clearTimeout(this.autoTimer); this.autoTimer = null; }
@@ -163,7 +163,48 @@ private fireIntroDoneOnce = (() => {
 
       if (!this.force) this.svc.markSeen(); // tylko gdy nie wymusiliśmy
     }, 700);
+  }*/
+  public dismiss = (userInitiated = false) => {
+  try {
+    console.debug('[intro] dismiss() called, userInitiated=', userInitiated);
+
+    if (!this.visible()) return;
+
+    // stop any pending auto close
+    if (this.autoTimer) { clearTimeout(this.autoTimer); this.autoTimer = null; }
+
+    if (userInitiated) {
+      // 🔸 instant hide — no lift, no waits
+      this.playing.set(false); // stop any state that might re-trigger CSS
+      this.visible.set(false); // remove overlay immediately
+
+      // clean global classes
+      document.documentElement.classList.remove('intro-active', 'intro-lift');
+
+     // if (!this.force) this.svc.markSeen();
+      this.fireIntroDoneOnce();
+      return; // ← done
+    }
+
+    // ⏳ keep existing timed path for auto-dismiss / animation flow
+    this.playing.set(false);
+    document.documentElement.classList.add('intro-lift');
+
+    setTimeout(() => {
+      this.visible.set(false);
+      document.documentElement.classList.remove('intro-active');
+      setTimeout(() => document.documentElement.classList.remove('intro-lift'), 50);
+   //   if (!this.force) this.svc.markSeen();
+      this.fireIntroDoneOnce();
+    }, 700); // matches your liftUp .7s
+  } catch (e) {
+    console.error('[intro] dismiss error:', e);
+    // fail-safe: hide overlay to avoid trapping the user
+    this.visible.set(false);
+    document.documentElement.classList.remove('intro-active', 'intro-lift');
   }
+};
+
 
   /** (opcjonalnie) Jeżeli w HTML masz (animationend)="onAnimEnd($event)" */
   onAnimEnd = (e: AnimationEvent) => this.onAnimationEnd(e);

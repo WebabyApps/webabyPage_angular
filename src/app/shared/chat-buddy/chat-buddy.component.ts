@@ -51,7 +51,7 @@ ngOnInit() {
 
     // (3) Fallback: po X sekundach (np. 4s), jeśli nic nie zadziałało
     setTimeout(() => this.markVisibleOnce(), 4000);
-  const pickVoice = () => {
+ /* const pickVoice = () => {
     const vs = window.speechSynthesis?.getVoices?.() || [];
     if (!vs.length) return false;
 
@@ -62,7 +62,24 @@ ngOnInit() {
       vs[0];
     this.voicesReady = !!this.voice;
     return this.voicesReady;
-  };
+  };*/
+  const pickVoice = () => {
+  const vs = window.speechSynthesis?.getVoices?.() || [];
+  if (!vs.length) return false;
+
+  // Spróbuj złapać "robotyczne" brzmienia
+  this.voice =
+    vs.find(v => /Zarvox|Trinoids|Fred|Cellos|Bubbles|Bad\sNews/i.test(v.name)) || // macOS/iOS
+    vs.find(v => /David/i.test(v.name)) ||                                         // Windows
+    vs.find(v => /Google\sUK\sEnglish\sMale/i.test(v.name)) ||                     // Android
+    vs.find(v => /pl(-|_|$)/i.test(v.lang)) ||                                     // Polski
+    vs.find(v => /en(-|_|$)/i.test(v.lang)) ||
+    vs[0];
+
+  this.voicesReady = !!this.voice;
+  return this.voicesReady;
+};
+
 
   // 1) Spróbuj natychmiast
   if (!pickVoice()) {
@@ -117,8 +134,8 @@ private speak(text: string) {
   const say = () => {
     const u = new SpeechSynthesisUtterance(text);
     if (this.voice) u.voice = this.voice;
-    u.rate = 1.0;
-    u.pitch = 1.05;
+    u.rate = 1.2;
+    u.pitch = 0.6;
     u.lang = this.voice?.lang || 'pl-PL';
 
     // Anuluj kolejkę (żeby nie „naginało” wielu wiadomości)

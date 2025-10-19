@@ -1,7 +1,7 @@
-<div class="intro" 
-     [class.playing]="playing" 
-     (animationend)="onAnimEnd($event)" 
-     *ngIf="visible">
+<div class="intro"
+     [class.playing]="playing()"
+     *ngIf="visible()"
+     (animationend)="onAnimEnd($event)">
   <div class="intro-center">
   <svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 484 484" role="img" aria-label="ip logo" style="overflow:visible">
         <defs>
@@ -143,5 +143,31 @@ style="overflow:visible"
 <!--<img class="wordmark wordmark--fade" src="assets/Webaby_text.png" width="720" height="160" alt="Webaby" />-->
 
     </div>
+  <!--<button class="skip-intro"
+        type="button"
+        (click)="$event.stopPropagation(); dismiss(true)"
+        aria-label="Pomiń intro"
+        title="Pomiń intro">
+  <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+    <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M5 4v16" />
+      <path d="M8 5l11 7-11 7" />
+    </g>
+  </svg>
+</button>-->
+<button class="skip-intro"
+          type="button"
+          (click)="$event.stopPropagation(); dismiss(true)"
+          aria-label="Pomiń intro"
+          title="Pomiń intro">
+    <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+      <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 4v16" />
+        <path d="M8 5l11 7-11 7" />
+      </g>
+    </svg>
+  </button>
+
+
   </div>
   
