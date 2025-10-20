@@ -24,17 +24,16 @@ export class ChatBuddyComponent implements OnInit {
   typing  = signal(false);
   input   = signal('');
   messages = signal<Msg[]>([
-    { from: 'bot', text: 'Cześć! Jestem Webaby Bot. Zapytaj o nasze produkty lub firmę 😊' }
+    { from: 'bot', text: 'Hi! I am Webaby Bot. Ask about our products or company ' }
   ]);
 
   private kb: Qa[] = [
-    { q: /abc[\s-]?land|abecad/i, a: () => 'ABC-Land: gra edukacyjna do nauki liter. Działa na iOS/Android. Chcesz link do tutorialu?' },
-    { q: /lucky\s?draw|koło|losow/i, a: () => 'Lucky Draw: wspólne losowanie z live-sharing. Otwórz stronę produktu i kliknij „Tutorial”.' },
-    { q: /cena|price|koszt/i, a: () => 'Większość aplikacji jest darmowa; płatne dodatki opisujemy na stronach produktów.' },
-    { q: /firma|kim|o nas|about/i, a: () => 'Webaby tworzy proste, ładne i edukacyjne narzędzia dla dzieci i rodziców – z naciskiem na języki i matematykę.' },
-    { q: /kontakt|email|mail/i, a: () => 'Napisz do nas przez formularz kontaktowy – odpowiedzi zwykle w 24h.' },
+    { q: /abc[\s-]?land|abecad/i, a: () => 'ABC-Land: an educational game for learning letters. Works on iOS/Android. Would you like a link to the tutorial?' },
+{ q: /lucky\s?draw|koło|losow/i, a: () => 'Lucky Draw: shared drawing with live sharing. Open the product page and click "Tutorial".' },
+{ q: /cena|price|cost/i, a: () => 'Most apps are free; paid add-ons are described on the product pages.' },
+{ q: /company|whom|about us|about/i, a: () => 'Webaby creates simple, beautiful, and educational tools for children and parents - with an emphasis on languages and math.' },
+{ q: /contact|email|mail/i, a: () => 'Write to us via the contact form -responses usually within 24 hours.' },
   ];
-
   // --- Animacje avatara ---
   blink = signal(false);
   wobble = signal(false);
@@ -153,9 +152,9 @@ export class ChatBuddyComponent implements OnInit {
 
     const helloRe = /\b(cześć|czesc|hej|siema|hello|hi)\b/i;
     const funny = [
-      'Cześć! 🤖 Właśnie naoliwiłem antenkę — jak mogę pomóc?',
-      'Hejo! Jeśli szukasz magii, mam śrubokręt i FAQ ✨',
-      'Dzień dobry! Wersja demo uśmiechu: 😊 — pełna wersja po kawie.',
+  'Hello! I just oiled my antenna—how can I help?',
+'Hey! If you are looking for magic, I have a screwdriver and an FAQ',
+'Good morning! Smile demo: 😊—full version after coffee.',
     ];
 
     window.setTimeout(() => {
@@ -166,7 +165,7 @@ export class ChatBuddyComponent implements OnInit {
         const hit = this.kb.find(k => k.q.test(userMsg));
         answer = hit
           ? hit.a(userMsg)
-          : 'Dobre pytanie! Mogę opowiedzieć o produktach (np. „ABC-Land”, „Lucky Draw”), kontaktach, cenach czy firmie.';
+          :  'Good question! I can tell you about the products (e.g. "ABC-Land", "Lucky Draw"), contacts, prices and the company.';
       }
 
       this.messages.update(m => [...m, { from: 'bot', text: answer }]);
@@ -235,8 +234,8 @@ export class ChatBuddyComponent implements OnInit {
     const say = () => {
       const u = new SpeechSynthesisUtterance(text);
       if (this.voice) u.voice = this.voice;
-      u.rate = 0.95;   // <- możesz korygować
-      u.pitch = 0.85;  // <-
+      u.rate = 1;   // <- możesz korygować
+      u.pitch = 0.1;  // <-
       u.lang = this.voice?.lang || 'pl-PL';
 
       try { window.speechSynthesis.cancel(); } catch {}
