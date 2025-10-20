@@ -205,7 +205,17 @@ private fireIntroDoneOnce = (() => {
   }
 };
 
+onAnimEnd(e: AnimationEvent) {
+  // Reaguj TYLKO na zakończenie 'liftUp' NA elemencie .intro-center
+  const t = e.target as HTMLElement | null;
+  if (!t) return;
+  const isCenter = t.classList?.contains('intro-center');
+  if (!isCenter) return;
+  if (e.animationName !== 'liftUp') return;
+
+  this.onAnimationEnd(e); // twoja obecna metoda, która finalnie woła dismiss()
+}
 
   /** (opcjonalnie) Jeżeli w HTML masz (animationend)="onAnimEnd($event)" */
-  onAnimEnd = (e: AnimationEvent) => this.onAnimationEnd(e);
+ 
 }
