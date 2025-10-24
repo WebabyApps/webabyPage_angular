@@ -5,6 +5,10 @@ import { ProductDialogComponent } from '../product-dialog/product-dialog.compone
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { firstValueFrom } from 'rxjs';
+
+
+
 
 type CardProduct = {
   id: string;  // i18n key
@@ -46,6 +50,10 @@ export class ProductsCarouselComponent implements AfterViewInit {
     @Inject(PLATFORM_ID) private platformId: Object // NEW (dla SSR-safe absolutnego URL)
   ) {}
 
+  private async ensureTranslationsReady(scope?: string) {
+  // Jeśli używasz kluczy globalnych typu "home.products...", wystarczy bez scope:
+  await firstValueFrom(this.transloco.selectTranslation(scope));
+}
   ngOnInit() {
     // NEW: reaguj na query param ?product=slug
     this.route.queryParamMap.subscribe(pm => {
@@ -72,18 +80,21 @@ export class ProductsCarouselComponent implements AfterViewInit {
     this.router.events.pipe(filter(e => e instanceof NavigationEnd)).subscribe(() => {});
   }
 
-  openDialog(p: CardProduct, pushUrl: boolean = true) {
-    const base = `home.products.${p.id}`;
+ 
+async openDialog(p: CardProduct, pushUrl: boolean = true) {
+  const base = `home.products.${p.id}`;
 
-    // NEW: wstaw/aktualizuj query param w URL, aby link był udostępnialny
-    if (pushUrl) {
-      this.router.navigate([], {
-        relativeTo: this.route,
-        queryParams: { product: p.slug },
-        queryParamsHandling: 'merge',
-        replaceUrl: false  // pozwala na "wstecz" zamknąć dialog
-      });
-    }
+  if (pushUrl) {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { product: p.slug },
+      queryParamsHandling: 'merge',
+      replaceUrl: false
+    });
+  }
+
+  // ⬇️ KLUCZOWE: poczekaj aż translacje się wczytają
+  await this.ensureTranslationsReady(/* 'home' jeśli używasz scope */);
 
     this.dialogRef = this.dialog.open(ProductDialogComponent, {
   panelClass: ['wb-product-dialog', 'transparent-dialog'],
