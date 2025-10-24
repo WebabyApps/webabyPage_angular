@@ -224,8 +224,10 @@ copyDeepLink() {
   navigator.clipboard?.writeText(this.data.deepLink).catch(() => {});
 }
 
-  goToDetails() {
-    this.ref.close();
-    this.router.navigate(['/products', this.data.slug]);
-  }
+ goToDetails() {
+  // Zwracamy powód zamknięcia — rodzic rozpozna i NIE będzie czyścił query param
+  this.ref.close('details');
+  this.router.navigate(['/products', this.data.slug]);
+}
+
 }

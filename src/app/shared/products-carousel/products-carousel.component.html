@@ -13,12 +13,6 @@
          (click)="openDialog(p)"
          (keyup.enter)="openDialog(p)">
 
-  <a [routerLink]="[]"
-     [queryParams]="{ product: p.slug }"
-     (click)="$event.preventDefault()"
-     class="card-hitarea"
-     aria-hidden="true"></a>
-
   <img [src]="p.img"
        [attr.aria-label]="t('home.products.' + p.id + '.imgAlt') || t('home.products.' + p.id + '.title')"
        decoding="async"

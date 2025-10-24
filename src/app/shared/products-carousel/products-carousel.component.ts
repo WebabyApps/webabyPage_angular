@@ -86,34 +86,38 @@ export class ProductsCarouselComponent implements AfterViewInit {
     }
 
     this.dialogRef = this.dialog.open(ProductDialogComponent, {
-      panelClass: ['wb-product-dialog', 'transparent-dialog'],
-      width: '720px',
-      maxWidth: '96vw',
-      maxHeight: '96vh',
-      autoFocus: false,
-      restoreFocus: true,
-      data: {
-        title: this.transloco.translate(`${base}.title`),
-        imageUrl: p.img,
-        appUrl: p.appUrl,
-        slug: p.slug,
-        desc: this.transloco.translate(`${base}.desc`),
+  panelClass: ['wb-product-dialog', 'transparent-dialog'],
+  width: '720px',
+  maxWidth: '96vw',
+  maxHeight: '96vh',
+  autoFocus: false,
+  restoreFocus: true,
+  data: {
+    title: this.transloco.translate(`${base}.title`),
+    imageUrl: p.img,
+    appUrl: p.appUrl,
+    slug: p.slug,
+    desc: this.transloco.translate(`${base}.desc`),
+    deepLink: this.buildDeepLink(p.slug)
+  } as any
+});
 
-        // NEW: przekaż do dialogu gotowy „deep link” (absolutny)
-        deepLink: this.buildDeepLink(p.slug)
-      } as any
-    });
+this.dialogRef.afterClosed().subscribe((reason) => {
+  this.dialogRef = null;
 
-    // NEW: po zamknięciu usuń query param `product`
-    this.dialogRef.afterClosed().subscribe(() => {
-      this.dialogRef = null;
-      this.router.navigate([], {
-        relativeTo: this.route,
-        queryParams: { product: null },
-        queryParamsHandling: 'merge',
-        replaceUrl: true
-      });
+  // ⬇️ Czyścimy ?product TYLKO gdy dialog nie zamknął się przez „Details”
+  if (reason !== 'details') {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { product: null },
+      queryParamsHandling: 'merge',
+      replaceUrl: true
     });
+  }
+});
+
+
+   
   }
 
   // --- autoplay / carousel logic (bez zmian) ---
