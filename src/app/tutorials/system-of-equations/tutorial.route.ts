@@ -29,7 +29,7 @@ const DATA: Record<string, TutorialContent> = {
 const i18nResolver = () => firstValueFrom(
   forkJoin([
     inject(TranslocoService).selectTranslation(),               // global
-    inject(TranslocoService).selectTranslation('abc-land') // ⬅️ scope = folder
+    inject(TranslocoService).selectTranslation('system-of-equations') // ⬅️ scope = folder
   ])
 );
 
