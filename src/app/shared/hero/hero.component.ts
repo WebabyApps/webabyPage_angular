@@ -1,14 +1,14 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Inject, PLATFORM_ID } from '@angular/core';
 import { TranslocoService } from '@jsverse/transloco';
 import { take } from 'rxjs/operators';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { TranslocoModule } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-hero',
   standalone: true,
-  imports: [CommonModule, RouterModule, TranslocoModule], // ⬅️ dodane Transloco
+  imports: [CommonModule, RouterModule, TranslocoModule],
   templateUrl: './hero.component.html',
   styleUrls: ['./hero.component.scss'],
 })
@@ -22,28 +22,33 @@ export class HeroComponent {
   resolvedSubtitle?: string;
   resolvedCtaText?: string;
 
-  constructor(private transloco: TranslocoService) {}
+  // ⬇️ WSTRZYKNIJ PLATFORM_ID (pierwszy parametr) + Transloco
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private transloco: TranslocoService
+  ) {}
 
+  @Input() set scope(value: string | undefined) { this._scope = value || undefined; this.resolveAll(); }
+  @Input() set title(value: string | undefined) { this._title = value || undefined; this.resolveAll(); }
+  @Input() set subtitle(value: string | undefined) { this._subtitle = value || undefined; this.resolveAll(); }
+  @Input() set ctaText(value: string | undefined) { this._ctaText = value || undefined; this.resolveAll(); }
 
-  @Input() set scope(value: string | undefined) {
-    this._scope = value || undefined;
-    this.resolveAll();
-  }
+  @Input() brandScrollTarget?: string;   // np. "page-title"
+  @Input() brandScrollOffset = 0;        // kompensacja sticky headera (px)
 
-  @Input() set title(value: string | undefined) {
-    this._title = value || undefined;
-    this.resolveAll();
-  }
+  // ✅ PUBLIC + ARROW => widoczne w template, poprawne this-binding
+  public onLogoClick = (event: MouseEvent): void => {
+    if (!this.brandScrollTarget) return; // pozwól routerLinkowi działać normalnie
+    event.preventDefault();
 
-  @Input() set subtitle(value: string | undefined) {
-    this._subtitle = value || undefined;
-    this.resolveAll();
-  }
+    if (!isPlatformBrowser(this.platformId)) return;
 
-  @Input() set ctaText(value: string | undefined) {
-    this._ctaText = value || undefined;
-    this.resolveAll();
-  }
+    const el = document.getElementById(this.brandScrollTarget);
+    if (!el) return;
+
+    const y = el.getBoundingClientRect().top + window.scrollY - (this.brandScrollOffset || 0);
+    window.scrollTo({ top: y, behavior: 'smooth' });
+  };
 
   private isKey(str?: string): boolean {
     return !!str && str.includes('.') && !/\s/.test(str);
@@ -60,7 +65,6 @@ export class HeroComponent {
       obs.pipe(take(1)).subscribe((v: string) => setter(v));
       return;
     }
-
     const v = this._scope ? this.transloco.translate(str, {}, this._scope)
                           : this.transloco.translate(str);
     setter(v);
@@ -71,15 +75,13 @@ export class HeroComponent {
     this.trMaybeAsync(this._subtitle, v => this.resolvedSubtitle = v);
     this.trMaybeAsync(this._ctaText, v => this.resolvedCtaText = v);
   }
-// ⬅️ bez wartości domyślnej
-// ⬅️ j.w.
-// ⬅️ j.w.
-  @Input() ctaLink: string | any[] | null = null;   // '/' lub ['/']
-  @Input() ctaFragment?: string;                    // 'products'
+
+  @Input() ctaLink: string | any[] | null = null;
+  @Input() ctaFragment?: string;
   @Input() compact = false;
 
   scrollToProducts() {
     const el = document.querySelector('#products');
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (el) (el as HTMLElement).scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 }

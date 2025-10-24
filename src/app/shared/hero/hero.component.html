@@ -5,7 +5,14 @@
 
   <div class="hero-content">
     <!-- BIG LOGO (hidden on compact pages) -->
-    <a class="hero-logo-link" [routerLink]="'/'" fragment="about" [attr.aria-label]="t('home.hero.logoAria')">
+<a
+  class="hero-logo-link"
+  [routerLink]="brandScrollTarget ? null : '/'"
+  [fragment]="brandScrollTarget ? null : 'about'"
+  [attr.href]="brandScrollTarget ? ('#' + brandScrollTarget) : null" 
+  (click)="onLogoClick($event)"
+  [attr.aria-label]="t('home.hero.logoAria')"
+>
       <svg class="hero-logo-svg"  
            xmlns="http://www.w3.org/2000/svg"
            viewBox="0 0 484 484"
