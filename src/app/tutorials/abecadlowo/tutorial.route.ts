@@ -1,6 +1,9 @@
 import { Routes } from '@angular/router';
 import { TUTORIALS } from '../tutorial.token';
 import type { TutorialContent } from '../tutorial.model';
+import { TranslocoService } from '@jsverse/transloco';
+import { firstValueFrom, forkJoin } from 'rxjs';
+import { inject } from '@angular/core';
 
 const DATA: Record<string, TutorialContent> = {
   abecadlowo: {
@@ -32,13 +35,21 @@ const DATA: Record<string, TutorialContent> = {
   }
 };
 
+const i18nResolver = () => firstValueFrom(
+  forkJoin([
+    inject(TranslocoService).selectTranslation(),               // global
+    inject(TranslocoService).selectTranslation('basketball-shots') // ⬅️ scope = folder
+  ])
+);
+
 export default [
   {
     path: '',
-    data: { slug: 'abecadlowo' },
+    data: { slug: 'abecadlowo' }, // <- TutorialPage reads this when no :slug param
     providers: [{ provide: TUTORIALS, useValue: DATA }],
     loadComponent: () =>
       import('../../pages/tutorial-page/tutorial-page.component')
         .then(m => m.TutorialPageComponent),
   }
 ] satisfies Routes;
+

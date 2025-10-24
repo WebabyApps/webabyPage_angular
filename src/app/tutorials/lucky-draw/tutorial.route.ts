@@ -1,6 +1,9 @@
 import { Routes } from '@angular/router';
 import { TUTORIALS } from '../tutorial.token';
 import type { TutorialContent } from '../tutorial.model';
+import { inject } from '@angular/core';
+import { TranslocoService } from '@jsverse/transloco';
+import { firstValueFrom, forkJoin } from 'rxjs';  
 
 const DATA: Record<string, TutorialContent> = {
   'lucky-draw': {
@@ -19,6 +22,13 @@ const DATA: Record<string, TutorialContent> = {
     resources: [{ label: 'Community Discord', href: '#' }]
   }
 };
+
+const i18nResolver = () => firstValueFrom(
+  forkJoin([
+    inject(TranslocoService).selectTranslation(),               // global
+    inject(TranslocoService).selectTranslation('abc-land') // ⬅️ scope = folder
+  ])
+);
 
 export default [
   {

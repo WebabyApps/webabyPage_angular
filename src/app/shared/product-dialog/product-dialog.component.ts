@@ -96,13 +96,14 @@ export type ProductDialogOptions = {
       <!-- 📌 Footer z CTA można ukryć -->
       <div class="dialog-actions" *ngIf="cfg.showDetailsButton">
         <button
-          mat-raised-button
-          color="primary"
-          class="glow-btn"
-          (click)="goToDetails()"
-        >
-          {{ 'home.products.dialog.detailsCta' | transloco }}
-        </button>
+  mat-raised-button
+  type="button"
+  color="primary"
+  class="glow-btn"
+  (click)="goToDetails()">
+  {{ 'home.products.dialog.detailsCta' | transloco }}
+</button>
+
       </div>
     </div>
   `,
@@ -224,10 +225,20 @@ copyDeepLink() {
   navigator.clipboard?.writeText(this.data.deepLink).catch(() => {});
 }
 
- goToDetails() {
-  // Zwracamy powód zamknięcia — rodzic rozpozna i NIE będzie czyścił query param
+goToDetails(ev?: Event) {
+  ev?.preventDefault();
+  ev?.stopPropagation();
+
+  const slug = this.data.slug;
+
+  // 1) zamknij z powodem, żeby rodzic wiedział „nie sprzątać”
   this.ref.close('details');
-  this.router.navigate(['/products', this.data.slug]);
+
+  // 2) nawiguj absolutnie (bez setTimeout)
+  this.router.navigate(['/products', slug]);
 }
+
+
+
 
 }

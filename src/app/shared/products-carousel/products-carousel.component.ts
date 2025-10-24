@@ -103,6 +103,7 @@ async openDialog(p: CardProduct, pushUrl: boolean = true) {
   maxHeight: '96vh',
   autoFocus: false,
   restoreFocus: true,
+  closeOnNavigation: true, // ⬅️ ważne
   data: {
     title: this.transloco.translate(`${base}.title`),
     imageUrl: p.img,
@@ -116,16 +117,26 @@ async openDialog(p: CardProduct, pushUrl: boolean = true) {
 this.dialogRef.afterClosed().subscribe((reason) => {
   this.dialogRef = null;
 
-  // ⬇️ Czyścimy ?product TYLKO gdy dialog nie zamknął się przez „Details”
-  if (reason !== 'details') {
-    this.router.navigate([], {
-      relativeTo: this.route,
-      queryParams: { product: null },
-      queryParamsHandling: 'merge',
-      replaceUrl: true
-    });
-  }
+  // Poczekaj 1 tick, żeby ewentualna nawigacja do /products/:slug się „zmaterializowała”
+  setTimeout(() => {
+    const urlNow = this.router.url;
+
+    // 1) Jeśli JESTEŚMY już na /products/..., to nic nie czyść – wygrała nawigacja do tutorialu.
+    if (urlNow.startsWith('/products/')) return;
+
+    // 2) Sprzątaj tylko, jeśli powód nie był 'details' ORAZ faktycznie jest ?product w URL
+    const hasProductQP = this.route.snapshot.queryParamMap.has('product');
+    if (reason !== 'details' && hasProductQP) {
+      this.router.navigate([], {
+        relativeTo: this.route,
+        queryParams: { product: null },
+        queryParamsHandling: 'merge',
+        replaceUrl: true
+      });
+    }
+  }, 0);
 });
+
 
 
    

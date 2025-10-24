@@ -1,6 +1,9 @@
 import { Routes } from '@angular/router';
 import { TUTORIALS } from '../tutorial.token';
 import type { TutorialContent } from '../tutorial.model';
+import { inject } from '@angular/core';
+import { TranslocoService } from '@jsverse/transloco';
+import { firstValueFrom, forkJoin } from 'rxjs'   ;
 
 const DATA: Record<string, TutorialContent> = {
   'system-of-equations': {
@@ -23,10 +26,17 @@ const DATA: Record<string, TutorialContent> = {
   }
 };
 
+const i18nResolver = () => firstValueFrom(
+  forkJoin([
+    inject(TranslocoService).selectTranslation(),               // global
+    inject(TranslocoService).selectTranslation('abc-land') // ⬅️ scope = folder
+  ])
+);
+
 export default [
   {
     path: '',
-    data: { slug: 'system-of-equations' },
+    data: { slug: 'system-of-equations' }, // <- TutorialPage reads this when no :slug param
     providers: [{ provide: TUTORIALS, useValue: DATA }],
     loadComponent: () =>
       import('../../pages/tutorial-page/tutorial-page.component')

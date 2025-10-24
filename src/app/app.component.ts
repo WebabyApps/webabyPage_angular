@@ -1,7 +1,8 @@
 // app.component.ts
 import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { Router, NavigationEnd, RouterOutlet, UrlTree } from '@angular/router';
+import { Router, NavigationEnd, NavigationStart, RouterOutlet, UrlTree } from '@angular/router'; // ⬅️ + NavigationStart
+import { MatDialog } from '@angular/material/dialog'; // ⬅️ NEW
 import { ChatBuddyComponent } from './shared/chat-buddy/chat-buddy.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
@@ -14,7 +15,6 @@ import { Observable } from 'rxjs';
   standalone: true,
   imports: [CommonModule, RouterOutlet, HeaderComponent, FooterComponent, IntroSplashComponent, ChatBuddyComponent],
   template: `
-    <!-- Intro tylko na HOME, bez #fragmentu i bez ?product=..., chyba że ?intro=1 -->
     <app-intro-splash *ngIf="isHomeNoHashNoProduct$ | async"></app-intro-splash>
 
     <app-header></app-header>
@@ -26,33 +26,40 @@ import { Observable } from 'rxjs';
 export class AppComponent {
   isHomeNoHashNoProduct$: Observable<boolean>;
 
-  constructor(private router: Router, @Inject(PLATFORM_ID) private platformId: Object) {
+  constructor(
+    private router: Router,
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private dialog: MatDialog // ⬅️ NEW
+  ) {
     this.isHomeNoHashNoProduct$ = this.router.events.pipe(
       startWith(null),
       filter(e => !e || e instanceof NavigationEnd),
       map(() => this.computeIntroVisibility()),
       distinctUntilChanged()
     );
+
+    // ⬅️ NEW: globalny bezpiecznik zamykający modale przy każdej nawigacji
+    if (isPlatformBrowser(this.platformId)) {
+      this.router.events
+        .pipe(filter(ev => ev instanceof NavigationStart))
+        .subscribe(() => this.dialog.closeAll());
+    }
   }
 
   private computeIntroVisibility(): boolean {
-    // SSR-safe parsowanie bieżącego URL
     const url = this.router.url;
     const tree: UrlTree = this.router.parseUrl(url);
-
-    const path = url.split('?')[0];                 // '/','/home','/...'
-    const fragment = tree.fragment ?? null;         // '#...'
+    const path = url.split('?')[0];
+    const fragment = tree.fragment ?? null;
     const qp = tree.queryParamMap;
 
-    const forceIntro = qp.get('intro') === '1';     // ?intro=1 wymusza intro
-    const hasProduct = qp.has('product');           // blokuje intro dla deep-linka
+    const forceIntro = qp.get('intro') === '1';
+    const hasProduct = qp.has('product');
 
-    // Intro tylko na home i bez fragmentu oraz bez ?product=..., chyba że wymuszone
     return forceIntro || (this.isHomePath(path) && !fragment && !hasProduct);
   }
 
   private isHomePath(path: string): boolean {
-    // dopisz ewentualne aliasy jak '/pl'
     return path === '/' || path === '' || path === '/home';
   }
 }
