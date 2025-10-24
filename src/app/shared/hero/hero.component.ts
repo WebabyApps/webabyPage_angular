@@ -4,11 +4,12 @@ import { take } from 'rxjs/operators';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { TranslocoModule } from '@jsverse/transloco';
+import { QRCodeComponent } from 'angularx-qrcode';
 
 @Component({
   selector: 'app-hero',
   standalone: true,
-  imports: [CommonModule, RouterModule, TranslocoModule],
+  imports: [CommonModule, RouterModule, TranslocoModule, QRCodeComponent],
   templateUrl: './hero.component.html',
   styleUrls: ['./hero.component.scss'],
 })
@@ -35,7 +36,10 @@ export class HeroComponent {
 
   @Input() brandScrollTarget?: string;   // np. "page-title"
   @Input() brandScrollOffset = 0;        // kompensacja sticky headera (px)
-
+  @Input() showQr = false;
+  @Input() appUrl?: string;          // URL do aplikacji (np. z mapy slug->url)
+  @Input() qrSize = 140;             // rozmiar QR w px
+  @Input() qrEcLevel: 'L'|'M'|'Q'|'H' = 'M'; 
   // ✅ PUBLIC + ARROW => widoczne w template, poprawne this-binding
   public onLogoClick = (event: MouseEvent): void => {
     if (!this.brandScrollTarget) return; // pozwól routerLinkowi działać normalnie

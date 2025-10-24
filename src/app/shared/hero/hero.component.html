@@ -125,8 +125,34 @@ style="overflow:visible"
 </svg>
     </a>
 
+    <!-- QR pod logo (tylko gdy showQr && appUrl) -->
+<div class="hero-qr" *ngIf="showQr && appUrl">
+ <qrcode
+  [qrdata]="appUrl"
+  [width]="qrSize"
+  [errorCorrectionLevel]="qrEcLevel"
+  colorLight="#00000000"     
+  colorDark="#ffffff">       
+</qrcode>
+
+  <div class="qr-caption">
+    {{ t('home.products.dialog.qrInstruction') }}
+  </div>
+</div>
+
     <!-- <h1>{{ resolvedTitle || t('home.hero.title') }}</h1>-->
-    <p class="lead">{{ resolvedSubtitle || t('home.hero.lead') }}</p>
+    <p
+  class="lead lead--pulse"
+  (click)="onLogoClick($event)"
+  (keydown.enter)="onLogoClick($event)"
+  (keydown.space)="onLogoClick($event)"
+  [attr.role]="brandScrollTarget ? 'button' : null"
+  [attr.tabindex]="brandScrollTarget ? '0' : null"
+  [attr.aria-label]="t('home.hero.lead')"
+  [class.clickable]="!!brandScrollTarget"
+>
+  {{ resolvedSubtitle || t('home.hero.lead') }}
+</p>
 
     <!-- Scroll version (home) -->
     <button *ngIf="!ctaLink" class="cta" (click)="scrollToProducts()">

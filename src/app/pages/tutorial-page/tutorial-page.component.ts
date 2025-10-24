@@ -8,6 +8,9 @@ import { Observable } from 'rxjs';                      // NEW
 
 import { HeroComponent } from '../../shared/hero/hero.component';
 import { TutorialSectionComponent } from '../../shared/tutorial-section/tutorial-section.component';
+import { getAppUrlBySlug } from '../../shared/models/producs.data';
+import { QRCodeComponent } from 'angularx-qrcode';
+
 
 @Component({
   selector: 'app-tutorial-page',
@@ -74,5 +77,9 @@ export class TutorialPageComponent implements OnInit {
   /** Bezpieczne rzutowanie na tablicę */
   private toArray<T = string>(v: unknown): T[] {
     return Array.isArray(v) ? (v as T[]) : [];
+  }
+
+    get appUrl(): string | undefined {
+    return getAppUrlBySlug(this.scopePath /* lub 'sp' */);
   }
 }

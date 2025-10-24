@@ -273,3 +273,52 @@ html, body { overflow-x: clip; } /* use hidden if clip isn't supported */
 @media (prefers-reduced-motion: reduce){
   .hero-logo-svg, .wordmark{ transition: none; }
 }
+.hero-qr {
+  margin-top: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  qrcode {
+    //background: #fff;
+    padding: .5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(0,0,0,.12);
+  }
+  .qr-caption {
+    margin-top: .35rem;
+    font-size: .9rem;
+    color: var(--text-muted, #6b7280);
+  }
+}
+
+/* opcjonalnie: w trybie compact ukryj QR */
+.hero.compact .hero-qr { display: none; }
+
+/* clickable state */
+.lead.clickable { cursor: pointer; }
+
+/* pulse animation (subtle, infinite) */
+.lead--pulse {
+  position: relative;
+  animation: lead-pulse 2.6s ease-in-out infinite;
+  /* keep it subtle on text */
+}
+
+@keyframes lead-pulse {
+  0%   { text-shadow: 0 0 0 rgba(255,255,255,0); transform: translateZ(0) scale(1);    opacity: .96; }
+  50%  { text-shadow: 0 0 .7rem rgba(255,255,255,.30); transform: translateZ(0) scale(1.02); opacity: 1; }
+  100% { text-shadow: 0 0 0 rgba(255,255,255,0); transform: translateZ(0) scale(1);    opacity: .96; }
+}
+
+/* highlight on hover/focus */
+.lead.clickable:hover,
+.lead.clickable:focus {
+  text-decoration: underline;
+  outline: none;
+}
+
+/* accessibility: respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .lead--pulse { animation: none; }
+}
+
