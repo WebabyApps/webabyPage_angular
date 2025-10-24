@@ -14,6 +14,9 @@ export type Product = {
   slug: string;
   desc?: string;
 };
+export type ProductDialogData = Product & Partial<ProductDialogOptions> & {
+  deepLink?: string; // NEW
+};
 
 // ➕ Opcje widoczności elementów (domyślnie wszystko włączone)
 export type ProductDialogOptions = {
@@ -24,8 +27,6 @@ export type ProductDialogOptions = {
   showCloseButton: boolean;
 };
 
-// Dane przekazywane do dialogu: produkt + opcjonalne flagi
-export type ProductDialogData = Product & Partial<ProductDialogOptions>;
 
 @Component({
   selector: 'app-product-dialog',
@@ -54,7 +55,16 @@ export type ProductDialogData = Product & Partial<ProductDialogOptions>;
 
         <div class="info-wrap">
           <div class="info-text">
-            <h2>{{ data.title }}</h2>
+            <h2>
+
+  <button *ngIf="data.deepLink"
+          class="copy-link"
+          type="button"
+          (click)="copyDeepLink()">
+    {{ data.title }}
+  </button>
+</h2>
+
             <p *ngIf="data.desc">{{ data.desc }}</p>
 
             <!-- 🔗 Przycisk-link można ukryć; i tak wymaga appUrl -->
@@ -98,6 +108,14 @@ export type ProductDialogData = Product & Partial<ProductDialogOptions>;
   `,
   styles: [`
     /* KARTA MODALA */
+    .copy-link{
+  font-size:1.875rem;
+  background:transparent;
+  border:1px solid rgba(255,255,255,.25);
+  color:#fff; border-radius:8px; padding:4px 8px; cursor:pointer;
+}
+.copy-link:hover{ border-color: rgba(255,255,255,.45); }
+
     .dialog{
       width: min(96vw, 720px);
       max-height: 96vh;
@@ -201,6 +219,10 @@ export class ProductDialogComponent {
   }
 
   close() { this.ref.close(); }
+copyDeepLink() {
+  if (!this.data.deepLink) return;
+  navigator.clipboard?.writeText(this.data.deepLink).catch(() => {});
+}
 
   goToDetails() {
     this.ref.close();

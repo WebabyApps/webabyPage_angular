@@ -60,4 +60,10 @@
   flex: 0 0 auto;
   scroll-snap-align: center; // albo center
 }
+.card { position: relative; }
+.card .card-hitarea {
+  position:absolute; inset:0;
+  /* brak tła – tylko obszar klikalny + możliwość „kopiuj linku” po PPM */
+}
+
 

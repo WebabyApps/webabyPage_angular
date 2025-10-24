@@ -235,7 +235,7 @@ export class ChatBuddyComponent implements OnInit {
       const u = new SpeechSynthesisUtterance(text);
       if (this.voice) u.voice = this.voice;
       u.rate = 1;   // <- możesz korygować
-      u.pitch = 0.1;  // <-
+      u.pitch = 1;  // <-
       u.lang = this.voice?.lang || 'pl-PL';
 
       try { window.speechSynthesis.cancel(); } catch {}

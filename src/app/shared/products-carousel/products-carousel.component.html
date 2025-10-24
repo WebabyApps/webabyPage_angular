@@ -6,23 +6,32 @@
           (click)="spring(-1)">&#10094;</button>
 
   <div #track class="car-track">
-    <article class="card"
-             *ngFor="let p of products"
-             (click)="openDialog(p)"
-             (keyup.enter)="openDialog(p)"
-             role="button"
-             tabindex="0">
-      <img [src]="p.img"
-           [attr.aria-label]="t('home.products.' + p.id + '.imgAlt') || t('home.products.' + p.id + '.title')"decoding="async"
-           loading="lazy"
-           fetchpriority="low"
-           [attr.alt]="t('home.products.' + p.id + '.imgAlt') || t('home.products.' + p.id + '.title')">
+   <article class="card"
+         *ngFor="let p of products"
+         role="button"
+         tabindex="0"
+         (click)="openDialog(p)"
+         (keyup.enter)="openDialog(p)">
 
-      <div class="card-body">
-        <h3>{{ t('home.products.' + p.id + '.title') }}</h3>
-        <p class="desc">{{ t('home.products.' + p.id + '.desc') }}</p>
-      </div>
-    </article>
+  <a [routerLink]="[]"
+     [queryParams]="{ product: p.slug }"
+     (click)="$event.preventDefault()"
+     class="card-hitarea"
+     aria-hidden="true"></a>
+
+  <img [src]="p.img"
+       [attr.aria-label]="t('home.products.' + p.id + '.imgAlt') || t('home.products.' + p.id + '.title')"
+       decoding="async"
+       loading="lazy"
+       fetchpriority="low"
+       [attr.alt]="t('home.products.' + p.id + '.imgAlt') || t('home.products.' + p.id + '.title')">
+
+  <div class="card-body">
+    <h3>{{ t('home.products.' + p.id + '.title') }}</h3>
+    <p class="desc">{{ t('home.products.' + p.id + '.desc') }}</p>
+  </div>
+</article>
+
   </div>
 
   <button class="car-arrow right"
