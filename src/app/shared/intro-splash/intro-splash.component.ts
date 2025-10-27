@@ -181,7 +181,7 @@ private fireIntroDoneOnce = (() => {
       // clean global classes
       document.documentElement.classList.remove('intro-active', 'intro-lift');
 
-     // if (!this.force) this.svc.markSeen();
+      if (!this.force) this.svc.markSeen();
       this.fireIntroDoneOnce();
       return; // ← done
     }
@@ -194,7 +194,7 @@ private fireIntroDoneOnce = (() => {
       this.visible.set(false);
       document.documentElement.classList.remove('intro-active');
       setTimeout(() => document.documentElement.classList.remove('intro-lift'), 50);
-   //   if (!this.force) this.svc.markSeen();
+      if (!this.force) this.svc.markSeen();
       this.fireIntroDoneOnce();
     }, 700); // matches your liftUp .7s
   } catch (e) {

@@ -7,6 +7,7 @@ import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { firstValueFrom } from 'rxjs';
 import { PRODUCTS } from '../models/producs.data';
+import { Location } from '@angular/common';
 
 
 
@@ -39,7 +40,8 @@ export class ProductsCarouselComponent implements AfterViewInit {
     private transloco: TranslocoService,
     private route: ActivatedRoute,            // NEW
     private router: Router,                   // NEW
-    @Inject(PLATFORM_ID) private platformId: Object // NEW (dla SSR-safe absolutnego URL)
+    @Inject(PLATFORM_ID) private platformId: Object, // NEW (dla SSR-safe absolutnego URL)
+    private location: Location // NEW (dla SSR-safe absolutnego URL)
   ) {}
 
   private async ensureTranslationsReady(scope?: string) {
@@ -72,6 +74,25 @@ export class ProductsCarouselComponent implements AfterViewInit {
     this.router.events.pipe(filter(e => e instanceof NavigationEnd)).subscribe(() => {});
   }
 
+private clearProductQueryWithoutNav() {
+  // Zbuduj aktualny URL bez parametru 'product', ale BEZ nawigacji
+  const tree = this.router.createUrlTree([], {
+    relativeTo: this.route,
+    queryParams: { product: null },
+    queryParamsHandling: 'merge'
+  });
+  // Zamień na ścieżkę+query (bez hosta)
+  const path = this.router.serializeUrl(tree);
+
+  // serializeUrl zostawia "?product=" gdy jest null → uprzątnij
+  const cleaned = path
+    .replace(/[?&]product=[^&#]*/g, '')
+    .replace(/[?&]$/g, '')
+    .replace(/\?&/, '?');
+
+  // Podmień historię bez nawigacji i bez eventów routera
+  this.location.replaceState(cleaned);
+}
  
 async openDialog(p: CardProduct, pushUrl: boolean = true) {
   const base = `home.products.${p.id}`;
@@ -109,25 +130,18 @@ async openDialog(p: CardProduct, pushUrl: boolean = true) {
 this.dialogRef.afterClosed().subscribe((reason) => {
   this.dialogRef = null;
 
-  // Poczekaj 1 tick, żeby ewentualna nawigacja do /products/:slug się „zmaterializowała”
-  setTimeout(() => {
-    const urlNow = this.router.url;
+  // 1) Kliknięto "Details" → dialog już nawigował do /products/:slug
+  if (reason === 'details') return;
 
-    // 1) Jeśli JESTEŚMY już na /products/..., to nic nie czyść – wygrała nawigacja do tutorialu.
-    if (urlNow.startsWith('/products/')) return;
+  // 2) Jeżeli nawigacja zaszła z innego powodu (closeOnNavigation) albo już jesteśmy na /products/
+  if (this.router.url.startsWith('/products/')) return;
 
-    // 2) Sprzątaj tylko, jeśli powód nie był 'details' ORAZ faktycznie jest ?product w URL
-    const hasProductQP = this.route.snapshot.queryParamMap.has('product');
-    if (reason !== 'details' && hasProductQP) {
-      this.router.navigate([], {
-        relativeTo: this.route,
-        queryParams: { product: null },
-        queryParamsHandling: 'merge',
-        replaceUrl: true
-      });
-    }
-  }, 0);
+  // 3) Jeśli w URL jest ?product – usuń go BEZ nawigacji (żeby nie odpalać intra)
+  if (this.route.snapshot.queryParamMap.has('product')) {
+    this.clearProductQueryWithoutNav(); // używa Location.replaceState(...)
+  }
 });
+
 
 
 

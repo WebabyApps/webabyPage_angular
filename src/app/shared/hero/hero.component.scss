@@ -5,6 +5,18 @@
   --logo-stroke: 2; /* grubość konturu w hero */
   --hero-logo-w: clamp(100px, 12vw, 180px);
   --wm-scale: 1.44;   
+
+   --walk-dur: 18s;            // prędkość obejścia konturu (większe = wolniej)
+  --dash-solid: 70;           // długość świecącego segmentu (w „jednostkach” pathLength)
+  --dash-gap: 930;            // reszta obrysu – duża przerwa = brak śladu
+  --stroke-base: 1.6px;       // bazowa grubość cienkiego „ghost” obrysu
+  --stroke-pulse: 3.2px;      // grubość segmentu w piku pulsu
+  --pulse-c1: #6ee7f9;        // kolory gradientu (możesz spiąć z brandem)
+  --pulse-c2: #a78bfa;
+  --ghost-color: #ffffff;     // kolor bazowego ledwie widocznego obrysu
+  --ghost-alpha: 0.10;        // przezroczystość bazowego obrysu
+  --glow-blur: 6px;           // „poświata” pod segmen
+  
 }
 
 /* Nowe SVG logo w hero */
@@ -61,6 +73,7 @@ margin-top: 50px;
   position: relative;
   min-height: 100vh;      /* full-screen on home */
   overflow: hidden;
+  isolation: isolate; // ładne przenikanie cieni
 }
 
 /* Background (behind everything) */
@@ -75,6 +88,7 @@ margin-top: 50px;
   z-index: 0;
   pointer-events: none;
 }
+
 
 /* Optional overlay gradient – still behind content */
 .hero::after {
@@ -322,3 +336,105 @@ html, body { overflow-x: clip; } /* use hidden if clip isn't supported */
   .lead--pulse { animation: none; }
 }
 
+/*.hero-bg-logo {
+  position: absolute;
+  inset: 0;
+  width: min(80vmin, 820px);
+  height: auto;
+  opacity: 0.22;               // tło bardzo delikatne
+  margin: auto;
+  z-index: -1;                 // pod treścią
+  pointer-events: none;
+  filter: saturate(1.2);
+}*/
+
+.hero-bg-logo {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 100%;
+  height: 100%;
+  opacity: 1; /* lepiej widać przez tło */
+  pointer-events: none;
+  z-index: 10; /* na wierzchu, żeby było widać */
+  width:min(103vmin,1030px);  
+  /* tymczasowo podmień animację na statyczny fill */
+  path {
+    fill: rgba(0, 255, 255, 0.3); /* turkusowy półprzezroczysty */
+    stroke: none;
+  }
+overflow: visible;
+  /* transformy do testów */
+  transform-origin: center;
+   --offset-x: 300px;
+  --offset-y: -80px;
+  --scale: 1;
+
+transform-origin: center;
+transform: translateX(350px) translateY(-65px) scale(0.95);
+
+  //transform: scale(0.5) translateY(10px) translateX(100px); // <- reguluj te wartości
+}
+
+
+.wb-outline {
+ stroke: color-mix(in oklab, var(--ghost-color) calc(var(--ghost-alpha) * 100%), transparent);
+
+  stroke-width: var(--stroke-base);
+  vector-effect: non-scaling-stroke;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Nakładka: chodzący segment z pulsem (używamy ::after via paint-order trick) */
+.wb-outline {
+  /* Tworzymy drugi „pass” tym samym path’em przez nałożenie kolejnych właściwości */
+  stroke: color-mix(in oklab, var(--ghost-color) calc(var(--ghost-alpha) * 100%), transparent);
+  position: relative;
+}
+
+/* WERSJA z pojedynczą ścieżką: nadpisujemy stroke na „aktywny” i animujemy */
+.wb-outline {
+  /* aktywny segment */
+  stroke: url(#gPulse);
+  stroke-width: var(--stroke-pulse);
+  stroke-dasharray: var(--dash-solid) var(--dash-gap);
+  stroke-dashoffset: 0;
+  opacity: 0.75;
+  mix-blend-mode: screen; // ładne „rozświetlenie” tła
+  filter: drop-shadow(0 0 var(--glow-blur) rgba(167,139,250,.65));
+  animation:
+    walk var(--walk-dur) linear infinite,
+    breathe 2.8s ease-in-out infinite;
+}
+
+/* Jeśli chcesz różne przesunięcie fazy dla W i B, aby nie biegły razem: */
+.wb-outline.w { animation-delay: 0s, .0s; }
+.wb-outline.b { animation-delay: calc(var(--walk-dur)/-4), .7s; }
+
+/* Animacja „chodzenia” – przesuwamy segment po obrysie */
+@keyframes walk {
+  to { stroke-dashoffset: -1000; } // 1000 = pathLength (pełne okrążenie)
+}
+
+/* Delikatny puls (bez „ogonów”) – tylko segment oddycha */
+@keyframes breathe {
+  0%, 100% {
+    opacity: 0.55;
+    stroke-width: var(--stroke-pulse);
+    filter: drop-shadow(0 0 var(--glow-blur) rgba(167,139,250,.45));
+  }
+  50% {
+    opacity: 0.85;
+    stroke-width: calc(var(--stroke-pulse) + 0.8px);
+    filter: drop-shadow(0 0 calc(var(--glow-blur) * 1.35) rgba(167,139,250,.75));
+  }
+}
+
+/* Szacunek dla prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .wb-outline {
+    animation: none !important;
+    opacity: 0.18;
+  }
+}
