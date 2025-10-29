@@ -6,6 +6,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { QRCodeComponent } from 'angularx-qrcode';
 import { TranslocoModule } from '@jsverse/transloco';
+import { A11yModule } from '@angular/cdk/a11y';
+//import { NgOptimizedImage } from '@angular/common';
 
 export type Product = {
   title: string;
@@ -31,17 +33,20 @@ export type ProductDialogOptions = {
 @Component({
   selector: 'app-product-dialog',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, QRCodeComponent, TranslocoModule],
+  imports: [CommonModule, MatButtonModule, QRCodeComponent, TranslocoModule, A11yModule],
   template: `
     <div class="dialog">
       <!-- ❌ X można ukryć -->
-      <button
-        *ngIf="cfg.showCloseButton"
-        class="close"
-        type="button"
-        [attr.aria-label]="'home.products.dialog.close' | transloco"
-        (click)="close()"
-      >×</button>
+ <button
+  *ngIf="cfg.showCloseButton"
+  class="close"
+  type="button"
+  cdkFocusInitial
+  (click)="$event.stopPropagation(); close('x')"
+>×</button>
+
+
+      
 
       <!-- przewijalna część środka -->
       <div class="dialog-body">
@@ -219,7 +224,11 @@ export class ProductDialogComponent {
     };
   }
 
-  close() { this.ref.close(); }
+
+close(reason: 'x' | 'cancel' = 'cancel') {
+  this.ref.close(reason);
+}
+
 copyDeepLink() {
   if (!this.data.deepLink) return;
   navigator.clipboard?.writeText(this.data.deepLink).catch(() => {});
