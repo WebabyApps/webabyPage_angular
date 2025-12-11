@@ -35,7 +35,11 @@
         "close": "Close dialog"
       },
       "cta": { "more": "Learn more" },
-
+      "socialmigrateai": {
+        "title": "Social Migrate AI",
+        "desc": "Move your facebook posts in just a few clicks.", 
+        "imgAlt": "App Social Migrate AI for your posts migration" 
+      },
       "bubbleWord": {
         "title": "Bubble Word",
         "desc": "Fast-paced word puzzler… pop, spell, and race the clock!",

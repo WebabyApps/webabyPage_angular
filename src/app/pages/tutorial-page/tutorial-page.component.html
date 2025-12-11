@@ -588,6 +588,89 @@
       </ng-container>
       <!-- /Bubble World -->
 
+
+        <!-- ========== Social MIgrate AI ========== -->
+        <ng-container *ngSwitchCase="'socialmigrateai'">
+        <h2>{{ tr('description.title') }}</h2>
+        
+        
+        <!-- STRATEGY -->
+        <app-tutorial-section
+        [title]="tr('sections.strategy.title')"
+        [img]="'assets/tutorials/socialmigrateai/header.jpg'"
+        [lazyImg]="true"
+        [alt]="tr('sections.strategy.caption')"
+        [caption]="tr('sections.strategy.caption')"
+        [reverse]="true"
+        [scope]="sp">
+        <p>{{ tr('sections.strategy.intro') }}</p>
+        <ul>
+        <ng-container *transloco="let t; scope: sp">
+        <li *ngFor="let tip of arr(t('sections.strategy.items', { returnObjects: true }))">
+        {{ tip }}
+        </li>
+        </ng-container>
+        </ul>
+        </app-tutorial-section>
+        
+        
+        <!-- FEATURES -->
+        <app-tutorial-section
+        [title]="tr('sections.features.title')"
+        [img]="'assets/tutorials/socialmigrateai/features.jpg'"
+        [lazyImg]="true"
+        [alt]="tr('sections.features.caption')"
+        [caption]="tr('sections.features.caption')"
+        [reverse]="false"
+        [scope]="sp">
+        <p>{{ tr('sections.features.p') }}</p>
+        <ul>
+        <ng-container *transloco="let t; scope: sp">
+        <li *ngFor="let f of arr(t('sections.features.items', { returnObjects: true }))">
+        {{ f }}
+        </li>
+        </ng-container>
+        </ul>
+        </app-tutorial-section>
+        
+        <!-- DATA STORAGE -->
+<app-tutorial-section
+[title]="tr('data.title')"
+[img]="'assets/tutorials/socialmigrateai/datastorage.png'"
+[lazyImg]="true"
+[alt]="tr('data.title')"
+[caption]="tr('data.title')"
+[reverse]="false"
+[scope]="sp">
+<p>{{ tr('data.p1') }}</p>
+<p>{{ tr('data.p2') }}</p>
+<p>{{ tr('data.p3') }}</p>
+</app-tutorial-section>
+
+        <!-- VIDEO -->
+        <section id="video" class="section">
+        <h3>{{ tr('video.title') }}</h3>
+        <div class="video">
+        <figure class="yt yt--md">
+        <iframe
+        src="https://www.youtube-nocookie.com/embed/"
+        title="SocialMigrateAI demo" loading="lazy"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen></iframe>
+        <figcaption>{{ tr('video.walkthrough') }}</figcaption>
+        </figure>
+        <small class="caption">{{ tr('video.walkthrough') }}</small>
+        </div>
+        </section>
+        
+        
+        <!-- KEYWORDS -->
+        <section class="keywords">
+        <small>{{ tr('keywords') }}</small>
+        </section>
+        </ng-container>
+      <!-- /Social MIgrate AI --> 
+
       <!-- ========== Fallback (nieznany slug) ========== -->
       <ng-container *ngSwitchDefault>
         <p class="muted">Nie znaleziono treści dla tego produktu.</p>

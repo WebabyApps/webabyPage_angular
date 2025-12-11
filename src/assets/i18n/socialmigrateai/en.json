@@ -1,0 +1,59 @@
+{
+  "hero": {
+    "title": "Social Migrate AI",
+    "subtitle": "Move your posts easily",  
+    "back": "Back to products"
+    },
+  "title": "Move your Facebook posts in just a few clicks",
+  "description": {
+    "title": "SocialMigrateAI",
+    "lead": "SocialMigrateAI helps you keep your Facebook history without manually copying every single post."
+  },
+  "sections": {
+    "how": {
+      "title": "How does SocialMigrateAI work?",
+      "intro": "Step by step:",
+      "caption": "How to use the app",
+      "items": [
+        "Sign in with Facebook using the secure login window.",
+        "Select the profile and date range from which you want to fetch posts.",
+        "Let the app load your posts and review them in a clear list.",
+        "Filter the results and choose the posts you want to keep."
+      ]
+    },
+    "strategy": {
+      "title": "Content migration strategy",
+      "intro": "A few tips to make your export cleaner and easier:",
+      "caption": "How to organise your export",
+      "items": [
+        "Group posts by topic if you run several projects.",
+        "Split long time ranges into smaller chunks to browse results more easily.",
+        "Remove duplicates or low-value posts before exporting.",
+        "Prepare separate export files for different target systems (e.g. blog, CRM)."
+      ]
+    },
+    "features": {
+      "title": "Key features of SocialMigrateAI",
+      "caption": "What the app can do",
+      "p": "SocialMigrateAI makes working with your Facebook data easier:",
+      "items": [
+        "Secure login via Facebook Login - the app never sees your password.",
+        "Profile selection and flexible date filtering.",
+        "Convenient search and filtering of your posts list.",
+        "Export to JSON or CSV, plus easy copy & paste of content.",
+        "Runs entirely in your browser - no data stored on our servers."
+      ]
+    }
+  },
+  "data": {
+    "title": "Data storage",
+    "p1": "SocialMigrateAI runs entirely in your browser and does not store any user data on our servers.",
+    "p2": "If you want to remove the app's permissions to your Facebook data, you can do it in Facebook settings: Settings & Privacy → Settings → Apps and Websites → SocialMigrateAI → Remove.",
+    "p3": "If you have additional questions regarding data, contact: contact@webaby.io"
+  },
+  "video": {
+    "title": "Short video walkthrough",
+    "walkthrough": "See how to use SocialMigrateAI step by step."
+  },
+  "keywords": "facebook posts migration, export facebook posts, SocialMigrateAI, copy content, keep facebook history"
+}

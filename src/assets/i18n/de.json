@@ -35,6 +35,11 @@
         "close": "Dialog schließen"
       },
       "cta": { "more": "Mehr erfahren" },
+"socialmigrateai": {
+  "title": "Social Migrate AI",
+  "desc": "Verschiebe deine Facebook-Beiträge mit nur wenigen Klicks.",
+  "imgAlt": "Social Migrate AI – App zur Migration deiner Beiträge"
+},
 
       "bubbleWord": {
         "title": "Bubble Word",

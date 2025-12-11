@@ -1,0 +1,61 @@
+{
+
+  "hero": {
+  "title": "Social Migrate AI",
+  "subtitle": "Przenieś swoje posty z Facebooka w kilku kliknięciach",  
+  "back": "Wróć do produktów"
+  },
+
+  "title": "Social Migrate AI - Przenieś swoje posty z Facebooka w kilku kliknięciach", 
+  "description": {
+    "title": "SocialMigrateAI",
+    "lead": "SocialMigrateAI pomaga Ci zachować historię z Facebooka – bez ręcznego kopiowania każdego posta."
+  },
+  "sections": {
+    "how": {
+      "title": "Jak działa SocialMigrateAI?",
+      "intro": "Krok po kroku:",
+      "caption": "Jak korzystać z aplikacji",
+      "items": [
+        "Zaloguj się przez Facebook, korzystając z bezpiecznego okna logowania.",
+        "Wybierz profil oraz zakres dat, z którego chcesz pobrać posty.",
+        "Odbierz listę postów i przejrzyj je w wygodnym widoku.",
+        "Przefiltruj wyniki i wybierz posty, które chcesz zachować."
+      ]
+    },
+    "strategy": {
+      "title": "Strategia przenoszenia treści",
+      "intro": "Kilka wskazówek, które ułatwią pracę z eksportem postów:",
+      "caption": "Jak dobrze zorganizować eksport",
+      "items": [
+        "Grupuj posty tematycznie, jeśli prowadzisz kilka różnych projektów.",
+        "Dziel długie okresy czasu na krótsze zakresy, aby łatwiej przeglądać wyniki.",
+        "Usuwaj duplikaty lub mało istotne wpisy przed eksportem.",
+        "Przygotuj osobne pliki eksportu pod różne docelowe systemy (np. blog, CRM)."
+      ]
+    },
+    "features": {
+      "title": "Najważniejsze funkcje SocialMigrateAI",
+      "caption": "Co potrafi aplikacja",
+      "p": "SocialMigrateAI upraszcza pracę z Twoimi danymi z Facebooka:",
+      "items": [
+        "Bezpieczne logowanie przez Facebook Login – bez udostępniania hasła aplikacji.",
+        "Wybór profilu i elastyczne filtrowanie po dacie.",
+        "Wygodne przeszukiwanie i filtrowanie listy postów.",
+        "Eksport danych do JSON lub CSV, a także możliwość prostego kopiowania treści.",
+        "Działanie wyłącznie po stronie przeglądarki – bez przechowywania danych na serwerze."
+      ]
+    }
+  },
+  "data": {
+    "title": "Przechowywanie danych",
+    "p1": "Aplikacja SocialMigrateAI działa wyłącznie po stronie przeglądarki i nie przechowuje żadnych danych użytkowników na naszych serwerach.",
+    "p2": "Jeżeli chcesz usunąć uprawnienia aplikacji do Twoich danych na Facebooku, możesz to zrobić w ustawieniach Facebooka: Ustawienia i prywatność → Ustawienia → Aplikacje i witryny → SocialMigrateAI → Usuń.",
+    "p3": "W razie dodatkowych pytań dotyczących danych skontaktuj się: contact@webaby.io"
+  },
+  "video": {
+    "title": "Krótki przewodnik wideo",
+    "walkthrough": "Zobacz, jak krok po kroku korzystać z SocialMigrateAI."
+  },
+  "keywords": "migracja postów z Facebooka, eksport postów Facebook, SocialMigrateAI, kopiowanie treści, zachowanie historii Facebooka"
+}
