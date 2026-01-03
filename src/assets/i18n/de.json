@@ -38,22 +38,22 @@
 "socialmigrateai": {
   "title": "Social Migrate AI",
   "desc": "Verschiebe deine Facebook-Beiträge mit nur wenigen Klicks.",
-  "imgAlt": "Social Migrate AI – App zur Migration deiner Beiträge"
+  "imgAlt": "Social Migrate AI - App zur Migration deiner Beiträge"
 },
 
       "bubbleWord": {
         "title": "Bubble Word",
-        "desc": "Rasantes Wortpuzzle – Bubbles platzen, buchstabieren und gegen die Uhr antreten!",
+        "desc": "Rasantes Wortpuzzle - Bubbles platzen, buchstabieren und gegen die Uhr antreten!",
         "imgAlt": "Bubble-Word-Spiel"
       },
       "basketballShots": {
         "title": "Basketball Shots",
-        "desc": "Arcade-Basketball – zielen, wischen, treffen!",
+        "desc": "Arcade-Basketball - zielen, wischen, treffen!",
         "imgAlt": "Basketball-Shots-Spiel"
       },
       "equationsTrainer": {
         "title": "Trainer für Gleichungssysteme",
-        "desc": "Algebra leicht gemacht – übe das Lösen linearer Systeme Schritt für Schritt.",
+        "desc": "Algebra leicht gemacht - übe das Lösen linearer Systeme Schritt für Schritt.",
         "imgAlt": "App zum Training von Gleichungssystemen"
       },
       "abcLand": {
@@ -68,7 +68,7 @@
       },
       "bibbleEcho": {
         "title": "Bibble Echo",
-        "desc": "Spirit-Upgrade – entdecke achtsame Echos und Reflexion.",
+        "desc": "Spirit-Upgrade - entdecke achtsame Echos und Reflexion.",
         "imgAlt": "Bibble-Echo-App"
       }
     },
@@ -82,7 +82,7 @@
       },
       "dev": {
         "title": "Softwareentwicklung & spielerisches Lernen",
-        "p1": "Bei Webaby entwerfen wir Software, die Spaß mit Wissen verbindet. Unsere Werke reichen von kniffligen Denkpuzzles bis zu actiongeladenen Abenteuern – voller Fantasie, Story und lebendiger Welten.",
+        "p1": "Bei Webaby entwerfen wir Software, die Spaß mit Wissen verbindet. Unsere Werke reichen von kniffligen Denkpuzzles bis zu actiongeladenen Abenteuern - voller Fantasie, Story und lebendiger Welten.",
         "p2": "Jedes Produkt weckt Neugier und lässt Lernen wie Spielen fühlen."
       },
       "innovation": {

@@ -5,16 +5,31 @@
           (mouseleave)="stopHover()"
           (click)="spring(-1)">&#10094;</button>
 
-  <div #track class="car-track">
-   <article class="card"
+  <div #track class="car-track"
+          (pointerdown)="onPointerDown($event)"
+          (pointermove)="onPointerMove($event)"
+          (pointerup)="onPointerUp($event)"
+          (pointercancel)="onPointerUp($event)"
+          (lostpointercapture)="onPointerUp($event)"
+>
+  <!-- <article class="card"
          *ngFor="let p of products"
          role="button"
          tabindex="0"
          (click)="openDialog(p)"
+         (keyup.enter)="openDialog(p)">-->
+         <article class="card"
+         *ngFor="let p of products"
+         role="button"
+         tabindex="0"
+         (dragstart)="$event.preventDefault()"
+         (click)="onCardClick($event, p)"
          (keyup.enter)="openDialog(p)">
 
   <img [src]="p.img"
        [attr.aria-label]="t('home.products.' + p.id + '.imgAlt') || t('home.products.' + p.id + '.title')"
+       draggable="false"
+       (dragstart)="$event.preventDefault()"
        decoding="async"
        loading="lazy"
        fetchpriority="low"

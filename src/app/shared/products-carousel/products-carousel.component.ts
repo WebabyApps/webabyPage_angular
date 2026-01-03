@@ -83,13 +83,176 @@ export class ProductsCarouselComponent implements AfterViewInit, OnInit, OnDestr
       }
     });
   }
+  private pointerActive = false;
+  private pointerId: number | null = null;
+  private captureSet = false;
+  
+  private startX = 0;
+  private startY = 0;
+  private startScrollLeft = 0;
+  
+  private lastX = 0;
+  private lastT = 0;
+  private velocity = 0;
+  
+  private dragged = false;
+  private totalDragX = 0;
+  private isVerticalScroll = false;
+  
+  private readonly DRAG_THRESHOLD = 10;
+  
+  private setDraggingState(isDragging: boolean) {
+    const t = this.trackRef?.nativeElement;
+    if (!t) return;
+    t.classList.toggle('is-dragging', isDragging);
+  }
+  
+  onPointerDown(ev: PointerEvent) {
+    if (ev.pointerType === 'mouse' && ev.button !== 0) return;
+  
+    const t = this.track();
+  
+    this.pointerActive = true;
+    this.pointerId = ev.pointerId;
+    this.captureSet = false;
+  
+    this.startX = ev.clientX;
+    this.startY = ev.clientY;
+    this.lastX = ev.clientX;
+  
+    this.startScrollLeft = t.scrollLeft;
+    this.lastT = performance.now();
+    this.velocity = 0;
+  
+    this.dragged = false;
+    this.totalDragX = 0;
+    this.isVerticalScroll = false;
+  
+    this.stopAutoplay();
+    this.stopHover();
+  
+    this.setDraggingState(false);
+  }
+  
+  onPointerMove(ev: PointerEvent) {
+    if (!this.pointerActive || this.pointerId !== ev.pointerId) return;
+  
+    const t = this.track();
+  
+    const dx = ev.clientX - this.startX;
+    const dy = ev.clientY - this.startY;
+  
+    // oddaj pionowy scroll stronie
+    if (!this.dragged && !this.isVerticalScroll) {
+      if (Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > 6) {
+        this.isVerticalScroll = true;
+        return;
+      }
+    }
+    if (this.isVerticalScroll) return;
+  
+    this.totalDragX = Math.abs(dx);
+  
+    // DRAG start dopiero po progu
+    if (!this.dragged && this.totalDragX >= this.DRAG_THRESHOLD) {
+      this.dragged = true;
+      this.setDraggingState(true);
+  
+      // CAPTURE dopiero teraz (to naprawia Chrome/Firefox click)
+      if (!this.captureSet) {
+        try { t.setPointerCapture(ev.pointerId); this.captureSet = true; } catch {}
+      }
+    }
+  
+    if (this.dragged) {
+      t.scrollLeft = this.startScrollLeft - dx;
+  
+      const now = performance.now();
+      const dt = Math.max(1, now - this.lastT);
+      const instV = (ev.clientX - this.lastX) / dt;
+      this.velocity = this.velocity * 0.7 + instV * 0.3;
+  
+      this.lastX = ev.clientX;
+      this.lastT = now;
+  
+      // preventDefault tylko gdy faktycznie dragujemy
+      ev.preventDefault();
+    }
+  }
+  
+  async onPointerUp(ev: PointerEvent) {
+    const t = this.trackRef?.nativeElement;
+    const isMine = this.pointerActive && this.pointerId === ev.pointerId;
+  
+    // sprzątanie ZAWSZE
+    this.pointerActive = false;
+    this.pointerId = null;
+    this.isVerticalScroll = false;
+  
+    this.setDraggingState(false);
+  
+    if (t && this.captureSet) {
+      try { t.releasePointerCapture(ev.pointerId); } catch {}
+    }
+    this.captureSet = false;
+  
+    if (isMine && this.dragged) {
+      const throwPx = Math.max(-600, Math.min(600, this.velocity * 420));
+      if (Math.abs(throwPx) > 20) {
+        await this.animateBy(-throwPx, 240, this.easeOutCubic);
+      }
+      this.snapToNearestCard();
+    }
+  
+    // twardy reset – przywraca kliki
+    this.totalDragX = 0;
+    this.dragged = false;
+  
+    this.startAutoplay();
+  }
+  
+  onCardClick(e: MouseEvent, p: CardProduct) {
+    // jeśli był prawdziwy drag -> blokuj klik
+    if (this.totalDragX >= this.DRAG_THRESHOLD) {
+      e.preventDefault();
+      e.stopPropagation();
+      return;
+    }
+    this.openDialog(p);
+  }
+  
+private snapToNearestCard() {
+  const t = this.track();
+  const step = this.cardWidth();
+  if (!step) return;
 
-  ngAfterViewInit() {
+  const target = Math.round(t.scrollLeft / step) * step;
+  t.scrollTo({ left: target, behavior: 'smooth' });
+
+  // Twoja pętla “wrap-around” lubi nudge
+  queueMicrotask(() => this.nudge());
+}
+
+
+
+
+
+
+/* ngAfterViewInit() {
     this.startAutoplay();
     if (isPlatformBrowser(this.platformId)) {
       window.addEventListener('resize', this.resizeHandler);
     }
+  } */
+ ngAfterViewInit() {
+  this.startAutoplay();
+  if (isPlatformBrowser(this.platformId)) {
+    // pozwól na pionowy scroll strony, ale poziome gesty bierzemy my
+    this.trackRef?.nativeElement?.style.setProperty('touch-action', 'pan-y');
+    window.addEventListener('resize', this.resizeHandler);
   }
+}
+
 
   ngOnDestroy() {
     this.stopAutoplay();

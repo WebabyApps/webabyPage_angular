@@ -34,7 +34,11 @@
         "close": "Zamknij okno"
       },
       "cta": { "more": "Dowiedz się więcej" },
-
+      "socialmigrateai": {
+        "title": "Social Migrate AI",
+        "desc": "Przenieś swoje posty z Facebooka w kilku kliknięciach.",
+        "imgAlt": "Aplikacja Social Migrate AI do migracji postów z Facebooka" 
+      },
       "bubbleWord": {
         "title": "Bubble Word",
         "desc": "Szybka gra słowna… układaj słowa i walcz z czasem!",
