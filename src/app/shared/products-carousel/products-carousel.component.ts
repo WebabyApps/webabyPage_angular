@@ -99,8 +99,14 @@ export class ProductsCarouselComponent implements AfterViewInit, OnInit, OnDestr
   private totalDragX = 0;
   private isVerticalScroll = false;
   
-  private readonly DRAG_THRESHOLD = 10;
-  
+ // private readonly DRAG_THRESHOLD = 10;
+  private readonly DRAG_THRESHOLD_TOUCH = 6;   // było 10
+  private readonly DRAG_THRESHOLD_MOUSE = 10;
+  private dragThreshold = 10;
+
+private readonly FLICK_VELOCITY = 0.8; // px/ms (ok. 800px/s)
+
+
   private setDraggingState(isDragging: boolean) {
     const t = this.trackRef?.nativeElement;
     if (!t) return;
@@ -110,6 +116,10 @@ export class ProductsCarouselComponent implements AfterViewInit, OnInit, OnDestr
   onPointerDown(ev: PointerEvent) {
     if (ev.pointerType === 'mouse' && ev.button !== 0) return;
   
+    this.dragThreshold = (ev.pointerType === 'touch')
+  ? this.DRAG_THRESHOLD_TOUCH
+  : this.DRAG_THRESHOLD_MOUSE;
+
     const t = this.track();
   
     this.pointerActive = true;
@@ -138,11 +148,18 @@ export class ProductsCarouselComponent implements AfterViewInit, OnInit, OnDestr
     if (!this.pointerActive || this.pointerId !== ev.pointerId) return;
   
     const t = this.track();
-  
     const dx = ev.clientX - this.startX;
     const dy = ev.clientY - this.startY;
   
-    // oddaj pionowy scroll stronie
+    // velocity ZAWSZE
+    const now = performance.now();
+    const dt = Math.max(1, now - this.lastT);
+    const instV = (ev.clientX - this.lastX) / dt;
+    this.velocity = this.velocity * 0.7 + instV * 0.3;
+    this.lastX = ev.clientX;
+    this.lastT = now;
+  
+    // pionowy scroll -> oddaj stronie
     if (!this.dragged && !this.isVerticalScroll) {
       if (Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > 6) {
         this.isVerticalScroll = true;
@@ -153,12 +170,13 @@ export class ProductsCarouselComponent implements AfterViewInit, OnInit, OnDestr
   
     this.totalDragX = Math.abs(dx);
   
-    // DRAG start dopiero po progu
-    if (!this.dragged && this.totalDragX >= this.DRAG_THRESHOLD) {
+    const fastFlick = Math.abs(this.velocity) >= this.FLICK_VELOCITY;
+    const farEnough = this.totalDragX >= this.dragThreshold;
+  
+    if (!this.dragged && (farEnough || fastFlick)) {
       this.dragged = true;
       this.setDraggingState(true);
   
-      // CAPTURE dopiero teraz (to naprawia Chrome/Firefox click)
       if (!this.captureSet) {
         try { t.setPointerCapture(ev.pointerId); this.captureSet = true; } catch {}
       }
@@ -166,19 +184,10 @@ export class ProductsCarouselComponent implements AfterViewInit, OnInit, OnDestr
   
     if (this.dragged) {
       t.scrollLeft = this.startScrollLeft - dx;
-  
-      const now = performance.now();
-      const dt = Math.max(1, now - this.lastT);
-      const instV = (ev.clientX - this.lastX) / dt;
-      this.velocity = this.velocity * 0.7 + instV * 0.3;
-  
-      this.lastX = ev.clientX;
-      this.lastT = now;
-  
-      // preventDefault tylko gdy faktycznie dragujemy
       ev.preventDefault();
     }
   }
+  
   
   async onPointerUp(ev: PointerEvent) {
     const t = this.trackRef?.nativeElement;
@@ -212,14 +221,14 @@ export class ProductsCarouselComponent implements AfterViewInit, OnInit, OnDestr
   }
   
   onCardClick(e: MouseEvent, p: CardProduct) {
-    // jeśli był prawdziwy drag -> blokuj klik
-    if (this.totalDragX >= this.DRAG_THRESHOLD) {
+    if (this.dragged) {
       e.preventDefault();
       e.stopPropagation();
       return;
     }
     this.openDialog(p);
   }
+  
   
 private snapToNearestCard() {
   const t = this.track();
