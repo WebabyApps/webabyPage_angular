@@ -10,7 +10,7 @@
   margin-top: 12px;
 }
 
-/* TRACK: jedyne miejsce gdzie jest przewijanie */
+/* Track (scroll container) */
 .car-track {
   display: flex;
   gap: var(--gap);
@@ -20,24 +20,24 @@
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
 
-  /* ważne cross-browser:
-     - pan-x: element “ma prawo” przejąć poziomy gest
-     - pion oddamy stronie przez logikę dx/dy w TS
-  */
+  /* najlepsze pod mobile swipe (native momentum) */
   touch-action: pan-x;
   overscroll-behavior-x: contain;
 
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
 
+  /* ukryj scrollbar */
   scrollbar-width: none; /* Firefox */
 }
 .car-track::-webkit-scrollbar {
   display: none; /* Chrome/Safari */
 }
 
+/* Card */
 .card {
   min-width: var(--slide-w-desktop);
+
   background: var(--panel);
   border: 1px solid var(--line);
   border-radius: 14px;
@@ -51,9 +51,10 @@
 
   transition: transform .25s, box-shadow .25s;
 }
+
 .card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(0,0,0,.25);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
 }
 
 .card img {
@@ -62,6 +63,7 @@
   aspect-ratio: 16/9;
   object-fit: cover;
 
+  /* ważne: nie pozwól przeglądarce “ciągnąć” obrazka */
   -webkit-user-drag: none;
   user-drag: none;
 }
@@ -70,7 +72,7 @@
   padding: 14px;
 }
 
-/* strzałki */
+/* Strzałki */
 .car-arrow {
   position: absolute;
   top: 50%;
@@ -78,8 +80,9 @@
   z-index: 5;
 
   border: none;
-  background: rgba(255,255,255,.85);
+  background: rgba(255, 255, 255, .85);
   color: #111;
+
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -87,32 +90,22 @@
 
   display: grid;
   place-items: center;
-  box-shadow: 0 6px 18px rgba(0,0,0,.25);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, .25);
 }
-.car-arrow.left { left: -8px; }
+
+.car-arrow.left  { left: -8px; }
 .car-arrow.right { right: -8px; }
+
 .car-arrow:hover { background: #fff; }
 
-/* mobile */
+/* Mobile sizing */
 @media (max-width: 900px) {
   .card { min-width: var(--slide-w-mobile); }
-  .car-arrow.left { left: 4px; }
+  .car-arrow.left  { left: 4px; }
   .car-arrow.right { right: 4px; }
 }
 
-/* UX przy drag */
-.car-track.is-dragging {
-  cursor: grabbing;
+/* Opcjonalnie: schowaj strzałki na telefonie (swipe jest naturalny) */
+@media (max-width: 768px) {
+  .car-arrow { display: none; }
 }
-.car-track.is-dragging * {
-  user-select: none;
-}
-.card, .card * {
-  -webkit-user-drag: none;
-  user-drag: none;
-}
-
-.card img {
-  pointer-events: auto; // upewniamy się, że img nie “znika”
-}
-

@@ -83,6 +83,54 @@ export class ProductsCarouselComponent implements AfterViewInit, OnInit, OnDestr
       }
     });
   }
+
+// --- mobile native swipe helpers ---
+private scrollEndTimer: any = null;
+private isUserInteracting = false;
+
+onTouchStart() {
+  this.isUserInteracting = true;
+  this.stopAutoplay();
+  this.stopHover();
+}
+
+onTouchEnd() {
+  this.isUserInteracting = false;
+  // snap po krótkiej chwili (gdy momentum się skończy)
+  this.scheduleSnapAfterScroll();
+  this.startAutoplay();
+}
+
+onTrackScroll() {
+  if (!this.isUserInteracting) {
+    // na iOS momentum scroll też wpada jako scroll bez touch
+    // więc i tak snapujemy po “uspokojeniu”
+    this.scheduleSnapAfterScroll();
+  }
+}
+
+private scheduleSnapAfterScroll() {
+  if (this.scrollEndTimer) clearTimeout(this.scrollEndTimer);
+  this.scrollEndTimer = setTimeout(() => {
+    this.snapToNearestCard();
+  }, 120); // małe opóźnienie: czułe, ale nie “szarpie”
+}
+
+private snapToNearestCard() {
+  const t = this.trackRef?.nativeElement;
+  if (!t) return;
+
+  const step = this.cardWidth();
+  if (!step) return;
+
+  const target = Math.round(t.scrollLeft / step) * step;
+  t.scrollTo({ left: target, behavior: 'smooth' });
+
+  queueMicrotask(() => this.nudge());
+}
+
+
+
   private pointerActive = false;
   private pointerId: number | null = null;
   private captureSet = false;
@@ -230,17 +278,7 @@ private readonly FLICK_VELOCITY = 0.8; // px/ms (ok. 800px/s)
   }
   
   
-private snapToNearestCard() {
-  const t = this.track();
-  const step = this.cardWidth();
-  if (!step) return;
 
-  const target = Math.round(t.scrollLeft / step) * step;
-  t.scrollTo({ left: target, behavior: 'smooth' });
-
-  // Twoja pętla “wrap-around” lubi nudge
-  queueMicrotask(() => this.nudge());
-}
 
 
 
@@ -270,6 +308,7 @@ private snapToNearestCard() {
     if (isPlatformBrowser(this.platformId)) {
       window.removeEventListener('resize', this.resizeHandler);
     }
+    if (this.scrollEndTimer) clearTimeout(this.scrollEndTimer);
   }
 
   private async ensureTranslationsReady(scope?: string) {
