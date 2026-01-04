@@ -143,34 +143,61 @@ export class ProductsCarouselComponent implements AfterViewInit, OnInit, OnDestr
 
   private maybeLoopTeleport() {
     if (this.isTeleporting) return;
-
+  
     const t = this.trackRef?.nativeElement;
     if (!t) return;
-
+  
     const step = this.cardWidth();
     const n = this.products.length;
     if (!n || !step) return;
-
+  
     const k = Math.min(this.clones, n);
-
-    const startReal = step * k;
-    const endReal = step * (k + n); // początek końcowych klonów
-
-    // lewo: w klonach z końca
-    if (t.scrollLeft < startReal - step * 0.5) {
+  
+    const startReal = step * k;      // początek prawdziwych kart
+    const realLen   = step * n;      // długość “prawdziwego” segmentu
+    const endReal   = startReal + realLen;
+  
+    // mały margines żeby nie teleportować “w połowie snapa”
+    const margin = step * 0.7;
+  
+    // Jesteśmy w lewych klonach -> przesuń o +realLen (zachowaj offset)
+    if (t.scrollLeft < startReal - margin) {
       this.isTeleporting = true;
-      t.scrollLeft = startReal + step * (n - 1);
-      queueMicrotask(() => (this.isTeleporting = false));
+  
+      // WYŁĄCZ smooth na moment, żeby teleport był natychmiastowy
+      const prev = t.style.scrollBehavior;
+      t.style.scrollBehavior = 'auto';
+  
+      t.scrollLeft = t.scrollLeft + realLen;
+  
+      // wyczyść ewentualny snap, żeby nie “dobijał” po teleport
+      if (this.scrollEndTimer) clearTimeout(this.scrollEndTimer);
+  
+      queueMicrotask(() => {
+        t.style.scrollBehavior = prev || '';
+        this.isTeleporting = false;
+      });
       return;
     }
-
-    // prawo: w klonach z początku
-    if (t.scrollLeft > endReal + step * 0.5) {
+  
+    // Jesteśmy w prawych klonach -> przesuń o -realLen (zachowaj offset)
+    if (t.scrollLeft > endReal + margin) {
       this.isTeleporting = true;
-      t.scrollLeft = startReal;
-      queueMicrotask(() => (this.isTeleporting = false));
+  
+      const prev = t.style.scrollBehavior;
+      t.style.scrollBehavior = 'auto';
+  
+      t.scrollLeft = t.scrollLeft - realLen;
+  
+      if (this.scrollEndTimer) clearTimeout(this.scrollEndTimer);
+  
+      queueMicrotask(() => {
+        t.style.scrollBehavior = prev || '';
+        this.isTeleporting = false;
+      });
     }
   }
+  
 
   // =========================
   // NATIVE MOBILE SWIPE HELPERS
@@ -191,14 +218,13 @@ export class ProductsCarouselComponent implements AfterViewInit, OnInit, OnDestr
   }
 
   onTrackScroll() {
-    // ✅ loop działa zawsze (touch + momentum)
     this.maybeLoopTeleport();
-
-    // snap dopiero gdy user nie trzyma palca
-    if (!this.isUserInteracting) {
+  
+    if (!this.isUserInteracting && !this.isTeleporting) {
       this.scheduleSnapAfterScroll();
     }
   }
+  
 
   private scheduleSnapAfterScroll() {
     if (this.scrollEndTimer) clearTimeout(this.scrollEndTimer);
