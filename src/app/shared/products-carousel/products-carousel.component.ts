@@ -38,10 +38,16 @@ export class ProductsCarouselComponent implements AfterViewInit, OnInit, OnDestr
 
   products: CardProduct[] = PRODUCTS;
 
+  // ✅ LOOP: lista z klonami (opcja A)
+  loopProducts: CardProduct[] = [];
+  private readonly clones = 3; // ustaw tutaj: 1–3 (3 jest “najbezpieczniejsze”)
+  private isTeleporting = false;
+
+  // dialog / url logic
   private dialogRef: MatDialogRef<ProductDialogComponent> | null = null;
   private openingFromUrl = false;
   private isClosing = false;
-  private openingNow = false;            // ⬅️ blokada reentrancji
+  private openingNow = false;
 
   private qpSub?: Subscription;
   private resizeHandler = () => this.nudge();
@@ -55,24 +61,26 @@ export class ProductsCarouselComponent implements AfterViewInit, OnInit, OnDestr
     private location: Location
   ) {}
 
+  // =========================
+  // INIT / DESTROY
+  // =========================
   async ngOnInit() {
+    this.buildLoopProducts();
+
     // reaguj na ?product=slug
     this.qpSub = this.route.queryParamMap.subscribe(async (pm) => {
       const slug = pm.get('product');
 
       if (!slug) {
-        // brak paramu → zamknij jeśli coś otwarte (bez grzebania w URL tutaj)
         if (this.dialog.openDialogs.length > 0 || this.dialogRef) {
           this.isClosing = true;
           this.dialog.closeAll();
           await firstValueFrom(this.dialog.afterAllClosed.pipe(take(1)));
           this.dialogRef = null;
-          // zdejmie się w afterClosed / mikro-tickach
         }
         return;
       }
 
-      // nie otwieraj jeśli w trakcie zamykania/otwierania lub coś już jest
       if (this.isClosing || this.openingNow || this.dialog.openDialogs.length > 0 || this.dialogRef) return;
 
       const prod = this.products.find((p) => p.slug === slug);
@@ -84,233 +92,143 @@ export class ProductsCarouselComponent implements AfterViewInit, OnInit, OnDestr
     });
   }
 
-// --- mobile native swipe helpers ---
-private scrollEndTimer: any = null;
-private isUserInteracting = false;
-
-onTouchStart() {
-  this.isUserInteracting = true;
-  this.stopAutoplay();
-  this.stopHover();
-}
-
-onTouchEnd() {
-  this.isUserInteracting = false;
-  // snap po krótkiej chwili (gdy momentum się skończy)
-  this.scheduleSnapAfterScroll();
-  this.startAutoplay();
-}
-
-onTrackScroll() {
-  if (!this.isUserInteracting) {
-    // na iOS momentum scroll też wpada jako scroll bez touch
-    // więc i tak snapujemy po “uspokojeniu”
-    this.scheduleSnapAfterScroll();
-  }
-}
-
-private scheduleSnapAfterScroll() {
-  if (this.scrollEndTimer) clearTimeout(this.scrollEndTimer);
-  this.scrollEndTimer = setTimeout(() => {
-    this.snapToNearestCard();
-  }, 120); // małe opóźnienie: czułe, ale nie “szarpie”
-}
-
-private snapToNearestCard() {
-  const t = this.trackRef?.nativeElement;
-  if (!t) return;
-
-  const step = this.cardWidth();
-  if (!step) return;
-
-  const target = Math.round(t.scrollLeft / step) * step;
-  t.scrollTo({ left: target, behavior: 'smooth' });
-
-  queueMicrotask(() => this.nudge());
-}
-
-
-
-  private pointerActive = false;
-  private pointerId: number | null = null;
-  private captureSet = false;
-  
-  private startX = 0;
-  private startY = 0;
-  private startScrollLeft = 0;
-  
-  private lastX = 0;
-  private lastT = 0;
-  private velocity = 0;
-  
-  private dragged = false;
-  private totalDragX = 0;
-  private isVerticalScroll = false;
-  
- // private readonly DRAG_THRESHOLD = 10;
-  private readonly DRAG_THRESHOLD_TOUCH = 6;   // było 10
-  private readonly DRAG_THRESHOLD_MOUSE = 10;
-  private dragThreshold = 10;
-
-private readonly FLICK_VELOCITY = 0.8; // px/ms (ok. 800px/s)
-
-
-  private setDraggingState(isDragging: boolean) {
-    const t = this.trackRef?.nativeElement;
-    if (!t) return;
-    t.classList.toggle('is-dragging', isDragging);
-  }
-  
-  onPointerDown(ev: PointerEvent) {
-    if (ev.pointerType === 'mouse' && ev.button !== 0) return;
-  
-    this.dragThreshold = (ev.pointerType === 'touch')
-  ? this.DRAG_THRESHOLD_TOUCH
-  : this.DRAG_THRESHOLD_MOUSE;
-
-    const t = this.track();
-  
-    this.pointerActive = true;
-    this.pointerId = ev.pointerId;
-    this.captureSet = false;
-  
-    this.startX = ev.clientX;
-    this.startY = ev.clientY;
-    this.lastX = ev.clientX;
-  
-    this.startScrollLeft = t.scrollLeft;
-    this.lastT = performance.now();
-    this.velocity = 0;
-  
-    this.dragged = false;
-    this.totalDragX = 0;
-    this.isVerticalScroll = false;
-  
-    this.stopAutoplay();
-    this.stopHover();
-  
-    this.setDraggingState(false);
-  }
-  
-  onPointerMove(ev: PointerEvent) {
-    if (!this.pointerActive || this.pointerId !== ev.pointerId) return;
-  
-    const t = this.track();
-    const dx = ev.clientX - this.startX;
-    const dy = ev.clientY - this.startY;
-  
-    // velocity ZAWSZE
-    const now = performance.now();
-    const dt = Math.max(1, now - this.lastT);
-    const instV = (ev.clientX - this.lastX) / dt;
-    this.velocity = this.velocity * 0.7 + instV * 0.3;
-    this.lastX = ev.clientX;
-    this.lastT = now;
-  
-    // pionowy scroll -> oddaj stronie
-    if (!this.dragged && !this.isVerticalScroll) {
-      if (Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > 6) {
-        this.isVerticalScroll = true;
-        return;
-      }
-    }
-    if (this.isVerticalScroll) return;
-  
-    this.totalDragX = Math.abs(dx);
-  
-    const fastFlick = Math.abs(this.velocity) >= this.FLICK_VELOCITY;
-    const farEnough = this.totalDragX >= this.dragThreshold;
-  
-    if (!this.dragged && (farEnough || fastFlick)) {
-      this.dragged = true;
-      this.setDraggingState(true);
-  
-      if (!this.captureSet) {
-        try { t.setPointerCapture(ev.pointerId); this.captureSet = true; } catch {}
-      }
-    }
-  
-    if (this.dragged) {
-      t.scrollLeft = this.startScrollLeft - dx;
-      ev.preventDefault();
-    }
-  }
-  
-  
-  async onPointerUp(ev: PointerEvent) {
-    const t = this.trackRef?.nativeElement;
-    const isMine = this.pointerActive && this.pointerId === ev.pointerId;
-  
-    // sprzątanie ZAWSZE
-    this.pointerActive = false;
-    this.pointerId = null;
-    this.isVerticalScroll = false;
-  
-    this.setDraggingState(false);
-  
-    if (t && this.captureSet) {
-      try { t.releasePointerCapture(ev.pointerId); } catch {}
-    }
-    this.captureSet = false;
-  
-    if (isMine && this.dragged) {
-      const throwPx = Math.max(-600, Math.min(600, this.velocity * 420));
-      if (Math.abs(throwPx) > 20) {
-        await this.animateBy(-throwPx, 240, this.easeOutCubic);
-      }
-      this.snapToNearestCard();
-    }
-  
-    // twardy reset – przywraca kliki
-    this.totalDragX = 0;
-    this.dragged = false;
-  
+  ngAfterViewInit() {
     this.startAutoplay();
-  }
-  
-  onCardClick(e: MouseEvent, p: CardProduct) {
-    if (this.dragged) {
-      e.preventDefault();
-      e.stopPropagation();
-      return;
-    }
-    this.openDialog(p);
-  }
-  
-  
 
-
-
-
-
-
-
-/* ngAfterViewInit() {
-    this.startAutoplay();
     if (isPlatformBrowser(this.platformId)) {
       window.addEventListener('resize', this.resizeHandler);
-    }
-  } */
- ngAfterViewInit() {
-  this.startAutoplay();
-  if (isPlatformBrowser(this.platformId)) {
-    // pozwól na pionowy scroll strony, ale poziome gesty bierzemy my
-    this.trackRef?.nativeElement?.style.setProperty('touch-action', 'pan-y');
-    window.addEventListener('resize', this.resizeHandler);
-  }
-}
 
+      // ✅ ustaw start scrolla na “prawdziwe” karty (omijamy klony z przodu)
+      queueMicrotask(() => this.jumpToRealStart());
+    }
+  }
 
   ngOnDestroy() {
     this.stopAutoplay();
     this.stopHover();
     this.qpSub?.unsubscribe();
+
+    if (this.scrollEndTimer) clearTimeout(this.scrollEndTimer);
+
     if (isPlatformBrowser(this.platformId)) {
       window.removeEventListener('resize', this.resizeHandler);
     }
-    if (this.scrollEndTimer) clearTimeout(this.scrollEndTimer);
   }
 
+  // =========================
+  // LOOP BUILD
+  // =========================
+  private buildLoopProducts() {
+    const n = this.products.length;
+    if (!n) {
+      this.loopProducts = [];
+      return;
+    }
+    const k = Math.min(this.clones, n);
+    const head = this.products.slice(0, k);
+    const tail = this.products.slice(n - k);
+    this.loopProducts = [...tail, ...this.products, ...head];
+  }
+
+  trackByLoop = (i: number, p: CardProduct) => `${p.slug}__${i}`;
+
+  private jumpToRealStart() {
+    const t = this.trackRef?.nativeElement;
+    if (!t) return;
+    const step = this.cardWidth();
+    const n = this.products.length;
+    const k = Math.min(this.clones, n);
+    t.scrollLeft = step * k;
+  }
+
+  private maybeLoopTeleport() {
+    if (this.isTeleporting) return;
+
+    const t = this.trackRef?.nativeElement;
+    if (!t) return;
+
+    const step = this.cardWidth();
+    const n = this.products.length;
+    if (!n || !step) return;
+
+    const k = Math.min(this.clones, n);
+
+    const startReal = step * k;
+    const endReal = step * (k + n); // początek końcowych klonów
+
+    // lewo: w klonach z końca
+    if (t.scrollLeft < startReal - step * 0.5) {
+      this.isTeleporting = true;
+      t.scrollLeft = startReal + step * (n - 1);
+      queueMicrotask(() => (this.isTeleporting = false));
+      return;
+    }
+
+    // prawo: w klonach z początku
+    if (t.scrollLeft > endReal + step * 0.5) {
+      this.isTeleporting = true;
+      t.scrollLeft = startReal;
+      queueMicrotask(() => (this.isTeleporting = false));
+    }
+  }
+
+  // =========================
+  // NATIVE MOBILE SWIPE HELPERS
+  // =========================
+  private scrollEndTimer: any = null;
+  private isUserInteracting = false;
+
+  onTouchStart() {
+    this.isUserInteracting = true;
+    this.stopAutoplay();
+    this.stopHover();
+  }
+
+  onTouchEnd() {
+    this.isUserInteracting = false;
+    this.scheduleSnapAfterScroll();
+    this.startAutoplay();
+  }
+
+  onTrackScroll() {
+    // ✅ loop działa zawsze (touch + momentum)
+    this.maybeLoopTeleport();
+
+    // snap dopiero gdy user nie trzyma palca
+    if (!this.isUserInteracting) {
+      this.scheduleSnapAfterScroll();
+    }
+  }
+
+  private scheduleSnapAfterScroll() {
+    if (this.scrollEndTimer) clearTimeout(this.scrollEndTimer);
+    this.scrollEndTimer = setTimeout(() => {
+      this.snapToNearestCard();
+    }, 120);
+  }
+
+  private snapToNearestCard() {
+    const t = this.trackRef?.nativeElement;
+    if (!t) return;
+
+    const step = this.cardWidth();
+    const n = this.products.length;
+    if (!step || !n) return;
+
+    const k = Math.min(this.clones, n);
+    const startReal = step * k;
+
+    const rel = t.scrollLeft - startReal;
+    const idx = Math.round(rel / step);
+    const target = startReal + idx * step;
+
+    t.scrollTo({ left: target, behavior: 'smooth' });
+    queueMicrotask(() => this.nudge());
+  }
+
+  // =========================
+  // DIALOG LOGIC (Twoje, bez zmian sensu)
+  // =========================
   private async ensureTranslationsReady(scope?: string) {
     await firstValueFrom(this.transloco.selectTranslation(scope));
   }
@@ -327,162 +245,82 @@ private readonly FLICK_VELOCITY = 0.8; // px/ms (ok. 800px/s)
       .replace(/[?&]$/g, '')
       .replace(/\?&/, '?');
 
-    this.location.replaceState(cleaned); // bez nawigacji i bez eventów routera
+    this.location.replaceState(cleaned);
   }
 
- async openDialog(p: CardProduct, pushUrl: boolean = true) {
-  if (this.openingNow) return; // ⬅️ blokada reentrancji
-  this.openingNow = true;
+  async openDialog(p: CardProduct, pushUrl: boolean = true) {
+    if (this.openingNow) return;
+    this.openingNow = true;
 
-  try {
-    const base = `home.products.${p.id}`;
+    try {
+      const base = `home.products.${p.id}`;
 
-    if (pushUrl) {
-      this.router.navigate([], {
-        relativeTo: this.route,
-        queryParams: { product: p.slug },
-        queryParamsHandling: 'merge',
-        replaceUrl: false,
-      });
-    }
-
-    // SINGLE-INSTANCE: domknij wszystko zanim otworzysz
-    if (this.dialog.openDialogs.length > 0) {
-      this.isClosing = true;
-      this.dialog.closeAll();
-      await firstValueFrom(this.dialog.afterAllClosed.pipe(take(1)));
-      this.isClosing = false;
-      this.dialogRef = null;
-    }
-
-    await this.ensureTranslationsReady();
-
-    this.dialogRef = this.dialog.open(ProductDialogComponent, {
-      panelClass: ['wb-product-dialog', 'transparent-dialog'],
-      width: '720px',
-      maxWidth: '96vw',
-      maxHeight: '96vh',
-      autoFocus: true,
-      restoreFocus: false,
-      closeOnNavigation: true,
-      disableClose: true,
-      data: {
-        title: this.transloco.translate(`${base}.title`),
-        imageUrl: p.img,
-        appUrl: p.appUrl,
-        slug: p.slug,
-        desc: this.transloco.translate(`${base}.desc`),
-        deepLink: this.buildDeepLink(p.slug),
-      } as any,
-    });
-
-    this.dialogRef.afterClosed().subscribe((reason) => {
-      this.dialogRef = null;
-      this.isClosing = true;
-
-      if (isPlatformBrowser(this.platformId)) {
-        (document.activeElement as HTMLElement | null)?.blur?.();
+      if (pushUrl) {
+        this.router.navigate([], {
+          relativeTo: this.route,
+          queryParams: { product: p.slug },
+          queryParamsHandling: 'merge',
+          replaceUrl: false,
+        });
       }
 
-      if (
-        reason !== 'details' &&
-        !this.router.url.startsWith('/products/') &&
-        this.route.snapshot.queryParamMap.has('product')
-      ) {
-        queueMicrotask(() => this.clearProductQueryWithoutNav());
-      }
-
-      queueMicrotask(() => {
+      if (this.dialog.openDialogs.length > 0) {
+        this.isClosing = true;
+        this.dialog.closeAll();
+        await firstValueFrom(this.dialog.afterAllClosed.pipe(take(1)));
         this.isClosing = false;
-        this.openingNow = false;
+        this.dialogRef = null;
+      }
+
+      await this.ensureTranslationsReady();
+
+      this.dialogRef = this.dialog.open(ProductDialogComponent, {
+        panelClass: ['wb-product-dialog', 'transparent-dialog'],
+        width: '720px',
+        maxWidth: '96vw',
+        maxHeight: '96vh',
+        autoFocus: true,
+        restoreFocus: false,
+        closeOnNavigation: true,
+        disableClose: true,
+        data: {
+          title: this.transloco.translate(`${base}.title`),
+          imageUrl: p.img,
+          appUrl: p.appUrl,
+          slug: p.slug,
+          desc: this.transloco.translate(`${base}.desc`),
+          deepLink: this.buildDeepLink(p.slug),
+        } as any,
       });
-    });
-  } catch (error) {
-    console.error('openDialog failed:', error);
-    this.openingNow = false;
-    this.isClosing = false;
-  }
-}
 
+      this.dialogRef.afterClosed().subscribe((reason) => {
+        this.dialogRef = null;
+        this.isClosing = true;
 
-  // --- autoplay / carousel logic (bez zmian) ---
-  private autoplayId: any = null;
-  private hoverId: any = null;
+        if (isPlatformBrowser(this.platformId)) {
+          (document.activeElement as HTMLElement | null)?.blur?.();
+        }
 
-  private track(): HTMLDivElement {
-    const el = this.trackRef?.nativeElement;
-    if (!el) throw new Error('Track element not ready yet');
-    return el;
-  }
-  private cardWidth() {
-    const c = this.track().querySelector('.card') as HTMLElement | null;
-    return (c?.getBoundingClientRect().width ?? 320) + this.gap();
-  }
-  private gap() {
-    return 18;
-  }
-  private move(px: number) {
-    const t = this.track();
-    t.scrollLeft += px;
-    const max = t.scrollWidth - t.clientWidth;
-    if (t.scrollLeft <= 0) t.scrollLeft = max - 2;
-    else if (t.scrollLeft >= max - 1) t.scrollLeft = 1;
-  }
-  private easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
-  private easeInOutCubic = (t: number) =>
-    t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-  private animateBy(delta: number, dur = 420, ease = (t: number) => t) {
-    const t = this.track();
-    const startX = t.scrollLeft;
-    const max = t.scrollWidth - t.clientWidth;
-    const s = performance.now();
-    return new Promise<void>((res) => {
-      const f = (n: number) => {
-        const k = Math.min(1, (n - s) / dur);
-        const x = startX + delta * ease(k);
-        t.scrollLeft = Math.max(0, Math.min(max, x));
-        if (k < 1) requestAnimationFrame(f);
-        else res();
-      };
-      requestAnimationFrame(f);
-    });
-  }
-  async spring(dir: number) {
-    this.stopAutoplay();
-    this.stopHover();
-    const d = this.cardWidth() * dir;
-    const over = d * 0.14;
-    await this.animateBy(d + over, 340, this.easeOutCubic);
-    await this.animateBy(-over, 180, this.easeInOutCubic);
-    this.startAutoplay();
-  }
-  private startAutoplay() {
-    this.stopAutoplay();
-    this.autoplayId = setInterval(() => this.move(this.cardWidth()), 4000);
-  }
-  private stopAutoplay() {
-    if (this.autoplayId) {
-      clearInterval(this.autoplayId);
-      this.autoplayId = null;
+        if (
+          reason !== 'details' &&
+          !this.router.url.startsWith('/products/') &&
+          this.route.snapshot.queryParamMap.has('product')
+        ) {
+          queueMicrotask(() => this.clearProductQueryWithoutNav());
+        }
+
+        queueMicrotask(() => {
+          this.isClosing = false;
+          this.openingNow = false;
+        });
+      });
+    } catch (error) {
+      console.error('openDialog failed:', error);
+      this.openingNow = false;
+      this.isClosing = false;
     }
   }
-  hover(dir: number) {
-    this.stopHover();
-    this.hoverId = setInterval(() => this.move(dir * 4), 16);
-    this.stopAutoplay();
-  }
-  stopHover() {
-    if (this.hoverId) {
-      clearInterval(this.hoverId);
-      this.hoverId = null;
-    }
-    this.startAutoplay();
-  }
-  private nudge() {
-    this.move(0);
-  }
 
-  // helper do zbudowania absolutnego linku (SSR-safe)
   private buildDeepLink(slug: string): string {
     if (isPlatformBrowser(this.platformId)) {
       const url = new URL(window.location.href);
@@ -496,5 +334,92 @@ private readonly FLICK_VELOCITY = 0.8; // px/ms (ok. 800px/s)
         queryParamsHandling: 'merge',
       })
       .toString();
+  }
+
+  // =========================
+  // AUTOPLAY / ARROWS
+  // =========================
+  private autoplayId: any = null;
+  private hoverId: any = null;
+
+  private track(): HTMLDivElement {
+    const el = this.trackRef?.nativeElement;
+    if (!el) throw new Error('Track element not ready yet');
+    return el;
+  }
+
+  private gap() {
+    return 18;
+  }
+
+  private cardWidth() {
+    const c = this.track().querySelector('.card') as HTMLElement | null;
+    return (c?.getBoundingClientRect().width ?? 320) + this.gap();
+  }
+
+  private move(px: number) {
+    const t = this.track();
+    t.scrollLeft += px;
+    // ✅ loop ogarnia maybeLoopTeleport() wywoływane w onTrackScroll()
+  }
+
+  private easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
+  private easeInOutCubic = (t: number) =>
+    t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+  private animateBy(delta: number, dur = 420, ease = (t: number) => t) {
+    const t = this.track();
+    const startX = t.scrollLeft;
+    const s = performance.now();
+    return new Promise<void>((res) => {
+      const f = (n: number) => {
+        const k = Math.min(1, (n - s) / dur);
+        t.scrollLeft = startX + delta * ease(k);
+        if (k < 1) requestAnimationFrame(f);
+        else res();
+      };
+      requestAnimationFrame(f);
+    });
+  }
+
+  async spring(dir: number) {
+    this.stopAutoplay();
+    this.stopHover();
+    const d = this.cardWidth() * dir;
+    const over = d * 0.14;
+    await this.animateBy(d + over, 340, this.easeOutCubic);
+    await this.animateBy(-over, 180, this.easeInOutCubic);
+    this.startAutoplay();
+  }
+
+  private startAutoplay() {
+    this.stopAutoplay();
+    this.autoplayId = setInterval(() => this.move(this.cardWidth()), 4000);
+  }
+
+  private stopAutoplay() {
+    if (this.autoplayId) {
+      clearInterval(this.autoplayId);
+      this.autoplayId = null;
+    }
+  }
+
+  hover(dir: number) {
+    this.stopHover();
+    this.hoverId = setInterval(() => this.move(dir * 4), 16);
+    this.stopAutoplay();
+  }
+
+  stopHover() {
+    if (this.hoverId) {
+      clearInterval(this.hoverId);
+      this.hoverId = null;
+    }
+    this.startAutoplay();
+  }
+
+  private nudge() {
+    // wymusza reflow/teleport check przez scroll eventy; bezpieczny “tick”
+    this.move(0);
   }
 }

@@ -10,14 +10,16 @@
           (touchend)="onTouchEnd()"
           (touchcancel)="onTouchEnd()"
           (scroll)="onTrackScroll()">
-     
-       <article class="card"
-                *ngFor="let p of products"
-                role="button"
-                tabindex="0"
-                (click)="openDialog(p)"
-                (keyup.enter)="openDialog(p)"
-                (dragstart)="$event.preventDefault()">
+          
+          <article class="card"
+          *ngFor="let p of loopProducts; let i = index; trackBy: trackByLoop"
+          role="button"
+          tabindex="0"
+          (click)="openDialog(p)"
+          (keyup.enter)="openDialog(p)"
+          (dragstart)="$event.preventDefault()">
+ 
+
      
          <img [src]="p.img"
               draggable="false"
