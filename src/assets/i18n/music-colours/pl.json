@@ -1,0 +1,45 @@
+{
+  "title": "Music Colours",
+  "hero": {
+    "title": "Music Colours",
+    "subtitle": "Łap kolor w środku rytmu",
+    "back": "Wróć do produktów"
+  },
+  "description": {
+    "title": "Opis",
+    "lead": "Gra rytmiczna: kolory zmieniają się w rytm muzyki, a Twoim zadaniem jest złapać aktualny kolor. Bonusy pomagają przechodzić poziomy, a po 10 trafieniach wchodzisz na kolejny level. Uważaj na Death Gift i limit czasu!"
+  },
+  "sections": {
+    "how": {
+      "title": "Jak grać",
+      "caption": "Złap kolor w rytmie",
+      "intro": "Podążaj za BPM i trafiaj kolor pokazany w środku:",
+      "items": [
+        "Ekran pulsuje do muzyki — obserwuj kolor w centrum.",
+        "Kliknij pasujący kolor w odpowiednim momencie.",
+        "Utrzymuj serię trafień, aby przejść na kolejny poziom."
+      ]
+    },
+    "bonuses": {
+      "title": "Bonusy i poziomy",
+      "caption": "Wzmocnienia i progres",
+      "intro": "Bonusy pomagają szybciej kończyć etapy:",
+      "items": [
+        "Po 10 poprawnych trafieniach awansujesz na następny poziom.",
+        "Zbieraj bonusy, by wydłużyć czas lub zwiększyć serię.",
+        "Uważaj na Death Gift — kończy grę natychmiast."
+      ]
+    },
+    "subscription": {
+      "title": "Własne soundtracki",
+      "caption": "Graj do swojej muzyki",
+      "intro": "Z subskrypcją możesz dodawać własne utwory:",
+      "items": [
+        "Wgraj własne piosenki i generuj rytm.",
+        "Graj w BPM dopasowanym do ulubionej muzyki.",
+        "Odblokuj dodatkowe paczki dźwięków i motywy."
+      ]
+    }
+  },
+  "keywords": "Słowa kluczowe: gra rytmiczna, muzyka, kolory, beat, refleks, bonusy, BPM, arcade"
+}

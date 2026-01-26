@@ -1,0 +1,45 @@
+{
+  "title": "Music Colours",
+  "hero": {
+    "title": "Music Colours",
+    "subtitle": "Catch the colour in the middle of the beat",
+    "back": "Back to products"
+  },
+  "description": {
+    "title": "Description",
+    "lead": "A rhythm game where the screen changes colours to the beat and you must catch the current colour. Bonuses help you clear levels, and after 10 correct catches you advance to the next level. Watch out for the Death Gift and the time limit!"
+  },
+  "sections": {
+    "how": {
+      "title": "How to play",
+      "caption": "Match the colour to the beat",
+      "intro": "Follow the BPM and hit the colour shown in the middle:",
+      "items": [
+        "The screen pulses to the music — watch the colour in the center.",
+        "Tap the matching colour at the perfect moment to score a catch.",
+        "Keep your streak to advance to the next level."
+      ]
+    },
+    "bonuses": {
+      "title": "Bonuses & levels",
+      "caption": "Boosts and progression",
+      "intro": "Bonuses help you clear stages faster:",
+      "items": [
+        "After 10 correct catches you advance to the next level.",
+        "Collect bonuses to extend time or increase your combo.",
+        "Avoid the Death Gift — it ends the run instantly."
+      ]
+    },
+    "subscription": {
+      "title": "Custom soundtracks",
+      "caption": "Play to your music",
+      "intro": "With a subscription you can add your own tracks:",
+      "items": [
+        "Upload or select your own songs and generate beats.",
+        "Play with BPM that matches your favorite music.",
+        "Unlock additional sound packs and themes."
+      ]
+    }
+  },
+  "keywords": "Keywords: rhythm game, music, colours, beat, reflexes, bonuses, BPM, arcade"
+}

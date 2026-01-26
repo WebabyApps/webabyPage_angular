@@ -13,7 +13,8 @@ export const PRODUCTS: CardProduct[] = [
   { id: 'abcLand',          slug: 'abc-land',            img: 'assets/scene1.jpg',        appUrl: 'https://play.google.com/store/apps/details?id=abecadlowo.webaby.io' },
   { id: 'luckyDraw',        slug: 'lucky-draw',          img: 'assets/lucky_draw.png',    appUrl: 'https://lucky-draw.webaby.io' },
   { id: 'bibbleEcho',       slug: 'bibble-echo',         img: 'assets/bibble_echo2.jpeg', appUrl: 'https://biblecho.webaby.io/' },
-  { id: 'socialmigrateai',  slug: 'socialmigrateai',     img: 'assets/socialmigrateai.jpg', appUrl: 'https://socialmigrateai.webaby.io/' }
+  { id: 'socialmigrateai',  slug: 'socialmigrateai',     img: 'assets/socialmigrateai.jpg', appUrl: 'https://socialmigrateai.webaby.io/' },
+  { id: 'musiccolours',     slug: 'music-colours',       img: 'assets/tutorials/music-colours/Music_colours_icon.png', appUrl: 'https://musiccolours.webaby.io' }
 ];
 
 export function getAppUrlBySlug(slug?: string): string | undefined {

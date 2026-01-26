@@ -1,0 +1,45 @@
+{
+  "title": "Music Colours",
+  "hero": {
+    "title": "Music Colours",
+    "subtitle": "Triff die Farbe im Takt",
+    "back": "Zurück zu den Produkten"
+  },
+  "description": {
+    "title": "Beschreibung",
+    "lead": "Ein Rhythmusspiel: Die Farben wechseln im Takt der Musik, und du musst die aktuelle Farbe treffen. Boni helfen dir durch die Level, und nach 10 richtigen Treffern steigst du ins nächste Level auf. Achte auf das Death Gift und das Zeitlimit!"
+  },
+  "sections": {
+    "how": {
+      "title": "So spielst du",
+      "caption": "Farbe im Takt treffen",
+      "intro": "Folge dem BPM und triff die Farbe in der Mitte:",
+      "items": [
+        "Der Bildschirm pulsiert zur Musik — beobachte die Farbe im Zentrum.",
+        "Tippe im richtigen Moment auf die passende Farbe.",
+        "Halte deine Serie, um ins nächste Level aufzusteigen."
+      ]
+    },
+    "bonuses": {
+      "title": "Boni & Level",
+      "caption": "Boosts und Fortschritt",
+      "intro": "Boni helfen dir, die Level schneller zu schaffen:",
+      "items": [
+        "Nach 10 richtigen Treffern steigst du ins nächste Level auf.",
+        "Sammle Boni, um die Zeit zu verlängern oder die Combo zu erhöhen.",
+        "Achte auf das Death Gift — es beendet den Lauf sofort."
+      ]
+    },
+    "subscription": {
+      "title": "Eigene Soundtracks",
+      "caption": "Spiel mit deiner Musik",
+      "intro": "Mit einem Abo kannst du eigene Tracks hinzufügen:",
+      "items": [
+        "Lade eigene Songs hoch und generiere Beats.",
+        "Spiele mit BPM passend zu deiner Lieblingsmusik.",
+        "Schalte zusätzliche Soundpacks und Themes frei."
+      ]
+    }
+  },
+  "keywords": "Schlüsselwörter: Rhythmusspiel, Musik, Farben, Beat, Reflexe, Boni, BPM, Arcade"
+}

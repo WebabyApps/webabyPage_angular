@@ -671,6 +671,76 @@
         </ng-container>
       <!-- /Social MIgrate AI --> 
 
+      <!-- ========== Music Colours ========== -->
+      <ng-container *ngSwitchCase="'music-colours'">
+        <h2>{{ tr('description.title') }}</h2>
+        <p class="lead">{{ tr('description.lead') }}</p>
+
+        <img class="app-header"
+             src="assets/tutorials/music-colours/background_musicColours.png"
+             [attr.alt]="tr('title')"
+             loading="lazy" decoding="async" />
+
+        <app-tutorial-section
+          [title]="tr('sections.how.title')"
+          [img]="'assets/tutorials/music-colours/Screenshot 2026-01-26 at 12.20.46 PM.png'"
+          [lazyImg]="true"
+          [alt]="tr('sections.how.caption')"
+          [caption]="tr('sections.how.caption')"
+          [reverse]="false"
+          [scope]="sp">
+          <p>{{ tr('sections.how.intro') }}</p>
+          <ul>
+            <ng-container *transloco="let t; scope: sp">
+              <li *ngFor="let step of arr(t('sections.how.items', { returnObjects: true }))">
+                {{ step }}
+              </li>
+            </ng-container>
+          </ul>
+        </app-tutorial-section>
+
+        <app-tutorial-section
+          [title]="tr('sections.bonuses.title')"
+          [img]="'assets/tutorials/music-colours/Screenshot 2026-01-26 at 12.20.56 PM.png'"
+          [lazyImg]="true"
+          [alt]="tr('sections.bonuses.caption')"
+          [caption]="tr('sections.bonuses.caption')"
+          [reverse]="true"
+          [scope]="sp">
+          <p>{{ tr('sections.bonuses.intro') }}</p>
+          <ul>
+            <ng-container *transloco="let t; scope: sp">
+              <li *ngFor="let item of arr(t('sections.bonuses.items', { returnObjects: true }))">
+                {{ item }}
+              </li>
+            </ng-container>
+          </ul>
+        </app-tutorial-section>
+
+        <app-tutorial-section
+          [title]="tr('sections.subscription.title')"
+          [img]="'assets/tutorials/music-colours/Screenshot 2026-01-26 at 12.21.05 PM.png'"
+          [lazyImg]="true"
+          [alt]="tr('sections.subscription.caption')"
+          [caption]="tr('sections.subscription.caption')"
+          [reverse]="false"
+          [scope]="sp">
+          <p>{{ tr('sections.subscription.intro') }}</p>
+          <ul>
+            <ng-container *transloco="let t; scope: sp">
+              <li *ngFor="let item of arr(t('sections.subscription.items', { returnObjects: true }))">
+                {{ item }}
+              </li>
+            </ng-container>
+          </ul>
+        </app-tutorial-section>
+
+        <section class="keywords">
+          <small>{{ tr('keywords') }}</small>
+        </section>
+      </ng-container>
+      <!-- /Music Colours -->
+
       <!-- ========== Fallback (nieznany slug) ========== -->
       <ng-container *ngSwitchDefault>
         <p class="muted">Nie znaleziono treści dla tego produktu.</p>
