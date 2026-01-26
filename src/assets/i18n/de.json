@@ -1,129 +1,134 @@
 {
-    "aria": {
-        "home": "Webaby-Startseite"
+  "aria": {
+    "home": "Webaby-Startseite"
+  },
+  "home": {
+    "about": {
+      "alt": {
+        "future": "Zukunftstechnologie",
+        "grow": "Schnelles Wachstum",
+        "scene2": "Illustration zu Bildung und Wachstum",
+        "software": "Softwareentwicklung"
+      },
+      "dev": {
+        "p1": "Bei Webaby entwerfen wir Software, die Spaß mit Wissen verbindet. Unsere Werke reichen von kniffligen Denkpuzzles bis zu actiongeladenen Abenteuern - voller Fantasie, Story und lebendiger Welten.",
+        "p2": "Jedes Produkt weckt Neugier und lässt Lernen wie Spielen fühlen.",
+        "title": "Softwareentwicklung & spielerisches Lernen"
+      },
+      "innovation": {
+        "p1": "Innovation steht im Zentrum unseres Handelns. Wir erkunden die Spitze von künstlicher Intelligenz, Blockchain, Gaming und interaktivem Storytelling sowie moderner Softwareentwicklung.",
+        "p2": "Unsere Leidenschaft für Technologie treibt uns an, neue Lernwege zu erfinden und mutige, sinnvolle Produkte auf den Markt zu bringen.",
+        "title": "Innovation & Technologie"
+      },
+      "mission": {
+        "p1": "Wir glauben, dass Technologie und Spiel kraftvolle Werkzeuge für Wachstum sind. Unsere Mission ist es, Kinder und Erwachsene durch interaktive Erlebnisse zu bilden, bei denen Unterhaltung nicht Selbstzweck ist, sondern eine Brücke zum Wissen.",
+        "p2": "Wir wollen nicht abhängig machen, sondern inspirieren. Wir ersetzen passiven Konsum durch aktives Entdecken. Wir fördern Kreativität, kritisches Denken und die Freude am Entdecken.",
+        "title": "Unsere Mission"
+      },
+      "title": "Webaby-Ziele",
+      "vision": {
+        "p1": "Wir wollen zu einem globalen Knotenpunkt werden, an dem Bildung, Kreativität und Innovation zusammenfinden. Indem wir Technologie mit menschlicher Vorstellungskraft vereinen, schafft Webaby Werkzeuge, die Lernen für alle Altersgruppen spannend machen und Gemeinschaften rund um Wissen und Spiel aufbauen.",
+        "p2": "Wir experimentieren kontinuierlich mit neuen digitalen Grenzen, um Erlebnisse zu liefern, die zählen.",
+        "title": "Langfristige Vision"
+      }
     },
-    "home": {
-        "about": {
-            "alt": {
-                "future": "Zukunftstechnologie",
-                "grow": "Schnelles Wachstum",
-                "scene2": "Illustration zu Bildung und Wachstum",
-                "software": "Softwareentwicklung"
-            },
-            "dev": {
-                "p1": "Bei Webaby entwerfen wir Software, die Spa\u00df mit Wissen verbindet. Unsere Werke reichen von kniffligen Denkpuzzles bis zu actiongeladenen Abenteuern - voller Fantasie, Story und lebendiger Welten.",
-                "p2": "Jedes Produkt weckt Neugier und l\u00e4sst Lernen wie Spielen f\u00fchlen.",
-                "title": "Softwareentwicklung & spielerisches Lernen"
-            },
-            "innovation": {
-                "p1": "Innovation steht im Zentrum unseres Handelns. Wir erkunden die Spitze von k\u00fcnstlicher Intelligenz, Blockchain, Gaming und interaktivem Storytelling sowie moderner Softwareentwicklung.",
-                "p2": "Unsere Leidenschaft f\u00fcr Technologie treibt uns an, neue Lernwege zu erfinden und mutige, sinnvolle Produkte auf den Markt zu bringen.",
-                "title": "Innovation & Technologie"
-            },
-            "mission": {
-                "p1": "Wir glauben, dass Technologie und Spiel kraftvolle Werkzeuge f\u00fcr Wachstum sind. Unsere Mission ist es, Kinder und Erwachsene durch interaktive Erlebnisse zu bilden, bei denen Unterhaltung nicht Selbstzweck ist, sondern eine Br\u00fccke zum Wissen.",
-                "p2": "Wir wollen nicht abh\u00e4ngig machen, sondern inspirieren. Wir ersetzen passiven Konsum durch aktives Entdecken. Wir f\u00f6rdern Kreativit\u00e4t, kritisches Denken und die Freude am Entdecken.",
-                "title": "Unsere Mission"
-            },
-            "title": "Webaby-Ziele",
-            "vision": {
-                "p1": "Wir wollen zu einem globalen Knotenpunkt werden, an dem Bildung, Kreativit\u00e4t und Innovation zusammenfinden. Indem wir Technologie mit menschlicher Vorstellungskraft vereinen, schafft Webaby Werkzeuge, die Lernen f\u00fcr alle Altersgruppen spannend machen und Gemeinschaften rund um Wissen und Spiel aufbauen.",
-                "p2": "Wir experimentieren kontinuierlich mit neuen digitalen Grenzen, um Erlebnisse zu liefern, die z\u00e4hlen.",
-                "title": "Langfristige Vision"
-            }
-        },
-        "hero": {
-            "cta": "Produkte entdecken",
-            "lead": "Spielen \u2022 Lernen \u2022 Fantasieren",
-            "logoAria": "Webaby-Logo",
-            "title": "Spielerische Technik f\u00fcrs Lernen"
-        },
-        "products": {
-            "abcLand": {
-                "desc": "Ein fabelhaftes Abenteuer zum Erlernen des Alphabets.",
-                "imgAlt": "ABC-Land-Spiel",
-                "title": "ABC Land"
-            },
-            "aria": {
-                "next": "N\u00e4chstes Produkt",
-                "prev": "Vorheriges Produkt"
-            },
-            "basketballShots": {
-                "desc": "Arcade-Basketball - zielen, wischen, treffen!",
-                "imgAlt": "Basketball-Shots-Spiel",
-                "title": "Basketball Shots"
-            },
-            "bibbleEcho": {
-                "desc": "Spirit-Upgrade - entdecke achtsame Echos und Reflexion.",
-                "imgAlt": "Bibble-Echo-App",
-                "title": "Bibble Echo"
-            },
-            "bubbleWord": {
-                "desc": "Rasantes Wortpuzzle - Bubbles platzen, buchstabieren und gegen die Uhr antreten!",
-                "imgAlt": "Bubble-Word-Spiel",
-                "title": "Bubble Word"
-            },
-            "cta": {
-                "more": "Mehr erfahren"
-            },
-            "dialog": {
-                "close": "Dialog schlie\u00dfen",
-                "detailsCta": "Ausf\u00fchrliches Tutorial",
-                "openLink": "App-Link \u00f6ffnen",
-                "qrInstruction": "Scanne den QR-Code, um die App auf deinem Handy zu \u00f6ffnen"
-            },
-            "equationsTrainer": {
-                "desc": "Algebra leicht gemacht - \u00fcbe das L\u00f6sen linearer Systeme Schritt f\u00fcr Schritt.",
-                "imgAlt": "App zum Training von Gleichungssystemen",
-                "title": "Trainer f\u00fcr Gleichungssysteme"
-            },
-            "luckyDraw": {
-                "desc": "Drehen, w\u00e4hlen, feiern!",
-                "imgAlt": "Lucky-Draw-App",
-                "title": "Lucky Draw"
-            },
-            "musiccolours": {
-                "desc": "Ein Rhythmusspiel: Die Farben wechseln im Takt der Musik, und du musst die aktuelle Farbe treffen. Boni helfen dir durch die Level, und nach 10 richtigen Treffern steigst du ins n\u00e4chste Level auf. Achte auf das Death Gift und das Zeitlimit!",
-                "imgAlt": "Music Colours \u2013 Farben im Takt der Musik treffen",
-                "title": "Music Colours"
-            },
-            "musiccoloursSubscription": {
-                "desc": "Mit einem Abo kannst du eigene Tracks hinzuf\u00fcgen und zu deiner Musik spielen.",
-                "title": "Eigene Soundtracks"
-            },
-            "socialmigrateai": {
-                "desc": "Verschiebe deine Facebook-Beitr\u00e4ge mit nur wenigen Klicks.",
-                "imgAlt": "Social Migrate AI - App zur Migration deiner Beitr\u00e4ge",
-                "title": "Social Migrate AI"
-            }
-        },
-        "sections": {
-            "contact": {
-                "title": "Kontakt"
-            },
-            "products": {
-                "title": "Produkte"
-            }
-        }
+    "hero": {
+      "cta": "Produkte entdecken",
+      "lead": "Spielen • Lernen • Fantasieren",
+      "logoAria": "Webaby-Logo",
+      "title": "Spielerische Technik fürs Lernen"
     },
-    "nav": {
-        "about": "\u00dcber uns",
-        "contact": "Kontakt",
-        "home": "Startseite",
-        "products": "Produkte"
+    "products": {
+      "abcLand": {
+        "desc": "Ein fabelhaftes Abenteuer zum Erlernen des Alphabets.",
+        "imgAlt": "ABC-Land-Spiel",
+        "title": "ABC Land"
+      },
+      "aria": {
+        "next": "Nächstes Produkt",
+        "prev": "Vorheriges Produkt"
+      },
+      "basketballShots": {
+        "desc": "Arcade-Basketball - zielen, wischen, treffen!",
+        "imgAlt": "Basketball-Shots-Spiel",
+        "title": "Basketball Shots"
+      },
+      "bibbleEcho": {
+        "desc": "Spirit-Upgrade - entdecke achtsame Echos und Reflexion.",
+        "imgAlt": "Bibble-Echo-App",
+        "title": "Bibble Echo"
+      },
+      "bubbleWord": {
+        "desc": "Rasantes Wortpuzzle - Bubbles platzen, buchstabieren und gegen die Uhr antreten!",
+        "imgAlt": "Bubble-Word-Spiel",
+        "title": "Bubble Word"
+      },
+      "cta": {
+        "more": "Mehr erfahren"
+      },
+      "dialog": {
+        "close": "Dialog schließen",
+        "detailsCta": "Ausführliches Tutorial",
+        "openLink": "App-Link öffnen",
+        "qrInstruction": "Scanne den QR-Code, um die App auf deinem Handy zu öffnen"
+      },
+      "equationsTrainer": {
+        "desc": "Algebra leicht gemacht - übe das Lösen linearer Systeme Schritt für Schritt.",
+        "imgAlt": "App zum Training von Gleichungssystemen",
+        "title": "Trainer für Gleichungssysteme"
+      },
+      "luckyDraw": {
+        "desc": "Drehen, wählen, feiern!",
+        "imgAlt": "Lucky-Draw-App",
+        "title": "Lucky Draw"
+      },
+      "musiccolours": {
+        "desc": "Ein Rhythmusspiel: Die Farben wechseln im Takt der Musik, und du musst die aktuelle Farbe treffen. Boni helfen dir durch die Level, und nach 10 richtigen Treffern steigst du ins nächste Level auf. Achte auf das Death Gift und das Zeitlimit!",
+        "imgAlt": "Music Colours – Farben im Takt der Musik treffen",
+        "title": "Music Colours"
+      },
+      "musiccoloursSubscription": {
+        "desc": "Mit einem Abo kannst du eigene Tracks hinzufügen und zu deiner Musik spielen.",
+        "title": "Eigene Soundtracks"
+      },
+      "socialmigrateai": {
+        "desc": "Verschiebe deine Facebook-Beiträge mit nur wenigen Klicks.",
+        "imgAlt": "Social Migrate AI - App zur Migration deiner Beiträge",
+        "title": "Social Migrate AI"
+      },
+      "freeride": {
+        "title": "FreeRide",
+        "desc": "Eine Fahrgemeinschafts-App, die das Anbieten und Buchen von Fahrten erleichtert. Integrierte Google Maps helfen bei Abhol- und Zielpunkten, während KI deine Route optimiert.",
+        "imgAlt": "FreeRide – Carpooling-App mit Google Maps und KI-Routenoptimierung"
+      }
     },
-    "policy": {
-        "global": {
-            "bodyHtml": "<h1>Datenschutzerkl\u00e4rung</h1><p>Letzte Aktualisierung: 10. April 2024</p><p>Diese Datenschutzerkl\u00e4rung beschreibt unsere Richtlinien und Verfahren zur Erhebung, Nutzung und Offenlegung Ihrer Informationen bei der Nutzung unserer Website und Dienste. Sie erkl\u00e4rt Ihre Datenschutzrechte und wie das Gesetz Sie sch\u00fctzt.</p><p>Wir verwenden Ihre personenbezogenen Daten, um unseren Dienst bereitzustellen und zu verbessern. Durch die Nutzung des Dienstes stimmen Sie der Erhebung und Nutzung von Informationen gem\u00e4\u00df dieser Datenschutzerkl\u00e4rung zu.</p><h2>Auslegung und Definitionen</h2><h3>Auslegung</h3><p>Begriffe, deren Anfangsbuchstabe gro\u00dfgeschrieben ist, haben die unten definierten Bedeutungen. Die folgenden Definitionen haben die gleiche Bedeutung, unabh\u00e4ngig davon, ob sie im Singular oder Plural erscheinen.</p><h3>Definitionen</h3><ul><li><strong>Konto</strong>: ein eindeutiges Konto, das f\u00fcr Sie erstellt wird, um auf unseren Dienst oder Teile davon zuzugreifen.</li><li><strong>Unternehmen</strong> (\"wir\", \"uns\" oder \"unser\"): Webaby.</li><li><strong>Cookies</strong>: kleine Dateien, die von einer Website auf Ihrem Ger\u00e4t gespeichert werden.</li><li><strong>Land</strong>: das Land, in dem Webaby t\u00e4tig ist.</li><li><strong>Ger\u00e4t</strong>: jedes Ger\u00e4t, das auf den Dienst zugreifen kann (z. B. Computer, Smartphone oder Tablet).</li><li><strong>Personenbezogene Daten</strong>: alle Informationen, die sich auf eine identifizierte oder identifizierbare Person beziehen.</li><li><strong>Dienst</strong>: die Website von Webaby sowie die dort angebotenen Inhalte und Funktionen.</li><li><strong>Dienstanbieter</strong>: nat\u00fcrliche oder juristische Personen, die Daten im Auftrag des Unternehmens verarbeiten.</li><li><strong>Nutzungsdaten</strong>: Daten, die automatisch erfasst werden, z. B. IP-Adresse, Browsertyp, besuchte Seiten, Datum/Uhrzeit und Verweildauer.</li></ul><h2>Erhebung und Verwendung personenbezogener Daten</h2><h3>Arten der erfassten Daten</h3><h4>Personenbezogene Daten</h4><p>Wir k\u00f6nnen Sie bitten, bestimmte personenbezogene Daten bereitzustellen, die zur Kontaktaufnahme oder Identifizierung verwendet werden k\u00f6nnen (z. B. E-Mail-Adresse).</p><h4>Nutzungsdaten</h4><p>Nutzungsdaten werden bei der Nutzung des Dienstes automatisch erfasst und k\u00f6nnen technische Informationen wie IP-Adresse, Browsertyp, besuchte Seiten und Ger\u00e4tekennungen enthalten.</p><h4>Tracking-Technologien und Cookies</h4><p>Wir verwenden Cookies, Web-Beacons und \u00e4hnliche Technologien, um Aktivit\u00e4ten zu verfolgen und Informationen zu speichern. Sie k\u00f6nnen Ihren Browser so einstellen, dass Cookies abgelehnt werden; manche Teile des Dienstes funktionieren dann m\u00f6glicherweise nicht korrekt.</p><h3>Zwecke der Verarbeitung</h3><ul><li>Bereitstellung und Wartung des Dienstes, einschlie\u00dflich \u00dcberwachung der Nutzung.</li><li>Verwaltung Ihres Kontos und der von Ihnen genutzten Funktionen.</li><li>Erf\u00fcllung von Vertr\u00e4gen und Kundenanfragen.</li><li>Kontaktaufnahme mit Ihnen zu Aktualisierungen, Sicherheits- oder Servicehinweisen.</li><li>Bereitstellung von Informationen zu \u00e4hnlichen Produkten/Diensten (sofern Sie nicht widersprochen haben).</li><li>Analyse, Verbesserung und Schutz unseres Dienstes.</li><li>Gesch\u00e4fts\u00fcbertragungen (z. B. Fusion, Erwerb) gem\u00e4\u00df gesetzlichen Vorgaben.</li></ul><h3>Aufbewahrung</h3><p>Wir bewahren personenbezogene Daten nur so lange auf, wie es f\u00fcr die in dieser Erkl\u00e4rung beschriebenen Zwecke erforderlich ist oder gesetzlich vorgeschrieben wird.</p><h3>\u00dcbermittlung</h3><p>Ihre Daten k\u00f6nnen in L\u00e4nder au\u00dferhalb Ihres Wohnsitzstaates \u00fcbertragen und dort verarbeitet werden. Wir stellen sicher, dass geeignete Schutzma\u00dfnahmen vorhanden sind.</p><h3>Offenlegung</h3><ul><li><strong>Gesetzliche Anforderungen</strong>: Wir k\u00f6nnen personenbezogene Daten offenlegen, wenn dies gesetzlich vorgeschrieben ist.</li><li><strong>Gesch\u00e4fts\u00fcbertragungen</strong>: Bei Fusion, Erwerb oder Ver\u00e4u\u00dferung von Verm\u00f6genswerten.</li><li><strong>Schutz</strong>: Zur Wahrung unserer Rechte, zur Betrugspr\u00e4vention oder zur Sicherheit der Nutzer.</li></ul><h3>Sicherheit</h3><p>Wir setzen angemessene technische und organisatorische Ma\u00dfnahmen ein, um personenbezogene Daten zu sch\u00fctzen. Keine Methode der \u00dcbertragung oder Speicherung ist jedoch 100 % sicher.</p><h2>Datenschutz von Kindern</h2><p>Unser Dienst richtet sich nicht an Personen unter 13 Jahren. Wir erfassen wissentlich keine Daten von Kindern unter 13 Jahren.</p><h2>Links zu anderen Websites</h2><p>Unser Dienst kann Links zu Websites Dritter enthalten. F\u00fcr deren Inhalte und Datenschutzpraktiken sind wir nicht verantwortlich.</p><h2>\u00c4nderungen an dieser Erkl\u00e4rung</h2><p>Wir k\u00f6nnen diese Datenschutzerkl\u00e4rung gelegentlich aktualisieren. \u00c4nderungen werden auf dieser Seite ver\u00f6ffentlicht; das Datum \u201eLetzte Aktualisierung\u201c wird angepasst.</p><h2>Kontakt</h2><p>Fragen? Besuchen Sie <a href=\"https://webaby.io\" target=\"_blank\" rel=\"noopener\">webaby.io</a>.</p>"
-        },
-        "product": {
-            "bodyHtml": "<h1>Datenschutzerkl\u00e4rung f\u00fcr {{appName}}</h1><p>Letzte Aktualisierung: 10. April 2024</p><p>Diese Datenschutzerkl\u00e4rung beschreibt, wie {{appName}} (ein Produkt von Webaby) Ihre Informationen erfasst, nutzt und offenlegt, wenn Sie die App nutzen. Sie erkl\u00e4rt Ihre Rechte und wie das Gesetz Sie sch\u00fctzt.</p><h2>Auslegung und Definitionen</h2><ul><li><strong>Service</strong>: die Anwendung {{appName}}.</li><li><strong>Unternehmen</strong>: Webaby (\"wir\", \"uns\", \"unser\").</li><li><strong>Konto</strong>: Ihr Benutzerkonto f\u00fcr den Zugriff auf Funktionen von {{appName}}.</li><li><strong>Dienstanbieter</strong>: beauftragte Dritte, die uns bei Betrieb, Analyse oder Support von {{appName}} helfen.</li><li><strong>Nutzungsdaten</strong>: automatisch erfasste technische Daten (z. B. IP, Ger\u00e4tekennungen, App-Version, Interaktionen).</li></ul><h2>Welche Daten wir verarbeiten</h2><h3>Personenbezogene Daten</h3><p>Sofern erforderlich, erfassen wir Kontaktangaben (z. B. E-Mail) zur Kommunikation, Supportf\u00e4llen oder Kontoverwaltung. Je nach Funktionsumfang der App k\u00f6nnen zus\u00e4tzliche Angaben n\u00f6tig sein; diese werden in der App transparent erl\u00e4utert.</p><h3>Nutzungsdaten</h3><p>Beim Verwenden von {{appName}} k\u00f6nnen automatisch Protokolle und technische Parameter anfallen (z. B. Absturzberichte, Leistungsmetriken, verwendete Funktionen). Diese Informationen helfen uns, Stabilit\u00e4t und Qualit\u00e4t zu verbessern.</p><h3>Cookies/\u00e4hnliche Technologien</h3><p>Sofern {{appName}} Web-Inhalte nutzt, k\u00f6nnen Cookies oder lokale Speicher eingesetzt werden. In der App selbst k\u00f6nnen ger\u00e4tespezifische Identifikatoren zu Sicherheits- und Diagnosenzwecken verwendet werden.</p><h2>Wie wir Daten nutzen</h2><ul><li>Zur Bereitstellung, Wartung und Verbesserung von {{appName}}.</li><li>Zur Personalisierung bestimmter Funktionen (falls verf\u00fcgbar).</li><li>Zur Kommunikation mit Ihnen (z. B. Updates, Sicherheitshinweise).</li><li>Zur Analyse der Nutzung, Qualit\u00e4tssicherung und zur Fehlerbehebung.</li><li>Zur Einhaltung rechtlicher Verpflichtungen.</li></ul><h2>Rechtsgrundlagen (EU/EWR)</h2><p>Je nach Situation st\u00fctzen wir die Verarbeitung auf: (i) Einwilligung (Art. 6 Abs. 1 a DSGVO), (ii) Vertragserf\u00fcllung (Art. 6 Abs. 1 b), (iii) berechtigtes Interesse (Art. 6 Abs. 1 f), (iv) rechtliche Verpflichtung (Art. 6 Abs. 1 c).</p><h2>Weitergabe von Daten</h2><ul><li>An Dienstanbieter (Hosting, Analytik, Support) auf Basis von Auftragsverarbeitungsvertr\u00e4gen.</li><li>Im Rahmen von Unternehmensvorg\u00e4ngen (z. B. Fusion/Erwerb) gem\u00e4\u00df gesetzlichen Anforderungen.</li><li>Wenn gesetzlich erforderlich oder zur Wahrung unserer Rechte/Sicherheit.</li></ul><h2>Aufbewahrung</h2><p>Personenbezogene Daten werden so lange gespeichert, wie es f\u00fcr die beschriebenen Zwecke erforderlich ist; Protokolldaten typischerweise k\u00fcrzer, sofern keine gesetzlichen Aufbewahrungspflichten bestehen.</p><h2>Internationale \u00dcbermittlungen</h2><p>Daten k\u00f6nnen in L\u00e4nder au\u00dferhalb des EWR \u00fcbertragen werden. Wir sorgen f\u00fcr geeignete Garantien (z. B. EU-Standardvertragsklauseln).</p><h2>Ihre Rechte</h2><ul><li>Auskunft, Berichtigung, L\u00f6schung, Einschr\u00e4nkung, Widerspruch, Daten\u00fcbertragbarkeit (gem\u00e4\u00df DSGVO, soweit anwendbar).</li><li>Widerruf einer Einwilligung mit Wirkung f\u00fcr die Zukunft.</li><li>Beschwerderecht bei einer Aufsichtsbeh\u00f6rde.</li></ul><h2>Sicherheit</h2><p>Wir treffen angemessene technische und organisatorische Ma\u00dfnahmen. Absolute Sicherheit kann jedoch nicht garantiert werden.</p><h2>Kinder</h2><p>{{appName}} richtet sich nicht an Kinder unter 13 Jahren. Wir erfassen wissentlich keine Daten von Kindern unter 13 Jahren.</p><h2>\u00c4nderungen</h2><p>Wir k\u00f6nnen diese Erkl\u00e4rung von Zeit zu Zeit aktualisieren; ma\u00dfgeblich ist die jeweils ver\u00f6ffentlichte Fassung in {{appName}} oder auf unserer Website.</p><h2>Kontakt</h2><p>Fragen zu dieser Datenschutzerkl\u00e4rung? Besuchen Sie <a href=\"https://webaby.io\" target=\"_blank\" rel=\"noopener\">webaby.io</a>.</p>"
-        }
+    "sections": {
+      "contact": {
+        "title": "Kontakt"
+      },
+      "products": {
+        "title": "Produkte"
+      }
+    }
+  },
+  "nav": {
+    "about": "Über uns",
+    "contact": "Kontakt",
+    "home": "Startseite",
+    "products": "Produkte"
+  },
+  "policy": {
+    "global": {
+      "bodyHtml": "<h1>Datenschutzerklärung</h1><p>Letzte Aktualisierung: 10. April 2024</p><p>Diese Datenschutzerklärung beschreibt unsere Richtlinien und Verfahren zur Erhebung, Nutzung und Offenlegung Ihrer Informationen bei der Nutzung unserer Website und Dienste. Sie erklärt Ihre Datenschutzrechte und wie das Gesetz Sie schützt.</p><p>Wir verwenden Ihre personenbezogenen Daten, um unseren Dienst bereitzustellen und zu verbessern. Durch die Nutzung des Dienstes stimmen Sie der Erhebung und Nutzung von Informationen gemäß dieser Datenschutzerklärung zu.</p><h2>Auslegung und Definitionen</h2><h3>Auslegung</h3><p>Begriffe, deren Anfangsbuchstabe großgeschrieben ist, haben die unten definierten Bedeutungen. Die folgenden Definitionen haben die gleiche Bedeutung, unabhängig davon, ob sie im Singular oder Plural erscheinen.</p><h3>Definitionen</h3><ul><li><strong>Konto</strong>: ein eindeutiges Konto, das für Sie erstellt wird, um auf unseren Dienst oder Teile davon zuzugreifen.</li><li><strong>Unternehmen</strong> (\"wir\", \"uns\" oder \"unser\"): Webaby.</li><li><strong>Cookies</strong>: kleine Dateien, die von einer Website auf Ihrem Gerät gespeichert werden.</li><li><strong>Land</strong>: das Land, in dem Webaby tätig ist.</li><li><strong>Gerät</strong>: jedes Gerät, das auf den Dienst zugreifen kann (z. B. Computer, Smartphone oder Tablet).</li><li><strong>Personenbezogene Daten</strong>: alle Informationen, die sich auf eine identifizierte oder identifizierbare Person beziehen.</li><li><strong>Dienst</strong>: die Website von Webaby sowie die dort angebotenen Inhalte und Funktionen.</li><li><strong>Dienstanbieter</strong>: natürliche oder juristische Personen, die Daten im Auftrag des Unternehmens verarbeiten.</li><li><strong>Nutzungsdaten</strong>: Daten, die automatisch erfasst werden, z. B. IP-Adresse, Browsertyp, besuchte Seiten, Datum/Uhrzeit und Verweildauer.</li></ul><h2>Erhebung und Verwendung personenbezogener Daten</h2><h3>Arten der erfassten Daten</h3><h4>Personenbezogene Daten</h4><p>Wir können Sie bitten, bestimmte personenbezogene Daten bereitzustellen, die zur Kontaktaufnahme oder Identifizierung verwendet werden können (z. B. E-Mail-Adresse).</p><h4>Nutzungsdaten</h4><p>Nutzungsdaten werden bei der Nutzung des Dienstes automatisch erfasst und können technische Informationen wie IP-Adresse, Browsertyp, besuchte Seiten und Gerätekennungen enthalten.</p><h4>Tracking-Technologien und Cookies</h4><p>Wir verwenden Cookies, Web-Beacons und ähnliche Technologien, um Aktivitäten zu verfolgen und Informationen zu speichern. Sie können Ihren Browser so einstellen, dass Cookies abgelehnt werden; manche Teile des Dienstes funktionieren dann möglicherweise nicht korrekt.</p><h3>Zwecke der Verarbeitung</h3><ul><li>Bereitstellung und Wartung des Dienstes, einschließlich Überwachung der Nutzung.</li><li>Verwaltung Ihres Kontos und der von Ihnen genutzten Funktionen.</li><li>Erfüllung von Verträgen und Kundenanfragen.</li><li>Kontaktaufnahme mit Ihnen zu Aktualisierungen, Sicherheits- oder Servicehinweisen.</li><li>Bereitstellung von Informationen zu ähnlichen Produkten/Diensten (sofern Sie nicht widersprochen haben).</li><li>Analyse, Verbesserung und Schutz unseres Dienstes.</li><li>Geschäftsübertragungen (z. B. Fusion, Erwerb) gemäß gesetzlichen Vorgaben.</li></ul><h3>Aufbewahrung</h3><p>Wir bewahren personenbezogene Daten nur so lange auf, wie es für die in dieser Erklärung beschriebenen Zwecke erforderlich ist oder gesetzlich vorgeschrieben wird.</p><h3>Übermittlung</h3><p>Ihre Daten können in Länder außerhalb Ihres Wohnsitzstaates übertragen und dort verarbeitet werden. Wir stellen sicher, dass geeignete Schutzmaßnahmen vorhanden sind.</p><h3>Offenlegung</h3><ul><li><strong>Gesetzliche Anforderungen</strong>: Wir können personenbezogene Daten offenlegen, wenn dies gesetzlich vorgeschrieben ist.</li><li><strong>Geschäftsübertragungen</strong>: Bei Fusion, Erwerb oder Veräußerung von Vermögenswerten.</li><li><strong>Schutz</strong>: Zur Wahrung unserer Rechte, zur Betrugsprävention oder zur Sicherheit der Nutzer.</li></ul><h3>Sicherheit</h3><p>Wir setzen angemessene technische und organisatorische Maßnahmen ein, um personenbezogene Daten zu schützen. Keine Methode der Übertragung oder Speicherung ist jedoch 100 % sicher.</p><h2>Datenschutz von Kindern</h2><p>Unser Dienst richtet sich nicht an Personen unter 13 Jahren. Wir erfassen wissentlich keine Daten von Kindern unter 13 Jahren.</p><h2>Links zu anderen Websites</h2><p>Unser Dienst kann Links zu Websites Dritter enthalten. Für deren Inhalte und Datenschutzpraktiken sind wir nicht verantwortlich.</p><h2>Änderungen an dieser Erklärung</h2><p>Wir können diese Datenschutzerklärung gelegentlich aktualisieren. Änderungen werden auf dieser Seite veröffentlicht; das Datum „Letzte Aktualisierung“ wird angepasst.</p><h2>Kontakt</h2><p>Fragen? Besuchen Sie <a href=\"https://webaby.io\" target=\"_blank\" rel=\"noopener\">webaby.io</a>.</p>"
     },
-    "social": {
-        "discord": "Discord",
-        "twitter": "Twitter / X",
-        "youtube": "YouTube"
-    },
-    "title": "Webaby"
+    "product": {
+      "bodyHtml": "<h1>Datenschutzerklärung für {{appName}}</h1><p>Letzte Aktualisierung: 10. April 2024</p><p>Diese Datenschutzerklärung beschreibt, wie {{appName}} (ein Produkt von Webaby) Ihre Informationen erfasst, nutzt und offenlegt, wenn Sie die App nutzen. Sie erklärt Ihre Rechte und wie das Gesetz Sie schützt.</p><h2>Auslegung und Definitionen</h2><ul><li><strong>Service</strong>: die Anwendung {{appName}}.</li><li><strong>Unternehmen</strong>: Webaby (\"wir\", \"uns\", \"unser\").</li><li><strong>Konto</strong>: Ihr Benutzerkonto für den Zugriff auf Funktionen von {{appName}}.</li><li><strong>Dienstanbieter</strong>: beauftragte Dritte, die uns bei Betrieb, Analyse oder Support von {{appName}} helfen.</li><li><strong>Nutzungsdaten</strong>: automatisch erfasste technische Daten (z. B. IP, Gerätekennungen, App-Version, Interaktionen).</li></ul><h2>Welche Daten wir verarbeiten</h2><h3>Personenbezogene Daten</h3><p>Sofern erforderlich, erfassen wir Kontaktangaben (z. B. E-Mail) zur Kommunikation, Supportfällen oder Kontoverwaltung. Je nach Funktionsumfang der App können zusätzliche Angaben nötig sein; diese werden in der App transparent erläutert.</p><h3>Nutzungsdaten</h3><p>Beim Verwenden von {{appName}} können automatisch Protokolle und technische Parameter anfallen (z. B. Absturzberichte, Leistungsmetriken, verwendete Funktionen). Diese Informationen helfen uns, Stabilität und Qualität zu verbessern.</p><h3>Cookies/ähnliche Technologien</h3><p>Sofern {{appName}} Web-Inhalte nutzt, können Cookies oder lokale Speicher eingesetzt werden. In der App selbst können gerätespezifische Identifikatoren zu Sicherheits- und Diagnosenzwecken verwendet werden.</p><h2>Wie wir Daten nutzen</h2><ul><li>Zur Bereitstellung, Wartung und Verbesserung von {{appName}}.</li><li>Zur Personalisierung bestimmter Funktionen (falls verfügbar).</li><li>Zur Kommunikation mit Ihnen (z. B. Updates, Sicherheitshinweise).</li><li>Zur Analyse der Nutzung, Qualitätssicherung und zur Fehlerbehebung.</li><li>Zur Einhaltung rechtlicher Verpflichtungen.</li></ul><h2>Rechtsgrundlagen (EU/EWR)</h2><p>Je nach Situation stützen wir die Verarbeitung auf: (i) Einwilligung (Art. 6 Abs. 1 a DSGVO), (ii) Vertragserfüllung (Art. 6 Abs. 1 b), (iii) berechtigtes Interesse (Art. 6 Abs. 1 f), (iv) rechtliche Verpflichtung (Art. 6 Abs. 1 c).</p><h2>Weitergabe von Daten</h2><ul><li>An Dienstanbieter (Hosting, Analytik, Support) auf Basis von Auftragsverarbeitungsverträgen.</li><li>Im Rahmen von Unternehmensvorgängen (z. B. Fusion/Erwerb) gemäß gesetzlichen Anforderungen.</li><li>Wenn gesetzlich erforderlich oder zur Wahrung unserer Rechte/Sicherheit.</li></ul><h2>Aufbewahrung</h2><p>Personenbezogene Daten werden so lange gespeichert, wie es für die beschriebenen Zwecke erforderlich ist; Protokolldaten typischerweise kürzer, sofern keine gesetzlichen Aufbewahrungspflichten bestehen.</p><h2>Internationale Übermittlungen</h2><p>Daten können in Länder außerhalb des EWR übertragen werden. Wir sorgen für geeignete Garantien (z. B. EU-Standardvertragsklauseln).</p><h2>Ihre Rechte</h2><ul><li>Auskunft, Berichtigung, Löschung, Einschränkung, Widerspruch, Datenübertragbarkeit (gemäß DSGVO, soweit anwendbar).</li><li>Widerruf einer Einwilligung mit Wirkung für die Zukunft.</li><li>Beschwerderecht bei einer Aufsichtsbehörde.</li></ul><h2>Sicherheit</h2><p>Wir treffen angemessene technische und organisatorische Maßnahmen. Absolute Sicherheit kann jedoch nicht garantiert werden.</p><h2>Kinder</h2><p>{{appName}} richtet sich nicht an Kinder unter 13 Jahren. Wir erfassen wissentlich keine Daten von Kindern unter 13 Jahren.</p><h2>Änderungen</h2><p>Wir können diese Erklärung von Zeit zu Zeit aktualisieren; maßgeblich ist die jeweils veröffentlichte Fassung in {{appName}} oder auf unserer Website.</p><h2>Kontakt</h2><p>Fragen zu dieser Datenschutzerklärung? Besuchen Sie <a href=\"https://webaby.io\" target=\"_blank\" rel=\"noopener\">webaby.io</a>.</p>"
+    }
+  },
+  "social": {
+    "discord": "Discord",
+    "twitter": "Twitter / X",
+    "youtube": "YouTube"
+  },
+  "title": "Webaby"
 }

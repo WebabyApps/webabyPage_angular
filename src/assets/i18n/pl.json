@@ -1,99 +1,104 @@
 {
     "aria": {
-        "home": "Webaby Strona g\u0142\u00f3wna"
+        "home": "Webaby Strona główna"
     },
     "home": {
         "about": {
             "alt": {
-                "future": "Technologie przysz\u0142o\u015bci",
-                "grow": "Natychmiastowy rozw\u00f3j",
+                "future": "Technologie przyszłości",
+                "grow": "Natychmiastowy rozwój",
                 "scene2": "Ilustracja edukacji i rozwoju",
                 "software": "Tworzenie oprogramowania"
             },
             "dev": {
-                "p1": "W Webaby projektujemy oprogramowanie \u0142\u0105cz\u0105ce zabaw\u0119 z wiedz\u0105. Nasze gry i aplikacje \u2014 od \u0142amig\u0142\u00f3wek po przygody akcji \u2014 pe\u0142ne s\u0105 wyobra\u017ani, fabu\u0142y i kolorowych \u015bwiat\u00f3w.",
-                "p2": "Ka\u017cdy produkt powstaje, aby rozbudza\u0107 ciekawo\u015b\u0107 i sprawia\u0107, \u017ce nauka staje si\u0119 zabaw\u0105.",
-                "title": "Tworzenie oprogramowania i nauka przez zabaw\u0119"
+                "p1": "W Webaby projektujemy oprogramowanie łączące zabawę z wiedzą. Nasze gry i aplikacje — od łamigłówek po przygody akcji — pełne są wyobraźni, fabuły i kolorowych światów.",
+                "p2": "Każdy produkt powstaje, aby rozbudzać ciekawość i sprawiać, że nauka staje się zabawą.",
+                "title": "Tworzenie oprogramowania i nauka przez zabawę"
             },
             "innovation": {
-                "p1": "Innowacja jest sercem wszystkiego, co robimy. Badamy najnowsze technologie: sztuczn\u0105 inteligencj\u0119, blockchain, gry i interaktywne opowie\u015bci, a tak\u017ce nowoczesne in\u017cynierie oprogramowania.",
-                "p2": "Nasza pasja do technologii pozwala nam tworzy\u0107 nowe sposoby uczenia si\u0119 i wprowadza\u0107 odwa\u017cne, warto\u015bciowe produkty na rynek.",
+                "p1": "Innowacja jest sercem wszystkiego, co robimy. Badamy najnowsze technologie: sztuczną inteligencję, blockchain, gry i interaktywne opowieści, a także nowoczesne inżynierie oprogramowania.",
+                "p2": "Nasza pasja do technologii pozwala nam tworzyć nowe sposoby uczenia się i wprowadzać odważne, wartościowe produkty na rynek.",
                 "title": "Innowacja i technologia"
             },
             "mission": {
-                "p1": "Wierzymy, \u017ce technologia i zabawa to pot\u0119\u017cne narz\u0119dzia rozwoju. Nasz\u0105 misj\u0105 jest edukacja dzieci i doros\u0142ych poprzez interaktywne do\u015bwiadczenia, gdzie rozrywka nie jest celem samym w sobie, ale mostem do wiedzy.",
-                "p2": "Nie chcemy uzale\u017cnia\u0107, ale inspirowa\u0107. Zast\u0119pujemy biern\u0105 konsumpcj\u0119 aktywn\u0105 eksploracj\u0105. Rozwijamy kreatywno\u015b\u0107, krytyczne my\u015blenie i rado\u015b\u0107 odkrywania.",
+                "p1": "Wierzymy, że technologia i zabawa to potężne narzędzia rozwoju. Naszą misją jest edukacja dzieci i dorosłych poprzez interaktywne doświadczenia, gdzie rozrywka nie jest celem samym w sobie, ale mostem do wiedzy.",
+                "p2": "Nie chcemy uzależniać, ale inspirować. Zastępujemy bierną konsumpcję aktywną eksploracją. Rozwijamy kreatywność, krytyczne myślenie i radość odkrywania.",
                 "title": "Nasza misja"
             },
             "title": "Cele Webaby",
             "vision": {
-                "p1": "Chcemy sta\u0107 si\u0119 globalnym centrum, gdzie edukacja, kreatywno\u015b\u0107 i innowacja spotykaj\u0105 si\u0119. \u0141\u0105cz\u0105c technologi\u0119 z ludzk\u0105 wyobra\u017ani\u0105, Webaby pragnie tworzy\u0107 narz\u0119dzia, kt\u00f3re czyni\u0105 nauk\u0119 anga\u017cuj\u0105c\u0105 dla wszystkich i budowa\u0107 spo\u0142eczno\u015bci wok\u00f3\u0142 wiedzy i zabawy.",
-                "p2": "Stale eksperymentujemy z nowymi obszarami cyfrowymi, aby dostarcza\u0107 do\u015bwiadcze\u0144, kt\u00f3re maj\u0105 znaczenie.",
-                "title": "Wizja d\u0142ugoterminowa"
+                "p1": "Chcemy stać się globalnym centrum, gdzie edukacja, kreatywność i innowacja spotykają się. Łącząc technologię z ludzką wyobraźnią, Webaby pragnie tworzyć narzędzia, które czynią naukę angażującą dla wszystkich i budować społeczności wokół wiedzy i zabawy.",
+                "p2": "Stale eksperymentujemy z nowymi obszarami cyfrowymi, aby dostarczać doświadczeń, które mają znaczenie.",
+                "title": "Wizja długoterminowa"
             }
         },
         "hero": {
             "cta": "Zobacz produkty",
-            "lead": "Graj \u2022 Ucz si\u0119 \u2022 Wyobra\u017caj",
+            "lead": "Graj • Ucz się • Wyobrażaj",
             "logoAria": "Logo Webaby",
-            "title": "Technologia w s\u0142u\u017cbie nauki"
+            "title": "Technologia w służbie nauki"
         },
         "products": {
             "abcLand": {
-                "desc": "Niezwyk\u0142a przygoda w nauce alfabetu.",
+                "desc": "Niezwykła przygoda w nauce alfabetu.",
                 "imgAlt": "Gra ABC Land",
                 "title": "ABC Land"
             },
             "aria": {
-                "next": "Nast\u0119pny produkt",
+                "next": "Następny produkt",
                 "prev": "Poprzedni produkt"
             },
             "basketballShots": {
-                "desc": "Zr\u0119czno\u015bciowa koszyk\u00f3wka \u2014 celuj, rzucaj, zdobywaj punkty!",
+                "desc": "Zręcznościowa koszykówka — celuj, rzucaj, zdobywaj punkty!",
                 "imgAlt": "Gra Basketball Shots",
                 "title": "Basketball Shots"
             },
             "bibbleEcho": {
-                "desc": "Podr\u00f3\u017c duchowa\u2026 eksploruj uwa\u017cno\u015b\u0107 i refleksj\u0119.",
+                "desc": "Podróż duchowa… eksploruj uważność i refleksję.",
                 "imgAlt": "Gra Bibble Echo",
                 "title": "Bibble Echo"
             },
             "bubbleWord": {
-                "desc": "Szybka gra s\u0142owna\u2026 uk\u0142adaj s\u0142owa i walcz z czasem!",
+                "desc": "Szybka gra słowna… układaj słowa i walcz z czasem!",
                 "imgAlt": "Gra Bubble Word",
                 "title": "Bubble Word"
             },
             "cta": {
-                "more": "Dowiedz si\u0119 wi\u0119cej"
+                "more": "Dowiedz się więcej"
             },
             "dialog": {
                 "close": "Zamknij okno",
-                "detailsCta": "Szczeg\u00f3\u0142owy tutorial",
-                "openLink": "Otw\u00f3rz link do aplikacji",
-                "qrInstruction": "Zeskanuj kod QR, aby otworzy\u0107 aplikacj\u0119 na telefonie"
+                "detailsCta": "Szczegółowy tutorial",
+                "openLink": "Otwórz link do aplikacji",
+                "qrInstruction": "Zeskanuj kod QR, aby otworzyć aplikację na telefonie"
             },
             "equationsTrainer": {
-                "desc": "U\u0142atwiamy algebr\u0119 \u2014 \u0107wicz rozwi\u0105zywanie uk\u0142ad\u00f3w liniowych krok po kroku.",
-                "imgAlt": "Aplikacja do nauki r\u00f3wna\u0144",
-                "title": "Trener uk\u0142ad\u00f3w r\u00f3wna\u0144"
+                "desc": "Ułatwiamy algebrę — ćwicz rozwiązywanie układów liniowych krok po kroku.",
+                "imgAlt": "Aplikacja do nauki równań",
+                "title": "Trener układów równań"
             },
             "luckyDraw": {
-                "desc": "Zakr\u0119\u0107, wybierz, \u015bwi\u0119tuj!",
+                "desc": "Zakręć, wybierz, świętuj!",
                 "imgAlt": "Gra Lucky Draw",
                 "title": "Lucky Draw"
             },
             "musiccolours": {
-                "desc": "Gra rytmiczna: kolory zmieniaj\u0105 si\u0119 w rytm muzyki, a Twoim zadaniem jest z\u0142apa\u0107 aktualny kolor. Bonusy pomagaj\u0105 przechodzi\u0107 poziomy, a po 10 trafieniach wchodzisz na kolejny level. Uwa\u017caj na Death Gift i limit czasu!",
-                "imgAlt": "Gra Music Colours \u2013 \u0142ap kolory w rytm muzyki",
+                "desc": "Gra rytmiczna: kolory zmieniają się w rytm muzyki, a Twoim zadaniem jest złapać aktualny kolor. Bonusy pomagają przechodzić poziomy, a po 10 trafieniach wchodzisz na kolejny level. Uważaj na Death Gift i limit czasu!",
+                "imgAlt": "Gra Music Colours – łap kolory w rytm muzyki",
                 "title": "Music Colours"
             },
             "musiccoloursSubscription": {
-                "desc": "Po wykupieniu subskrypcji mo\u017cesz dodawa\u0107 w\u0142asne utwory i gra\u0107 do swojej muzyki.",
-                "title": "W\u0142asne soundtracki"
+                "desc": "Po wykupieniu subskrypcji możesz dodawać własne utwory i grać do swojej muzyki.",
+                "title": "Własne soundtracki"
+            },
+            "freeride": {
+                "title": "FreeRide",
+                "desc": "Aplikacja do carpoolingu: łatwo oferuj i rezerwuj przejazdy. Wbudowane Google Maps ułatwia wybór punktów, a AI pomaga optymalizować trasę.",
+                "imgAlt": "FreeRide - aplikacja do carpoolingu z Google Maps i optymalizacją trasy AI"
             },
             "socialmigrateai": {
-                "desc": "Przenie\u015b swoje posty z Facebooka w kilku klikni\u0119ciach.",
-                "imgAlt": "Aplikacja Social Migrate AI do migracji post\u00f3w z Facebooka",
+                "desc": "Przenieś swoje posty z Facebooka w kilku kliknięciach.",
+                "imgAlt": "Aplikacja Social Migrate AI do migracji postów z Facebooka",
                 "title": "Social Migrate AI"
             }
         },
@@ -109,15 +114,15 @@
     "nav": {
         "about": "O nas",
         "contact": "Kontakt",
-        "home": "Strona g\u0142\u00f3wna",
+        "home": "Strona główna",
         "products": "Produkty"
     },
     "policy": {
         "global": {
-            "bodyHtml": "<h1>Polityka Prywatno\u015bci</h1><p>Ostatnia aktualizacja: 10 kwietnia 2024</p><p>Niniejsza Polityka Prywatno\u015bci opisuje nasze zasady i procedury dotycz\u0105ce gromadzenia, wykorzystywania i ujawniania Twoich danych podczas korzystania z naszej strony internetowej i us\u0142ug. Wyja\u015bnia r\u00f3wnie\u017c Twoje prawa zwi\u0105zane z prywatno\u015bci\u0105 oraz spos\u00f3b, w jaki prawo Ci\u0119 chroni.</p><p>U\u017cywamy Twoich danych osobowych w celu \u015bwiadczenia i ulepszania naszych us\u0142ug. Korzystaj\u0105c z us\u0142ug, wyra\u017casz zgod\u0119 na gromadzenie i wykorzystywanie informacji zgodnie z niniejsz\u0105 Polityk\u0105 Prywatno\u015bci.</p><h2>Interpretacja i definicje</h2><h3>Interpretacja</h3><p>S\u0142owa, kt\u00f3rych pierwsza litera jest napisana wielk\u0105 liter\u0105, maj\u0105 znaczenia zdefiniowane poni\u017cej. Definicje te maj\u0105 to samo znaczenie niezale\u017cnie od tego, czy wyst\u0119puj\u0105 w liczbie pojedynczej czy mnogiej.</p><h3>Definicje</h3><ul><li><strong>Konto</strong>: unikalne konto utworzone dla Ciebie w celu uzyskania dost\u0119pu do naszych us\u0142ug lub ich cz\u0119\u015bci.</li><li><strong>Firma</strong> (\"my\", \"nasz\", \"nasza\"): Webaby.</li><li><strong>Cookies</strong>: pliki ma\u0142ej wielko\u015bci przechowywane na Twoim urz\u0105dzeniu przez stron\u0119 internetow\u0105.</li><li><strong>Kraj</strong>: kraj, w kt\u00f3rym dzia\u0142a Webaby.</li><li><strong>Urz\u0105dzenie</strong>: ka\u017cde urz\u0105dzenie umo\u017cliwiaj\u0105ce dost\u0119p do naszych us\u0142ug, np. komputer, telefon lub tablet.</li><li><strong>Dane osobowe</strong>: wszelkie informacje dotycz\u0105ce zidentyfikowanej lub mo\u017cliwej do zidentyfikowania osoby fizycznej.</li><li><strong>Us\u0142uga</strong>: strona internetowa Webaby wraz z oferowanymi tre\u015bciami i funkcjonalno\u015bciami.</li><li><strong>Dostawca us\u0142ug</strong>: osoba fizyczna lub prawna przetwarzaj\u0105ca dane w imieniu firmy.</li><li><strong>Dane o u\u017cytkowaniu</strong>: dane zbierane automatycznie, np. adres IP, typ przegl\u0105darki, odwiedzane strony, data/godzina i czas sp\u0119dzony na stronie.</li></ul><h2>Gromadzenie i wykorzystywanie danych osobowych</h2><h3>Rodzaje gromadzonych danych</h3><h4>Dane osobowe</h4><p>Mo\u017cemy poprosi\u0107 Ci\u0119 o podanie danych osobowych (np. adresu e-mail), kt\u00f3re b\u0119d\u0105 u\u017cywane do kontaktu z Tob\u0105 lub identyfikacji.</p><h4>Dane o u\u017cytkowaniu</h4><p>Dane o u\u017cytkowaniu s\u0105 zbierane automatycznie podczas korzystania z us\u0142ug i mog\u0105 zawiera\u0107 informacje techniczne, takie jak adres IP, typ przegl\u0105darki, odwiedzane strony, identyfikatory urz\u0105dze\u0144.</p><h4>Pliki cookies</h4><p>U\u017cywamy cookies oraz podobnych technologii \u015bledz\u0105cych, aby monitorowa\u0107 aktywno\u015b\u0107 i przechowywa\u0107 informacje. Mo\u017cesz ustawi\u0107 przegl\u0105dark\u0119 tak, aby odrzuca\u0142a cookies; niekt\u00f3re cz\u0119\u015bci us\u0142ug mog\u0105 wtedy nie dzia\u0142a\u0107 poprawnie.</p><h3>Cel przetwarzania</h3><ul><li>\u015awiadczenie i utrzymanie us\u0142ug, w tym monitorowanie ich wykorzystania.</li><li>Zarz\u0105dzanie Twoim kontem i funkcjonalno\u015bciami.</li><li>Realizacja um\u00f3w i obs\u0142uga klient\u00f3w.</li><li>Kontaktowanie si\u0119 z Tob\u0105 w sprawie aktualizacji, bezpiecze\u0144stwa lub komunikat\u00f3w dotycz\u0105cych us\u0142ug.</li><li>Dostarczanie informacji o podobnych produktach/us\u0142ugach (o ile nie wyrazi\u0142e\u015b sprzeciwu).</li><li>Analiza, ulepszanie i ochrona naszych us\u0142ug.</li><li>Obs\u0142uga proces\u00f3w biznesowych (np. fuzje, przej\u0119cia) zgodnie z prawem.</li></ul><h3>Okres przechowywania</h3><p>Dane osobowe przechowujemy tak d\u0142ugo, jak jest to niezb\u0119dne do realizacji cel\u00f3w okre\u015blonych w niniejszej Polityce Prywatno\u015bci lub wymagane prawem.</p><h3>Przekazywanie danych</h3><p>Twoje dane mog\u0105 by\u0107 przekazywane i przetwarzane w krajach innych ni\u017c Tw\u00f3j kraj zamieszkania. Zapewniamy odpowiednie \u015brodki ochrony.</p><h3>Ujawnianie danych</h3><ul><li><strong>Wymogi prawne</strong>: mo\u017cemy ujawni\u0107 dane osobowe, je\u015bli wymaga tego prawo.</li><li><strong>Procesy biznesowe</strong>: w przypadku fuzji, przej\u0119cia lub sprzeda\u017cy aktyw\u00f3w.</li><li><strong>Ochrona</strong>: dla ochrony naszych praw, zapobiegania oszustwom i bezpiecze\u0144stwa u\u017cytkownik\u00f3w.</li></ul><h3>Bezpiecze\u0144stwo</h3><p>Stosujemy odpowiednie \u015brodki techniczne i organizacyjne w celu ochrony danych osobowych. Jednak \u017cadna metoda transmisji lub przechowywania nie jest w 100% bezpieczna.</p><h2>Prywatno\u015b\u0107 dzieci</h2><p>Nasze us\u0142ugi nie s\u0105 skierowane do os\u00f3b poni\u017cej 13 roku \u017cycia. Nie zbieramy \u015bwiadomie danych dzieci poni\u017cej 13 lat.</p><h2>Linki do innych stron</h2><p>Nasze us\u0142ugi mog\u0105 zawiera\u0107 linki do stron os\u00f3b trzecich. Nie ponosimy odpowiedzialno\u015bci za ich tre\u015bci ani praktyki prywatno\u015bci.</p><h2>Zmiany w Polityce Prywatno\u015bci</h2><p>Mo\u017cemy aktualizowa\u0107 niniejsz\u0105 Polityk\u0119 Prywatno\u015bci. Wszelkie zmiany publikujemy na tej stronie, a data \u201eOstatnia aktualizacja\u201d zostaje zmieniona.</p><h2>Kontakt</h2><p>Masz pytania? Odwied\u017a <a href=\"https://webaby.io\" target=\"_blank\" rel=\"noopener\">webaby.io</a>.</p>"
+            "bodyHtml": "<h1>Polityka Prywatności</h1><p>Ostatnia aktualizacja: 10 kwietnia 2024</p><p>Niniejsza Polityka Prywatności opisuje nasze zasady i procedury dotyczące gromadzenia, wykorzystywania i ujawniania Twoich danych podczas korzystania z naszej strony internetowej i usług. Wyjaśnia również Twoje prawa związane z prywatnością oraz sposób, w jaki prawo Cię chroni.</p><p>Używamy Twoich danych osobowych w celu świadczenia i ulepszania naszych usług. Korzystając z usług, wyrażasz zgodę na gromadzenie i wykorzystywanie informacji zgodnie z niniejszą Polityką Prywatności.</p><h2>Interpretacja i definicje</h2><h3>Interpretacja</h3><p>Słowa, których pierwsza litera jest napisana wielką literą, mają znaczenia zdefiniowane poniżej. Definicje te mają to samo znaczenie niezależnie od tego, czy występują w liczbie pojedynczej czy mnogiej.</p><h3>Definicje</h3><ul><li><strong>Konto</strong>: unikalne konto utworzone dla Ciebie w celu uzyskania dostępu do naszych usług lub ich części.</li><li><strong>Firma</strong> (\"my\", \"nasz\", \"nasza\"): Webaby.</li><li><strong>Cookies</strong>: pliki małej wielkości przechowywane na Twoim urządzeniu przez stronę internetową.</li><li><strong>Kraj</strong>: kraj, w którym działa Webaby.</li><li><strong>Urządzenie</strong>: każde urządzenie umożliwiające dostęp do naszych usług, np. komputer, telefon lub tablet.</li><li><strong>Dane osobowe</strong>: wszelkie informacje dotyczące zidentyfikowanej lub możliwej do zidentyfikowania osoby fizycznej.</li><li><strong>Usługa</strong>: strona internetowa Webaby wraz z oferowanymi treściami i funkcjonalnościami.</li><li><strong>Dostawca usług</strong>: osoba fizyczna lub prawna przetwarzająca dane w imieniu firmy.</li><li><strong>Dane o użytkowaniu</strong>: dane zbierane automatycznie, np. adres IP, typ przeglądarki, odwiedzane strony, data/godzina i czas spędzony na stronie.</li></ul><h2>Gromadzenie i wykorzystywanie danych osobowych</h2><h3>Rodzaje gromadzonych danych</h3><h4>Dane osobowe</h4><p>Możemy poprosić Cię o podanie danych osobowych (np. adresu e-mail), które będą używane do kontaktu z Tobą lub identyfikacji.</p><h4>Dane o użytkowaniu</h4><p>Dane o użytkowaniu są zbierane automatycznie podczas korzystania z usług i mogą zawierać informacje techniczne, takie jak adres IP, typ przeglądarki, odwiedzane strony, identyfikatory urządzeń.</p><h4>Pliki cookies</h4><p>Używamy cookies oraz podobnych technologii śledzących, aby monitorować aktywność i przechowywać informacje. Możesz ustawić przeglądarkę tak, aby odrzucała cookies; niektóre części usług mogą wtedy nie działać poprawnie.</p><h3>Cel przetwarzania</h3><ul><li>Świadczenie i utrzymanie usług, w tym monitorowanie ich wykorzystania.</li><li>Zarządzanie Twoim kontem i funkcjonalnościami.</li><li>Realizacja umów i obsługa klientów.</li><li>Kontaktowanie się z Tobą w sprawie aktualizacji, bezpieczeństwa lub komunikatów dotyczących usług.</li><li>Dostarczanie informacji o podobnych produktach/usługach (o ile nie wyraziłeś sprzeciwu).</li><li>Analiza, ulepszanie i ochrona naszych usług.</li><li>Obsługa procesów biznesowych (np. fuzje, przejęcia) zgodnie z prawem.</li></ul><h3>Okres przechowywania</h3><p>Dane osobowe przechowujemy tak długo, jak jest to niezbędne do realizacji celów określonych w niniejszej Polityce Prywatności lub wymagane prawem.</p><h3>Przekazywanie danych</h3><p>Twoje dane mogą być przekazywane i przetwarzane w krajach innych niż Twój kraj zamieszkania. Zapewniamy odpowiednie środki ochrony.</p><h3>Ujawnianie danych</h3><ul><li><strong>Wymogi prawne</strong>: możemy ujawnić dane osobowe, jeśli wymaga tego prawo.</li><li><strong>Procesy biznesowe</strong>: w przypadku fuzji, przejęcia lub sprzedaży aktywów.</li><li><strong>Ochrona</strong>: dla ochrony naszych praw, zapobiegania oszustwom i bezpieczeństwa użytkowników.</li></ul><h3>Bezpieczeństwo</h3><p>Stosujemy odpowiednie środki techniczne i organizacyjne w celu ochrony danych osobowych. Jednak żadna metoda transmisji lub przechowywania nie jest w 100% bezpieczna.</p><h2>Prywatność dzieci</h2><p>Nasze usługi nie są skierowane do osób poniżej 13 roku życia. Nie zbieramy świadomie danych dzieci poniżej 13 lat.</p><h2>Linki do innych stron</h2><p>Nasze usługi mogą zawierać linki do stron osób trzecich. Nie ponosimy odpowiedzialności za ich treści ani praktyki prywatności.</p><h2>Zmiany w Polityce Prywatności</h2><p>Możemy aktualizować niniejszą Politykę Prywatności. Wszelkie zmiany publikujemy na tej stronie, a data „Ostatnia aktualizacja” zostaje zmieniona.</p><h2>Kontakt</h2><p>Masz pytania? Odwiedź <a href=\"https://webaby.io\" target=\"_blank\" rel=\"noopener\">webaby.io</a>.</p>"
         },
         "product": {
-            "bodyHtml": "<h1>Polityka Prywatno\u015bci dla {{appName}}</h1><p>Ostatnia aktualizacja: 10 kwietnia 2024</p><p>Niniejsza Polityka Prywatno\u015bci opisuje, w jaki spos\u00f3b {{appName}} (produkt Webaby) gromadzi, wykorzystuje i ujawnia Twoje dane podczas korzystania z aplikacji. Wyja\u015bnia tak\u017ce Twoje prawa oraz spos\u00f3b, w jaki prawo Ci\u0119 chroni.</p><h2>Interpretacja i definicje</h2><ul><li><strong>Us\u0142uga</strong>: aplikacja {{appName}}.</li><li><strong>Firma</strong>: Webaby (\"my\", \"nasz\").</li><li><strong>Konto</strong>: Twoje konto u\u017cytkownika umo\u017cliwiaj\u0105ce dost\u0119p do funkcji {{appName}}.</li><li><strong>Dostawca us\u0142ug</strong>: podmioty trzecie wspieraj\u0105ce dzia\u0142anie, analiz\u0119 lub obs\u0142ug\u0119 {{appName}}.</li><li><strong>Dane o u\u017cytkowaniu</strong>: automatycznie gromadzone dane techniczne (np. adres IP, identyfikatory urz\u0105dze\u0144, wersja aplikacji, interakcje).</li></ul><h2>Jakie dane przetwarzamy</h2><h3>Dane osobowe</h3><p>W razie potrzeby mo\u017cemy zbiera\u0107 dane kontaktowe (np. adres e-mail) do komunikacji, wsparcia technicznego czy zarz\u0105dzania kontem. W zale\u017cno\u015bci od funkcji aplikacji mog\u0105 by\u0107 wymagane dodatkowe dane \u2013 zostanie to zawsze jasno wskazane.</p><h3>Dane o u\u017cytkowaniu</h3><p>Korzystaj\u0105c z {{appName}}, mog\u0105 by\u0107 automatycznie gromadzone dane log\u00f3w i parametry techniczne (np. raporty o b\u0142\u0119dach, metryki wydajno\u015bci, u\u017cywane funkcje). S\u0142u\u017c\u0105 one poprawie stabilno\u015bci i jako\u015bci aplikacji.</p><h3>Cookies i podobne technologie</h3><p>Je\u017celi {{appName}} wykorzystuje tre\u015bci internetowe, mog\u0105 by\u0107 stosowane pliki cookies lub lokalna pami\u0119\u0107 przegl\u0105darki. Sama aplikacja mo\u017ce u\u017cywa\u0107 identyfikator\u00f3w urz\u0105dze\u0144 do cel\u00f3w bezpiecze\u0144stwa i diagnostyki.</p><h2>Jak wykorzystujemy dane</h2><ul><li>Do \u015bwiadczenia, utrzymania i ulepszania dzia\u0142ania {{appName}}.</li><li>Do personalizacji funkcji (je\u015bli dost\u0119pne).</li><li>Do kontaktowania si\u0119 z Tob\u0105 (np. aktualizacje, komunikaty bezpiecze\u0144stwa).</li><li>Do analizy wykorzystania, zapewnienia jako\u015bci i rozwi\u0105zywania problem\u00f3w.</li><li>Do spe\u0142niania obowi\u0105zk\u00f3w prawnych.</li></ul><h2>Podstawy prawne (UE/EOG)</h2><p>W zale\u017cno\u015bci od sytuacji przetwarzanie opieramy na: (i) zgodzie (art. 6 ust. 1 lit. a RODO), (ii) wykonaniu umowy (art. 6 ust. 1 lit. b), (iii) prawnie uzasadnionym interesie (art. 6 ust. 1 lit. f), (iv) obowi\u0105zku prawnym (art. 6 ust. 1 lit. c).</p><h2>Udost\u0119pnianie danych</h2><ul><li>Dostawcom us\u0142ug (hosting, analityka, wsparcie) na podstawie um\u00f3w powierzenia przetwarzania.</li><li>W ramach proces\u00f3w biznesowych (np. fuzja, przej\u0119cie) zgodnie z prawem.</li><li>Je\u015bli wymagaj\u0105 tego przepisy prawa lub dla ochrony naszych praw/bezpiecze\u0144stwa.</li></ul><h2>Przechowywanie danych</h2><p>Dane osobowe przechowujemy tak d\u0142ugo, jak jest to niezb\u0119dne do cel\u00f3w wskazanych w niniejszej polityce; dane log\u00f3w zazwyczaj kr\u00f3cej, chyba \u017ce prawo wymaga d\u0142u\u017cszego przechowywania.</p><h2>Transfer danych</h2><p>Dane mog\u0105 by\u0107 przekazywane do pa\u0144stw spoza EOG. Zapewniamy odpowiednie zabezpieczenia (np. standardowe klauzule umowne UE).</p><h2>Twoje prawa</h2><ul><li>Prawo dost\u0119pu, sprostowania, usuni\u0119cia, ograniczenia przetwarzania, sprzeciwu, przenoszenia danych (zgodnie z RODO, je\u015bli dotyczy).</li><li>Prawo do wycofania zgody w dowolnym momencie.</li><li>Prawo wniesienia skargi do organu nadzorczego.</li></ul><h2>Bezpiecze\u0144stwo</h2><p>Stosujemy odpowiednie \u015brodki techniczne i organizacyjne. Nie mo\u017cemy jednak zagwarantowa\u0107 absolutnego bezpiecze\u0144stwa.</p><h2>Dzieci</h2><p>{{appName}} nie jest przeznaczona dla dzieci poni\u017cej 13 lat. Nie zbieramy \u015bwiadomie danych dzieci poni\u017cej 13 lat.</p><h2>Zmiany</h2><p>Mo\u017cemy okresowo aktualizowa\u0107 t\u0119 polityk\u0119; wi\u0105\u017c\u0105ca jest zawsze najnowsza wersja opublikowana w {{appName}} lub na naszej stronie.</p><h2>Kontakt</h2><p>Pytania dotycz\u0105ce niniejszej Polityki Prywatno\u015bci? Odwied\u017a <a href=\"https://webaby.io\" target=\"_blank\" rel=\"noopener\">webaby.io</a>.</p>"
+            "bodyHtml": "<h1>Polityka Prywatności dla {{appName}}</h1><p>Ostatnia aktualizacja: 10 kwietnia 2024</p><p>Niniejsza Polityka Prywatności opisuje, w jaki sposób {{appName}} (produkt Webaby) gromadzi, wykorzystuje i ujawnia Twoje dane podczas korzystania z aplikacji. Wyjaśnia także Twoje prawa oraz sposób, w jaki prawo Cię chroni.</p><h2>Interpretacja i definicje</h2><ul><li><strong>Usługa</strong>: aplikacja {{appName}}.</li><li><strong>Firma</strong>: Webaby (\"my\", \"nasz\").</li><li><strong>Konto</strong>: Twoje konto użytkownika umożliwiające dostęp do funkcji {{appName}}.</li><li><strong>Dostawca usług</strong>: podmioty trzecie wspierające działanie, analizę lub obsługę {{appName}}.</li><li><strong>Dane o użytkowaniu</strong>: automatycznie gromadzone dane techniczne (np. adres IP, identyfikatory urządzeń, wersja aplikacji, interakcje).</li></ul><h2>Jakie dane przetwarzamy</h2><h3>Dane osobowe</h3><p>W razie potrzeby możemy zbierać dane kontaktowe (np. adres e-mail) do komunikacji, wsparcia technicznego czy zarządzania kontem. W zależności od funkcji aplikacji mogą być wymagane dodatkowe dane – zostanie to zawsze jasno wskazane.</p><h3>Dane o użytkowaniu</h3><p>Korzystając z {{appName}}, mogą być automatycznie gromadzone dane logów i parametry techniczne (np. raporty o błędach, metryki wydajności, używane funkcje). Służą one poprawie stabilności i jakości aplikacji.</p><h3>Cookies i podobne technologie</h3><p>Jeżeli {{appName}} wykorzystuje treści internetowe, mogą być stosowane pliki cookies lub lokalna pamięć przeglądarki. Sama aplikacja może używać identyfikatorów urządzeń do celów bezpieczeństwa i diagnostyki.</p><h2>Jak wykorzystujemy dane</h2><ul><li>Do świadczenia, utrzymania i ulepszania działania {{appName}}.</li><li>Do personalizacji funkcji (jeśli dostępne).</li><li>Do kontaktowania się z Tobą (np. aktualizacje, komunikaty bezpieczeństwa).</li><li>Do analizy wykorzystania, zapewnienia jakości i rozwiązywania problemów.</li><li>Do spełniania obowiązków prawnych.</li></ul><h2>Podstawy prawne (UE/EOG)</h2><p>W zależności od sytuacji przetwarzanie opieramy na: (i) zgodzie (art. 6 ust. 1 lit. a RODO), (ii) wykonaniu umowy (art. 6 ust. 1 lit. b), (iii) prawnie uzasadnionym interesie (art. 6 ust. 1 lit. f), (iv) obowiązku prawnym (art. 6 ust. 1 lit. c).</p><h2>Udostępnianie danych</h2><ul><li>Dostawcom usług (hosting, analityka, wsparcie) na podstawie umów powierzenia przetwarzania.</li><li>W ramach procesów biznesowych (np. fuzja, przejęcie) zgodnie z prawem.</li><li>Jeśli wymagają tego przepisy prawa lub dla ochrony naszych praw/bezpieczeństwa.</li></ul><h2>Przechowywanie danych</h2><p>Dane osobowe przechowujemy tak długo, jak jest to niezbędne do celów wskazanych w niniejszej polityce; dane logów zazwyczaj krócej, chyba że prawo wymaga dłuższego przechowywania.</p><h2>Transfer danych</h2><p>Dane mogą być przekazywane do państw spoza EOG. Zapewniamy odpowiednie zabezpieczenia (np. standardowe klauzule umowne UE).</p><h2>Twoje prawa</h2><ul><li>Prawo dostępu, sprostowania, usunięcia, ograniczenia przetwarzania, sprzeciwu, przenoszenia danych (zgodnie z RODO, jeśli dotyczy).</li><li>Prawo do wycofania zgody w dowolnym momencie.</li><li>Prawo wniesienia skargi do organu nadzorczego.</li></ul><h2>Bezpieczeństwo</h2><p>Stosujemy odpowiednie środki techniczne i organizacyjne. Nie możemy jednak zagwarantować absolutnego bezpieczeństwa.</p><h2>Dzieci</h2><p>{{appName}} nie jest przeznaczona dla dzieci poniżej 13 lat. Nie zbieramy świadomie danych dzieci poniżej 13 lat.</p><h2>Zmiany</h2><p>Możemy okresowo aktualizować tę politykę; wiążąca jest zawsze najnowsza wersja opublikowana w {{appName}} lub na naszej stronie.</p><h2>Kontakt</h2><p>Pytania dotyczące niniejszej Polityki Prywatności? Odwiedź <a href=\"https://webaby.io\" target=\"_blank\" rel=\"noopener\">webaby.io</a>.</p>"
         }
     },
     "social": {

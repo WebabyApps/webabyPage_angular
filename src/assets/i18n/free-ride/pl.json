@@ -1,0 +1,72 @@
+{
+  "title": "FreeRide – carpooling i rezerwacje przejazdów",
+  "description": {
+    "title": "FreeRide",
+    "lead": "Oferuj i rezerwuj przejazdy w prosty sposób. Google Maps ułatwia wybór punktów, a AI podpowiada optymalną trasę."
+  },
+  "tutorial": {
+    "title": "Carpooling z Google Maps + AI",
+    "intro": "FreeRide to aplikacja do carpoolingu, która pomaga szybko znaleźć przejazd lub zaoferować wolne miejsce. Wbudowane mapy upraszczają planowanie, a optymalizacja trasy AI pomaga jechać sprytniej.",
+    "benefits": [
+      "Szybkie oferowanie przejazdu i łatwe rezerwacje.",
+      "Punkty start/stop wybierasz na mapie.",
+      "AI może podpowiedzieć lepszą trasę i kolejność przystanków.",
+      "Przejrzyste szczegóły przejazdu: czas, dystans, szacunkowa trasa.",
+      "Idealne na dojazdy do pracy, szkoły i wyjazdy okazjonalne."
+    ]
+  },
+  "sections": {
+    "how": {
+      "title": "Jak to działa?",
+      "intro": "W kilku krokach:",
+      "caption": "Przykładowy przepływ",
+      "items": [
+        "Wybierz: oferujesz przejazd czy chcesz go zarezerwować.",
+        "Ustaw punkt startu i cel na mapie (Google Maps).",
+        "Dodaj szczegóły: godzina, liczba miejsc, uwagi dla pasażerów.",
+        "Wyszukaj dopasowania lub opublikuj ofertę.",
+        "Zarezerwuj przejazd i skontaktuj się z kierowcą/pasażerem."
+      ]
+    },
+    "strategy": {
+      "title": "Wskazówki i optymalizacja",
+      "intro": "Jak zwiększyć szansę na dopasowanie i skrócić czas podróży:",
+      "caption": "Tipy praktyczne",
+      "items": [
+        "Dodawaj dokładne punkty start/stop – mapy zrobią resztę.",
+        "Ustaw bufor czasu na odbiór, jeśli jedziesz w godzinach szczytu.",
+        "Skorzystaj z podpowiedzi AI przy kilku przystankach.",
+        "W opisie doprecyzuj bagaż, preferencje i zasady przejazdu.",
+        "Aktualizuj ofertę, gdy zmienia się godzina lub trasa."
+      ]
+    },
+    "features": {
+      "title": "Najważniejsze funkcje",
+      "caption": "Co potrafi FreeRide",
+      "p": "FreeRide łączy prostotę ogłoszeń z mapami i inteligentnym planowaniem:",
+      "items": [
+        "Tworzenie ofert przejazdu i rezerwacje w kilka kliknięć.",
+        "Integracja z Google Maps (punkty, trasa, dystans).",
+        "Sugestie AI do optymalizacji trasy i kolejności przystanków.",
+        "Lista dopasowań i wygodne filtrowanie.",
+        "Szczegóły przejazdu: czas, dystans, orientacyjna trasa."
+      ]
+    }
+  },
+  "data": {
+    "title": "Przechowywanie danych",
+    "p1": "FreeRide przechowuje wyłącznie dane niezbędne do działania funkcji carpoolingu (np. oferty przejazdów, rezerwacje i ustawienia użytkownika).",
+    "p2": "Możesz w każdej chwili usunąć konto lub poprosić o usunięcie danych, kontaktując się z nami.",
+    "p3": "W razie pytań dotyczących danych skontaktuj się: contact@webaby.io"
+  },
+  "video": {
+    "title": "Wideo – jak działa FreeRide",
+    "walkthrough": "Krótki walkthrough: tworzenie oferty, wybór punktów na mapie i rezerwacja przejazdu."
+  },
+  "keywords": "carpooling, wspólne przejazdy, rezerwacja przejazdu, google maps, optymalizacja trasy ai, FreeRide",
+  "hero": {
+    "title": "FreeRide",
+    "subtitle": "Oferuj lub rezerwuj przejazd w kilka sekund",
+    "back": "Wróć do produktów"
+  }
+}

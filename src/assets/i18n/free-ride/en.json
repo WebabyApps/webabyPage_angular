@@ -1,0 +1,72 @@
+{
+  "title": "FreeRide - carpooling and ride booking",
+  "description": {
+    "title": "FreeRide",
+    "lead": "Offer and book rides easily. Google Maps helps you pick locations, and AI suggests an optimised route."
+  },
+  "tutorial": {
+    "title": "Carpooling with Google Maps + AI",
+    "intro": "FreeRide is a carpooling app that lets you quickly find a ride or offer spare seats. Built-in maps simplify planning, and AI route optimisation helps you travel smarter.",
+    "benefits": [
+      "Quick ride offers and easy bookings.",
+      "Choose pick-up and drop-off points on the map.",
+      "AI can suggest a better route and stop order.",
+      "Clear ride details: time, distance, estimated route.",
+      "Great for commutes and occasional trips."
+    ]
+  },
+  "sections": {
+    "how": {
+      "title": "How it works",
+      "intro": "In a few steps:",
+      "caption": "Example flow",
+      "items": [
+        "Choose: offer a ride or book a ride.",
+        "Set start and destination on the map (Google Maps).",
+        "Add details: time, available seats, notes.",
+        "Search matches or publish your offer.",
+        "Book the ride and connect with the driver/passengers."
+      ]
+    },
+    "strategy": {
+      "title": "Tips & optimisation",
+      "intro": "Increase match chances and reduce travel time:",
+      "caption": "Practical tips",
+      "items": [
+        "Use accurate pick-up/drop-off points – maps do the heavy lifting.",
+        "Add a pickup time buffer during rush hours.",
+        "Use AI suggestions when you have multiple stops.",
+        "Clarify luggage and ride rules in the description.",
+        "Update your offer if time or route changes."
+      ]
+    },
+    "features": {
+      "title": "Key features",
+      "caption": "What FreeRide can do",
+      "p": "FreeRide combines simple listings with maps and smart planning:",
+      "items": [
+        "Create ride offers and book in a few clicks.",
+        "Google Maps integration (locations, route, distance).",
+        "AI suggestions for route and stop order optimisation.",
+        "Matches list with convenient filters.",
+        "Ride details: time, distance, estimated route."
+      ]
+    }
+  },
+  "data": {
+    "title": "Data storage",
+    "p1": "FreeRide stores only the data required to run core carpooling features (e.g., ride offers, bookings, and user settings).",
+    "p2": "You can delete your account at any time or request data deletion by contacting us.",
+    "p3": "For data-related questions, contact: contact@webaby.io"
+  },
+  "video": {
+    "title": "Video – how FreeRide works",
+    "walkthrough": "A short walkthrough: creating an offer, selecting map points, and booking a ride."
+  },
+  "keywords": "carpooling, shared rides, ride booking, google maps, ai route optimisation, FreeRide",
+  "hero": {
+    "title": "FreeRide",
+    "subtitle": "Offer or book a carpool in seconds",
+    "back": "Back to products"
+  }
+}

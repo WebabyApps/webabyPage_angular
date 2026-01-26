@@ -91,6 +91,11 @@
                 "desc": "With a subscription, you can add your own tracks and play to your music.",
                 "title": "Custom soundtracks"
             },
+            "freeride": {
+                "title": "FreeRide",
+                "desc": "A carpooling app that makes offering and booking rides easy. Built-in Google Maps helps with pick-up and drop-off points, while AI optimises your route.",
+                "imgAlt": "FreeRide – carpooling app with Google Maps and AI route optimisation"
+            },
             "socialmigrateai": {
                 "desc": "Move your facebook posts in just a few clicks.",
                 "imgAlt": "App Social Migrate AI for your posts migration",

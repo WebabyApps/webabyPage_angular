@@ -589,6 +589,130 @@
       <!-- /Bubble World -->
 
 
+      <!-- ========== FreeRide ========== -->
+      <ng-container *ngSwitchCase="'free-ride'">
+        <h2>{{ tr('description.title') }}</h2>
+        <p class="lead">{{ tr('description.lead') }}</p>
+
+        <img class="app-header"
+             src="assets/tutorials/freeride/FreeRideHeader.png"
+             [attr.alt]="tr('title')"
+             loading="lazy" decoding="async" />
+
+        <!-- TUTORIAL -->
+        <app-tutorial-section
+          [title]="tr('tutorial.title')"
+          [img]="'assets/tutorials/freeride/Screenshot 2026-01-26 at 1.31.58 PM.png'"
+          [lazyImg]="true"
+          [alt]="tr('tutorial.title')"
+          [caption]="tr('tutorial.title')"
+          [reverse]="false"
+          [scope]="sp">
+          <p>{{ tr('tutorial.intro') }}</p>
+          <ul>
+            <ng-container *transloco="let t; scope: sp">
+              <li *ngFor="let b of arr(t('tutorial.benefits', { returnObjects: true }))">
+                {{ b }}
+              </li>
+            </ng-container>
+          </ul>
+        </app-tutorial-section>
+
+        <!-- HOW -->
+        <app-tutorial-section
+          [title]="tr('sections.how.title')"
+          [img]="'assets/tutorials/freeride/FindRide.png'"
+          [lazyImg]="true"
+          [alt]="tr('sections.how.caption')"
+          [caption]="tr('sections.how.caption')"
+          [reverse]="true"
+          [scope]="sp">
+          <p>{{ tr('sections.how.intro') }}</p>
+          <ul>
+            <ng-container *transloco="let t; scope: sp">
+              <li *ngFor="let step of arr(t('sections.how.items', { returnObjects: true }))">
+                {{ step }}
+              </li>
+            </ng-container>
+          </ul>
+        </app-tutorial-section>
+
+        <!-- STRATEGY -->
+        <app-tutorial-section
+          [title]="tr('sections.strategy.title')"
+          [img]="'assets/tutorials/freeride/OfferRide.png'"
+          [lazyImg]="true"
+          [alt]="tr('sections.strategy.caption')"
+          [caption]="tr('sections.strategy.caption')"
+          [reverse]="false"
+          [scope]="sp">
+          <p>{{ tr('sections.strategy.intro') }}</p>
+          <ul>
+            <ng-container *transloco="let t; scope: sp">
+              <li *ngFor="let tip of arr(t('sections.strategy.items', { returnObjects: true }))">
+                {{ tip }}
+              </li>
+            </ng-container>
+          </ul>
+        </app-tutorial-section>
+
+        <!-- FEATURES -->
+        <app-tutorial-section
+          [title]="tr('sections.features.title')"
+          [img]="'assets/tutorials/freeride/Profile.png'"
+          [lazyImg]="true"
+          [alt]="tr('sections.features.caption')"
+          [caption]="tr('sections.features.caption')"
+          [reverse]="true"
+          [scope]="sp">
+          <p>{{ tr('sections.features.p') }}</p>
+          <ul>
+            <ng-container *transloco="let t; scope: sp">
+              <li *ngFor="let f of arr(t('sections.features.items', { returnObjects: true }))">
+                {{ f }}
+              </li>
+            </ng-container>
+          </ul>
+        </app-tutorial-section>
+
+        <!-- DATA STORAGE -->
+        <app-tutorial-section
+          [title]="tr('data.title')"
+          [img]="'assets/tutorials/freeride/BookASeat.png'"
+          [lazyImg]="true"
+          [alt]="tr('data.title')"
+          [caption]="tr('data.title')"
+          [reverse]="false"
+          [scope]="sp">
+          <p>{{ tr('data.p1') }}</p>
+          <p>{{ tr('data.p2') }}</p>
+          <p>{{ tr('data.p3') }}</p>
+        </app-tutorial-section>
+
+        <!-- VIDEO -->
+        <section id="video" class="section">
+          <h3>{{ tr('video.title') }}</h3>
+          <div class="video">
+            <figure class="yt yt--md">
+              <iframe
+                src="https://www.youtube-nocookie.com/embed/"
+                title="FreeRide demo" loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
+              <figcaption>{{ tr('video.walkthrough') }}</figcaption>
+            </figure>
+            <small class="caption">{{ tr('video.walkthrough') }}</small>
+          </div>
+        </section>
+
+        <!-- KEYWORDS -->
+        <section class="keywords">
+          <small>{{ tr('keywords') }}</small>
+        </section>
+      </ng-container>
+      <!-- /FreeRide -->
+
+
         <!-- ========== Social MIgrate AI ========== -->
         <ng-container *ngSwitchCase="'socialmigrateai'">
         <h2>{{ tr('description.title') }}</h2>

@@ -1,0 +1,72 @@
+{
+  "title": "FreeRide – Carpooling und Fahrten buchen",
+  "description": {
+    "title": "FreeRide",
+    "lead": "Fahrten einfach anbieten und buchen. Google Maps hilft bei der Auswahl der Orte, und KI schlägt eine optimierte Route vor."
+  },
+  "tutorial": {
+    "title": "Carpooling mit Google Maps + KI",
+    "intro": "FreeRide ist eine Carpooling-App, mit der du schnell eine Fahrt findest oder freie Plätze anbietest. Integrierte Karten vereinfachen die Planung, und KI-Routenoptimierung hilft dir, smarter zu fahren.",
+    "benefits": [
+      "Schnelle Fahrangebote und einfache Buchungen.",
+      "Abhol- und Zielpunkte direkt auf der Karte wählen.",
+      "KI kann eine bessere Route und Reihenfolge der Stopps vorschlagen.",
+      "Klare Fahrtdetails: Zeit, Distanz, geschätzte Route.",
+      "Ideal für Pendelstrecken und gelegentliche Fahrten."
+    ]
+  },
+  "sections": {
+    "how": {
+      "title": "So funktioniert’s",
+      "intro": "In wenigen Schritten:",
+      "caption": "Beispielflow",
+      "items": [
+        "Wähle: Fahrt anbieten oder Fahrt buchen.",
+        "Start und Ziel auf der Karte festlegen (Google Maps).",
+        "Details hinzufügen: Uhrzeit, freie Plätze, Hinweise.",
+        "Matches suchen oder dein Angebot veröffentlichen.",
+        "Fahrt buchen und mit Fahrer/Mitfahrenden Kontakt aufnehmen."
+      ]
+    },
+    "strategy": {
+      "title": "Tipps & Optimierung",
+      "intro": "So erhöhst du die Match-Chancen und sparst Zeit:",
+      "caption": "Praktische Tipps",
+      "items": [
+        "Nutze genaue Abhol-/Zielpunkte – die Karten erledigen den Rest.",
+        "Plane in Stoßzeiten einen Zeitpuffer für die Abholung ein.",
+        "Nutze KI-Vorschläge bei mehreren Stopps.",
+        "Kläre Gepäck und Regeln in der Beschreibung.",
+        "Aktualisiere dein Angebot, wenn Zeit oder Route sich ändern."
+      ]
+    },
+    "features": {
+      "title": "Wichtige Funktionen",
+      "caption": "Was FreeRide kann",
+      "p": "FreeRide kombiniert einfache Angebote mit Karten und smarter Planung:",
+      "items": [
+        "Fahrten anbieten und in wenigen Klicks buchen.",
+        "Google-Maps-Integration (Orte, Route, Distanz).",
+        "KI-Vorschläge zur Optimierung von Route und Stoppreihenfolge.",
+        "Match-Liste mit praktischen Filtern.",
+        "Fahrtdetails: Zeit, Distanz, geschätzte Route."
+      ]
+    }
+  },
+  "data": {
+    "title": "Datenspeicherung",
+    "p1": "FreeRide speichert nur die Daten, die für die Kernfunktionen des Carpoolings nötig sind (z.B. Fahrangebote, Buchungen und Nutzereinstellungen).",
+    "p2": "Du kannst dein Konto jederzeit löschen oder eine Datenlöschung anfragen, indem du uns kontaktierst.",
+    "p3": "Bei Fragen zu Daten: contact@webaby.io"
+  },
+  "video": {
+    "title": "Video – so funktioniert FreeRide",
+    "walkthrough": "Kurzer Walkthrough: Angebot erstellen, Punkte auf der Karte wählen und eine Fahrt buchen."
+  },
+  "keywords": "Carpooling, Mitfahrgelegenheiten, Fahrt buchen, Google Maps, KI Routenoptimierung, FreeRide",
+  "hero": {
+    "title": "FreeRide",
+    "subtitle": "Fahrten anbieten oder buchen in Sekunden",
+    "back": "Zurück zu den Produkten"
+  }
+}
