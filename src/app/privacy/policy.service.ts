@@ -1,8 +1,11 @@
 // src/app/privacy/policy.service.ts
 import { Injectable, inject } from '@angular/core';
 import { TranslocoService } from '@jsverse/transloco';
-import { startWith, switchMap, map } from 'rxjs';
+import { startWith, switchMap, of } from 'rxjs';
 import { PRODUCT_APP_NAME_EN, PRODUCT_APP_NAME_PL, PRODUCT_APP_NAME_DE } from './product-meta';
+import { tryPolicyEn } from './policy-registry.en';
+import { tryPolicyPl } from './policy-registry.pl';
+import { tryPolicyDe } from './policy-registry.de';
 
 type Lang = 'en' | 'pl' | 'de';
 const norm = (s?: string | null) => (s ?? '').trim().toLowerCase();
@@ -41,8 +44,29 @@ export class PolicyService {
     const s = norm(slug);
     return this.t.langChanges$.pipe(
       startWith(this.getLang()),
-      map(() => ({ appName: this.getAppName(s) })),
-      switchMap(params => this.t.selectTranslate('policy.product.bodyHtml', params))
+      switchMap(() => {
+        const appName = this.getAppName(s);
+        const lang = this.getLang();
+        const custom = this.getCustomPolicyForSlug(lang, s);
+
+        if (custom) {
+          return of(this.interpolateAppName(custom, appName));
+        }
+
+        return this.t.selectTranslate('policy.product.bodyHtml', { appName });
+      })
     );
+  }
+
+  private getCustomPolicyForSlug(lang: Lang, slug?: string | null): string | undefined {
+    switch (lang) {
+      case 'pl': return tryPolicyPl(slug);
+      case 'de': return tryPolicyDe(slug);
+      default:   return tryPolicyEn(slug);
+    }
+  }
+
+  private interpolateAppName(html: string, appName: string): string {
+    return html.replace(/{{\s*appName\s*}}/g, appName);
   }
 }
