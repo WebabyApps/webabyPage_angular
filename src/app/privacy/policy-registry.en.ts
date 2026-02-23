@@ -21,9 +21,8 @@ export const POLICY_BY_SLUG_EN: Record<string, string> = {
 
 <h3>Personal Data</h3>
 <p>
-  We may collect contact information (e.g., email address) for communication,
-  support, or account management. Additional data may be requested depending
-  on the app features.
+  We do not collect personal data such as name, email address, phone number,
+  or precise location.
 </p>
 
 <h3>Usage Data</h3>

@@ -25,9 +25,8 @@ export const POLICY_BY_SLUG_DE: Record<string, string> = {
 
 <h3>Personenbezogene Daten</h3>
 <p>
-  Wir können Kontaktdaten (z. B. E-Mail-Adresse) für Kommunikation,
-  Support oder Kontoverwaltung erheben. Je nach Funktionen der App
-  können zusätzliche Daten erforderlich sein.
+  Wir erfassen keine personenbezogenen Daten wie Name, E-Mail-Adresse,
+  Telefonnummer oder genauen Standort.
 </p>
 
 <h3>Nutzungsdaten</h3>
