@@ -2,7 +2,7 @@ import { PRIVACY_POLICY_PL } from './privacy-policy-text.pl';
 
 export const POLICY_BY_SLUG_PL: Record<string, string> = {
   'abc-land': `
- <h1>Polityka Prywatności dla BC LAND</h1>
+ <h1>Polityka Prywatności dla ABC Land</h1>
 <p><strong>Ostatnia aktualizacja:</strong> 10 kwietnia 2024</p>
 
 <p>
@@ -190,15 +190,30 @@ export const POLICY_BY_SLUG_PL: Record<string, string> = {
 };
 
 
+
 function normSlug(s?: string | null) {
   return (s ?? '').trim().toLowerCase().replace(/\u2013|\u2014/g, '-');
 }
 
+function normalizeHtmlPolicy(html: string): string {
+  // If any CSS uses `white-space: pre-line/pre-wrap`, extra newlines from template literals
+  // can turn into huge vertical gaps. This normalizes the string defensively.
+  return (html ?? '')
+    .replace(/\r\n?/g, '\n')
+    // remove leading indentation introduced by template literal formatting
+    .replace(/^\s+</gm, '<')
+    // collapse 3+ blank lines into a single blank line
+    .replace(/\n\s*\n\s*\n+/g, '\n\n')
+    .trim();
+}
+
 export function tryPolicyPl(slug?: string | null): string | undefined {
   const s = normSlug(slug);
-  return s ? POLICY_BY_SLUG_PL[s] : undefined;
+  const html = s ? POLICY_BY_SLUG_PL[s] : undefined;
+  return html ? normalizeHtmlPolicy(html) : undefined;
 }
 
 export function getPolicyPlForSlug(slug?: string | null): string {
-  return tryPolicyPl(slug) ?? PRIVACY_POLICY_PL;
+  const html = tryPolicyPl(slug) ?? PRIVACY_POLICY_PL;
+  return normalizeHtmlPolicy(html);
 }

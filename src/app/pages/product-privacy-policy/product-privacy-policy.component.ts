@@ -12,7 +12,7 @@ import { map, switchMap } from 'rxjs';
   imports: [CommonModule, TranslocoModule],
   template: `
     <section class="container policy-page">
-      <div [innerHTML]="html$ | async"></div>
+      <div class="policy-body" [innerHTML]="html$ | async"></div>
       <small style="opacity:.6">slug: {{ (slug$ | async) || '—' }}</small>
     </section>
   `,
@@ -20,7 +20,10 @@ import { map, switchMap } from 'rxjs';
     .policy-page {
       padding: 2rem;
       margin-top: 5rem;
-      white-space: pre-wrap;
+    }
+
+    .policy-body {
+      white-space: normal;
     }
   `]
 })

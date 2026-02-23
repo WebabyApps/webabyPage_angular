@@ -4,13 +4,11 @@ export const POLICY_BY_SLUG_EN: Record<string, string> = {
   'abc-land': `
  <h1>Privacy Policy for ABC Land</h1>
 <p><strong>Last updated:</strong> April 10, 2024</p>
-
 <p>
   This Privacy Policy explains how ABC LAND (a Webaby product) collects, uses,
   and discloses your information while using the app. It also informs you of
   your rights and how the law protects you.
 </p>
-
 <h2>Interpretation and Definitions</h2>
 <ul>
   <li><strong>Service:</strong> the ABC Land application.</li>
@@ -19,7 +17,6 @@ export const POLICY_BY_SLUG_EN: Record<string, string> = {
   <li><strong>Service Provider:</strong> third parties supporting, analyzing, or facilitating ABC Land.</li>
   <li><strong>Usage Data:</strong> technical data collected automatically (e.g., IP address, device identifiers, logs).</li>
 </ul>
-
 <h2>Data We Collect</h2>
 
 <h3>Personal Data</h3>
