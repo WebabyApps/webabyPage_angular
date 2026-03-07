@@ -865,6 +865,151 @@
       </ng-container>
       <!-- /Music Colours -->
 
+      <!-- ========== PlanetLingua ========== -->
+      <ng-container *ngSwitchCase="'planetlingua'">
+        <h2>{{ tr('description.title') }}</h2>
+        <p class="lead">{{ tr('description.lead') }}</p>
+
+        <img class="app-header"
+             src="assets/tutorials/planetlingua/header-horizontal.png"
+             [attr.alt]="tr('title')"
+             loading="lazy" decoding="async" />
+
+        <app-tutorial-section
+          [title]="tr('tutorial.title')"
+          [img]="'assets/tutorials/planetlingua/planet_menu.png'"
+          [lazyImg]="true"
+          [alt]="tr('tutorial.title')"
+          [caption]="tr('tutorial.title')"
+          [reverse]="false"
+          [scope]="sp">
+          <p>{{ tr('tutorial.intro') }}</p>
+          <ul>
+            <ng-container *transloco="let t; scope: sp">
+              <li *ngFor="let b of arr(t('tutorial.benefits', { returnObjects: true }))">
+                {{ b }}
+              </li>
+            </ng-container>
+          </ul>
+        </app-tutorial-section>
+
+        <app-tutorial-section
+          [title]="tr('sections.showcase.title')"
+          [img]="'assets/tutorials/planetlingua/header-vertical.png'"
+          [lazyImg]="true"
+          [alt]="tr('sections.showcase.caption')"
+          [caption]="tr('sections.showcase.caption')"
+          [reverse]="true"
+          [scope]="sp">
+          <p>{{ tr('sections.showcase.intro') }}</p>
+        </app-tutorial-section>
+
+        <app-tutorial-section
+          [title]="tr('sections.how.title')"
+          [img]="'assets/tutorials/planetlingua/planet_language_sellection.png'"
+          [lazyImg]="true"
+          [alt]="tr('sections.how.caption')"
+          [caption]="tr('sections.how.caption')"
+          [reverse]="true"
+          [scope]="sp">
+          <p>{{ tr('sections.how.intro') }}</p>
+          <ul>
+            <ng-container *transloco="let t; scope: sp">
+              <li *ngFor="let step of arr(t('sections.how.items', { returnObjects: true }))">
+                {{ step }}
+              </li>
+            </ng-container>
+          </ul>
+        </app-tutorial-section>
+
+        <app-tutorial-section
+          [title]="tr('sections.progress.title')"
+          [img]="'assets/tutorials/planetlingua/planet_session.png'"
+          [lazyImg]="true"
+          [alt]="tr('sections.progress.caption')"
+          [caption]="tr('sections.progress.caption')"
+          [reverse]="false"
+          [scope]="sp">
+          <p>{{ tr('sections.progress.intro') }}</p>
+          <ul>
+            <ng-container *transloco="let t; scope: sp">
+              <li *ngFor="let item of arr(t('sections.progress.items', { returnObjects: true }))">
+                {{ item }}
+              </li>
+            </ng-container>
+          </ul>
+        </app-tutorial-section>
+
+        <app-tutorial-section
+          [title]="tr('sections.bonuses.title')"
+          [img]="'assets/tutorials/planetlingua/planet_bonus.png'"
+          [lazyImg]="true"
+          [alt]="tr('sections.bonuses.caption')"
+          [caption]="tr('sections.bonuses.caption')"
+          [reverse]="true"
+          [scope]="sp">
+          <p>{{ tr('sections.bonuses.intro') }}</p>
+          <ul>
+            <ng-container *transloco="let t; scope: sp">
+              <li *ngFor="let item of arr(t('sections.bonuses.items', { returnObjects: true }))">
+                {{ item }}
+              </li>
+            </ng-container>
+          </ul>
+        </app-tutorial-section>
+
+        <app-tutorial-section
+          [title]="tr('sections.customization.title')"
+          [img]="'assets/tutorials/planetlingua/header-horizontal.png'"
+          [lazyImg]="true"
+          [alt]="tr('sections.customization.caption')"
+          [caption]="tr('sections.customization.caption')"
+          [reverse]="false"
+          [scope]="sp">
+          <p>{{ tr('sections.customization.intro') }}</p>
+          <ul>
+            <ng-container *transloco="let t; scope: sp">
+              <li *ngFor="let item of arr(t('sections.customization.items', { returnObjects: true }))">
+                {{ item }}
+              </li>
+            </ng-container>
+          </ul>
+        </app-tutorial-section>
+
+        <app-tutorial-section
+          [title]="tr('data.title')"
+          [img]="'assets/software.png'"
+          [lazyImg]="true"
+          [alt]="tr('data.title')"
+          [caption]="tr('data.title')"
+          [reverse]="true"
+          [scope]="sp">
+          <p>{{ tr('data.p1') }}</p>
+          <p>{{ tr('data.p2') }}</p>
+          <p>{{ tr('data.p3') }}</p>
+        </app-tutorial-section>
+
+        <section id="video" class="section">
+          <h3>{{ tr('video.title') }}</h3>
+          <div class="video">
+            <figure class="yt yt--md">
+              <iframe
+                src="https://www.youtube-nocookie.com/embed/"
+                title="PlanetLingua demo" loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
+              <figcaption>{{ tr('video.walkthrough') }}</figcaption>
+            </figure>
+            <small class="caption">{{ tr('video.walkthrough') }}</small>
+          </div>
+        </section>
+
+        <section class="keywords">
+          <small>{{ tr('keywords') }}</small>
+        </section>
+      </ng-container>
+      <!-- /PlanetLingua -->
+
       <!-- ========== Fallback (nieznany slug) ========== -->
       <ng-container *ngSwitchDefault>
         <p class="muted">Nie znaleziono treści dla tego produktu.</p>

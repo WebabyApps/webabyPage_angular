@@ -100,6 +100,11 @@
         "title": "FreeRide",
         "desc": "Eine Fahrgemeinschafts-App, die das Anbieten und Buchen von Fahrten erleichtert. Integrierte Google Maps helfen bei Abhol- und Zielpunkten, während KI deine Route optimiert.",
         "imgAlt": "FreeRide – Carpooling-App mit Google Maps und KI-Routenoptimierung"
+      },
+      "planetlingua": {
+        "title": "PlanetLingua",
+        "desc": "Eine Sprachlern-App mit täglichen 30-Minuten-Missionen, Spiel-Boni, Reisen zwischen Sprachplaneten und Raketen-Anpassung.",
+        "imgAlt": "PlanetLingua – tägliches Sprachenlernen mit spielerischem Fortschritt"
       }
     },
     "sections": {

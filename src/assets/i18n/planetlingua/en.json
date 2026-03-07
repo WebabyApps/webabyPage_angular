@@ -1,0 +1,89 @@
+{
+  "title": "PlanetLingua - learn languages in 30 minutes a day",
+  "description": {
+    "title": "PlanetLingua",
+    "lead": "Spend 30 minutes daily, travel to new language planets, unlock new days, and learn through play."
+  },
+  "tutorial": {
+    "title": "Language learning as a space adventure",
+    "intro": "PlanetLingua combines short daily learning sessions with game mechanics. You build consistency, earn rewards, and track real progress every day.",
+    "benefits": [
+      "A steady routine: 30 minutes of learning per day.",
+      "Unlocking new days and language planets.",
+      "Bonuses that increase motivation and pace.",
+      "Game elements that connect learning with fun.",
+      "A clear progress path for each language."
+    ]
+  },
+  "sections": {
+    "how": {
+      "title": "How to start",
+      "intro": "Just a few steps:",
+      "caption": "First launch",
+      "items": [
+        "Choose the language planet you want to start with.",
+        "Set your daily 30-minute learning routine.",
+        "Complete the first tasks and earn starter points.",
+        "Come back every day to unlock the next day.",
+        "Keep your streak to open new planets faster."
+      ]
+    },
+    "progress": {
+      "title": "Planet travel and progress",
+      "intro": "Each completed session moves you forward:",
+      "caption": "Progress map",
+      "items": [
+        "Each day is a new stage to unlock.",
+        "Progress is tracked separately for each language.",
+        "Consistency is rewarded with faster unlocks.",
+        "Harder challenges appear as you improve.",
+        "Your rocket reaches new language planets."
+      ]
+    },
+    "bonuses": {
+      "title": "Bonus types",
+      "intro": "The app includes multiple bonus systems to support learning:",
+      "caption": "Bonus system",
+      "items": [
+        "Daily login and streak bonuses.",
+        "Rewards for fully completing the daily session.",
+        "Extra points for accurate answers.",
+        "Special event and time-limited challenge bonuses.",
+        "Achievements that unlock more gameplay elements."
+      ]
+    },
+    "customization": {
+      "title": "Rocket customization",
+      "intro": "You can change your rocket look and build your own travel style:",
+      "caption": "Rocket customization",
+      "items": [
+        "Unlock new skins and visual parts.",
+        "Match the rocket look to your achievements.",
+        "Use bonus rewards to personalize your ship.",
+        "Each change highlights your learning progress.",
+        "Fun and motivation grow with your results."
+      ]
+    },
+    "showcase": {
+      "title": "Main screen showcase",
+      "intro": "The start screen shows the rocket, language planets, and quick start for a 30-minute session.",
+      "caption": "PlanetLingua home screen"
+    }
+  },
+  "data": {
+    "title": "Data and account",
+    "p1": "PlanetLingua stores only the data required for learning progress, day streaks, and bonuses.",
+    "p2": "You can request account and data deletion at any time.",
+    "p3": "For data-related questions, contact: contact@webaby.io"
+  },
+  "video": {
+    "title": "Video - how PlanetLingua works",
+    "walkthrough": "Short walkthrough: daily session, planet travel, and unlocking new days."
+  },
+  "keywords": "planetlingua, language learning, 30 minutes daily, gamified learning, bonuses, language planets, rocket customization",
+  "hero": {
+    "title": "PlanetLingua",
+    "subtitle": "Learn languages daily and discover new planets",
+    "back": "Back to products"
+  }
+}

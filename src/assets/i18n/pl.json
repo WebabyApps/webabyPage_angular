@@ -96,6 +96,11 @@
                 "desc": "Aplikacja do carpoolingu: łatwo oferuj i rezerwuj przejazdy. Wbudowane Google Maps ułatwia wybór punktów, a AI pomaga optymalizować trasę.",
                 "imgAlt": "FreeRide - aplikacja do carpoolingu z Google Maps i optymalizacją trasy AI"
             },
+            "planetlingua": {
+                "title": "PlanetLingua",
+                "desc": "Aplikacja do nauki języków metodą 30 minut dziennie z bonusami gier, podróżami między planetami językowymi i personalizacją rakiety.",
+                "imgAlt": "PlanetLingua - codzienna nauka języków z elementami gry"
+            },
             "socialmigrateai": {
                 "desc": "Przenieś swoje posty z Facebooka w kilku kliknięciach.",
                 "imgAlt": "Aplikacja Social Migrate AI do migracji postów z Facebooka",

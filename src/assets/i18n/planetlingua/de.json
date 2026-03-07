@@ -1,0 +1,89 @@
+{
+  "title": "PlanetLingua - Sprachenlernen in 30 Minuten pro Tag",
+  "description": {
+    "title": "PlanetLingua",
+    "lead": "Lerne täglich 30 Minuten, reise zu neuen Sprachplaneten, schalte neue Tage frei und verbinde Lernen mit Spielspaß."
+  },
+  "tutorial": {
+    "title": "Sprachenlernen als Weltraum-Abenteuer",
+    "intro": "PlanetLingua verbindet kurze tägliche Lerneinheiten mit Spielmechaniken. Du baust Routine auf, sammelst Belohnungen und siehst jeden Tag echten Fortschritt.",
+    "benefits": [
+      "Feste Lernroutine: 30 Minuten pro Tag.",
+      "Neue Tage und Sprachplaneten freischalten.",
+      "Boni steigern Motivation und Lerntempo.",
+      "Spiel-Elemente verbinden Lernen mit Spaß.",
+      "Klarer Fortschrittspfad für jede Sprache."
+    ]
+  },
+  "sections": {
+    "how": {
+      "title": "So startest du",
+      "intro": "In wenigen Schritten:",
+      "caption": "Erster Start",
+      "items": [
+        "Wähle den Sprachplaneten, mit dem du beginnen willst.",
+        "Lege deine tägliche 30-Minuten-Lernzeit fest.",
+        "Erledige die ersten Aufgaben und sammle Startpunkte.",
+        "Komme täglich zurück, um den nächsten Tag freizuschalten.",
+        "Halte deine Serie, um neue Planeten schneller zu öffnen."
+      ]
+    },
+    "progress": {
+      "title": "Planetenflug und Fortschritt",
+      "intro": "Jede abgeschlossene Session bringt dich weiter:",
+      "caption": "Fortschrittskarte",
+      "items": [
+        "Jeder Tag ist eine neue freischaltbare Etappe.",
+        "Fortschritt wird pro Sprache separat verfolgt.",
+        "Regelmäßigkeit wird mit schnelleren Freischaltungen belohnt.",
+        "Schwierigere Herausforderungen kommen mit deinem Fortschritt.",
+        "Deine Rakete erreicht neue Sprachplaneten."
+      ]
+    },
+    "bonuses": {
+      "title": "Bonusarten",
+      "intro": "Die App bietet verschiedene Boni zur Lernunterstützung:",
+      "caption": "Bonus-System",
+      "items": [
+        "Tägliche Login- und Serienboni.",
+        "Belohnungen für vollständig absolvierte Tages-Sessions.",
+        "Zusatzpunkte für genaue Antworten.",
+        "Spezielle Event- und zeitlich begrenzte Challenge-Boni.",
+        "Erfolge, die weitere Gameplay-Elemente freischalten."
+      ]
+    },
+    "customization": {
+      "title": "Raketen-Anpassung",
+      "intro": "Du kannst das Aussehen deiner Rakete ändern und deinen eigenen Stil gestalten:",
+      "caption": "Raketen-Customizing",
+      "items": [
+        "Neue Skins und visuelle Teile freischalten.",
+        "Raketen-Design an deine Erfolge anpassen.",
+        "Bonus-Belohnungen für Personalisierung nutzen.",
+        "Jede Änderung zeigt deinen Lernfortschritt.",
+        "Spaß und Motivation wachsen mit deinen Ergebnissen."
+      ]
+    },
+    "showcase": {
+      "title": "Startbildschirm-Vorschau",
+      "intro": "Der Startbildschirm zeigt die Rakete, Sprachplaneten und den schnellen Start einer 30-Minuten-Session.",
+      "caption": "PlanetLingua Startansicht"
+    }
+  },
+  "data": {
+    "title": "Daten und Konto",
+    "p1": "PlanetLingua speichert nur Daten, die für Lernfortschritt, Tagesserien und Boni erforderlich sind.",
+    "p2": "Du kannst jederzeit die Löschung von Konto und Daten anfordern.",
+    "p3": "Bei Fragen zu Daten: contact@webaby.io"
+  },
+  "video": {
+    "title": "Video - so funktioniert PlanetLingua",
+    "walkthrough": "Kurzer Walkthrough: tägliche Session, Flug zwischen Planeten und Freischaltung neuer Tage."
+  },
+  "keywords": "planetlingua, Sprachenlernen, 30 Minuten täglich, spielerisches Lernen, Boni, Sprachplaneten, Raketen-Anpassung",
+  "hero": {
+    "title": "PlanetLingua",
+    "subtitle": "Lerne täglich Sprachen und entdecke neue Planeten",
+    "back": "Zurück zu den Produkten"
+  }
+}

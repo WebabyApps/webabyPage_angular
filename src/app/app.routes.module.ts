@@ -41,6 +41,8 @@ export const routes: Routes = [
       loadChildren: () => import('./tutorials/music-colours/tutorial.route') },
     { path: 'products/free-ride',
       loadChildren: () => import('./tutorials/free-ride/tutorial.route') },
+    { path: 'products/planetlingua',
+      loadChildren: () => import('./tutorials/planetlingua/tutorial.route') },
     
   // --- Fallbacks (match AFTER specific routes) ---
   { path: 'products/:slug', component: TutorialPageComponent },  // generic

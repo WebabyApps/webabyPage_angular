@@ -5,7 +5,8 @@ export type ProductSlug =
   | 'bible-echo'
   | 'lucky-draw'
   | 'system-of-equations'
-  | 'music-colours';
+  | 'music-colours'
+  | 'planetlingua';
   
 // Wyświetlane nazwy w różnych językach (na start mogą być takie same)
 export const PRODUCT_APP_NAME_EN: Record<ProductSlug, string> = {
@@ -15,7 +16,8 @@ export const PRODUCT_APP_NAME_EN: Record<ProductSlug, string> = {
   'bible-echo': 'Bible Echo',
   'lucky-draw': 'Lucky Draw',
   'system-of-equations': 'System of Equations',
-  'music-colours': 'Music Colours'
+  'music-colours': 'Music Colours',
+  'planetlingua': 'PlanetLingua'
 };
 
 export const PRODUCT_APP_NAME_PL: Record<ProductSlug, string> = {
@@ -25,7 +27,8 @@ export const PRODUCT_APP_NAME_PL: Record<ProductSlug, string> = {
   'bible-echo': 'Bible Echo',
   'lucky-draw': 'Lucky Draw',
   'system-of-equations': 'System of Equations',
-  'music-colours': 'Music Colours'
+  'music-colours': 'Music Colours',
+  'planetlingua': 'PlanetLingua'
 };
 
 export const PRODUCT_APP_NAME_DE: Record<ProductSlug, string> = {
@@ -35,5 +38,6 @@ export const PRODUCT_APP_NAME_DE: Record<ProductSlug, string> = {
   'bible-echo': 'Bible Echo',
   'lucky-draw': 'Lucky Draw',
   'system-of-equations': 'System of Equations',
-  'music-colours': 'Music Colours'
+  'music-colours': 'Music Colours',
+  'planetlingua': 'PlanetLingua'
 };
