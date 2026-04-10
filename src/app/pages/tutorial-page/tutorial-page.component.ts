@@ -11,6 +11,11 @@ import { TutorialSectionComponent } from '../../shared/tutorial-section/tutorial
 import { getAppUrlBySlug } from '../../shared/models/producs.data';
 import { QRCodeComponent } from 'angularx-qrcode';
 
+type FaqItem = {
+  q: string;
+  a: string;
+  items?: string[];
+};
 
 @Component({
   selector: 'app-tutorial-page',
@@ -23,6 +28,7 @@ import { QRCodeComponent } from 'angularx-qrcode';
 export class TutorialPageComponent implements OnInit {
   public arr = (v: unknown): any[] => Array.isArray(v) ? (v as any[]) : [];
   scopePath!: string; // e.g. 'basketball-shots'           // CHANGED: tylko scope potrzebny
+  openFaqIndex = 0;
 
   // NEW: cały słownik dla scope’u jako stream (po załadowaniu translacji)
   dict$!: Observable<any>;
@@ -32,6 +38,7 @@ export class TutorialPageComponent implements OnInit {
   soundItems$!: Observable<string[]>;
   howSteps$!: Observable<string[]>;
   tips$!: Observable<string[]>;
+  faqItems$!: Observable<FaqItem[]>;
 
   constructor(
     private route: ActivatedRoute,
@@ -61,6 +68,14 @@ export class TutorialPageComponent implements OnInit {
     this.tips$ = this.dict$.pipe(
       map(d => this.toArray(d?.sections?.tips?.items))
     );
+    const svc: any = this.transloco as any;
+    this.faqItems$ = typeof svc.selectTranslateObject === 'function'
+      ? svc.selectTranslateObject('faq.items', {}, this.scopePath).pipe(
+          map((items: unknown) => this.toArray<FaqItem>(items))
+        )
+      : this.dict$.pipe(
+          map(d => this.toArray<FaqItem>(d?.faq?.items))
+        );
 
     // (opcjonalnie) wymuś jednoładowanie, jeśli chcesz mieć pewność w konsoli:
     this.transloco.selectTranslation(this.scopePath).pipe(take(1)).subscribe();
@@ -69,6 +84,10 @@ export class TutorialPageComponent implements OnInit {
   /** ---- SCOPE-AWARE HELPERS ---- */
   tr(key: string, params: Record<string, any> = {}): string {
     return this.transloco.translate(key, params, this.scopePath);
+  }
+
+  toggleFaq(index: number): void {
+    this.openFaqIndex = this.openFaqIndex === index ? -1 : index;
   }
 
   // REMOVED: BehaviorSubjecty i tro() nie są potrzebne do list; zostawiamy tr() dla zwykłych stringów

@@ -16,7 +16,7 @@ export const PRODUCTS: CardProduct[] = [
   { id: 'socialmigrateai',  slug: 'socialmigrateai',     img: 'assets/socialmigrateai.jpg', appUrl: 'https://socialmigrateai.webaby.io/' },
   { id: 'musiccolours',     slug: 'music-colours',       img: 'assets/tutorials/music-colours/Music_colours_icon.png', appUrl: 'https://musiccolours.webaby.io' },
   { id: 'freeride',         slug: 'free-ride',           img: 'assets/tutorials/freeride/icon.png', appUrl: 'https://freeride.webaby.io' },
-  { id: 'planetlingua',     slug: 'planetlingua',        img: 'assets/tutorials/planetlingua/header-vertical.png', appUrl: 'https://planetlingua.webaby.io' }
+  { id: 'planetlingua',     slug: 'planetlingua',        img: 'assets/tutorials/planetlingua/planet-header.png', appUrl: 'https://planetlingua.webaby.io' }
 ];
 
 export function getAppUrlBySlug(slug?: string): string | undefined {

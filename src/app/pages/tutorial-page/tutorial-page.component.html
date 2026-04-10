@@ -867,11 +867,10 @@
 
       <!-- ========== PlanetLingua ========== -->
       <ng-container *ngSwitchCase="'planetlingua'">
-        <h2>{{ tr('description.title') }}</h2>
         <p class="lead">{{ tr('description.lead') }}</p>
 
         <img class="app-header"
-             src="assets/tutorials/planetlingua/header-horizontal.png"
+             src="assets/tutorials/planetlingua/planet-header.png"
              [attr.alt]="tr('title')"
              loading="lazy" decoding="async" />
 
@@ -895,18 +894,44 @@
 
         <app-tutorial-section
           [title]="tr('sections.showcase.title')"
-          [img]="'assets/tutorials/planetlingua/header-vertical.png'"
+          [img]="'assets/tutorials/planetlingua/planet-header.png'"
           [lazyImg]="true"
           [alt]="tr('sections.showcase.caption')"
           [caption]="tr('sections.showcase.caption')"
           [reverse]="true"
           [scope]="sp">
           <p>{{ tr('sections.showcase.intro') }}</p>
+          <ul>
+            <ng-container *transloco="let t; scope: sp">
+              <li *ngFor="let item of arr(t('sections.showcase.items', { returnObjects: true }))">
+                {{ item }}
+              </li>
+            </ng-container>
+          </ul>
+        </app-tutorial-section>
+
+        <app-tutorial-section
+          [title]="tr('sections.onboarding.title')"
+          [img]="'assets/tutorials/planetlingua/planet_language_sellection.png'"
+          [lazyImg]="true"
+          [alt]="tr('sections.onboarding.caption')"
+          [caption]="tr('sections.onboarding.caption')"
+          [reverse]="false"
+          [scope]="sp">
+          <p>{{ tr('sections.onboarding.intro') }}</p>
+          <p>{{ tr('sections.onboarding.summary') }}</p>
+          <ol class="steps">
+            <ng-container *transloco="let t; scope: sp">
+              <li *ngFor="let step of arr(t('sections.onboarding.items', { returnObjects: true }))">
+                {{ step }}
+              </li>
+            </ng-container>
+          </ol>
         </app-tutorial-section>
 
         <app-tutorial-section
           [title]="tr('sections.how.title')"
-          [img]="'assets/tutorials/planetlingua/planet_language_sellection.png'"
+          [img]="'assets/tutorials/planetlingua/planet_session.png'"
           [lazyImg]="true"
           [alt]="tr('sections.how.caption')"
           [caption]="tr('sections.how.caption')"
@@ -924,7 +949,7 @@
 
         <app-tutorial-section
           [title]="tr('sections.progress.title')"
-          [img]="'assets/tutorials/planetlingua/planet_session.png'"
+          [img]="'assets/tutorials/planetlingua/planet_bonus.png'"
           [lazyImg]="true"
           [alt]="tr('sections.progress.caption')"
           [caption]="tr('sections.progress.caption')"
@@ -942,7 +967,7 @@
 
         <app-tutorial-section
           [title]="tr('sections.bonuses.title')"
-          [img]="'assets/tutorials/planetlingua/planet_bonus.png'"
+          [img]="'assets/tutorials/planetlingua/header-horizontal.png'"
           [lazyImg]="true"
           [alt]="tr('sections.bonuses.caption')"
           [caption]="tr('sections.bonuses.caption')"
@@ -960,7 +985,7 @@
 
         <app-tutorial-section
           [title]="tr('sections.customization.title')"
-          [img]="'assets/tutorials/planetlingua/header-horizontal.png'"
+          [img]="'assets/tutorials/planetlingua/header-vertical.png'"
           [lazyImg]="true"
           [alt]="tr('sections.customization.caption')"
           [caption]="tr('sections.customization.caption')"
@@ -970,6 +995,92 @@
           <ul>
             <ng-container *transloco="let t; scope: sp">
               <li *ngFor="let item of arr(t('sections.customization.items', { returnObjects: true }))">
+                {{ item }}
+              </li>
+            </ng-container>
+          </ul>
+        </app-tutorial-section>
+
+        <section id="planetlingua-learning-panels" class="section">
+          <h3>{{ tr('sections.learningPanels.title') }}</h3>
+          <p>{{ tr('sections.learningPanels.intro') }}</p>
+          <div class="media-grid">
+            <figure>
+              <img src="assets/tutorials/planetlingua/learning-overview.png"
+                   [attr.alt]="tr('sections.learningPanels.items.overview')"
+                   loading="lazy" decoding="async">
+              <figcaption>{{ tr('sections.learningPanels.items.overview') }}</figcaption>
+            </figure>
+            <figure>
+              <img src="assets/tutorials/planetlingua/learning-sentences.png"
+                   [attr.alt]="tr('sections.learningPanels.items.sentences')"
+                   loading="lazy" decoding="async">
+              <figcaption>{{ tr('sections.learningPanels.items.sentences') }}</figcaption>
+            </figure>
+            <figure>
+              <img src="assets/tutorials/planetlingua/learning-listening.png"
+                   [attr.alt]="tr('sections.learningPanels.items.listening')"
+                   loading="lazy" decoding="async">
+              <figcaption>{{ tr('sections.learningPanels.items.listening') }}</figcaption>
+            </figure>
+            <figure>
+              <img src="assets/tutorials/planetlingua/learning-numbers.png"
+                   [attr.alt]="tr('sections.learningPanels.items.numbers')"
+                   loading="lazy" decoding="async">
+              <figcaption>{{ tr('sections.learningPanels.items.numbers') }}</figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section id="planetlingua-profile" class="section">
+          <h3>{{ tr('sections.profile.title') }}</h3>
+          <p>{{ tr('sections.profile.intro') }}</p>
+          <div class="media-grid">
+            <figure>
+              <img src="assets/tutorials/planetlingua/profile-overview.png"
+                   [attr.alt]="tr('sections.profile.items.overview')"
+                   loading="lazy" decoding="async">
+              <figcaption>{{ tr('sections.profile.items.overview') }}</figcaption>
+            </figure>
+            <figure>
+              <img src="assets/tutorials/planetlingua/profile-rocket-editor.png"
+                   [attr.alt]="tr('sections.profile.items.rocket')"
+                   loading="lazy" decoding="async">
+              <figcaption>{{ tr('sections.profile.items.rocket') }}</figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <app-tutorial-section
+          [title]="tr('sections.premium.title')"
+          [img]="'assets/tutorials/planetlingua/planet_bonus.png'"
+          [lazyImg]="true"
+          [alt]="tr('sections.premium.caption')"
+          [caption]="tr('sections.premium.caption')"
+          [reverse]="true"
+          [scope]="sp">
+          <p>{{ tr('sections.premium.intro') }}</p>
+          <ul>
+            <ng-container *transloco="let t; scope: sp">
+              <li *ngFor="let item of arr(t('sections.premium.items', { returnObjects: true }))">
+                {{ item }}
+              </li>
+            </ng-container>
+          </ul>
+        </app-tutorial-section>
+
+        <app-tutorial-section
+          [title]="tr('sections.webPwa.title')"
+          [img]="'assets/tutorials/planetlingua/planet_menu.png'"
+          [lazyImg]="true"
+          [alt]="tr('sections.webPwa.caption')"
+          [caption]="tr('sections.webPwa.caption')"
+          [reverse]="false"
+          [scope]="sp">
+          <p>{{ tr('sections.webPwa.intro') }}</p>
+          <ul>
+            <ng-container *transloco="let t; scope: sp">
+              <li *ngFor="let item of arr(t('sections.webPwa.items', { returnObjects: true }))">
                 {{ item }}
               </li>
             </ng-container>
@@ -989,18 +1100,29 @@
           <p>{{ tr('data.p3') }}</p>
         </app-tutorial-section>
 
-        <section id="video" class="section">
-          <h3>{{ tr('video.title') }}</h3>
-          <div class="video">
-            <figure class="yt yt--md">
-              <iframe
-                src="https://www.youtube-nocookie.com/embed/"
-                title="PlanetLingua demo" loading="lazy"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen></iframe>
-              <figcaption>{{ tr('video.walkthrough') }}</figcaption>
-            </figure>
-            <small class="caption">{{ tr('video.walkthrough') }}</small>
+        <section class="section faq">
+          <h3>{{ tr('faq.title') }}</h3>
+          <div class="faq-list" *ngIf="faqItems$ | async as faqItems">
+              <article class="faq-item"
+                       *ngFor="let item of faqItems; let i = index"
+                       [class.is-open]="openFaqIndex === i">
+                <button type="button"
+                        class="faq-trigger"
+                        (click)="toggleFaq(i)"
+                        [attr.aria-expanded]="openFaqIndex === i"
+                        [attr.aria-controls]="'faq-panel-' + i">
+                  <span>{{ item.q }}</span>
+                  <span class="faq-icon" aria-hidden="true"></span>
+                </button>
+                <div class="faq-answer"
+                     *ngIf="openFaqIndex === i"
+                     [attr.id]="'faq-panel-' + i">
+                  <p>{{ item.a }}</p>
+                  <ul *ngIf="arr(item.items).length">
+                    <li *ngFor="let point of arr(item.items)">{{ point }}</li>
+                  </ul>
+                </div>
+              </article>
           </div>
         </section>
 

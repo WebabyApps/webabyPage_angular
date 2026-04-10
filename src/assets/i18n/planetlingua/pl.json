@@ -1,88 +1,204 @@
 {
-  "title": "PlanetLingua - nauka języków 30 minut dziennie",
+  "title": "Planet Lingua - nauka języków, która naprawdę wciąga",
   "description": {
-    "title": "PlanetLingua",
-    "lead": "Codziennie 30 minut nauki i lot na kolejne planety językowe. Odblokowuj dni, zdobywaj bonusy i ucz się przez zabawę."
+    "title": "Planet Lingua - nauka języków, która naprawdę wciąga",
+    "lead": "Ucz się codziennie w krótkich sesjach, łącząc słówka, zdania, listening i dynamiczną minigrę bonusową. Planet Lingua to nowoczesna web/PWA, która zamienia rutynę nauki w progres, flow i zabawę."
   },
   "tutorial": {
-    "title": "Nauka języków jako kosmiczna przygoda",
-    "intro": "PlanetLingua łączy krótkie codzienne sesje nauki z mechaniką gry. Budujesz regularność, zdobywasz nagrody i widzisz realny progres każdego dnia.",
+    "title": "Dlaczego działa?",
+    "intro": "Planet Lingua prowadzi użytkownika jasną ścieżką od pierwszego startu do codziennego progresu i utrzymania motywacji.",
     "benefits": [
-      "Stały rytm nauki: 30 minut dziennie.",
-      "Odblokowywanie kolejnych dni i planet językowych.",
-      "Bonusy, które wzmacniają motywację i tempo nauki.",
-      "Elementy gry, które łączą edukację z zabawą.",
-      "Przejrzysta ścieżka progresu dla każdego języka."
+      "Jasna ścieżka nauki: słówka -> zdania -> listening -> liczby -> bonus.",
+      "Codzienny rytm: szybkie sesje, które da się utrzymać.",
+      "Interaktywny bonus game: litery, bossowie, power-upy i realna powtórka języka.",
+      "Motywacja i streaki: odznaki plus przyspieszony unlock bonusów.",
+      "Hall of Fame: ranking Top 10 i porównanie wyników między użytkownikami.",
+      "Web + PWA: działa w przeglądarce i jako instalowana appka."
     ]
   },
   "sections": {
-    "how": {
-      "title": "Jak zacząć",
-      "intro": "Wystarczy kilka kroków:",
-      "caption": "Pierwsze uruchomienie",
+    "showcase": {
+      "title": "Co dostaje użytkownik?",
+      "intro": "Na starcie użytkownik dostaje prosty, angażujący system nauki i czytelny progres.",
+      "caption": "Planet Lingua - ekran produktu",
       "items": [
-        "Wybierz język-planetę, od której zaczynasz.",
-        "Zaplanuj codzienne 30 minut nauki.",
-        "Wykonaj pierwsze zadania i zdobądź startowe punkty.",
-        "Wracaj codziennie, by odblokowywać kolejne dni.",
-        "Utrzymuj serię, aby szybciej otwierać nowe planety."
+        "Onboarding krok po kroku.",
+        "Spersonalizowaną rakietę i nickname.",
+        "Audio feedback i TTS literek lub słów.",
+        "Progres dzienny i długoterminowy.",
+        "Naukę przez działanie, nie przez nudę."
+      ]
+    },
+    "onboarding": {
+      "title": "Szybki start (pierwsze 2 minuty)",
+      "intro": "Planet Lingua to web/PWA do codziennej nauki języka w formie krótkich, angażujących sesji.",
+      "summary": "Uczysz się przez słówka, zdania, listening, liczby i bonusową minigrę. Pierwsze uruchomienie zostało skrócone do kilku prostych kroków.",
+      "caption": "Onboarding i wybór języka",
+      "items": [
+        "Załóż konto (email + hasło) i aktywuj je z linku w mailu.",
+        "Wybierz parę językową (język źródłowy -> docelowy) na ekranie planet.",
+        "Kliknij START i przejdź dzienną sesję.",
+        "Po utworzeniu konta usłyszysz dźwięk \"access granted\"."
+      ]
+    },
+    "how": {
+      "title": "Jak wygląda sesja nauki",
+      "intro": "Sesja obejmuje 5 etapów i prowadzi użytkownika od prostych elementów do minigry bonusowej.",
+      "caption": "Dzienna sesja nauki",
+      "items": [
+        "Słówka: fiszki, odsłuch, układanie liter oraz progres i powtórki.",
+        "Zdania: praktyczne zdania, ćwiczenia i weryfikacja odpowiedzi.",
+        "Listening: podsumowanie materiału, tłumaczenie i opis \"zdanie po zdaniu\" oraz format bez duplikatów i mieszania języków.",
+        "Liczby: codzienna szybka powtórka liczb i wymowy.",
+        "Bonus (minigra): zbierasz litery, składasz słowa, walczysz z bossami i zdobywasz nagrody."
       ]
     },
     "progress": {
-      "title": "Lot między planetami i postępy",
-      "intro": "Każda ukończona sesja przesuwa Cię dalej:",
-      "caption": "Mapa postępu",
+      "title": "Kluczowe funkcje bonusu",
+      "intro": "Bonus game nie jest dodatkiem obok nauki - to część systemu utrwalania słownictwa i budowania flow.",
+      "caption": "Bonus game i power-upy",
       "items": [
-        "Każdy dzień to nowy etap do odblokowania.",
-        "Postęp jest widoczny osobno dla każdego języka.",
-        "Regularność nagradzana jest szybszym odblokowaniem treści.",
-        "Trudniejsze wyzwania pojawiają się wraz z rozwojem.",
-        "Twoja rakieta dociera na kolejne planety językowe."
+        "Tryb Easy/Hard: Easy ma 5 żyć, Hard ma 3 życia.",
+        "Pauza timera przy bossie - czas na słowo startuje dopiero po pokonaniu bossa.",
+        "Czytanie poprawnych literek można włączyć checkboxem, domyślnie jest aktywne.",
+        "Po złożeniu całego słowa odczytywane są słowo i tłumaczenie.",
+        "Bossowie ewoluują wraz z poziomem, a dropy mogą być pozytywne i negatywne, np. +1 życie, spowolnienie, turbo lub hazard."
       ]
     },
     "bonuses": {
-      "title": "Rodzaje bonusów",
-      "intro": "W aplikacji dostępne są różne bonusy wspierające naukę:",
-      "caption": "System bonusów",
+      "title": "Hall of Fame (Top 10)",
+      "intro": "Wyniki bonusu są zapisywane i porównywane między użytkownikami, dzięki czemu bonus ma też wymiar rywalizacji.",
+      "caption": "Ranking i wyniki bonusu",
       "items": [
-        "Bonusy za codzienne logowanie i utrzymanie serii.",
-        "Nagrody za pełne wykonanie dziennej sesji.",
-        "Dodatkowe punkty za dokładność odpowiedzi.",
-        "Specjalne bonusy wydarzeń i wyzwań czasowych.",
-        "Osiągnięcia odblokowujące kolejne elementy rozgrywki."
+        "Ranking wyników bonusu zapisywany jest na serwerze.",
+        "Wyniki są porównywane między kontami użytkowników.",
+        "Leaderboard pokazuje avatar, nazwę i score w pełnym ekranie.",
+        "Do Top 10 trafia tylko wynik, który przebija aktualny próg rankingu.",
+        "Nickname do rankingu ustawiasz w edytorze rakiety - możesz użyć domyślnej nazwy lub własnej."
       ]
     },
     "customization": {
-      "title": "Personalizacja rakiety",
-      "intro": "Możesz zmieniać wygląd rakiety i budować własny styl podróży:",
-      "caption": "Modyfikacja rakiety",
+      "title": "Rakieta i personalizacja",
+      "intro": "Planet Lingua pozwala połączyć naukę z lekką warstwą identyfikacji i zabawy.",
+      "caption": "Rakieta i personalizacja profilu",
       "items": [
-        "Odblokowuj nowe skórki i elementy wizualne.",
-        "Dopasuj wygląd rakiety do swoich osiągnięć.",
-        "Używaj nagród z bonusów do personalizacji.",
-        "Każda zmiana podkreśla postęp w nauce.",
-        "Zabawa i motywacja rosną razem z Twoim rozwojem."
+        "Edytor rakiety oferuje warianty i styl.",
+        "Nickname można personalizować pod ranking.",
+        "Astronauta HUD pokazuje ring życia i animacje reakcji.",
+        "Audio i UI są dopracowane pod eventy takie jak start, boss, kolekcja i eksplozje."
       ]
     },
-    "showcase": {
-      "title": "Podgląd ekranu głównego",
-      "intro": "Ekran startowy pokazuje rakietę, planety językowe i szybki start sesji 30-minutowej.",
-      "caption": "Ekran główny PlanetLingua"
+    "learningPanels": {
+      "title": "Panele nauki",
+      "intro": "Nowe ekrany pokazują, jak wygląda przejście przez sesję i kolejne moduły nauki w praktyce.",
+      "items": {
+        "overview": "Przegląd sesji 30 minut i aktywnych modułów.",
+        "sentences": "Panel zdań z ćwiczeniem uzupełniania i kontrolą odpowiedzi.",
+        "listening": "Listening z podsumowaniem, tłumaczeniem i opisem zdanie po zdaniu.",
+        "numbers": "Panel liczb do codziennej szybkiej powtórki wymowy."
+      }
+    },
+    "profile": {
+      "title": "Profil użytkownika",
+      "intro": "Profil zbiera postępy, aktywne pary językowe, osiągnięcia i ustawienia personalizacji.",
+      "items": {
+        "overview": "Profil nauki z aktywnymi parami, bonus game i osiągnięciami.",
+        "rocket": "Edytor rakiety z nickname do Hall of Fame."
+      }
+    },
+    "premium": {
+      "title": "Premium (skrót)",
+      "intro": "Premium odblokowuje pełniejsze opcje personalizacji i bonusów.",
+      "caption": "Premium i dodatkowe opcje",
+      "items": [
+        "Więcej opcji muzyki bonusu.",
+        "Szybszy dostęp do wyższych elementów gameplayu i customizacji."
+      ]
+    },
+    "webPwa": {
+      "title": "Tryb PWA i Web",
+      "intro": "Planet Lingua działa spójnie na desktopie i telefonie, bez konieczności pobierania klasycznej aplikacji ze sklepu.",
+      "caption": "Planet Lingua na Web i PWA",
+      "items": [
+        "Możesz używać aplikacji jako Web w przeglądarce.",
+        "Możesz też zainstalować ją jako PWA.",
+        "Funkcjonalnie oba tryby są spójne, a PWA daje wygodę appki i cache."
+      ]
     }
+  },
+  "faq": {
+    "title": "FAQ",
+    "items": [
+      {
+        "q": "Czym jest Planet Lingua?",
+        "a": "To aplikacja do codziennej nauki języków (Web + PWA), która łączy klasyczne ćwiczenia z minigrą bonusową i systemem progresu."
+      },
+      {
+        "q": "Jak zacząć?",
+        "a": "Załóż konto, aktywuj je z linku email, wybierz parę językową (źródłowy -> docelowy) i kliknij START."
+      },
+      {
+        "q": "Jak wygląda sesja?",
+        "a": "Sesja obejmuje 5 etapów:",
+        "items": [
+          "Słówka",
+          "Zdania",
+          "Listening",
+          "Liczby",
+          "Bonus game"
+        ]
+      },
+      {
+        "q": "Czy Planet Lingua działa na telefonie?",
+        "a": "Tak. Możesz używać jej w przeglądarce albo zainstalować jako PWA."
+      },
+      {
+        "q": "Czym jest Bonus Game?",
+        "a": "To minigra utrwalająca słownictwo: zbierasz litery, składasz słowa, walczysz z bossami i zbierasz power-upy."
+      },
+      {
+        "q": "Jak działają życia i poziomy trudności?",
+        "a": "Masz do wyboru dwa tryby:",
+        "items": [
+          "Easy: 5 żyć",
+          "Hard: 3 życia"
+        ]
+      },
+      {
+        "q": "Co to jest Hall of Fame?",
+        "a": "To ranking Top 10 wyników bonusu. Wyniki zapisują się na serwerze i są porównywane między użytkownikami."
+      },
+      {
+        "q": "Kiedy wynik trafia do Hall of Fame?",
+        "a": "Gdy przebije próg aktualnego Top 10."
+      },
+      {
+        "q": "Czy mogę zmienić nazwę w rankingu?",
+        "a": "Tak - ustawiasz nickname w edytorze rakiety. Możesz użyć domyślnej nazwy lub własnej."
+      },
+      {
+        "q": "Czy bonus czyta literki i słowa?",
+        "a": "Tak. Możesz włączyć czytanie poprawnie trafionych literek, a po złożeniu całego słowa odczytywane są słowo i tłumaczenie."
+      },
+      {
+        "q": "Jak działa streak i odznaki?",
+        "a": "Za regularną naukę zbierasz streak. Po 3 dniach z rzędu odblokowujesz odznakę i dostajesz przyspieszony unlock kolejnych elementów bonusu."
+      },
+      {
+        "q": "Co daje Premium?",
+        "a": "Premium odblokowuje rozszerzone opcje personalizacji i bonusów, np. pełny wybór muzyki bonusu i szersze możliwości w gameplayu."
+      }
+    ]
   },
   "data": {
     "title": "Dane i konto",
-    "p1": "PlanetLingua przechowuje tylko dane potrzebne do działania postępów nauki, serii dni i bonusów.",
+    "p1": "Planet Lingua przechowuje tylko dane potrzebne do działania konta, postępów nauki, streaków, rankingu i bonusów.",
     "p2": "W każdej chwili możesz poprosić o usunięcie konta i danych.",
     "p3": "W sprawach dotyczących danych napisz na: contact@webaby.io"
   },
-  "video": {
-    "title": "Wideo - jak działa PlanetLingua",
-    "walkthrough": "Krótki przegląd: codzienna sesja, lot między planetami i odblokowywanie nowych dni."
-  },
-  "keywords": "planetlingua, nauka języków, 30 minut dziennie, nauka przez zabawę, bonusy, planety językowe, personalizacja rakiety",
+  "keywords": "planet lingua, nauka języków, web pwa, onboarding, bonus game, hall of fame, streak, premium, personalizacja rakiety",
   "hero": {
-    "title": "PlanetLingua",
+    "title": "Planet Lingua",
     "subtitle": "Ucz się języków codziennie i odkrywaj nowe planety",
     "back": "Wróć do produktów"
   }
