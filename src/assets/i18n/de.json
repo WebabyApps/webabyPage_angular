@@ -72,6 +72,11 @@
         "openLink": "App-Link öffnen",
         "qrInstruction": "Scanne den QR-Code, um die App auf deinem Handy zu öffnen"
       },
+      "docuflow": {
+        "desc": "Dokumenten-Workflow, Reporting, Vermietung und volle KSeF-Synchronisierung in einem Panel.",
+        "imgAlt": "DocuFlow-Dashboard für Dokumente, KSeF, Rechnungen und Vermietung",
+        "title": "DocuFlow"
+      },
       "equationsTrainer": {
         "desc": "Algebra leicht gemacht - übe das Lösen linearer Systeme Schritt für Schritt.",
         "imgAlt": "App zum Training von Gleichungssystemen",

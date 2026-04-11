@@ -3,6 +3,7 @@ import { NgIf, NgClass } from '@angular/common';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { FadeInOnScrollDirective } from '../directives/fade-in-on-scroll.directive';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-tutorial-section',
@@ -56,13 +57,35 @@ export class TutorialSectionComponent implements OnChanges {
       const obs = this.scope
         ? svc.selectTranslate(str, {}, this.scope)
         : svc.selectTranslate(str);
-      obs.pipe().subscribe((v: string) => setter(v));
+      obs.pipe(take(1)).subscribe((v: string) => {
+        if (v !== str) {
+          setter(v);
+          return;
+        }
+
+        if (!this.scope) {
+          setter(v);
+          return;
+        }
+
+        const prefixedKey = `${this.scope}.${str}`;
+        this.transloco.selectTranslate(prefixedKey).pipe(take(1)).subscribe((prefixed: string) => {
+          setter(prefixed !== prefixedKey ? prefixed : v);
+        });
+      });
       return;
     }
     const v = this.scope
       ? this.transloco.translate(str, {}, this.scope)
       : this.transloco.translate(str);
-    setter(v);
+    if (v !== str || !this.scope) {
+      setter(v);
+      return;
+    }
+
+    const prefixedKey = `${this.scope}.${str}`;
+    const prefixed = this.transloco.translate(prefixedKey);
+    setter(prefixed !== prefixedKey ? prefixed : v);
   }
 
   private resolveAll() {
@@ -73,7 +96,13 @@ export class TutorialSectionComponent implements OnChanges {
 
   /** ⬇️ NEW scope-aware helpers */
   tr(key: string, params: Record<string, any> = {}): string {
-    return this.transloco.translate(key, params, this.scope);
+    const scoped = this.transloco.translate(key, params, this.scope);
+    if (scoped !== key) return scoped;
+
+    if (!this.scope) return scoped;
+    const prefixedKey = `${this.scope}.${key}`;
+    const prefixed = this.transloco.translate(prefixedKey, params);
+    return prefixed !== prefixedKey ? prefixed : scoped;
   }
 
   tro(key: string, params: Record<string, any> = {}) {

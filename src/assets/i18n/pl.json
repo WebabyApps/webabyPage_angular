@@ -72,6 +72,11 @@
                 "openLink": "Otwórz link do aplikacji",
                 "qrInstruction": "Zeskanuj kod QR, aby otworzyć aplikację na telefonie"
             },
+            "docuflow": {
+                "desc": "Obieg dokumentów, raportowanie, najem i pełna synchronizacja z KSeF w jednym panelu.",
+                "imgAlt": "DocuFlow - panel do dokumentów, KSeF, faktur i najmu",
+                "title": "DocuFlow"
+            },
             "equationsTrainer": {
                 "desc": "Ułatwiamy algebrę — ćwicz rozwiązywanie układów liniowych krok po kroku.",
                 "imgAlt": "Aplikacja do nauki równań",

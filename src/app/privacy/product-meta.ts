@@ -1,4 +1,5 @@
 export type ProductSlug =
+  | 'docuflow'
   | 'abc-land'
   | 'bubble-world'
   | 'basketball-shots'
@@ -10,6 +11,7 @@ export type ProductSlug =
   
 // Wyświetlane nazwy w różnych językach (na start mogą być takie same)
 export const PRODUCT_APP_NAME_EN: Record<ProductSlug, string> = {
+  'docuflow': 'DocuFlow',
   'abc-land': 'ABC Land',
   'bubble-world': 'Bubble World',
   'basketball-shots': 'Basketball Shots',
@@ -21,6 +23,7 @@ export const PRODUCT_APP_NAME_EN: Record<ProductSlug, string> = {
 };
 
 export const PRODUCT_APP_NAME_PL: Record<ProductSlug, string> = {
+  'docuflow': 'DocuFlow',
   'abc-land': 'ABC Land',
   'bubble-world': 'Bubble World',
   'basketball-shots': 'Basketball Shots',
@@ -32,6 +35,7 @@ export const PRODUCT_APP_NAME_PL: Record<ProductSlug, string> = {
 };
 
 export const PRODUCT_APP_NAME_DE: Record<ProductSlug, string> = {
+  'docuflow': 'DocuFlow',
   'abc-land': 'ABC Land',
   'bubble-world': 'Bubble World',
   'basketball-shots': 'Basketball Shots',

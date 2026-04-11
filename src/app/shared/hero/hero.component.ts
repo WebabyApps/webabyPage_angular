@@ -66,12 +66,34 @@ export class HeroComponent {
     if (typeof svc.selectTranslate === 'function') {
       const obs = this._scope ? svc.selectTranslate(str, {}, this._scope)
                               : svc.selectTranslate(str);
-      obs.pipe(take(1)).subscribe((v: string) => setter(v));
+      obs.pipe(take(1)).subscribe((v: string) => {
+        if (v !== str) {
+          setter(v);
+          return;
+        }
+
+        if (!this._scope) {
+          setter(v);
+          return;
+        }
+
+        const prefixedKey = `${this._scope}.${str}`;
+        this.transloco.selectTranslate(prefixedKey).pipe(take(1)).subscribe((prefixed: string) => {
+          setter(prefixed !== prefixedKey ? prefixed : v);
+        });
+      });
       return;
     }
     const v = this._scope ? this.transloco.translate(str, {}, this._scope)
                           : this.transloco.translate(str);
-    setter(v);
+    if (v !== str || !this._scope) {
+      setter(v);
+      return;
+    }
+
+    const prefixedKey = `${this._scope}.${str}`;
+    const prefixed = this.transloco.translate(prefixedKey);
+    setter(prefixed !== prefixedKey ? prefixed : v);
   }
 
   private resolveAll() {

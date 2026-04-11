@@ -1,0 +1,63 @@
+{
+  "title": "DocuFlow",
+  "hero": {
+    "title": "DocuFlow",
+    "subtitle": "Documents, KSeF, rentals, and reporting in one workspace",
+    "back": "Back to products"
+  },
+  "description": {
+    "title": "One workspace for operational flow",
+    "lead": "DocuFlow combines document workflow, reporting, sending and receiving KSeF invoices, payment statuses, a rental module, and secure document archiving in one product."
+  },
+  "sections": {
+    "workspace": {
+      "title": "Daily operations without tool switching",
+      "caption": "Main workspace and guided onboarding",
+      "p1": "The app brings invoicing, documents, KSeF, payments, FAQ, and reporting into one consistent operational dashboard for both operators and business owners.",
+      "p2": "It is designed for teams that want one practical control panel instead of stitching together several separate tools."
+    },
+    "documents": {
+      "title": "Document workflow and archive",
+      "caption": "A hub for documents and daily operations",
+      "p1": "The documents module keeps invoices, files, and processing states in one place. Teams can move quickly from an incoming document to approval, payment, reporting, or KSeF delivery.",
+      "p2": "The focus is practical day-to-day handling, so the interface emphasizes readable lists, filtering, and fast transitions between a document, a company, and the next action."
+    },
+    "ksef": {
+      "title": "Send and receive invoices through KSeF",
+      "caption": "KSeF connection setup",
+      "p1": "DocuFlow synchronizes with KSeF, supports issuing invoices to KSeF, and handles incoming documents. The workflow moves from invoice preparation to submission status and confirmation.",
+      "p2": "The interface simplifies TEST, DEMO, and PRD setup so the current authorization state and company context stay visible while working."
+    },
+    "invoicing": {
+      "title": "Invoice issuing and error handling",
+      "caption": "Invoice form, XML flow, and submission states",
+      "p1": "DocuFlow supports manual invoicing, file-based invoicing, and invoice generation from monthly reports. Teams can manage drafts, XML creation, KSeF submission, and status checks in one flow.",
+      "p2": "That reduces manual re-entry and helps operators catch authorization, session, or validation issues earlier when working with KSeF responses."
+    },
+    "payments": {
+      "title": "Payments and reporting in one view",
+      "caption": "Payments and banking synchronization",
+      "p1": "The payments area shows banking history, document status, and settlement progress. After connecting an account, teams can sync history and match transfers against invoices faster.",
+      "p2": "Reporting helps turn operational data into practical dashboards and monthly summaries without moving information between systems by hand."
+    },
+    "rental": {
+      "title": "Rental management inside the same system",
+      "caption": "Rental module with units, rooms, and tenants",
+      "p1": "DocuFlow includes a rental module for defining properties and rooms, assigning tenants, and generating recurring rental documents for the selected period.",
+      "p2": "That keeps rental operations, invoicing, and archiving in the same workflow, ready for later sending and audit-friendly storage."
+    },
+    "blockchain": {
+      "title": "Document integrity and trusted storage",
+      "caption": "Secure document preservation",
+      "p1": "One of DocuFlow's distinctive features is the ability to store documents using blockchain-backed verification, giving teams stronger confidence in integrity and later proof of authenticity.",
+      "p2": "This matters wherever audit trails, authenticity checks, and confidence that a saved document was not silently altered are important."
+    }
+  },
+  "gallery": {
+    "title": "Selected screens",
+    "faq": "FAQ and category overview",
+    "banking": "Bank selection for synchronization",
+    "ksef": "KSeF statuses and error handling"
+  },
+  "keywords": "DocuFlow, document workflow, KSeF, invoicing, reporting, rental management, blockchain, banking sync"
+}

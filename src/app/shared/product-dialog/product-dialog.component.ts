@@ -237,14 +237,11 @@ copyDeepLink() {
 goToDetails(ev?: Event) {
   ev?.preventDefault();
   ev?.stopPropagation();
-
   const slug = this.data.slug;
-
-  // 1) zamknij z powodem, żeby rodzic wiedział „nie sprzątać”
   this.ref.close('details');
-
-  // 2) nawiguj absolutnie (bez setTimeout)
-  this.router.navigate(['/products', slug]);
+  queueMicrotask(() => {
+    this.router.navigate(['/products', slug]);
+  });
 }
 
 

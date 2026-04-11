@@ -1,5 +1,5 @@
 // src/app/pages/tutorial-page/tutorial-page.component.ts
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
@@ -42,7 +42,8 @@ export class TutorialPageComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private transloco: TranslocoService
+    private transloco: TranslocoService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -77,13 +78,20 @@ export class TutorialPageComponent implements OnInit {
           map(d => this.toArray<FaqItem>(d?.faq?.items))
         );
 
-    // (opcjonalnie) wymuś jednoładowanie, jeśli chcesz mieć pewność w konsoli:
-    this.transloco.selectTranslation(this.scopePath).pipe(take(1)).subscribe();
+    // Wymuś przerysowanie przy dojechaniu scoped tłumaczeń dla szablonu z OnPush.
+    this.transloco.selectTranslation(this.scopePath).subscribe(() => {
+      this.cdr.markForCheck();
+    });
   }
 
   /** ---- SCOPE-AWARE HELPERS ---- */
   tr(key: string, params: Record<string, any> = {}): string {
-    return this.transloco.translate(key, params, this.scopePath);
+    const scoped = this.transloco.translate(key, params, this.scopePath);
+    if (scoped !== key) return scoped;
+
+    const prefixedKey = `${this.scopePath}.${key}`;
+    const prefixed = this.transloco.translate(prefixedKey, params);
+    return prefixed !== prefixedKey ? prefixed : scoped;
   }
 
   toggleFaq(index: number): void {

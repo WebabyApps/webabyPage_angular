@@ -1,0 +1,63 @@
+{
+  "title": "DocuFlow",
+  "hero": {
+    "title": "DocuFlow",
+    "subtitle": "Dokumente, KSeF, Vermietung und Reporting in einem Arbeitsbereich",
+    "back": "Zurück zu den Produkten"
+  },
+  "description": {
+    "title": "Ein Bereich für den operativen Ablauf",
+    "lead": "DocuFlow verbindet Dokumenten-Workflow, Reporting, Senden und Empfangen von KSeF-Rechnungen, Zahlungsstatus, ein Vermietungsmodul und sichere Dokumentenablage in einem Produkt."
+  },
+  "sections": {
+    "workspace": {
+      "title": "Tägliche Arbeit ohne Werkzeugwechsel",
+      "caption": "Startbereich und geführtes Onboarding",
+      "p1": "Die Anwendung bündelt Rechnungen, Dokumente, KSeF, Zahlungen, FAQ und Reporting in einem konsistenten Arbeitsbereich für Operatoren und Unternehmensinhaber.",
+      "p2": "Sie richtet sich an Teams, die ein praktisches Steuerungszentrum statt mehrerer getrennter Werkzeuge brauchen."
+    },
+    "documents": {
+      "title": "Dokumenten-Workflow und Archiv",
+      "caption": "Zentrale für Dokumente und tägliche Abläufe",
+      "p1": "Das Dokumentenmodul bündelt Rechnungen, Dateien und Bearbeitungsstatus an einem Ort. Teams gelangen schnell vom eingehenden Dokument zu Freigabe, Zahlung, Reporting oder KSeF-Versand.",
+      "p2": "Im Fokus steht die tägliche Arbeit, deshalb setzt die Oberfläche auf lesbare Listen, Filter und schnelle Wechsel zwischen Dokument, Firma und nächstem Schritt."
+    },
+    "ksef": {
+      "title": "Rechnungen über KSeF senden und empfangen",
+      "caption": "Einrichtung der KSeF-Verbindung",
+      "p1": "DocuFlow synchronisiert sich mit KSeF, unterstützt das Ausstellen von Rechnungen an KSeF und verarbeitet eingehende Dokumente. Der Ablauf führt von der Vorbereitung bis zum Versandstatus und Nachweis.",
+      "p2": "Die Oberfläche vereinfacht die Einrichtung von TEST, DEMO und PRD, sodass Autorisierungsstatus und Firmenkontext während der Arbeit sichtbar bleiben."
+    },
+    "invoicing": {
+      "title": "Rechnungsstellung und Fehlerbehandlung",
+      "caption": "Rechnungsformular, XML-Ablauf und Versandstatus",
+      "p1": "DocuFlow unterstützt manuelle Rechnungen, Rechnungen aus Dateien und die Generierung aus Monatsberichten. Entwürfe, XML-Erstellung, KSeF-Versand und Statusprüfung bleiben in einem Ablauf.",
+      "p2": "So wird weniger manuell übertragen und Probleme bei Autorisierung, Sitzung oder Validierung von KSeF-Antworten werden früher sichtbar."
+    },
+    "payments": {
+      "title": "Zahlungen und Reporting in einer Ansicht",
+      "caption": "Zahlungen und Bank-Synchronisierung",
+      "p1": "Der Zahlungsbereich zeigt Bankhistorie, Dokumentstatus und Fortschritt der Abwicklung. Nach dem Verbinden eines Kontos lässt sich die Historie synchronisieren und schneller mit Rechnungen abgleichen.",
+      "p2": "Das Reporting verwandelt operative Daten in übersichtliche Dashboards und Monatszusammenfassungen ohne manuelle Übertragung zwischen Systemen."
+    },
+    "rental": {
+      "title": "Vermietung im selben System verwalten",
+      "caption": "Vermietungsmodul mit Einheiten, Zimmern und Mietern",
+      "p1": "DocuFlow enthält ein Vermietungsmodul zum Anlegen von Objekten und Zimmern, Zuweisen von Mietern und Generieren wiederkehrender Mietdokumente für den gewählten Zeitraum.",
+      "p2": "So bleiben Vermietung, Rechnungsstellung und Archivierung in einem gemeinsamen Ablauf und sind für Versand und revisionssichere Ablage vorbereitet."
+    },
+    "blockchain": {
+      "title": "Dokumentenintegrität und vertrauenswürdige Ablage",
+      "caption": "Sichere Aufbewahrung von Dokumenten",
+      "p1": "Ein besonderes Merkmal von DocuFlow ist die Möglichkeit, Dokumente mit blockchain-gestützter Verifikation abzulegen. Das schafft mehr Sicherheit bei Integrität und späterem Nachweis der Echtheit.",
+      "p2": "Das ist überall dort wertvoll, wo Prüfpfade, Authentizitätskontrollen und die Gewissheit wichtig sind, dass ein gespeichertes Dokument nicht unbemerkt verändert wurde."
+    }
+  },
+  "gallery": {
+    "title": "Ausgewählte Ansichten",
+    "faq": "FAQ und Kategorienübersicht",
+    "banking": "Bankauswahl zur Synchronisierung",
+    "ksef": "KSeF-Status und Fehlerbehandlung"
+  },
+  "keywords": "DocuFlow, Dokumenten-Workflow, KSeF, Rechnungen, Reporting, Vermietung, Blockchain, Bank-Synchronisierung"
+}

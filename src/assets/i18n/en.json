@@ -72,6 +72,11 @@
                 "openLink": "Open app link",
                 "qrInstruction": "Scan the QR code to open the app on your phone"
             },
+            "docuflow": {
+                "desc": "Document workflow, reporting, rental management, and full KSeF sync in one workspace.",
+                "imgAlt": "DocuFlow dashboard for documents, KSeF, invoicing, and rentals",
+                "title": "DocuFlow"
+            },
             "equationsTrainer": {
                 "desc": "Make algebra easy \u2014 practice solving linear systems step by step.",
                 "imgAlt": "Equations trainer app",

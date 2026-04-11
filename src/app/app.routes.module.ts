@@ -43,6 +43,8 @@ export const routes: Routes = [
       loadChildren: () => import('./tutorials/free-ride/tutorial.route') },
     { path: 'products/planetlingua',
       loadChildren: () => import('./tutorials/planetlingua/tutorial.route') },
+    { path: 'products/docuflow',
+      loadChildren: () => import('./tutorials/docuflow/tutorial.route') },
     
   // --- Fallbacks (match AFTER specific routes) ---
   { path: 'products/:slug', component: TutorialPageComponent },  // generic

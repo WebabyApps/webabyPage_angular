@@ -1,0 +1,63 @@
+{
+  "title": "DocuFlow",
+  "hero": {
+    "title": "DocuFlow",
+    "subtitle": "Dokumenty, KSeF, najem i raporty w jednym panelu",
+    "back": "Wróć do produktów"
+  },
+  "description": {
+    "title": "Jeden panel do pracy operacyjnej",
+    "lead": "DocuFlow łączy obieg dokumentów, raportowanie, wystawianie i odbieranie faktur KSeF, statusy płatności, moduł najmu oraz bezpieczne archiwizowanie dokumentów."
+  },
+  "sections": {
+    "workspace": {
+      "title": "Codzienna praca bez przełączania narzędzi",
+      "caption": "Panel startowy i onboarding produktu",
+      "p1": "Aplikacja porządkuje główne obszary pracy: wystawianie, dokumenty, KSeF, płatności, FAQ i raporty. Dzięki temu operator i właściciel firmy pracują na jednym spójnym widoku.",
+      "p2": "To rozwiązanie dla firm, które chcą obsługiwać dokumenty i wyniki operacyjne z jednego miejsca zamiast sklejać kilka osobnych systemów."
+    },
+    "documents": {
+      "title": "Obieg dokumentów i archiwum",
+      "caption": "Centrum dokumentów i codziennych operacji",
+      "p1": "Moduł dokumentów porządkuje faktury, pliki i statusy obsługi w jednym miejscu. Dzięki temu zespół może szybko przejść od odebrania dokumentu do dalszego procesu: akceptacji, płatności, raportu albo wysyłki do KSeF.",
+      "p2": "System ma służyć pracy operacyjnej, więc skupia się na czytelnych listach, filtrowaniu i szybkim przechodzeniu między dokumentem, kontrahentem i kolejnym krokiem procesu."
+    },
+    "ksef": {
+      "title": "Wysyłka i odbiór faktur przez KSeF",
+      "caption": "Konfiguracja połączenia z KSeF",
+      "p1": "DocuFlow synchronizuje się z KSeF, wspiera wystawianie faktur do KSeF oraz odbieranie dokumentów przychodzących. W jednym przepływie można przejść od dokumentu do statusu wysyłki i UPO.",
+      "p2": "Interfejs upraszcza konfigurację środowisk TEST, DEMO i PRD, a operator ma pod ręką status połączenia oraz dane kontekstu potrzebne do dalszej pracy."
+    },
+    "invoicing": {
+      "title": "Wystawianie faktur i obsługa błędów",
+      "caption": "Formularz faktury, XML i statusy wysyłki",
+      "p1": "DocuFlow pozwala wystawiać faktury ręcznie, z pliku lub na podstawie raportów miesięcznych. Operator ma pod kontrolą szkice, XML, wysyłkę do KSeF i późniejsze sprawdzanie statusu dokumentu.",
+      "p2": "W praktyce oznacza to mniej ręcznego przepisywania i szybsze wychwycenie problemów technicznych, takich jak błędy autoryzacji, sesji albo walidacji odpowiedzi z KSeF."
+    },
+    "payments": {
+      "title": "Płatności i raportowanie pod kontrolą",
+      "caption": "Widok płatności i synchronizacji bankowej",
+      "p1": "Moduł płatności pokazuje historię bankową, statusy dokumentów i kolejne etapy rozliczeń. Po podłączeniu rachunku można synchronizować historię i szybciej dopasowywać przelewy do faktur.",
+      "p2": "Raportowanie pozwala przejść od danych operacyjnych do czytelnych dashboardów i miesięcznych podsumowań bez ręcznego przepisywania informacji między systemami."
+    },
+    "rental": {
+      "title": "Obsługa najmu w tym samym systemie",
+      "caption": "Moduł najmu z lokalami, pokojami i najemcami",
+      "p1": "DocuFlow zawiera moduł do obsługi najmu: definiowanie mieszkań i pokoi, przypisywanie najemców oraz generowanie dokumentów dla kolejnych okresów rozliczeniowych.",
+      "p2": "To pozwala prowadzić najem i fakturowanie w jednym narzędziu, z gotowością do dalszej wysyłki dokumentów i archiwizacji."
+    },
+    "blockchain": {
+      "title": "Niezmienialność dokumentów i zaufane archiwum",
+      "caption": "Bezpieczne zapisywanie dokumentów",
+      "p1": "Jednym z wyróżników DocuFlow jest możliwość zapisywania dokumentów z wykorzystaniem blockchain, aby mieć silniejszą gwarancję ich integralności i późniejszej weryfikowalności.",
+      "p2": "To ważne wszędzie tam, gdzie liczy się historia zmian, potwierdzenie autentyczności i pewność, że dokument po zapisaniu nie został po cichu podmieniony."
+    }
+  },
+  "gallery": {
+    "title": "Wybrane ekrany",
+    "faq": "FAQ i podział na kategorie",
+    "banking": "Wybór banku do synchronizacji",
+    "ksef": "Obsługa komunikatów i statusów KSeF"
+  },
+  "keywords": "DocuFlow, obieg dokumentów, KSeF, faktury, raportowanie, najem, blockchain, synchronizacja bankowa"
+}

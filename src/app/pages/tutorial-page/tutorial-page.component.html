@@ -1132,6 +1132,135 @@
       </ng-container>
       <!-- /PlanetLingua -->
 
+      <!-- ========== DocuFlow ========== -->
+      <ng-container *ngSwitchCase="'docuflow'">
+        <img
+          class="app-header"
+          src="assets/tutorials/docuflow/carousel-banner.png"
+          [attr.alt]="tr('title')"
+          loading="lazy"
+          decoding="async" />
+
+        <h2>{{ tr('description.title') }}</h2>
+        <p class="lead">{{ tr('description.lead') }}</p>
+
+        <app-tutorial-section
+          [title]="tr('sections.workspace.title')"
+          [img]="'assets/tutorials/docuflow/about.png'"
+          [lazyImg]="true"
+          [alt]="tr('sections.workspace.caption')"
+          [caption]="tr('sections.workspace.caption')"
+          [reverse]="true"
+          [scope]="sp">
+          <p>{{ tr('sections.workspace.p1') }}</p>
+          <p>{{ tr('sections.workspace.p2') }}</p>
+        </app-tutorial-section>
+
+        <app-tutorial-section
+          [title]="tr('sections.documents.title')"
+          [img]="'assets/tutorials/docuflow/header.png'"
+          [lazyImg]="true"
+          [alt]="tr('sections.documents.caption')"
+          [caption]="tr('sections.documents.caption')"
+          [reverse]="false"
+          [scope]="sp">
+          <p>{{ tr('sections.documents.p1') }}</p>
+          <p>{{ tr('sections.documents.p2') }}</p>
+        </app-tutorial-section>
+
+        <app-tutorial-section
+          [title]="tr('sections.ksef.title')"
+          [img]="'assets/tutorials/docuflow/ksef-connect.png'"
+          [lazyImg]="true"
+          [alt]="tr('sections.ksef.caption')"
+          [caption]="tr('sections.ksef.caption')"
+          [reverse]="false"
+          [scope]="sp">
+          <p>{{ tr('sections.ksef.p1') }}</p>
+          <p>{{ tr('sections.ksef.p2') }}</p>
+        </app-tutorial-section>
+
+        <app-tutorial-section
+          [title]="tr('sections.invoicing.title')"
+          [img]="'assets/tutorials/docuflow/ksef-error.png'"
+          [lazyImg]="true"
+          [alt]="tr('sections.invoicing.caption')"
+          [caption]="tr('sections.invoicing.caption')"
+          [reverse]="true"
+          [scope]="sp">
+          <p>{{ tr('sections.invoicing.p1') }}</p>
+          <p>{{ tr('sections.invoicing.p2') }}</p>
+        </app-tutorial-section>
+
+        <app-tutorial-section
+          [title]="tr('sections.payments.title')"
+          [img]="'assets/tutorials/docuflow/payments.png'"
+          [lazyImg]="true"
+          [alt]="tr('sections.payments.caption')"
+          [caption]="tr('sections.payments.caption')"
+          [reverse]="true"
+          [scope]="sp">
+          <p>{{ tr('sections.payments.p1') }}</p>
+          <p>{{ tr('sections.payments.p2') }}</p>
+        </app-tutorial-section>
+
+        <app-tutorial-section
+          [title]="tr('sections.rental.title')"
+          [img]="'assets/tutorials/docuflow/rental.png'"
+          [lazyImg]="true"
+          [alt]="tr('sections.rental.caption')"
+          [caption]="tr('sections.rental.caption')"
+          [reverse]="false"
+          [scope]="sp">
+          <p>{{ tr('sections.rental.p1') }}</p>
+          <p>{{ tr('sections.rental.p2') }}</p>
+        </app-tutorial-section>
+
+        <app-tutorial-section
+          [title]="tr('sections.blockchain.title')"
+          [img]="'assets/tutorials/docuflow/poster.png'"
+          [lazyImg]="true"
+          [alt]="tr('sections.blockchain.caption')"
+          [caption]="tr('sections.blockchain.caption')"
+          [reverse]="true"
+          [scope]="sp">
+          <p>{{ tr('sections.blockchain.p1') }}</p>
+          <p>{{ tr('sections.blockchain.p2') }}</p>
+        </app-tutorial-section>
+
+        <section id="gallery" class="section">
+          <h3>{{ tr('gallery.title') }}</h3>
+          <div class="media-grid">
+            <figure>
+              <img src="assets/tutorials/docuflow/faq.png"
+                   [attr.alt]="tr('gallery.faq')"
+                   loading="lazy"
+                   decoding="async">
+              <figcaption>{{ tr('gallery.faq') }}</figcaption>
+            </figure>
+            <figure>
+              <img src="assets/tutorials/docuflow/banking.png"
+                   [attr.alt]="tr('gallery.banking')"
+                   loading="lazy"
+                   decoding="async">
+              <figcaption>{{ tr('gallery.banking') }}</figcaption>
+            </figure>
+            <figure>
+              <img src="assets/tutorials/docuflow/ksef-error.png"
+                   [attr.alt]="tr('gallery.ksef')"
+                   loading="lazy"
+                   decoding="async">
+              <figcaption>{{ tr('gallery.ksef') }}</figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section class="section">
+          <small>{{ tr('keywords') }}</small>
+        </section>
+      </ng-container>
+      <!-- /DocuFlow -->
+
       <!-- ========== Fallback (nieznany slug) ========== -->
       <ng-container *ngSwitchDefault>
         <p class="muted">Nie znaleziono treści dla tego produktu.</p>

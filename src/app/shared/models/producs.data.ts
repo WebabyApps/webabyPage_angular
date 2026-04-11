@@ -7,6 +7,7 @@ export type CardProduct = {
 };
 
 export const PRODUCTS: CardProduct[] = [
+  { id: 'docuflow',        slug: 'docuflow',            img: 'assets/tutorials/docuflow/carousel-banner.png', appUrl: 'https://docuflow.webaby.io' },
   { id: 'bubbleWord',       slug: 'bubble-world',        img: 'assets/bubble.jpg',        appUrl: 'https://webaby.io/details/bubble-word' },
   { id: 'basketballShots',  slug: 'basketball-shots',    img: 'assets/basket.jpg',        appUrl: 'https://play.google.com/store/apps/details?id=com.basketballshots.app&hl=pl' },
   { id: 'equationsTrainer', slug: 'system-of-equations', img: 'assets/equations.jpg',     appUrl: 'https://lucky-draw.webaby.io' },
