@@ -25,6 +25,12 @@
                 "p2": "We do not seek to addict, but to inspire. We replace passive consumption with active exploration. We nurture creativity, critical thinking, and joy in discovery.",
                 "title": "Our Mission"
             },
+            "orbit": {
+                "development": "Software development",
+                "innovations": "Innovations",
+                "mission": "Mission",
+                "vision": "Long term vision"
+            },
             "title": "Webaby Goals",
             "vision": {
                 "p1": "We aim to become a global hub where education, creativity, and innovation meet. By uniting technology with human imagination, Webaby seeks to create tools that make learning engaging for all ages and to build communities around knowledge and play.",

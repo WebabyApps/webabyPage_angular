@@ -25,6 +25,12 @@
         "p2": "Wir wollen nicht abhängig machen, sondern inspirieren. Wir ersetzen passiven Konsum durch aktives Entdecken. Wir fördern Kreativität, kritisches Denken und die Freude am Entdecken.",
         "title": "Unsere Mission"
       },
+      "orbit": {
+        "development": "Software development",
+        "innovations": "Innovations",
+        "mission": "Mission",
+        "vision": "Long term vision"
+      },
       "title": "Webaby-Ziele",
       "vision": {
         "p1": "Wir wollen zu einem globalen Knotenpunkt werden, an dem Bildung, Kreativität und Innovation zusammenfinden. Indem wir Technologie mit menschlicher Vorstellungskraft vereinen, schafft Webaby Werkzeuge, die Lernen für alle Altersgruppen spannend machen und Gemeinschaften rund um Wissen und Spiel aufbauen.",
