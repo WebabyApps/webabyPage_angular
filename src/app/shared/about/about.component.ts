@@ -58,7 +58,7 @@ export class AboutComponent implements OnInit, OnDestroy {
             p1Key: 'home.about.innovation.p1',
             p2Key: 'home.about.innovation.p2',
             planetClass: 'planet-violet',
-            imageSrc: 'assets/grow.png',
+            imageSrc: 'assets/software_development.jpeg',
             energy: 88,
         },
         {
