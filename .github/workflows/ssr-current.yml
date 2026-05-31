@@ -1,8 +1,6 @@
-name: webaby-page runner (NEW on domain, SSR)
+name: webaby-page runner (NEW on domain, SSR, manual disabled)
 
 on:
-  push:
-    branches: [ "main", "master" ]
   workflow_dispatch:
 
 concurrency:
@@ -11,6 +9,7 @@ concurrency:
 
 jobs:
   build-deploy:
+    if: ${{ false }}
     runs-on: self-hosted
     timeout-minutes: 60
 

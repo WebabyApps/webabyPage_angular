@@ -1,13 +1,10 @@
-name: pagewebaby runner
+name: pagewebaby runner (legacy manual disabled)
 on:
-  schedule:
-    - cron: '0 8,20 * * *'
-  push:
-    branches: [ "main" ]
   workflow_dispatch:
 
 jobs:
   build:
+    if: ${{ false }}
     runs-on: self-hosted
     timeout-minutes: 10
 

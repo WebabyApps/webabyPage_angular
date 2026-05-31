@@ -1,12 +1,11 @@
-name: Angular SSR CI/CD
+name: Angular SSR CI/CD (manual disabled)
  
 on:
-  push:
-    branches: [ main ]
   workflow_dispatch:
 
 jobs:
   build:
+    if: ${{ false }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
