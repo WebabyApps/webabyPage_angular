@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';       
 import { TranslocoModule } from '@jsverse/transloco';
 import { TranslocoService } from '@jsverse/transloco';
+import { Subject, takeUntil } from 'rxjs';
 
 interface GoalOrbitItem {
     id: 'mission' | 'development' | 'innovations' | 'vision';
@@ -84,14 +85,21 @@ export class AboutComponent implements OnInit, OnDestroy {
     private resumeTimer?: ReturnType<typeof setTimeout>;
     private cycleTimer?: ReturnType<typeof setTimeout>;
     private selectedIndex = 0;
+    private readonly destroy$ = new Subject<void>();
 
     constructor(private readonly transloco: TranslocoService) {}
 
     ngOnInit(): void {
-        this.focusGoal(this.orbitItems[0], false);
+        this.transloco.selectTranslation()
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(() => {
+                this.focusGoal(this.orbitItems[this.selectedIndex]);
+            });
     }
 
     ngOnDestroy(): void {
+        this.destroy$.next();
+        this.destroy$.complete();
         this.clearTimers();
     }
 
@@ -122,14 +130,14 @@ export class AboutComponent implements OnInit, OnDestroy {
     selectGoal(item: GoalOrbitItem, index: number, event?: Event): void {
         event?.stopPropagation();
         this.selectedIndex = index;
-        this.focusGoal(item, true);
+        this.focusGoal(item);
     }
 
     isActive(item: GoalOrbitItem): boolean {
         return this.activeGoalId === item.id;
     }
 
-    private focusGoal(item: GoalOrbitItem, fromUser: boolean): void {
+    private focusGoal(item: GoalOrbitItem): void {
         this.clearTimers();
         this.activeGoalId = item.id;
         this.autoRotate = false;
@@ -180,7 +188,7 @@ export class AboutComponent implements OnInit, OnDestroy {
     private scheduleNextGoal(): void {
         this.cycleTimer = setTimeout(() => {
             this.selectedIndex = (this.selectedIndex - 1 + this.orbitItems.length) % this.orbitItems.length;
-            this.focusGoal(this.orbitItems[this.selectedIndex], false);
+            this.focusGoal(this.orbitItems[this.selectedIndex]);
         }, NEXT_TOP_DELAY_MS);
     }
 
