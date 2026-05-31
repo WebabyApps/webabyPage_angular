@@ -7,6 +7,12 @@ import {
 } from '@jsverse/transloco';
 import { DebugMissingHandler } from './debug-missing.handler';
 
+const SUPPORTED_LANGS = new Set(['en', 'pl', 'de']);
+
+function normalizeLang(lang: string): string {
+  const normalized = String(lang || 'en').toLowerCase().split('-')[0];
+  return SUPPORTED_LANGS.has(normalized) ? normalized : 'en';
+}
 
 @Injectable({ providedIn: 'root' })
 export class TranslocoHttpLoader implements TranslocoLoader {
@@ -15,7 +21,7 @@ export class TranslocoHttpLoader implements TranslocoLoader {
   getTranslation(lang: string, data?: any) {
     // 1) Normalize lang: support "en" or "abc-land/en" or "tutorials/abc-land/en"
     const parts = String(lang).split('/');
-    const realLang = parts.pop()!;              // → "en"
+    const realLang = normalizeLang(parts.pop()!); // -> "en", "pl" or "de"
     const scopeFromLang = parts.join('/');      // → "abc-land" or "tutorials/abc-land" or ""
   
     // 2) Prefer explicit scope from data, else use the scope encoded in lang (if any)

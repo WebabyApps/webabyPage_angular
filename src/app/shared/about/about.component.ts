@@ -11,8 +11,14 @@ interface GoalOrbitItem {
     p1Key: string;
     p2Key: string;
     planetClass: string;
+    imageSrc: string;
     energy: number;
 }
+
+const ROTATION_STEP_DEGREES = 0.24;
+const ROTATION_FRAME_MS = 30;
+const ORBIT_STEP_DEGREES = 90;
+const NEXT_TOP_DELAY_MS = Math.round(ORBIT_STEP_DEGREES / (ROTATION_STEP_DEGREES / ROTATION_FRAME_MS));
 
 @Component({
     selector: 'app-about', templateUrl: './about.component.html', styleUrls: ['./about.component.scss'],
@@ -29,6 +35,7 @@ export class AboutComponent implements OnInit, OnDestroy {
             p1Key: 'home.about.mission.p1',
             p2Key: 'home.about.mission.p2',
             planetClass: 'planet-cyan',
+            imageSrc: 'assets/education_and_grow_small.jpg',
             energy: 92,
         },
         {
@@ -39,6 +46,7 @@ export class AboutComponent implements OnInit, OnDestroy {
             p1Key: 'home.about.dev.p1',
             p2Key: 'home.about.dev.p2',
             planetClass: 'planet-lime',
+            imageSrc: 'assets/software.png',
             energy: 84,
         },
         {
@@ -49,6 +57,7 @@ export class AboutComponent implements OnInit, OnDestroy {
             p1Key: 'home.about.innovation.p1',
             p2Key: 'home.about.innovation.p2',
             planetClass: 'planet-violet',
+            imageSrc: 'assets/grow.png',
             energy: 88,
         },
         {
@@ -59,6 +68,7 @@ export class AboutComponent implements OnInit, OnDestroy {
             p1Key: 'home.about.vision.p1',
             p2Key: 'home.about.vision.p2',
             planetClass: 'planet-amber',
+            imageSrc: 'assets/future.png',
             energy: 76,
         },
     ];
@@ -124,7 +134,7 @@ export class AboutComponent implements OnInit, OnDestroy {
         this.activeGoalId = item.id;
         this.autoRotate = false;
         this.rotateGoalToTop(item);
-        this.startTyping(item, fromUser);
+        this.startTyping(item);
     }
 
     private rotateGoalToTop(item: GoalOrbitItem): void {
@@ -133,7 +143,7 @@ export class AboutComponent implements OnInit, OnDestroy {
         this.rotationAngle = -90 - baseAngle;
     }
 
-    private startTyping(item: GoalOrbitItem, fromUser: boolean): void {
+    private startTyping(item: GoalOrbitItem): void {
         const title = this.transloco.translate(item.titleKey).toUpperCase();
         const body = `${this.transloco.translate(item.p1Key)} ${this.transloco.translate(item.p2Key)}`;
         const full = `${title}\n${body}`;
@@ -154,7 +164,7 @@ export class AboutComponent implements OnInit, OnDestroy {
                 this.stopTypingTimer();
                 this.resumeTimer = setTimeout(() => {
                     this.startAutoRotate();
-                    this.scheduleNextGoal(fromUser ? 4600 : 3600);
+                    this.scheduleNextGoal();
                 }, 1800);
             }
         }, 16);
@@ -163,15 +173,15 @@ export class AboutComponent implements OnInit, OnDestroy {
     private startAutoRotate(): void {
         this.autoRotate = true;
         this.rotationTimer = setInterval(() => {
-            this.rotationAngle = (this.rotationAngle + 0.24) % 360;
-        }, 30);
+            this.rotationAngle = (this.rotationAngle + ROTATION_STEP_DEGREES) % 360;
+        }, ROTATION_FRAME_MS);
     }
 
-    private scheduleNextGoal(delay: number): void {
+    private scheduleNextGoal(): void {
         this.cycleTimer = setTimeout(() => {
-            this.selectedIndex = (this.selectedIndex + 1) % this.orbitItems.length;
+            this.selectedIndex = (this.selectedIndex - 1 + this.orbitItems.length) % this.orbitItems.length;
             this.focusGoal(this.orbitItems[this.selectedIndex], false);
-        }, delay);
+        }, NEXT_TOP_DELAY_MS);
     }
 
     private clearTimers(): void {

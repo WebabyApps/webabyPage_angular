@@ -10,7 +10,8 @@ import { inject } from '@angular/core';
 import { TranslocoService } from '@jsverse/transloco';
 const i18nResolver = () => {
   const t = inject(TranslocoService);
-  const lang = (t.getActiveLang() || 'en').toLowerCase();
+  const normalized = (t.getActiveLang() || 'en').toLowerCase().split('-')[0];
+  const lang = ['en', 'pl', 'de'].includes(normalized) ? normalized : 'en';
   return t.load(lang);
 };
 

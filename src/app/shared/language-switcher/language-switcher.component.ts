@@ -13,6 +13,13 @@ const LANGS: Array<{ id: Lang; label: string; flag: string; locale: string }> = 
   { id: 'de', label: 'Deutsch', flag: '🇩🇪', locale: 'de-DE' },
 ];
 
+function normalizeLang(value: string | null | undefined): Lang | null {
+  const normalized = String(value ?? '').toLowerCase().split('-')[0];
+  return (['en', 'pl', 'de'] as Lang[]).includes(normalized as Lang)
+    ? (normalized as Lang)
+    : null;
+}
+
 @Component({
   selector: 'app-language-switcher',
   standalone: true,
@@ -98,7 +105,7 @@ export class LanguageSwitcherComponent implements OnDestroy {
 
   open = false;
   langs = LANGS;
-  active = signal<Lang>((this.transloco.getActiveLang() as Lang) || 'en');
+  active = signal<Lang>(normalizeLang(this.transloco.getActiveLang()) ?? 'en');
 
   private inactivityTimer: any = null;
   private readonly INACTIVITY_MS = 2000;
@@ -106,10 +113,10 @@ export class LanguageSwitcherComponent implements OnDestroy {
   constructor() {
     const urlLang = this._langFromUrl(); // 1) URL first
     const saved = (typeof localStorage !== 'undefined'
-      ? (localStorage.getItem('lang') as Lang | null)
+      ? normalizeLang(localStorage.getItem('lang'))
       : null);
     const fallback = this.active();
-    const initial = (urlLang ?? saved ?? fallback) as Lang;
+    const initial = urlLang ?? saved ?? fallback;
 
     if (initial !== this.transloco.getActiveLang()) {
       this.setLang(initial);
@@ -190,6 +197,7 @@ export class LanguageSwitcherComponent implements OnDestroy {
   }
 
   private setLang(lang: Lang) {
+    lang = normalizeLang(lang) ?? 'en';
     this.transloco.setActiveLang(lang);
     const lc = this.langs.find(l => l.id === lang)?.locale ?? 'en-US';
     this.locale?.setLocale(lc);
@@ -202,7 +210,7 @@ export class LanguageSwitcherComponent implements OnDestroy {
   private _langFromUrl(): Lang | null {
     const current = this.router.parseUrl(this.router.url);
     const seg0 = current.root.children['primary']?.segments?.[0]?.path;
-    return (['en','pl','de'] as Lang[]).includes(seg0 as Lang) ? (seg0 as Lang) : null;
+    return normalizeLang(seg0);
   }
 
   private _treeWithLang(lang: Lang): UrlTree {

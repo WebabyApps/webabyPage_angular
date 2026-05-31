@@ -83,9 +83,22 @@ jobs:
       - name: Create dest dir (sudo)
         run: ssh ubuntu@${{ secrets.OVH_VPS_IP }} "sudo mkdir -p '${{ env.DEST_DIR }}'"
 
+      - name: Check server disk usage
+        run: |
+          ssh ubuntu@${{ secrets.OVH_VPS_IP }} "\
+            set -e; \
+            echo 'Disk usage:'; \
+            df -h / /var /var/www || true; \
+            echo; \
+            echo 'Inode usage:'; \
+            df -ih / /var /var/www || true; \
+            echo; \
+            echo 'Largest /var folders:'; \
+            sudo du -xh /var --max-depth=1 2>/dev/null | sort -h | tail -20"
+
       - name: Rsync build → /var/www/webaby-page/current (sudo)
         run: |
-          rsync -az --delete \
+          rsync -az --delete-before \
             --rsync-path="sudo rsync" \
             "${BUILD_OUT}/" \
             ubuntu@${{ secrets.OVH_VPS_IP }}:"${{ env.DEST_DIR }}/"

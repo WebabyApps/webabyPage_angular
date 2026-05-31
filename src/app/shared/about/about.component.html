@@ -1,9 +1,10 @@
 <!-- ABOUT -->
 <section class="goals-stage" *transloco="let t">
   <div class="goals-orbit" [class.auto-rotating]="autoRotate">
-    <div class="star star-a"></div>
-    <div class="star star-b"></div>
-    <div class="star star-c"></div>
+    <div class="orbit-system">
+      <div class="star star-a"></div>
+      <div class="star star-b"></div>
+      <div class="star star-c"></div>
 
     <div class="orbit-ring orbit-ring-outer"></div>
     <div class="orbit-ring orbit-ring-middle"></div>
@@ -58,14 +59,30 @@
       <span class="planet-label">{{ t(item.labelKey) }}</span>
     </button>
 
+    </div>
+
     <article class="goal-typewriter" *ngIf="activeGoal as goal">
       <div class="goal-kicker">{{ t(goal.labelKey) }}</div>
-      <h3>
-        {{ typedTitle }}<span class="caret" *ngIf="!typedText"></span>
-      </h3>
-      <p>
-        {{ typedText }}<span class="caret" *ngIf="typedText"></span>
-      </p>
+      <div class="goal-panel-body">
+        <div class="goal-copy">
+          <h3>
+            {{ typedTitle }}<span class="caret" *ngIf="!typedText"></span>
+          </h3>
+          <p>
+            {{ typedText }}<span class="caret" *ngIf="typedText"></span>
+          </p>
+        </div>
+
+        <div class="goal-visuals" aria-hidden="true">
+          <img
+            *ngFor="let item of orbitItems"
+            class="goal-image"
+            [class.active]="isActive(item)"
+            [src]="item.imageSrc"
+            [alt]=""
+          />
+        </div>
+      </div>
     </article>
   </div>
 </section>
