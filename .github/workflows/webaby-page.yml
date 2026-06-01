@@ -18,45 +18,46 @@ jobs:
     timeout-minutes: 60
 
     env:
-      # >>> ZMIANA: docelowy docroot POZA _work
       DEST_DIR: /var/www/webaby-page/current
+      SSR_DIR: /opt/webaby-page/current
+      SSR_PORT: "4000"
+      SERVICE_NAME: webaby-ssr
 
     steps:
       - uses: actions/checkout@v4
-        # (opcjonalnie – jeśli kiedyś zostałbyś przy _work, można dodać clean:false)
-        # with:
-        #   clean: false
 
-      - name: Use Node.js 20
+      - name: Use Node.js 22
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: 'npm'
 
       - name: Install deps
-        run: npm ci
+        run: npm ci --legacy-peer-deps
 
-      - name: Build Angular (production)
-        run: npm run build
+      - name: Build Angular SSR (browser + server)
+        run: npm run build:ssr
 
-      - name: Detect build output dir
-        id: outdir
+      - name: Detect build output dirs
         shell: bash
         run: |
           set -e
-          OUT=$(ls -d dist/*/browser 2>/dev/null || ls -d dist/*)
-          echo "BUILD_OUT=$OUT" >> $GITHUB_ENV
-          echo "Build output: $OUT"
+          BROWSER_OUT=$(ls -d dist/*/browser 2>/dev/null || true)
+          SERVER_OUT=$(ls -d dist/*/server 2>/dev/null || true)
+          if [ -z "$BROWSER_OUT" ]; then echo "Brak dist/*/browser"; exit 1; fi
+          if [ -z "$SERVER_OUT" ]; then echo "Brak dist/*/server"; exit 1; fi
+          echo "BROWSER_OUT=$BROWSER_OUT" >> $GITHUB_ENV
+          echo "SERVER_OUT=$SERVER_OUT" >> $GITHUB_ENV
+          echo "browser: $BROWSER_OUT  |  server: $SERVER_OUT"
 
-      # --- PWA (opcjonalnie) – ZOSTAWIAM dokładnie jak u Ciebie, tylko działa z nowym BUILD_OUT ---
+      # --- PWA (opcjonalnie) ---
       # - uses: actions/checkout@v4
       #   with:
       #     repository: maciejmar/basketball-game
       #     path: basketball-pwa
-      #     # jeśli prywatne: token: ${{ secrets.GH_PAT }}
       # - uses: actions/setup-node@v4
       #   with:
-      #     node-version: 20
+      #     node-version: 22
       #     cache: 'npm'
       #     cache-dependency-path: basketball-pwa/package-lock.json
       # - name: Build PWA (/basketball-pwa)
@@ -66,8 +67,8 @@ jobs:
       #   shell: bash
       #   run: |
       #     PWA_DIR=$(ls -d basketball-pwa/dist/*/browser 2>/dev/null || ls -d basketball-pwa/dist/*)
-      #     mkdir -p "$BUILD_OUT/basketball-pwa"
-      #     rsync -a --delete "$PWA_DIR/" "$BUILD_OUT/basketball-pwa/"
+      #     mkdir -p "$BROWSER_OUT/basketball-pwa"
+      #     rsync -a --delete "$PWA_DIR/" "$BROWSER_OUT/basketball-pwa/"
 
       - name: Setup SSH agent
         uses: webfactory/ssh-agent@v0.9.0
@@ -80,35 +81,69 @@ jobs:
       - name: SSH smoke test
         run: ssh -o BatchMode=yes ubuntu@${{ secrets.OVH_VPS_IP }} "echo CONNECTED && hostname"
 
-      - name: Create dest dir (sudo)
-        run: ssh ubuntu@${{ secrets.OVH_VPS_IP }} "sudo mkdir -p '${{ env.DEST_DIR }}'"
+      - name: Create dest dirs
+        run: |
+          ssh ubuntu@${{ secrets.OVH_VPS_IP }} \
+            "sudo mkdir -p '${{ env.DEST_DIR }}' && sudo mkdir -p '${{ env.SSR_DIR }}'"
 
       - name: Check server disk usage
         run: |
-          ssh ubuntu@${{ secrets.OVH_VPS_IP }} "\
-            set -e; \
-            echo 'Disk usage:'; \
-            df -h / /var /var/www || true; \
-            echo; \
-            echo 'Inode usage:'; \
-            df -ih / /var /var/www || true; \
-            echo; \
-            echo 'Largest /var folders:'; \
-            sudo du -xh /var --max-depth=1 2>/dev/null | sort -h | tail -20"
+          ssh ubuntu@${{ secrets.OVH_VPS_IP }} "
+            echo 'Disk usage:'; df -h / /var /var/www || true
+            echo 'Largest /var folders:'; sudo du -xh /var --max-depth=1 2>/dev/null | sort -h | tail -10"
 
-      - name: Rsync build → /var/www/webaby-page/current (sudo)
+      - name: Rsync browser → $DEST_DIR
         run: |
           rsync -az --delete-before \
             --rsync-path="sudo rsync" \
-            "${BUILD_OUT}/" \
+            "${BROWSER_OUT}/" \
             ubuntu@${{ secrets.OVH_VPS_IP }}:"${{ env.DEST_DIR }}/"
 
-      - name: Fix perms (opcjonalnie, ale polecane)
+      - name: Rsync server → $SSR_DIR
         run: |
-          ssh ubuntu@${{ secrets.OVH_VPS_IP }} "\
-            sudo find '${{ env.DEST_DIR }}' -type d -exec chmod 755 {} \; && \
-            sudo find '${{ env.DEST_DIR }}' -type f -exec chmod 644 {} \; && \
-            sudo chown -R root:root '${{ env.DEST_DIR }}'"
+          rsync -az --delete-before \
+            --rsync-path="sudo rsync" \
+            "${SERVER_OUT}/" \
+            ubuntu@${{ secrets.OVH_VPS_IP }}:"${{ env.SSR_DIR }}/"
+
+      - name: Fix permissions
+        run: |
+          ssh ubuntu@${{ secrets.OVH_VPS_IP }} "
+            sudo find '${{ env.DEST_DIR }}' -type d -exec chmod 755 {} \;
+            sudo find '${{ env.DEST_DIR }}' -type f -exec chmod 644 {} \;
+            sudo chown -R root:root '${{ env.DEST_DIR }}'
+            sudo find '${{ env.SSR_DIR }}' -type d -exec chmod 755 {} \;
+            sudo find '${{ env.SSR_DIR }}' -type f -exec chmod 755 {} \;
+            sudo chown -R ubuntu:ubuntu '${{ env.SSR_DIR }}'"
+
+      - name: Create / update systemd service
+        run: |
+          # Znajdź ścieżkę node na VPS (nvm lub systemowy)
+          ssh ubuntu@${{ secrets.OVH_VPS_IP }} "
+            NODE_BIN=\$(. \$HOME/.nvm/nvm.sh 2>/dev/null; which node 2>/dev/null || which node)
+            sudo tee /etc/systemd/system/${{ env.SERVICE_NAME }}.service > /dev/null <<EOF
+          [Unit]
+          Description=Webaby Angular SSR
+          After=network.target
+
+          [Service]
+          Type=simple
+          User=ubuntu
+          WorkingDirectory=${{ env.SSR_DIR }}
+          ExecStart=\$NODE_BIN ${{ env.SSR_DIR }}/server.mjs
+          Restart=on-failure
+          RestartSec=5
+          Environment=NODE_ENV=production
+          Environment=PORT=${{ env.SSR_PORT }}
+
+          [Install]
+          WantedBy=multi-user.target
+          EOF
+            sudo systemctl daemon-reload
+            sudo systemctl enable ${{ env.SERVICE_NAME }}
+            sudo systemctl restart ${{ env.SERVICE_NAME }}
+            sleep 2
+            sudo systemctl is-active ${{ env.SERVICE_NAME }}"
 
       - name: Reload Nginx
         run: ssh ubuntu@${{ secrets.OVH_VPS_IP }} "sudo nginx -t && sudo systemctl reload nginx"

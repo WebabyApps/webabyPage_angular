@@ -12,6 +12,8 @@
     "start": "ng serve",
     "build": "ng build --configuration production",
     "build:pages": "ng build --configuration production --base-href ./",
+    "build:ssr": "ng build --configuration production",
+    "serve:ssr": "node dist/webaby-angular/server/server.mjs",
     "test": "ng test",
     "lint": "ng lint"
   },
@@ -30,7 +32,10 @@
     "@jsverse/transloco-locale": "^7.0.1",
     "@ngneat/transloco": "^6.0.4",
     "@ngneat/transloco-locale": "^5.1.2",
+    "@angular/platform-server": "^20.3.0",
+    "@angular/ssr": "^20.3.0",
     "angularx-qrcode": "^20.0.0",
+    "express": "^4.21.2",
     "rxjs": "^7.8.2",
     "tslib": "^2.8.1",
     "zone.js": "^0.15.1"
@@ -39,7 +44,9 @@
     "@angular/build": "^20.2.0",
     "@angular/cli": "^20.3.3",
     "@angular/compiler-cli": "^20.2.1",
+    "@types/express": "^4.17.21",
     "@types/jasmine": "^5.1.9",
+    "@types/node": "^22.0.0",
     "ajv-formats": "^3.0.1",
     "typescript": "~5.9.2"
   }

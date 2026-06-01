@@ -4,9 +4,10 @@ import {
   ElementRef,
   ViewChild,
   AfterViewInit,
-  inject
+  inject,
+  PLATFORM_ID
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Router, RouterLink, RouterLinkActive, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { TranslocoModule } from '@jsverse/transloco';
@@ -21,6 +22,7 @@ import { LanguageSwitcherComponent } from '../language-switcher/language-switche
 })
 export class HeaderComponent implements AfterViewInit {
   private router = inject(Router);
+  private platformId = inject(PLATFORM_ID);
 
   @ViewChild('navMenu', { static: false }) navMenuRef!: ElementRef<HTMLElement>;
 
@@ -31,15 +33,17 @@ export class HeaderComponent implements AfterViewInit {
   private inactivityTimer: any = null;
 
   ngAfterViewInit(): void {
-    // Auto-close przy zmianie trasy
     this.router.events.pipe(filter(e => e instanceof NavigationEnd)).subscribe(() => this.closeMenu());
-    // Klik poza nawigacją
-    document.addEventListener('click', this.onDocumentClick, true);
+    if (isPlatformBrowser(this.platformId)) {
+      document.addEventListener('click', this.onDocumentClick, true);
+    }
   }
 
   ngOnDestroy(): void {
-    document.removeEventListener('click', this.onDocumentClick, true);
-    document.body.classList.remove('menu-open');
+    if (isPlatformBrowser(this.platformId)) {
+      document.removeEventListener('click', this.onDocumentClick, true);
+      document.body.classList.remove('menu-open');
+    }
     clearTimeout(this.inactivityTimer);
   }
 
@@ -67,6 +71,7 @@ export class HeaderComponent implements AfterViewInit {
 
   @HostListener('window:scroll')
   onScroll() {
+    if (!isPlatformBrowser(this.platformId)) return;
     const y = window.scrollY || 0;
     this.scrolled = y > 40;
 
@@ -89,6 +94,7 @@ export class HeaderComponent implements AfterViewInit {
   @HostListener('window:resize')
   @HostListener('window:orientationchange')
   onViewportChange() {
+    if (!isPlatformBrowser(this.platformId)) return;
     if (window.innerWidth > 900) this.closeMenu();
   }
 
@@ -113,7 +119,7 @@ export class HeaderComponent implements AfterViewInit {
    *  ----------------*/
   private startInactivityTimer() {
     this.clearInactivityTimer();
-    if (window.innerWidth > 900) return; // tylko mobile
+    if (!isPlatformBrowser(this.platformId) || window.innerWidth > 900) return; // tylko mobile
     this.inactivityTimer = setTimeout(() => {
       this.closeMenu();
     }, 4000); // 4 sekundy

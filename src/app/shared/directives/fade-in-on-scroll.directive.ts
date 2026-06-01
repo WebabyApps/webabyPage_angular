@@ -1,4 +1,5 @@
-import { AfterViewInit, Directive, ElementRef, OnDestroy, Renderer2 } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, OnDestroy, Renderer2, PLATFORM_ID, inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 @Directive({
   selector: '[fadeInOnScroll]',
@@ -6,6 +7,7 @@ import { AfterViewInit, Directive, ElementRef, OnDestroy, Renderer2 } from '@ang
 })
 export class FadeInOnScrollDirective implements AfterViewInit, OnDestroy {
   private observer?: IntersectionObserver;
+  private platformId = inject(PLATFORM_ID);
 
   constructor(private el: ElementRef, private renderer: Renderer2) {
     // Start hidden, CSS will fade it in when 'visible' is added
@@ -13,6 +15,8 @@ export class FadeInOnScrollDirective implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+
     // 1) If already on screen at mount, reveal immediately (no flash)
     const rect = (this.el.nativeElement as HTMLElement).getBoundingClientRect();
     const vh = window.innerHeight || document.documentElement.clientHeight;
