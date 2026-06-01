@@ -123,7 +123,7 @@ jobs:
           if [ -z "$NODE_PATH" ]; then echo "ERROR: brak node v22"; exit 1; fi
           echo "Node path: $NODE_PATH"
 
-          UNIT="[Unit]\nDescription=Webaby Angular SSR\nAfter=network.target\n\n[Service]\nType=simple\nUser=ubuntu\nWorkingDirectory=${{ env.SSR_DIR }}\nExecStart=${NODE_PATH} ${{ env.SSR_DIR }}/server.mjs\nRestart=on-failure\nRestartSec=5\nEnvironment=NODE_ENV=production\nEnvironment=PORT=${{ env.SSR_PORT }}\n\n[Install]\nWantedBy=multi-user.target"
+          UNIT="[Unit]\nDescription=Webaby Angular SSR\nAfter=network.target\n\n[Service]\nType=simple\nUser=ubuntu\nWorkingDirectory=${{ env.SSR_DIR }}\nExecStart=${NODE_PATH} ${{ env.SSR_DIR }}/server.mjs\nRestart=on-failure\nRestartSec=5\nEnvironment=NODE_ENV=production\nEnvironment=PORT=${{ env.SSR_PORT }}\nEnvironment=BROWSER_DIST=${{ env.DEST_DIR }}\n\n[Install]\nWantedBy=multi-user.target"
 
           ssh ubuntu@${{ secrets.OVH_VPS_IP }} \
             "printf '${UNIT}' | sudo tee /etc/systemd/system/${{ env.SERVICE_NAME }}.service > /dev/null

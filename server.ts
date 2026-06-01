@@ -8,14 +8,22 @@ import bootstrap from './src/main.server';
 export function app(): express.Express {
   const server = express();
   const serverDistFolder = dirname(fileURLToPath(import.meta.url));
-  const browserDistFolder = resolve(serverDistFolder, '../browser');
+
+  // Można nadpisać zmienną środowiskową BROWSER_DIST gdy browser i server
+  // są w różnych katalogach (np. Nginx serwuje z /var/www, Node z /opt)
+  const browserDistFolder = process.env['BROWSER_DIST']
+    ?? resolve(serverDistFolder, '../browser');
+
   const indexHtml = join(serverDistFolder, 'index.server.html');
 
-  const commonEngine = new CommonEngine();
+  const commonEngine = new CommonEngine({
+    allowedHosts: ['webaby.io', 'www.webaby.io', 'localhost', '51.68.172.64'],
+  });
 
   server.set('view engine', 'html');
   server.set('views', browserDistFolder);
 
+  // Statyki – fallback gdyby Nginx nie obsłużył
   server.get('**', express.static(browserDistFolder, {
     maxAge: '1y',
     index: false,
@@ -47,6 +55,7 @@ function run(): void {
   const server = app();
   server.listen(port, () => {
     console.log(`Node Express server listening on http://localhost:${port}`);
+    console.log(`Browser dist: ${process.env['BROWSER_DIST'] ?? 'auto'}`);
   });
 }
 
