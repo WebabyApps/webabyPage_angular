@@ -118,27 +118,37 @@ jobs:
 
       - name: Create / update systemd service
         run: |
-          # Znajdź ścieżkę node na VPS (nvm lub systemowy)
+          ssh ubuntu@${{ secrets.OVH_VPS_IP }} '
+            set -e
+            # Zawsze użyj node 22 z nvm
+            NODE_BIN=$(ls /home/ubuntu/.nvm/versions/node/v22.*/bin/node 2>/dev/null | tail -1)
+            if [ -z "$NODE_BIN" ]; then
+              echo "ERROR: nie znaleziono node v22 w nvm"; exit 1
+            fi
+            echo "Używam node: $NODE_BIN ($($NODE_BIN -v))"
+          '
+          # Zapisz ścieżkę node do użycia w heredoc
+          NODE_PATH=$(ssh ubuntu@${{ secrets.OVH_VPS_IP }} \
+            'ls /home/ubuntu/.nvm/versions/node/v22.*/bin/node 2>/dev/null | tail -1')
           ssh ubuntu@${{ secrets.OVH_VPS_IP }} "
-            NODE_BIN=\$(. \$HOME/.nvm/nvm.sh 2>/dev/null; which node 2>/dev/null || which node)
-            sudo tee /etc/systemd/system/${{ env.SERVICE_NAME }}.service > /dev/null <<EOF
-          [Unit]
-          Description=Webaby Angular SSR
-          After=network.target
+            sudo tee /etc/systemd/system/${{ env.SERVICE_NAME }}.service > /dev/null << 'UNIT'
+[Unit]
+Description=Webaby Angular SSR
+After=network.target
 
-          [Service]
-          Type=simple
-          User=ubuntu
-          WorkingDirectory=${{ env.SSR_DIR }}
-          ExecStart=\$NODE_BIN ${{ env.SSR_DIR }}/server.mjs
-          Restart=on-failure
-          RestartSec=5
-          Environment=NODE_ENV=production
-          Environment=PORT=${{ env.SSR_PORT }}
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=${{ env.SSR_DIR }}
+ExecStart=${NODE_PATH} ${{ env.SSR_DIR }}/server.mjs
+Restart=on-failure
+RestartSec=5
+Environment=NODE_ENV=production
+Environment=PORT=${{ env.SSR_PORT }}
 
-          [Install]
-          WantedBy=multi-user.target
-          EOF
+[Install]
+WantedBy=multi-user.target
+UNIT
             sudo systemctl daemon-reload
             sudo systemctl enable ${{ env.SERVICE_NAME }}
             sudo systemctl restart ${{ env.SERVICE_NAME }}
