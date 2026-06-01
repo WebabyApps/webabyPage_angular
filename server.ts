@@ -1,37 +1,53 @@
-import { AngularNodeAppEngine, createNodeRequestHandler, writeResponseToNodeResponse } from '@angular/ssr/node';
+import { APP_BASE_HREF } from '@angular/common';
+import { CommonEngine } from '@angular/ssr/node';
 import express from 'express';
-import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { dirname, join, resolve } from 'node:path';
+import bootstrap from './src/main.server';
 
-const serverDistFolder = dirname(fileURLToPath(import.meta.url));
-const browserDistFolder = resolve(serverDistFolder, '../browser');
+export function app(): express.Express {
+  const server = express();
+  const serverDistFolder = dirname(fileURLToPath(import.meta.url));
+  const browserDistFolder = resolve(serverDistFolder, '../browser');
+  const indexHtml = join(serverDistFolder, 'index.server.html');
 
-const app = express();
-const angularApp = new AngularNodeAppEngine();
+  const commonEngine = new CommonEngine();
 
-// Pliki statyczne serwuje Nginx, ale zostawiamy fallback
-app.use(
-  express.static(browserDistFolder, {
+  server.set('view engine', 'html');
+  server.set('views', browserDistFolder);
+
+  server.get('**', express.static(browserDistFolder, {
     maxAge: '1y',
     index: false,
-  }),
-);
+  }));
 
-// Wszystkie pozostałe requesty → SSR
-app.use('/**', createNodeRequestHandler(async (req, res, next) => {
-  try {
-    const response = await angularApp.handle(req, res);
-    if (response) {
-      await writeResponseToNodeResponse(response, res);
-    } else {
-      next();
-    }
-  } catch (error) {
-    next(error);
-  }
-}));
+  server.get('**', (req, res, next) => {
+    const { protocol, originalUrl, baseUrl, headers } = req;
 
-const port = process.env['PORT'] || 4000;
-app.listen(port, () => {
-  console.log(`Node Express server listening on http://localhost:${port}`);
-});
+    commonEngine
+      .render({
+        bootstrap,
+        documentFilePath: indexHtml,
+        url: `${protocol}://${headers.host}${originalUrl}`,
+        publicPath: browserDistFolder,
+        providers: [{ provide: APP_BASE_HREF, useValue: baseUrl }],
+      })
+      .then((html) => res.send(html))
+      .catch((err) => {
+        console.error('SSR render error:', err);
+        next(err);
+      });
+  });
+
+  return server;
+}
+
+function run(): void {
+  const port = process.env['PORT'] || 4000;
+  const server = app();
+  server.listen(port, () => {
+    console.log(`Node Express server listening on http://localhost:${port}`);
+  });
+}
+
+run();
