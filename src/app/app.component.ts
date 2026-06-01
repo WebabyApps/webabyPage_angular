@@ -1,5 +1,5 @@
 // app.component.ts
-import { Component, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, Inject, Optional, PLATFORM_ID } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Router, NavigationEnd, NavigationStart, RouterOutlet, UrlTree } from '@angular/router'; // ⬅️ + NavigationStart
 import { MatDialog } from '@angular/material/dialog'; // ⬅️ NEW
@@ -29,7 +29,7 @@ export class AppComponent {
   constructor(
     private router: Router,
     @Inject(PLATFORM_ID) private platformId: Object,
-    private dialog: MatDialog // ⬅️ NEW
+    @Optional() private dialog: MatDialog // opcjonalny — nie dostępny podczas SSR
   ) {
     this.isHomeNoHashNoProduct$ = this.router.events.pipe(
       startWith(null),
