@@ -67,6 +67,8 @@ export class ProductsCarouselComponent implements AfterViewInit, OnInit, OnDestr
   async ngOnInit() {
     this.buildLoopProducts();
 
+    if (!isPlatformBrowser(this.platformId)) return; // SSR — nie otwieraj dialogów
+
     // reaguj na ?product=slug
     this.qpSub = this.route.queryParamMap.subscribe(async (pm) => {
       const slug = pm.get('product');
@@ -93,14 +95,11 @@ export class ProductsCarouselComponent implements AfterViewInit, OnInit, OnDestr
   }
 
   ngAfterViewInit() {
+    if (!isPlatformBrowser(this.platformId)) return; // SSR — nie startuj timerów
+
     this.startAutoplay();
-
-    if (isPlatformBrowser(this.platformId)) {
-      window.addEventListener('resize', this.resizeHandler);
-
-      // ✅ ustaw start scrolla na “prawdziwe” karty (omijamy klony z przodu)
-      queueMicrotask(() => this.jumpToRealStart());
-    }
+    window.addEventListener('resize', this.resizeHandler);
+    queueMicrotask(() => this.jumpToRealStart());
   }
 
   ngOnDestroy() {
