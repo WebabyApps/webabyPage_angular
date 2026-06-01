@@ -1,6 +1,7 @@
 import { ApplicationConfig } from '@angular/core';
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideClientHydration } from '@angular/platform-browser';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { importProvidersFrom } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
@@ -24,6 +25,7 @@ export const appConfig: ApplicationConfig = {
         scrollPositionRestoration: 'enabled',
       })
     ),
+    provideClientHydration(),
     // withFetch() jest wymagane dla SSR
     provideHttpClient(withFetch()),
     importProvidersFrom(TranslocoModule, TranslocoRootModule, TranslocoLocaleModule),

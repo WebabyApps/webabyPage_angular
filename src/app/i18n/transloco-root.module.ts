@@ -2,6 +2,7 @@
 import { Injectable, NgModule, PLATFORM_ID, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { isPlatformBrowser, APP_BASE_HREF } from '@angular/common';
+import { of } from 'rxjs';
 import {
   TranslocoModule, TranslocoLoader, Translation,
   translocoConfig, provideTransloco,
@@ -37,12 +38,13 @@ export class TranslocoHttpLoader implements TranslocoLoader {
       ? `assets/i18n/${scope}/${realLang}.json`
       : `assets/i18n/${realLang}.json`;
 
-    // 3) Na serwerze potrzebny absolutny URL, na przeglądarce relatywny wystarczy
-    const url = isPlatformBrowser(this.platformId)
-      ? path
-      : `http://localhost:4000/${path}`;
+    // 3) Na serwerze nie ładuj tłumaczeń przez HTTP — zwróć pusty obiekt synchronicznie.
+    //    Klient załaduje tłumaczenia po hydratacji.
+    if (!isPlatformBrowser(this.platformId)) {
+      return of({} as Translation);
+    }
 
-    return this.http.get<Translation>(url);
+    return this.http.get<Translation>(path);
   }
 }
 
