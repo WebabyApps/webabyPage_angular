@@ -104,7 +104,7 @@ export class ProductsCarouselComponent implements AfterViewInit, OnInit, OnDestr
 
   ngOnDestroy() {
     this.stopAutoplay();
-    this.stopHover();
+    this.stopHover(false);
     this.qpSub?.unsubscribe();
 
     if (this.scrollEndTimer) clearTimeout(this.scrollEndTimer);
@@ -207,7 +207,7 @@ export class ProductsCarouselComponent implements AfterViewInit, OnInit, OnDestr
   onTouchStart() {
     this.isUserInteracting = true;
     this.stopAutoplay();
-    this.stopHover();
+    this.stopHover(false);
   }
 
   onTouchEnd() {
@@ -418,6 +418,8 @@ export class ProductsCarouselComponent implements AfterViewInit, OnInit, OnDestr
   }
 
   private startAutoplay() {
+    if (!isPlatformBrowser(this.platformId)) return;
+
     this.stopAutoplay();
     this.autoplayId = setInterval(() => this.move(this.cardWidth()), 4000);
   }
@@ -430,20 +432,25 @@ export class ProductsCarouselComponent implements AfterViewInit, OnInit, OnDestr
   }
 
   hover(dir: number) {
+    if (!isPlatformBrowser(this.platformId)) return;
+
     this.stopHover();
     this.hoverId = setInterval(() => this.move(dir * 4), 16);
     this.stopAutoplay();
   }
 
-  stopHover() {
+  stopHover(restartAutoplay = true) {
     if (this.hoverId) {
       clearInterval(this.hoverId);
       this.hoverId = null;
     }
-    this.startAutoplay();
+
+    if (restartAutoplay) this.startAutoplay();
   }
 
   private nudge() {
+    if (!isPlatformBrowser(this.platformId)) return;
+
     // wymusza reflow/teleport check przez scroll eventy; bezpieczny “tick”
     this.move(0);
   }
