@@ -1,5 +1,5 @@
-import { Component, DestroyRef, inject, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, DestroyRef, inject, signal, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
 import { IntroSplashService } from './intro-splash.service';
 
@@ -21,6 +21,7 @@ export class IntroSplashComponent {
   private svc = inject(IntroSplashService);
   private router = inject(Router);
   private destroyRef = inject(DestroyRef);
+  private platformId = inject(PLATFORM_ID);
 
   visible = signal(false);
   playing = signal(false);
@@ -29,16 +30,18 @@ export class IntroSplashComponent {
   private autoTimer: any = null;
   private force = false;
   private endedOnce = false;
-private fireIntroDoneOnce = (() => {
-  let fired = false;
-  return () => {
-    if (fired) return;
-    fired = true;
-    try { window.dispatchEvent(new CustomEvent('webaby:intro:done')); } catch {}
-  };
-})();
+  private fireIntroDoneOnce = (() => {
+    let fired = false;
+    return () => {
+      if (fired) return;
+      fired = true;
+      try { window.dispatchEvent(new CustomEvent('webaby:intro:done')); } catch {}
+    };
+  })();
 
   constructor() {
+    if (!isPlatformBrowser(this.platformId)) return; // SSR — nic nie rób
+
     const url = new URL(window.location.href);
     this.force = url.searchParams.get('intro') === '1';
   
