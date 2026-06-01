@@ -1,6 +1,7 @@
 // src/app/i18n/transloco-root.module.ts
-import { Injectable, NgModule } from '@angular/core';
+import { Injectable, NgModule, PLATFORM_ID, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { isPlatformBrowser, APP_BASE_HREF } from '@angular/common';
 import {
   TranslocoModule, TranslocoLoader, Translation,
   translocoConfig, provideTransloco,
@@ -16,28 +17,33 @@ function normalizeLang(lang: string): string {
 
 @Injectable({ providedIn: 'root' })
 export class TranslocoHttpLoader implements TranslocoLoader {
-  constructor(private http: HttpClient) {}
+  private http = inject(HttpClient);
+  private platformId = inject(PLATFORM_ID);
+  private baseHref = inject(APP_BASE_HREF, { optional: true }) ?? '';
 
   getTranslation(lang: string, data?: any) {
     // 1) Normalize lang: support "en" or "abc-land/en" or "tutorials/abc-land/en"
     const parts = String(lang).split('/');
     const realLang = normalizeLang(parts.pop()!); // -> "en", "pl" or "de"
     const scopeFromLang = parts.join('/');      // → "abc-land" or "tutorials/abc-land" or ""
-  
+
     // 2) Prefer explicit scope from data, else use the scope encoded in lang (if any)
     const scope =
       (typeof data?.scope === 'string' && data.scope) ||
       (typeof data?.scopePath === 'string' && data.scopePath) ||
       (scopeFromLang || null);
- 
-    // 3) Build URL
-    const url = scope
+
+    const path = scope
       ? `assets/i18n/${scope}/${realLang}.json`
       : `assets/i18n/${realLang}.json`;
 
-    return this.http.get(url);
+    // 3) Na serwerze potrzebny absolutny URL, na przeglądarce relatywny wystarczy
+    const url = isPlatformBrowser(this.platformId)
+      ? path
+      : `http://localhost:4000/${path}`;
+
+    return this.http.get<Translation>(url);
   }
-  
 }
 
 
