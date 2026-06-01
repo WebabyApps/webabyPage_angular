@@ -1,5 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';       
+import { Component, OnDestroy, OnInit, PLATFORM_ID, inject } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { TranslocoModule } from '@jsverse/transloco';
 import { TranslocoService } from '@jsverse/transloco';
 import { Subject, takeUntil } from 'rxjs';
@@ -87,9 +87,12 @@ export class AboutComponent implements OnInit, OnDestroy {
     private selectedIndex = 0;
     private readonly destroy$ = new Subject<void>();
 
+    private platformId = inject(PLATFORM_ID);
     constructor(private readonly transloco: TranslocoService) {}
 
     ngOnInit(): void {
+        if (!isPlatformBrowser(this.platformId)) return; // SSR — nie startuj timerów animacji
+
         this.transloco.selectTranslation()
             .pipe(takeUntil(this.destroy$))
             .subscribe(() => {
