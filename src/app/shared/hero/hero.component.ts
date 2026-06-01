@@ -14,6 +14,8 @@ import { QRCodeComponent } from 'angularx-qrcode';
   styleUrls: ['./hero.component.scss'],
 })
 export class HeroComponent {
+  readonly isBrowser: boolean;
+
   private _scope?: string;
   private _title?: string;
   private _subtitle?: string;
@@ -27,7 +29,9 @@ export class HeroComponent {
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
     private transloco: TranslocoService
-  ) {}
+  ) {
+    this.isBrowser = isPlatformBrowser(this.platformId);
+  }
 
   @Input() set scope(value: string | undefined) { this._scope = value || undefined; this.resolveAll(); }
   @Input() set title(value: string | undefined) { this._title = value || undefined; this.resolveAll(); }
@@ -45,7 +49,7 @@ export class HeroComponent {
     if (!this.brandScrollTarget) return; // pozwól routerLinkowi działać normalnie
     event.preventDefault();
 
-    if (!isPlatformBrowser(this.platformId)) return;
+    if (!this.isBrowser) return;
 
     const el = document.getElementById(this.brandScrollTarget);
     if (!el) return;
@@ -107,6 +111,8 @@ export class HeroComponent {
   @Input() compact = false;
 
   scrollToProducts() {
+    if (!this.isBrowser) return;
+
     const el = document.querySelector('#products');
     if (el) (el as HTMLElement).scrollIntoView({ behavior: 'smooth', block: 'start' });
   }

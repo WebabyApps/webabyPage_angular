@@ -20,10 +20,24 @@
             "assets": [
               "src/favicon.ico",
               "src/app-ads.txt",
-              "src/assets"
+              "src/robots.txt",
+              "src/sitemap.xml",
+              {
+                "glob": "**/*",
+                "input": "src/assets",
+                "output": "assets",
+                "ignore": [
+                  "**/.DS_Store",
+                  "**/Thumbs.db",
+                  "**/*.pdn"
+                ]
+              }
             ],
             "styles": [
               "src/styles.scss"
+            ],
+            "allowedCommonJsDependencies": [
+              "qrcode"
             ],
             "scripts": [],
             "browser": "src/main.ts",

@@ -9,6 +9,7 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { IntroSplashComponent } from './shared/intro-splash/intro-splash.component';
 import { filter, map, startWith, distinctUntilChanged } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { SeoService } from './seo/seo.service';
 
 @Component({
   selector: 'app-root',
@@ -29,8 +30,11 @@ export class AppComponent {
   constructor(
     private router: Router,
     @Inject(PLATFORM_ID) private platformId: Object,
-    @Optional() private dialog: MatDialog // opcjonalny — nie dostępny podczas SSR
+    @Optional() private dialog: MatDialog, // opcjonalny — nie dostępny podczas SSR
+    seo: SeoService
   ) {
+    seo.init();
+
     this.isHomeNoHashNoProduct$ = this.router.events.pipe(
       startWith(null),
       filter(e => !e || e instanceof NavigationEnd),
