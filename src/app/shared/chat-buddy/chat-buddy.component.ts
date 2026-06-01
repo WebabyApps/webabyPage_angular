@@ -1,5 +1,5 @@
-import { Component, effect, signal, inject, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, effect, signal, inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 // Jeśli używasz Transloco do TTS językowego (opcjonalnie):
 // import { TranslocoService } from '@jsverse/transloco';
 
@@ -49,8 +49,10 @@ export class ChatBuddyComponent implements OnInit {
   // (opcjonalnie Transloco)
   // private transloco = inject(TranslocoService);
 
+  private platformId = inject(PLATFORM_ID);
+
   constructor() {
-    if (typeof window !== 'undefined') {
+    if (isPlatformBrowser(this.platformId)) {
       window.addEventListener('webaby:intro:done', () => this.markVisibleOnce());
 
       // animacje
@@ -66,7 +68,7 @@ export class ChatBuddyComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (typeof window !== 'undefined') {
+    if (isPlatformBrowser(this.platformId)) {
       // 1) intro zniknęło z viewportu
       this.observeIntroLeavingViewport();
       // 2) fallback czasowy
