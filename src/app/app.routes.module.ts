@@ -6,6 +6,11 @@ import { ContactComponent } from './shared/contact/contact.component';
 import { TutorialPageComponent } from './pages/tutorial-page/tutorial-page.component';
 import { PrivacyPolicyEnComponent } from './pages/privacy-policy-en/privacy-policy-en.component';
 import { ProductPrivacyPolicyComponent } from './pages/product-privacy-policy/product-privacy-policy.component';
+import { BlogListComponent } from './pages/blog/blog-list.component';
+import { BlogDetailComponent } from './pages/blog/blog-detail.component';
+import { EventsListComponent } from './pages/events/events-list.component';
+import { EventDetailComponent } from './pages/events/event-detail.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 import { inject } from '@angular/core';
 import { TranslocoService } from '@jsverse/transloco';
 const i18nResolver = () => {
@@ -20,6 +25,12 @@ export const routes: Routes = [
 
   { path: 'about', component: AboutComponent },
   { path: 'contact', component: ContactComponent },
+  { path: 'blog', component: BlogListComponent },
+  { path: 'blog/:slug', component: BlogDetailComponent },
+  { path: 'events', component: EventsListComponent },
+  { path: 'events/:slug', component: EventDetailComponent },
+  { path: 'login', component: ProfileComponent },
+  { path: 'profile', redirectTo: 'login', pathMatch: 'full' },
   
   { path: 'privacy-policy', component: PrivacyPolicyEnComponent, resolve: { i18n: i18nResolver } },
   { path: 'products/:slug/privacy-policy', component: ProductPrivacyPolicyComponent, resolve: { i18n: i18nResolver } },

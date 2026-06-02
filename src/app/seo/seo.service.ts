@@ -4,14 +4,19 @@ import { Meta, Title } from '@angular/platform-browser';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter, startWith } from 'rxjs/operators';
 import { PRODUCTS } from '../shared/models/producs.data';
+import { BLOG_POSTS, MEETUP_EVENTS } from '../content/content.seed';
 
 type SeoConfig = {
   title: string;
   description: string;
   path: string;
   image?: string;
-  type?: 'website' | 'article' | 'product';
+  type?: 'website' | 'article' | 'product' | 'event';
   keywords?: string;
+  robots?: string;
+  publishedAt?: string;
+  startsAt?: string;
+  location?: string;
 };
 
 const SITE_URL = 'https://webaby.io';
@@ -107,12 +112,12 @@ export class SeoService {
 
     this.title.setTitle(config.title);
     this.setTag('description', config.description);
-    this.setTag('robots', 'index, follow, max-image-preview:large');
+    this.setTag('robots', config.robots ?? 'index, follow, max-image-preview:large');
     this.setTag('keywords', config.keywords ?? 'Webaby, educational apps, learning games, software development, AI apps');
     this.setTag('theme-color', '#080b16');
 
     this.setProperty('og:site_name', SITE_NAME);
-    this.setProperty('og:type', config.type === 'product' ? 'product' : 'website');
+    this.setProperty('og:type', config.type === 'article' ? 'article' : config.type === 'product' ? 'product' : 'website');
     this.setProperty('og:title', config.title);
     this.setProperty('og:description', config.description);
     this.setProperty('og:url', canonical);
@@ -154,6 +159,66 @@ export class SeoService {
       };
     }
 
+    if (path === '/blog') {
+      return {
+        title: 'Webaby Blog | AI agents, MCP, Angular SSR and app development',
+        description: 'Read Webaby articles about AI agents, MCP servers, mobile AI, Angular SSR, SEO and modern web application development.',
+        path,
+        type: 'website',
+        keywords: 'AI agents, MCP servers, Angular SSR, mobile AI, web apps, app development, Webaby blog',
+      };
+    }
+
+    const blogSlug = this.blogSlug(path);
+    if (blogSlug) {
+      const post = BLOG_POSTS.find((item) => item.slug === blogSlug);
+      if (post) {
+        return {
+          title: `${post.title} | Webaby Blog`,
+          description: post.excerpt,
+          path: `/blog/${post.slug}`,
+          type: 'article',
+          keywords: post.tags.join(', '),
+          publishedAt: post.publishedAt,
+        };
+      }
+    }
+
+    if (path === '/events') {
+      return {
+        title: 'Webaby Events | AI, mobile and web meetups',
+        description: 'Join Webaby meetups and workshops about AI agents, Angular SSR, mobile AI and modern application development.',
+        path,
+        type: 'website',
+        keywords: 'AI meetups, Angular SSR workshop, MCP meetup, mobile AI event, Webaby events',
+      };
+    }
+
+    const eventSlug = this.eventSlug(path);
+    if (eventSlug) {
+      const event = MEETUP_EVENTS.find((item) => item.slug === eventSlug);
+      if (event) {
+        return {
+          title: `${event.title} | Webaby Events`,
+          description: event.summary,
+          path: `/events/${event.slug}`,
+          type: 'event',
+          keywords: event.tags.join(', '),
+          startsAt: event.startsAt,
+          location: event.location,
+        };
+      }
+    }
+
+    if (path === '/login' || path === '/profile') {
+      return {
+        title: 'Login | Webaby',
+        description: 'Login to the Webaby account and admin area.',
+        path: '/login',
+        robots: 'noindex, nofollow',
+      };
+    }
+
     if (path === '/privacy-policy') {
       return {
         title: 'Privacy Policy | Webaby',
@@ -186,6 +251,16 @@ export class SeoService {
 
   private productSlug(path: string): string | null {
     const match = path.match(/^\/(?:products|tutorial)\/([^/]+)/);
+    return match?.[1] ?? null;
+  }
+
+  private blogSlug(path: string): string | null {
+    const match = path.match(/^\/blog\/([^/]+)/);
+    return match?.[1] ?? null;
+  }
+
+  private eventSlug(path: string): string | null {
+    const match = path.match(/^\/events\/([^/]+)/);
     return match?.[1] ?? null;
   }
 
@@ -249,6 +324,40 @@ export class SeoService {
         image,
         applicationCategory: 'EducationalApplication',
         publisher: organization,
+      };
+    }
+
+    if (config.type === 'article') {
+      return {
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline: config.title.split('|')[0].trim(),
+        description: config.description,
+        url: canonical,
+        image,
+        datePublished: config.publishedAt,
+        author: organization,
+        publisher: organization,
+      };
+    }
+
+    if (config.type === 'event') {
+      return {
+        '@context': 'https://schema.org',
+        '@type': 'Event',
+        name: config.title.split('|')[0].trim(),
+        description: config.description,
+        url: canonical,
+        image,
+        startDate: config.startsAt,
+        location: {
+          '@type': config.location?.toLowerCase().includes('online') ? 'VirtualLocation' : 'Place',
+          name: config.location,
+          url: canonical,
+        },
+        organizer: organization,
+        eventAttendanceMode: 'https://schema.org/MixedEventAttendanceMode',
+        eventStatus: 'https://schema.org/EventScheduled',
       };
     }
 

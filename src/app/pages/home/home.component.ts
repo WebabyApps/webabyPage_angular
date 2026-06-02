@@ -7,6 +7,7 @@ import { HeroComponent } from '../../shared/hero/hero.component';
 import { ProductsCarouselComponent } from '../../shared/products-carousel/products-carousel.component';
 import { AboutComponent } from '../../shared/about/about.component';
 import { ContactComponent } from '../../shared/contact/contact.component';
+import { BlogTeaserComponent } from '../../shared/blog-teaser/blog-teaser.component';
 
 @Component({
   selector: 'app-home',
@@ -15,6 +16,7 @@ import { ContactComponent } from '../../shared/contact/contact.component';
     CommonModule,
     HeroComponent,
     ProductsCarouselComponent,
+    BlogTeaserComponent,
     AboutComponent,
     ContactComponent,
     TranslocoModule 

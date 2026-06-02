@@ -12,6 +12,7 @@ import { Router, RouterLink, RouterLinkActive, NavigationEnd } from '@angular/ro
 import { filter } from 'rxjs/operators';
 import { TranslocoModule } from '@jsverse/transloco';
 import { LanguageSwitcherComponent } from '../language-switcher/language-switcher.component';
+import { AuthService } from '../../content/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -23,6 +24,7 @@ import { LanguageSwitcherComponent } from '../language-switcher/language-switche
 export class HeaderComponent implements AfterViewInit {
   private router = inject(Router);
   private platformId = inject(PLATFORM_ID);
+  auth = inject(AuthService);
 
   @ViewChild('navMenu', { static: false }) navMenuRef!: ElementRef<HTMLElement>;
 

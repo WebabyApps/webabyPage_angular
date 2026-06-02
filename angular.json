@@ -37,7 +37,14 @@
               "src/styles.scss"
             ],
             "allowedCommonJsDependencies": [
-              "qrcode"
+              "qrcode",
+              "pg",
+              "pg-pool",
+              "pg-protocol",
+              "pg-types",
+              "pgpass",
+              "pg-connection-string",
+              "pg-cloudflare"
             ],
             "scripts": [],
             "browser": "src/main.ts",
@@ -49,6 +56,12 @@
           },
           "configurations": {
             "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
               "budgets": [
                 {
                   "type": "initial",
