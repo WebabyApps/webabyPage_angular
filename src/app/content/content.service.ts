@@ -2,6 +2,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { Observable, catchError, map, of } from 'rxjs';
+import { TranslocoService } from '@jsverse/transloco';
 import { environment } from '../../environments/environment';
 import { BLOG_POSTS, MEETUP_EVENTS } from './content.seed';
 import { BlogPost, EventSignup, MeetupEvent } from './content.models';
@@ -12,6 +13,7 @@ export class ContentService {
 
   constructor(
     private readonly http: HttpClient,
+    private readonly transloco: TranslocoService,
     @Inject(PLATFORM_ID) platformId: Object
   ) {
     this.browser = isPlatformBrowser(platformId);
@@ -19,7 +21,7 @@ export class ContentService {
 
   getPosts(): Observable<BlogPost[]> {
     if (!this.browser) return of(this.seedPosts());
-    return this.http.get<BlogPost[]>('/api/blog-posts').pipe(
+    return this.http.get<BlogPost[]>('/api/blog-posts', { params: this.langParams() }).pipe(
       map((posts) => posts.sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))),
       catchError(() => of(this.seedPosts()))
     );
@@ -31,12 +33,12 @@ export class ContentService {
 
   getPost(slug: string): Observable<BlogPost | undefined> {
     if (!this.browser) return of(BLOG_POSTS.find((post) => post.slug === slug));
-    return this.http.get<BlogPost>(`/api/blog-posts/${encodeURIComponent(slug)}`).pipe(
+    return this.http.get<BlogPost>(`/api/blog-posts/${encodeURIComponent(slug)}`, { params: this.langParams() }).pipe(
       catchError(() => of(BLOG_POSTS.find((post) => post.slug === slug)))
     );
   }
 
-  addPost(input: Pick<BlogPost, 'title' | 'excerpt' | 'body' | 'category' | 'tags'>, adminEmail?: string): Observable<BlogPost> {
+  addPost(input: Pick<BlogPost, 'title' | 'excerpt' | 'body' | 'category' | 'tags' | 'imageUrl'>, adminEmail?: string): Observable<BlogPost> {
     if (!this.browser) throw new Error('Cannot add blog posts during SSR');
     return this.http.post<BlogPost>('/api/blog-posts', input, {
       headers: this.adminHeaders(adminEmail),
@@ -45,7 +47,7 @@ export class ContentService {
 
   getEvents(): Observable<MeetupEvent[]> {
     if (!this.browser) return of(this.seedEvents());
-    return this.http.get<MeetupEvent[]>('/api/events').pipe(
+    return this.http.get<MeetupEvent[]>('/api/events', { params: this.langParams() }).pipe(
       map((events) => events.sort((a, b) => a.startsAt.localeCompare(b.startsAt))),
       catchError(() => of(this.seedEvents()))
     );
@@ -53,7 +55,7 @@ export class ContentService {
 
   getEvent(slug: string): Observable<MeetupEvent | undefined> {
     if (!this.browser) return of(MEETUP_EVENTS.find((event) => event.slug === slug));
-    return this.http.get<MeetupEvent>(`/api/events/${encodeURIComponent(slug)}`).pipe(
+    return this.http.get<MeetupEvent>(`/api/events/${encodeURIComponent(slug)}`, { params: this.langParams() }).pipe(
       catchError(() => of(MEETUP_EVENTS.find((event) => event.slug === slug)))
     );
   }
@@ -86,6 +88,11 @@ export class ContentService {
   private adminHeaders(adminEmail?: string): HttpHeaders {
     const email = adminEmail || environment.adminEmail;
     return new HttpHeaders({ 'x-admin-email': email });
+  }
+
+  private langParams(): HttpParams {
+    const lang = (this.transloco.getActiveLang() || 'pl').toLowerCase().split('-')[0];
+    return new HttpParams().set('lang', ['pl', 'en', 'de'].includes(lang) ? lang : 'pl');
   }
 
   private seedPosts(): BlogPost[] {

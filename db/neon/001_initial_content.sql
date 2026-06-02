@@ -9,6 +9,7 @@ create table if not exists public.blog_posts (
   category text not null default 'Webaby Notes',
   tags text[] not null default '{}',
   author_name text not null default 'Webaby Admin',
+  image_url text,
   author_user_id text,
   status text not null default 'published' check (status in ('draft', 'published')),
   published_at timestamptz not null default now(),
@@ -47,63 +48,48 @@ create index if not exists meetup_events_starts_at_idx on public.meetup_events (
 create index if not exists event_signups_event_id_idx on public.event_signups (event_id);
 
 insert into public.blog_posts
-  (slug, title, excerpt, body, category, tags, author_name, published_at)
+  (slug, title, excerpt, body, category, tags, author_name, image_url, published_at)
 values
   (
     'agentic-apps-2026',
-    'Agentic apps in 2026: from chatbot to product workflow',
-    'AI agents are moving from chat windows into real workflows: planning, tool use, memory, approvals and product telemetry.',
+    'Aplikacje agentowe w 2026: od chatbota do prawdziwego workflow',
+    'Agenci AI wychodza poza okno chatu i zaczynaja obslugiwac konkretne procesy: planowanie, narzedzia, pamiec, zgody i telemetryke.',
     array[
-      'The most useful AI products are no longer just chat interfaces. They are workflow systems where a model can decide what context it needs, call a tool, ask for approval, and hand work to another specialised agent.',
-      'For mobile and web apps this changes product design. The best user experience is not an oversized text box. It is a small set of high-confidence actions that remove repeated coordination work while keeping the user in control.'
+      'Najciekawsze produkty AI nie sa juz tylko rozmowa z modelem. Coraz czesciej sa systemami workflow, w ktorych agent potrafi dobrac kontekst, wywolac narzedzie, poprosic o akceptacje i przekazac zadanie dalej.',
+      'Dla aplikacji webowych i mobilnych oznacza to zmiane projektowania. Zamiast wielkiego pola tekstowego warto budowac male, pewne akcje, ktore usuwaja powtarzalna koordynacje.'
     ],
-    'AI Agents',
-    array['AI agents', 'product design', 'automation'],
+    'Agenci AI',
+    array['AI agents', 'automatyzacja', 'product design'],
     'Webaby Labs',
+    'assets/futere_technology.jpeg',
     '2026-06-02 00:00:00+00'
   ),
   (
     'mcp-servers-product-architecture',
-    'MCP servers: the new integration layer for AI tools',
-    'Model Context Protocol gives AI systems a standard way to work with tools, resources and prompts across products.',
+    'Serwery MCP jako nowa warstwa integracji dla narzedzi AI',
+    'Model Context Protocol pomaga laczyc modele AI z narzedziami, zasobami i promptami w bardziej przewidywalny sposob.',
     array[
-      'Model Context Protocol is becoming a practical bridge between language models and external systems. Instead of writing one-off integrations for every assistant, teams can expose resources, prompts and tools through an MCP server.',
-      'Treat MCP servers like production APIs. Add authentication, rate limits, audit logs, tool descriptions that are hard to misuse, and clear boundaries around sensitive operations.'
+      'MCP staje sie praktycznym mostem pomiedzy modelami jezykowymi a systemami biznesowymi. Zamiast pisac osobna integracje dla kazdego asystenta, zespol moze wystawic narzedzia i zasoby przez jeden serwer MCP.',
+      'Architektonicznie warto traktowac MCP jak produkcyjne API: z autoryzacja, limitami, logami audytu i opisami narzedzi, ktore trudno zle zinterpretowac.'
     ],
     'MCP',
-    array['MCP', 'integration', 'tooling'],
+    array['MCP', 'integracje', 'AI tooling'],
     'Webaby Labs',
+    'assets/software_development.jpeg',
     '2026-06-02 00:00:00+00'
   ),
   (
     'seo-for-ssr-angular-apps',
-    'SEO for Angular SSR apps: what actually matters',
-    'SSR gives crawlers HTML, but rankings still depend on content quality, metadata, internal links and performance.',
+    'SEO dla Angular SSR: co naprawde ma znaczenie',
+    'SSR daje crawlerom HTML, ale widocznosc zalezy tez od jakosci tresci, metadanych, linkow wewnetrznych i wydajnosci.',
     array[
-      'Server-side rendering solves one important problem: crawlers and social previews can see real HTML. But SSR alone is not a ranking strategy.',
-      'A strong Angular SEO setup includes unique titles and descriptions, canonical links, structured data, a sitemap, accessible headings, descriptive internal links and pages that load quickly.'
+      'Server-side rendering rozwiazuje wazny problem: roboty i podglady social media widza prawdziwy HTML. Ale sam SSR nie jest strategia pozycjonowania.',
+      'Dobry setup SEO w Angularze obejmuje unikalne tytuly i opisy, canonicale, structured data, sitemap, dostepne naglowki, opisowe linki i szybkie strony.'
     ],
     'SEO',
     array['Angular', 'SSR', 'SEO'],
     'Webaby Labs',
+    'assets/hero-bg.jpg',
     '2026-06-02 00:00:00+00'
-  )
-on conflict (slug) do nothing;
-
-insert into public.meetup_events
-  (slug, title, summary, description, starts_at, location, capacity, tags)
-values
-  (
-    'ai-agents-for-products',
-    'AI Agents for Real Products',
-    'A practical meetup about designing agentic features for mobile and web apps.',
-    array[
-      'We will look at agent workflows, tool permissions, MCP servers and human-in-the-loop approvals.',
-      'The session is aimed at founders, developers and product builders who want to add AI features without turning the app into a vague chatbot.'
-    ],
-    '2026-07-10 16:00:00+00',
-    'Online',
-    60,
-    array['AI agents', 'MCP', 'product']
   )
 on conflict (slug) do nothing;

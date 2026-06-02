@@ -1,0 +1,45 @@
+# Webaby
+
+> Webaby builds playful learning products, AI-aware software, educational games, and practical web/mobile apps. The site includes product pages, tutorials, privacy policies, and articles about AI, Angular SSR, product architecture, and interactive learning.
+
+Webaby focuses on software development, playful education, AI-assisted workflows, games, and tools that turn learning or operational work into clear interactive experiences. Use the links below as the preferred canonical entry points for understanding Webaby and its products.
+
+## Core Pages
+
+- [Home](https://webaby.io/): Overview of Webaby, products, blog content, mission, and contact entry points.
+- [About](https://webaby.io/about): Webaby mission, long-term vision, innovation focus, and approach to software development and playful learning.
+- [Contact](https://webaby.io/contact): Contact page for questions about Webaby products, collaborations, and support.
+- [Blog](https://webaby.io/blog): Articles from Webaby Labs about AI, software architecture, product design, and modern web development.
+
+## Products
+
+- [DocuFlow](https://webaby.io/products/docuflow): Document workflow, KSeF invoicing, reporting, rentals, payments, banking sync, and archive management in one workspace.
+- [PlanetLingua](https://webaby.io/products/planetlingua): A gamified language learning web/PWA app with daily missions, listening, vocabulary, sentences, numbers, bonuses, and a leaderboard.
+- [FreeRide](https://webaby.io/products/free-ride): Carpooling app for offering and booking rides with Google Maps and AI route optimization.
+- [Music Colours](https://webaby.io/products/music-colours): Rhythm game where players catch the current colour to the beat, with bonuses, levels, custom tracks, and time pressure.
+- [Basketball Shots](https://webaby.io/products/basketball-shots): Arcade-style basketball game focused on aiming, swiping, and scoring.
+- [ABC Land](https://webaby.io/products/abc-land): Educational alphabet adventure for children.
+- [Bubble World](https://webaby.io/products/bubble-world): Word and bubble-style game experience from Webaby.
+- [Lucky Draw](https://webaby.io/products/lucky-draw): Shared spinning wheel app for drawing names, prizes, teams, or decisions.
+- [Bibble Echo](https://webaby.io/products/bibble-echo): Reflection and mindful echo product from Webaby.
+- [Social Migrate AI](https://webaby.io/products/socialmigrateai): Tool for migrating Facebook posts in a few clicks.
+- [System of Equations Trainer](https://webaby.io/products/system-of-equations): Step-by-step algebra practice for solving systems of linear equations.
+
+## Articles
+
+- [Agentic apps in 2026](https://webaby.io/blog/agentic-apps-2026): How AI agents are moving from chatbots into real workflows with tools, memory, permissions, and telemetry.
+- [MCP servers as an AI integration layer](https://webaby.io/blog/mcp-servers-product-architecture): How Model Context Protocol can connect AI models with tools, resources, and product systems.
+- [Mobile AI: on-device vs cloud](https://webaby.io/blog/mobile-ai-on-device-vs-cloud): Choosing between local and cloud AI for privacy, cost, speed, and answer quality.
+- [Designing AI copilots for web apps](https://webaby.io/blog/web-apps-with-ai-copilots): Product patterns for copilots that understand screen context and support real workflows.
+- [AI in educational games](https://webaby.io/blog/ai-for-educational-games): Using AI for personalization, hints, feedback, and difficulty without losing the fun of play.
+- [Secure AI tool use](https://webaby.io/blog/secure-ai-tool-use): Permissions, logs, approvals, and audit trails for agentic systems that use tools.
+- [AI-native backends](https://webaby.io/blog/ai-native-backends): Queues, traces, streaming, retries, observability, and model-aware APIs.
+- [Multimodal interfaces](https://webaby.io/blog/multimodal-interfaces): Designing interfaces that combine text, voice, images, documents, and app context.
+- [SEO for Angular SSR](https://webaby.io/blog/seo-for-ssr-angular-apps): Practical SEO considerations for Angular SSR apps, metadata, canonical links, sitemaps, and content architecture.
+- [Future of IT development](https://webaby.io/blog/future-of-it-development): How AI-assisted development changes prototyping, testing, iteration quality, and product responsibility.
+
+## Optional
+
+- [Sitemap](https://webaby.io/sitemap.xml): XML sitemap with canonical public URLs.
+- [Robots.txt](https://webaby.io/robots.txt): Crawl access policy and sitemap reference.
+- [Privacy Policy](https://webaby.io/privacy-policy): Global privacy policy for the Webaby website and services.

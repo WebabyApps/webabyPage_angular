@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { BlogPost } from '../../content/content.models';
 import { ContentService } from '../../content/content.service';
+import { LocalizedRoutingService } from '../../i18n/localized-routing.service';
 
 @Component({
   selector: 'app-blog-detail',
@@ -13,12 +14,14 @@ import { ContentService } from '../../content/content.service';
       <section class="section">
         <div class="container">
           <ng-container *ngIf="post; else notFound">
-            <a routerLink="/blog" class="back-link">Back to blog</a>
+            <a [routerLink]="localized.path('blog')" class="back-link">Wroc do bloga</a>
             <article class="article-detail">
               <p class="eyebrow">{{ post.category }}</p>
               <h1>{{ post.title }}</h1>
               <p class="lead">{{ post.excerpt }}</p>
-              <p class="meta">By {{ post.author }} · {{ post.publishedAt }} · {{ post.readingMinutes }} min read</p>
+              <p class="meta">{{ post.author }} · {{ post.publishedAt }} · {{ post.readingMinutes }} min czytania</p>
+
+              <img class="article-hero" *ngIf="post.imageUrl" [src]="post.imageUrl" [alt]="post.title" />
 
               <div class="tag-row">
                 <span *ngFor="let tag of post.tags">{{ tag }}</span>
@@ -30,9 +33,9 @@ import { ContentService } from '../../content/content.service';
             </article>
 
             <aside class="related" *ngIf="related.length">
-              <h2>Related Webaby articles</h2>
+              <h2>Powiazane artykuly Webaby</h2>
               <div class="related-grid">
-                <a *ngFor="let item of related" [routerLink]="['/blog', item.slug]">
+                <a *ngFor="let item of related" [routerLink]="localized.path('blog', item.slug)">
                   <span>{{ item.category }}</span>
                   <strong>{{ item.title }}</strong>
                 </a>
@@ -41,9 +44,9 @@ import { ContentService } from '../../content/content.service';
           </ng-container>
 
           <ng-template #notFound>
-            <h1>Article not found</h1>
-            <p class="lead">This article is not available yet.</p>
-            <a routerLink="/blog" class="primary-link">Go to blog</a>
+            <h1>Nie znaleziono artykulu</h1>
+            <p class="lead">Ten artykul nie jest jeszcze dostepny.</p>
+            <a [routerLink]="localized.path('blog')" class="primary-link">Przejdz do bloga</a>
           </ng-template>
         </div>
       </section>
@@ -55,7 +58,7 @@ export class BlogDetailComponent {
   post?: BlogPost;
   related: BlogPost[] = [];
 
-  constructor(route: ActivatedRoute, private readonly content: ContentService) {
+  constructor(route: ActivatedRoute, private readonly content: ContentService, readonly localized: LocalizedRoutingService) {
     const slug = route.snapshot.paramMap.get('slug') ?? '';
     this.content.getPost(slug).subscribe((post) => {
       this.post = post;

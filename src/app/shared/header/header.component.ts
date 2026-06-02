@@ -13,6 +13,7 @@ import { filter } from 'rxjs/operators';
 import { TranslocoModule } from '@jsverse/transloco';
 import { LanguageSwitcherComponent } from '../language-switcher/language-switcher.component';
 import { AuthService } from '../../content/auth.service';
+import { LocalizedRoutingService } from '../../i18n/localized-routing.service';
 
 @Component({
   selector: 'app-header',
@@ -24,6 +25,7 @@ import { AuthService } from '../../content/auth.service';
 export class HeaderComponent implements AfterViewInit {
   private router = inject(Router);
   private platformId = inject(PLATFORM_ID);
+  private localizedRouting = inject(LocalizedRoutingService);
   auth = inject(AuthService);
 
   @ViewChild('navMenu', { static: false }) navMenuRef!: ElementRef<HTMLElement>;
@@ -54,6 +56,14 @@ export class HeaderComponent implements AfterViewInit {
       ev.preventDefault();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+  }
+
+  localizedRoot(): string[] {
+    return this.localizedRouting.root();
+  }
+
+  localizedPath(path: string): string[] {
+    return this.localizedRouting.path(path);
   }
 
   toggleMenu() {
@@ -138,4 +148,5 @@ export class HeaderComponent implements AfterViewInit {
       this.inactivityTimer = null;
     }
   }
+
 }

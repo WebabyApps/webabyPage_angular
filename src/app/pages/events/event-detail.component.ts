@@ -5,6 +5,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { MeetupEvent } from '../../content/content.models';
 import { AuthService } from '../../content/auth.service';
 import { ContentService } from '../../content/content.service';
+import { LocalizedRoutingService } from '../../i18n/localized-routing.service';
 
 @Component({
   selector: 'app-event-detail',
@@ -15,10 +16,10 @@ import { ContentService } from '../../content/content.service';
       <section class="section">
         <div class="container">
           <ng-container *ngIf="event; else notFound">
-            <a routerLink="/events" class="back-link">Back to events</a>
+            <a [routerLink]="localized.path('events')" class="back-link">Wroc do eventow</a>
             <div class="event-layout">
               <article>
-                <p class="eyebrow">Webaby Meetup</p>
+                <p class="eyebrow">Meetup Webaby</p>
                 <h1>{{ event.title }}</h1>
                 <p class="lead">{{ event.summary }}</p>
                 <p class="meta">{{ event.startsAt | date:'full' }} · {{ event.location }}</p>
@@ -31,26 +32,26 @@ import { ContentService } from '../../content/content.service';
               </article>
 
               <form class="signup-panel" (ngSubmit)="signup()">
-                <h2>Sign up</h2>
-                <p>{{ signedCount }}/{{ event.capacity }} places taken</p>
+                <h2>Zapisz sie</h2>
+                <p>{{ signedCount }}/{{ event.capacity }} miejsc zajetych</p>
                 <label>
-                  Name
+                  Imie
                   <input name="name" [(ngModel)]="name" required autocomplete="name" />
                 </label>
                 <label>
                   Email
                   <input name="email" [(ngModel)]="email" type="email" required autocomplete="email" />
                 </label>
-                <button type="submit">Join event</button>
+                <button type="submit">Dolacz do eventu</button>
                 <p class="success" *ngIf="message">{{ message }}</p>
               </form>
             </div>
           </ng-container>
 
           <ng-template #notFound>
-            <h1>Event not found</h1>
-            <p class="lead">This meetup is not available yet.</p>
-            <a routerLink="/events" class="primary-link">Go to events</a>
+            <h1>Nie znaleziono eventu</h1>
+            <p class="lead">Ten meetup nie jest jeszcze dostepny.</p>
+            <a [routerLink]="localized.path('events')" class="primary-link">Przejdz do eventow</a>
           </ng-template>
         </div>
       </section>
@@ -68,7 +69,8 @@ export class EventDetailComponent {
   constructor(
     route: ActivatedRoute,
     private readonly auth: AuthService,
-    private readonly content: ContentService
+    private readonly content: ContentService,
+    readonly localized: LocalizedRoutingService
   ) {
     const slug = route.snapshot.paramMap.get('slug') ?? '';
     this.content.getEvent(slug).subscribe((event) => {
@@ -85,10 +87,10 @@ export class EventDetailComponent {
     this.content.signup(this.event.id, this.name, this.email).subscribe({
       next: () => {
         this.signedCount += 1;
-        this.message = 'You are signed up. We will send details before the event.';
+        this.message = 'Zapis gotowy. Szczegoly wyslemy przed eventem.';
       },
       error: () => {
-        this.message = 'Signup failed. Please try again.';
+        this.message = 'Nie udalo sie zapisac. Sprobuj ponownie.';
       },
     });
   }

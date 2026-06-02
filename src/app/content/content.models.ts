@@ -9,6 +9,7 @@ export type BlogPost = {
   author: string;
   publishedAt: string;
   readingMinutes: number;
+  imageUrl?: string;
   featured?: boolean;
 };
 

@@ -22,6 +22,7 @@ type SeoConfig = {
 const SITE_URL = 'https://webaby.io';
 const SITE_NAME = 'Webaby';
 const DEFAULT_IMAGE = `${SITE_URL}/assets/hero-bg.jpg`;
+const LANG_PREFIX = /^\/(en|pl|de)(?=\/|$)/;
 
 const productCopy: Record<string, { title: string; description: string; keywords: string }> = {
   docuflow: {
@@ -133,17 +134,19 @@ export class SeoService {
   }
 
   private configForPath(path: string): SeoConfig {
-    if (path === '/' || path === '') {
+    const routePath = this.routePath(path);
+
+    if (routePath === '/' || routePath === '') {
       return {
         title: 'Webaby | Playful learning apps, games and software',
         description: 'Webaby builds playful educational apps, learning games and useful digital products that blend creativity, technology and knowledge.',
-        path: '/',
+        path,
         image: DEFAULT_IMAGE,
         type: 'website',
       };
     }
 
-    if (path === '/about') {
+    if (routePath === '/about') {
       return {
         title: 'About Webaby | Software, learning and playful technology',
         description: 'Learn about Webaby mission: building software, learning games and interactive tools that make knowledge engaging.',
@@ -151,7 +154,7 @@ export class SeoService {
       };
     }
 
-    if (path === '/contact') {
+    if (routePath === '/contact') {
       return {
         title: 'Contact Webaby | Software and product enquiries',
         description: 'Contact Webaby about software products, educational apps, games and technology projects.',
@@ -159,24 +162,24 @@ export class SeoService {
       };
     }
 
-    if (path === '/blog') {
+    if (routePath === '/blog') {
       return {
-        title: 'Webaby Blog | AI agents, MCP, Angular SSR and app development',
-        description: 'Read Webaby articles about AI agents, MCP servers, mobile AI, Angular SSR, SEO and modern web application development.',
+        title: 'Blog Webaby | Agenci AI, MCP, Angular SSR i aplikacje',
+        description: 'Czytaj artykuly Webaby o agentach AI, serwerach MCP, mobile AI, Angular SSR, SEO i nowoczesnym tworzeniu aplikacji.',
         path,
         type: 'website',
-        keywords: 'AI agents, MCP servers, Angular SSR, mobile AI, web apps, app development, Webaby blog',
+        keywords: 'agenci AI, serwery MCP, Angular SSR, mobile AI, aplikacje webowe, development, blog Webaby',
       };
     }
 
-    const blogSlug = this.blogSlug(path);
+    const blogSlug = this.blogSlug(routePath);
     if (blogSlug) {
       const post = BLOG_POSTS.find((item) => item.slug === blogSlug);
       if (post) {
         return {
           title: `${post.title} | Webaby Blog`,
           description: post.excerpt,
-          path: `/blog/${post.slug}`,
+          path,
           type: 'article',
           keywords: post.tags.join(', '),
           publishedAt: post.publishedAt,
@@ -184,24 +187,24 @@ export class SeoService {
       }
     }
 
-    if (path === '/events') {
+    if (routePath === '/events') {
       return {
-        title: 'Webaby Events | AI, mobile and web meetups',
-        description: 'Join Webaby meetups and workshops about AI agents, Angular SSR, mobile AI and modern application development.',
+        title: 'Eventy Webaby | AI, mobile i web meetupy',
+        description: 'Sprawdz eventy i meetupy Webaby o agentach AI, Angular SSR, mobile AI i nowoczesnym tworzeniu aplikacji.',
         path,
         type: 'website',
-        keywords: 'AI meetups, Angular SSR workshop, MCP meetup, mobile AI event, Webaby events',
+        keywords: 'eventy AI, meetupy Webaby, Angular SSR, MCP, mobile AI',
       };
     }
 
-    const eventSlug = this.eventSlug(path);
+    const eventSlug = this.eventSlug(routePath);
     if (eventSlug) {
       const event = MEETUP_EVENTS.find((item) => item.slug === eventSlug);
       if (event) {
         return {
           title: `${event.title} | Webaby Events`,
           description: event.summary,
-          path: `/events/${event.slug}`,
+          path,
           type: 'event',
           keywords: event.tags.join(', '),
           startsAt: event.startsAt,
@@ -210,16 +213,16 @@ export class SeoService {
       }
     }
 
-    if (path === '/login' || path === '/profile') {
+    if (routePath === '/login' || routePath === '/profile') {
       return {
         title: 'Login | Webaby',
         description: 'Login to the Webaby account and admin area.',
-        path: '/login',
+        path,
         robots: 'noindex, nofollow',
       };
     }
 
-    if (path === '/privacy-policy') {
+    if (routePath === '/privacy-policy') {
       return {
         title: 'Privacy Policy | Webaby',
         description: 'Read the Webaby privacy policy for website and product users.',
@@ -227,7 +230,7 @@ export class SeoService {
       };
     }
 
-    const productSlug = this.productSlug(path);
+    const productSlug = this.productSlug(routePath);
     if (productSlug) {
       const product = PRODUCTS.find((item) => item.slug === productSlug);
       const copy = productCopy[productSlug];
@@ -235,7 +238,7 @@ export class SeoService {
       return {
         title: copy?.title ?? `${this.titleize(productSlug)} | Webaby product`,
         description: copy?.description ?? `Explore ${this.titleize(productSlug)}, a Webaby product.`,
-        path: `/products/${productSlug}`,
+        path,
         image: product ? `${SITE_URL}/${product.img}` : DEFAULT_IMAGE,
         type: 'product',
         keywords: copy?.keywords,
@@ -267,6 +270,11 @@ export class SeoService {
   private cleanPath(url: string): string {
     const path = url.split('#')[0].split('?')[0] || '/';
     return path.endsWith('/') && path !== '/' ? path.slice(0, -1) : path;
+  }
+
+  private routePath(path: string): string {
+    const withoutLang = path.replace(LANG_PREFIX, '') || '/';
+    return withoutLang.endsWith('/') && withoutLang !== '/' ? withoutLang.slice(0, -1) : withoutLang;
   }
 
   private titleize(value: string): string {

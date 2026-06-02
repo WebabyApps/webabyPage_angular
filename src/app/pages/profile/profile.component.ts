@@ -5,6 +5,7 @@ import { RouterLink } from '@angular/router';
 import { CurrentUser, AuthService } from '../../content/auth.service';
 import { ContentService } from '../../content/content.service';
 import { EventSignup, MeetupEvent } from '../../content/content.models';
+import { LocalizedRoutingService } from '../../i18n/localized-routing.service';
 
 @Component({
   selector: 'app-profile',
@@ -74,6 +75,7 @@ import { EventSignup, MeetupEvent } from '../../content/content.models';
                 <label>Category<input name="postCategory" [(ngModel)]="postCategory" required /></label>
                 <label>Excerpt<textarea name="postExcerpt" [(ngModel)]="postExcerpt" required rows="3"></textarea></label>
                 <label>Tags<input name="postTags" [(ngModel)]="postTags" placeholder="AI, MCP, Angular" /></label>
+                <label>Image URL<input name="postImageUrl" [(ngModel)]="postImageUrl" placeholder="assets/software_development.jpeg" /></label>
                 <label>Body<textarea name="postBody" [(ngModel)]="postBody" required rows="9"></textarea></label>
                 <button type="submit">Publish article</button>
               </form>
@@ -106,7 +108,7 @@ import { EventSignup, MeetupEvent } from '../../content/content.models';
               <div class="panel">
                 <h2>Your meetups</h2>
                 <p>Browse upcoming events and sign up with your profile email.</p>
-                <a routerLink="/events" class="primary-link">Open events</a>
+                <a [routerLink]="localized.path('events')" class="primary-link">Open events</a>
               </div>
             </ng-template>
           </ng-container>
@@ -130,6 +132,7 @@ export class ProfileComponent {
   postCategory = 'AI';
   postExcerpt = '';
   postTags = '';
+  postImageUrl = '';
   postBody = '';
 
   eventTitle = '';
@@ -140,7 +143,7 @@ export class ProfileComponent {
   eventTags = '';
   eventDescription = '';
 
-  constructor(private readonly auth: AuthService, private readonly content: ContentService) {
+  constructor(private readonly auth: AuthService, private readonly content: ContentService, readonly localized: LocalizedRoutingService) {
     this.user = this.auth.currentUser;
     this.auth.user$.subscribe((user) => {
       this.user = user;
@@ -165,6 +168,7 @@ export class ProfileComponent {
       excerpt: this.postExcerpt,
       category: this.postCategory,
       tags: this.parseTags(this.postTags),
+      imageUrl: this.postImageUrl.trim() || undefined,
       body: this.parseParagraphs(this.postBody),
     }, this.user?.email).subscribe({
       next: (post) => {
@@ -172,6 +176,7 @@ export class ProfileComponent {
         this.postTitle = '';
         this.postExcerpt = '';
         this.postTags = '';
+        this.postImageUrl = '';
         this.postBody = '';
       },
       error: () => {

@@ -21,6 +21,7 @@
               "src/favicon.ico",
               "src/app-ads.txt",
               "src/robots.txt",
+              "src/llms.txt",
               "src/sitemap.xml",
               {
                 "glob": "**/*",

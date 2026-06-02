@@ -6,7 +6,7 @@
   <div class="container nav-row">
     <!-- BRAND -->
     <a
-      [routerLink]="['/']"
+      [routerLink]="localizedRoot()"
       fragment="main"
       routerLinkActive="active"
       [routerLinkActiveOptions]="{ exact: true }"
@@ -51,7 +51,7 @@
 <!-- NAV -->
 <nav id="navMenu" class="main-nav" [class.open]="menuOpen" #navMenu>
    <a
-        [routerLink]="['/']"
+        [routerLink]="localizedRoot()"
         fragment="main"
         routerLinkActive="active"
         [routerLinkActiveOptions]="{ exact: true }"
@@ -60,29 +60,29 @@
         {{ 'nav.home' | transloco }}
       </a>
 
-      <a [routerLink]="['/']" fragment="products" (click)="closeMenu()">
+      <a [routerLink]="localizedRoot()" fragment="products" (click)="closeMenu()">
         {{ 'nav.products' | transloco }}
       </a>
 
-      <a [routerLink]="['/blog']" routerLinkActive="active" (click)="closeMenu()">
+      <a [routerLink]="localizedPath('blog')" routerLinkActive="active" (click)="closeMenu()">
         Blog
       </a>
 
-      <a [routerLink]="['/events']" routerLinkActive="active" (click)="closeMenu()">
-        Events
+      <a [routerLink]="localizedPath('events')" routerLinkActive="active" (click)="closeMenu()">
+        Eventy
       </a>
 
-      <a [routerLink]="['/']" fragment="about" (click)="closeMenu()">
+      <a [routerLink]="localizedRoot()" fragment="about" (click)="closeMenu()">
         {{ 'nav.about' | transloco }}
       </a>
 
-      <a [routerLink]="['/']" fragment="contact" (click)="closeMenu()">
+      <a [routerLink]="localizedRoot()" fragment="contact" (click)="closeMenu()">
         {{ 'nav.contact' | transloco }}
       </a>
 
       <ng-container *ngIf="auth.user$ | async as user; else loginTextLink">
         <a
-          [routerLink]="['/login']"
+          [routerLink]="localizedPath('login')"
           routerLinkActive="active"
           (click)="closeMenu()"
           class="account-link logged-in"
@@ -96,7 +96,7 @@
       </ng-container>
 
       <ng-template #loginTextLink>
-        <a [routerLink]="['/login']" routerLinkActive="active" (click)="closeMenu()">
+        <a [routerLink]="localizedPath('login')" routerLinkActive="active" (click)="closeMenu()">
           Login
         </a>
       </ng-template>

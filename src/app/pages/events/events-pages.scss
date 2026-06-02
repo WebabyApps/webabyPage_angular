@@ -29,6 +29,19 @@ h1 {
   margin-top: 28px;
 }
 
+.empty-state {
+  max-width: 700px;
+  margin-top: 28px;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(16, 22, 29, 0.78);
+}
+
+.empty-state p {
+  color: #c9d7e3;
+}
+
 .event-card {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 150px;

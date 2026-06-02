@@ -10,6 +10,7 @@ import { BLOG_POSTS, MEETUP_EVENTS } from './src/app/content/content.seed';
 import { PRODUCTS } from './src/app/shared/models/producs.data';
 
 const SITE_URL = 'https://webaby.io';
+const SITEMAP_LANGS = ['pl', 'en', 'de'];
 const { Pool } = pg;
 loadLocalEnv();
 const pool = process.env['DATABASE_URL']
@@ -206,7 +207,7 @@ function requirePool(): pg.Pool {
 async function readBlogPosts() {
   if (!pool) return BLOG_POSTS;
   const result = await pool.query(`
-    select id, slug, title, excerpt, body, category, tags, author_name, published_at
+    select id, slug, title, excerpt, body, category, tags, author_name, image_url, published_at
     from public.blog_posts
     where status = 'published'
     order by published_at desc
@@ -217,7 +218,7 @@ async function readBlogPosts() {
 async function readBlogPost(slug: string) {
   if (!pool) return BLOG_POSTS.find((post) => post.slug === slug);
   const result = await pool.query(`
-    select id, slug, title, excerpt, body, category, tags, author_name, published_at
+    select id, slug, title, excerpt, body, category, tags, author_name, image_url, published_at
     from public.blog_posts
     where slug = $1 and status = 'published'
     limit 1
@@ -231,15 +232,16 @@ async function createBlogPost(input: {
   body?: string[];
   category?: string;
   tags?: string[];
+  imageUrl?: string;
 }) {
   const title = requiredText(input.title, 'title');
   const body = Array.isArray(input.body) ? input.body.map((item) => String(item).trim()).filter(Boolean) : [];
   if (!body.length) throw new Error('body is required');
   const slug = await uniqueSlug(title, 'blog_posts');
   const result = await requirePool().query(`
-    insert into public.blog_posts (slug, title, excerpt, body, category, tags, author_name)
-    values ($1, $2, $3, $4, $5, $6, 'Webaby Admin')
-    returning id, slug, title, excerpt, body, category, tags, author_name, published_at
+    insert into public.blog_posts (slug, title, excerpt, body, category, tags, image_url, author_name)
+    values ($1, $2, $3, $4, $5, $6, $7, 'Webaby Admin')
+    returning id, slug, title, excerpt, body, category, tags, image_url, author_name, published_at
   `, [
     slug,
     title,
@@ -247,6 +249,7 @@ async function createBlogPost(input: {
     body,
     requiredText(input.category ?? 'Webaby Notes', 'category'),
     Array.isArray(input.tags) ? input.tags : [],
+    typeof input.imageUrl === 'string' && input.imageUrl.trim() ? input.imageUrl.trim() : null,
   ]);
   return mapPost(result.rows[0]);
 }
@@ -379,6 +382,7 @@ function mapPost(row: Record<string, any>) {
     author: String(row['author_name']),
     publishedAt: new Date(row['published_at']).toISOString().slice(0, 10),
     readingMinutes: Math.max(2, Math.ceil(body.join(' ').split(/\s+/).filter(Boolean).length / 180)),
+    imageUrl: typeof row['image_url'] === 'string' ? row['image_url'] : undefined,
   };
 }
 
@@ -436,6 +440,26 @@ async function generateSitemap(): Promise<string> {
     })),
     { loc: '/privacy-policy', lastmod: today, changefreq: 'yearly', priority: '0.3' },
   ];
+
+  for (const lang of SITEMAP_LANGS) {
+    entries.push(
+      { loc: `/${lang}`, lastmod: today, changefreq: 'weekly', priority: lang === 'pl' ? '0.95' : '0.85' },
+      { loc: `/${lang}/blog`, lastmod: latestDate(posts.map((post) => post.publishedAt), today), changefreq: 'weekly', priority: '0.85' },
+      { loc: `/${lang}/events`, lastmod: today, changefreq: 'weekly', priority: '0.65' },
+      ...posts.map((post) => ({
+        loc: `/${lang}/blog/${post.slug}`,
+        lastmod: post.publishedAt,
+        changefreq: 'monthly' as const,
+        priority: '0.75',
+      })),
+      ...events.map((event) => ({
+        loc: `/${lang}/events/${event.slug}`,
+        lastmod: today,
+        changefreq: 'monthly' as const,
+        priority: '0.62',
+      })),
+    );
+  }
 
   return [
     '<?xml version="1.0" encoding="UTF-8"?>',

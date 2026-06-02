@@ -203,7 +203,7 @@ export class LanguageSwitcherComponent implements OnDestroy {
     this.locale?.setLocale(lc);
     this.active.set(lang);
     if (typeof localStorage !== 'undefined') localStorage.setItem('lang', lang);
-    document.documentElement.lang = lang;
+    if (typeof document !== 'undefined') document.documentElement.lang = lang;
   }
 
   // ——— URL helpers ———

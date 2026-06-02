@@ -1,5 +1,5 @@
 // src/app/app.routes.module.ts
-import { Routes } from '@angular/router';
+import { CanMatchFn, Routes, UrlSegment } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { AboutComponent } from './shared/about/about.component';
 import { ContactComponent } from './shared/contact/contact.component';
@@ -13,16 +13,36 @@ import { EventDetailComponent } from './pages/events/event-detail.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { inject } from '@angular/core';
 import { TranslocoService } from '@jsverse/transloco';
-const i18nResolver = () => {
+
+const supportedLangs = ['en', 'pl', 'de'] as const;
+type SupportedLang = typeof supportedLangs[number];
+
+const normalizeLang = (value: string | undefined | null): SupportedLang | null => {
+  const normalized = String(value ?? '').toLowerCase().split('-')[0];
+  return supportedLangs.includes(normalized as SupportedLang) ? normalized as SupportedLang : null;
+};
+
+const setRouteLang = (lang: SupportedLang) => {
   const t = inject(TranslocoService);
-  const normalized = (t.getActiveLang() || 'en').toLowerCase().split('-')[0];
-  const lang = ['en', 'pl', 'de'].includes(normalized) ? normalized : 'en';
+  if (t.getActiveLang() !== lang) t.setActiveLang(lang);
   return t.load(lang);
 };
 
-export const routes: Routes = [
-  { path: '', component: HomeComponent, pathMatch: 'full' },
+const langCanMatch: CanMatchFn = (_route, segments: UrlSegment[]) => {
+  const lang = normalizeLang(segments[0]?.path);
+  if (!lang) return false;
+  setRouteLang(lang);
+  return true;
+};
 
+const i18nResolver = () => {
+  const t = inject(TranslocoService);
+  const lang = normalizeLang(t.getActiveLang()) ?? 'en';
+  return t.load(lang);
+};
+
+const localizedRoutes: Routes = [
+  { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'about', component: AboutComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'blog', component: BlogListComponent },
@@ -31,7 +51,7 @@ export const routes: Routes = [
   { path: 'events/:slug', component: EventDetailComponent },
   { path: 'login', component: ProfileComponent },
   { path: 'profile', redirectTo: 'login', pathMatch: 'full' },
-  
+
   { path: 'privacy-policy', component: PrivacyPolicyEnComponent, resolve: { i18n: i18nResolver } },
   { path: 'products/:slug/privacy-policy', component: ProductPrivacyPolicyComponent, resolve: { i18n: i18nResolver } },
   // --- Per-tutorial lazy "modules" (specific slugs first) ---
@@ -61,6 +81,16 @@ export const routes: Routes = [
   // --- Fallbacks (match AFTER specific routes) ---
   { path: 'products/:slug', component: TutorialPageComponent },  // generic
   { path: 'tutorial/:slug', component: TutorialPageComponent },  // optional alias
+];
+
+export const routes: Routes = [
+  { path: '', component: HomeComponent, pathMatch: 'full' },
+  ...localizedRoutes.filter((route) => route.path !== ''),
+  {
+    path: ':lang',
+    canMatch: [langCanMatch],
+    children: localizedRoutes,
+  },
 
   { path: '**', redirectTo: '' },
 ];
