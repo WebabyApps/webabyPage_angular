@@ -2,6 +2,14 @@
   padding-top: 84px;
 }
 
+.content-page--with-hero {
+  padding-top: 0;
+}
+
+.content-section {
+  padding-top: clamp(48px, 7vw, 84px);
+}
+
 .eyebrow,
 .meta {
   color: var(--accent);
@@ -15,6 +23,7 @@ h1 {
   max-width: 900px;
   font-size: clamp(2rem, 4vw, 3.2rem);
   line-height: 1.05;
+  overflow-wrap: break-word;
 }
 
 .lead {
@@ -155,5 +164,21 @@ h1 {
   .event-card,
   .event-layout {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .content-section {
+    padding-top: 42px;
+  }
+
+  h1 {
+    max-width: 100%;
+    font-size: clamp(1.9rem, 8vw, 2.35rem);
+    line-height: 1.12;
+  }
+
+  .lead {
+    font-size: 1rem;
   }
 }

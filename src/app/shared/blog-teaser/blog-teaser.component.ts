@@ -4,16 +4,24 @@ import { RouterLink } from '@angular/router';
 import { BlogPost } from '../../content/content.models';
 import { ContentService } from '../../content/content.service';
 import { LocalizedRoutingService } from '../../i18n/localized-routing.service';
+import { VaporTextComponent } from '../vapor-text/vapor-text.component';
 
 @Component({
   selector: 'app-blog-teaser',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, VaporTextComponent],
   template: `
     <div class="blog-teaser">
-      <p class="section-lead">
-        Praktyczne notatki o agentach AI, MCP, mobile AI, Angular SSR, SEO i nowoczesnym tworzeniu produktow.
-      </p>
+      <div class="section-lead">
+        <app-vapor-text
+          class="section-lead__vapor"
+          text="Praktyczne notatki o agentach AI, MCP, mobile AI, Angular SSR, SEO i nowoczesnym tworzeniu produktow."
+          [minFont]="22"
+          [maxFont]="34"
+          [fontRatio]="0.036"
+          [fontWeight]="700"
+        ></app-vapor-text>
+      </div>
 
       <div class="teaser-list">
         <article class="teaser-row" *ngFor="let post of posts; let index = index">

@@ -1,0 +1,28 @@
+:host {
+  position: relative;
+  display: block;
+  width: var(--vapor-width, min(100%, 960px));
+  height: var(--vapor-height, clamp(118px, 16vw, 190px));
+  margin-inline: auto;
+  flex: 0 1 var(--vapor-width, 960px);
+}
+
+canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.seo-heading {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

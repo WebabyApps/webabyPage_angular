@@ -4,14 +4,24 @@ import { RouterLink } from '@angular/router';
 import { MeetupEvent } from '../../content/content.models';
 import { ContentService } from '../../content/content.service';
 import { LocalizedRoutingService } from '../../i18n/localized-routing.service';
+import { HeroComponent } from '../../shared/hero/hero.component';
 
 @Component({
   selector: 'app-events-list',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, HeroComponent],
   template: `
-    <main class="content-page">
-      <section class="section">
+    <main class="content-page content-page--with-hero">
+      <app-hero
+        title="Meetupy Webaby"
+        subtitle="Wydarzenia dla tworcow AI, aplikacji mobilnych i webowych"
+        ctaText="Zobacz eventy"
+        [ctaLink]="localized.path('events')"
+        ctaFragment="events"
+        [compact]="true">
+      </app-hero>
+
+      <section class="section content-section" id="events">
         <div class="container">
           <p class="eyebrow">Meetupy Webaby</p>
           <h1>Wydarzenia dla tworcow AI, aplikacji mobilnych i webowych</h1>

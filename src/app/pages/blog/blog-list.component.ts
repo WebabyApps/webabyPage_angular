@@ -4,17 +4,29 @@ import { RouterLink } from '@angular/router';
 import { BlogPost } from '../../content/content.models';
 import { ContentService } from '../../content/content.service';
 import { LocalizedRoutingService } from '../../i18n/localized-routing.service';
+import { HeroComponent } from '../../shared/hero/hero.component';
 
 @Component({
   selector: 'app-blog-list',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, HeroComponent],
   template: `
-    <main class="content-page">
-      <section class="section">
+    <main class="content-page content-page--with-hero">
+      <app-hero
+        title="Blog Webaby"
+        subtitle="AI, aplikacje webowe, mobilne i nowoczesny development"
+        ctaText="Czytaj artykuly"
+        [ctaLink]="localized.path('blog')"
+        ctaFragment="articles"
+        [compact]="true">
+      </app-hero>
+
+      <section class="section content-section blog-live-section" id="articles">
         <div class="container">
           <p class="eyebrow">Blog Webaby</p>
-          <h1>AI, aplikacje webowe, mobilne i nowoczesny development</h1>
+          <h1 class="blog-typewriter">
+            <span>AI, aplikacje webowe, mobilne i nowoczesny development</span>
+          </h1>
           <p class="lead">
             Praktyczne artykuly o agentach AI, serwerach MCP, Angular SSR, mobile AI,
             SEO oraz architekturze nowoczesnych produktow cyfrowych.
