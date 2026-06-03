@@ -12,10 +12,12 @@
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  min-height: 560px;
+  min-height: 0;
+  padding: clamp(30px, 4vw, 48px) 0 clamp(38px, 5vw, 62px);
   background:
-    radial-gradient(circle at 52% 6%, rgba(125, 92, 255, 0.18), transparent 30%),
-    linear-gradient(180deg, #05070d 0%, #08111b 58%, #0b0f14 100%);
+    radial-gradient(circle at 50% 0%, rgba(79, 209, 197, 0.13), transparent 28%),
+    radial-gradient(circle at 82% 78%, rgba(125, 92, 255, 0.12), transparent 30%),
+    linear-gradient(180deg, #080d13 0%, #0a111a 58%, #0b0f14 100%);
 }
 
 .blog-section::before,
@@ -28,22 +30,20 @@
 
 .blog-section::before {
   z-index: 1;
-  background: linear-gradient(90deg, rgba(5, 7, 13, 0.86), rgba(5, 7, 13, 0.16) 50%, rgba(5, 7, 13, 0.86));
+  background:
+    linear-gradient(90deg, rgba(5, 7, 13, 0.76), rgba(5, 7, 13, 0.18) 50%, rgba(5, 7, 13, 0.76)),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.024) 0 1px, transparent 1px 92px);
 }
 
 .blog-section::after {
   z-index: 1;
   background:
-    radial-gradient(circle at 50% 28%, rgba(79, 209, 197, 0.13), transparent 40%),
-    linear-gradient(180deg, rgba(5, 7, 13, 0.02), rgba(5, 7, 13, 0.92)),
-    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.022) 0 1px, transparent 1px 112px);
+    linear-gradient(112deg, transparent 0 42%, rgba(79, 209, 197, 0.11) 48%, transparent 56%),
+    linear-gradient(22deg, transparent 0 43%, rgba(125, 92, 255, 0.11) 50%, transparent 58%);
+  background-size: 520px 100%, 620px 100%;
+  background-position: -220px 0, 420px 0;
   mix-blend-mode: screen;
-  opacity: 0.46;
-}
-
-.blog-section app-shader-lines {
-  z-index: 0;
-  opacity: 0.9;
+  opacity: 0.58;
 }
 
 .blog-section__content {
@@ -56,22 +56,23 @@
 
 .blog-section__heading {
   display: flex;
-  width: 100%;
-  min-width: 0;
-  align-items: center;
   justify-content: center;
   text-align: center;
-  margin: 0 auto 10px;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
 }
 
 .blog-title-vapor {
-  --vapor-width: min(100%, 1040px);
-  --vapor-height: clamp(136px, 17vw, 210px);
+  --vapor-width: min(100%, 760px);
+  --vapor-height: clamp(88px, 8vw, 118px);
+  flex-basis: auto;
+  max-width: 100%;
 }
 
 @media (max-width: 720px) {
   .blog-section {
-    min-height: 620px;
+    padding: 34px 0 48px;
   }
 }
 

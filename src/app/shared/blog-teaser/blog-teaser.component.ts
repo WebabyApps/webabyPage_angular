@@ -16,9 +16,9 @@ import { VaporTextComponent } from '../vapor-text/vapor-text.component';
         <app-vapor-text
           class="section-lead__vapor"
           text="Praktyczne notatki o agentach AI, MCP, mobile AI, Angular SSR, SEO i nowoczesnym tworzeniu produktow."
-          [minFont]="22"
-          [maxFont]="34"
-          [fontRatio]="0.036"
+          [minFont]="24"
+          [maxFont]="31"
+          [fontRatio]="0.034"
           [fontWeight]="700"
         ></app-vapor-text>
       </div>

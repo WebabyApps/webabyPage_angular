@@ -139,18 +139,18 @@ export class VaporTextComponent implements AfterViewInit, OnChanges, OnDestroy {
     }
 
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const cycle = 5400;
+    const cycle = 11000;
     const elapsed = (performance.now() - this.startTime) % cycle;
-    const vaporProgress = Math.min(1, Math.max(0, (elapsed - 700) / 2300));
-    const rebuildProgress = Math.min(1, Math.max(0, (elapsed - 3550) / 1100));
+    const vaporProgress = Math.min(1, Math.max(0, (elapsed - 7600) / 1700));
+    const rebuildProgress = Math.min(1, Math.max(0, (elapsed - 9600) / 1000));
     const waveX = this.textBounds.left + this.textBounds.width * vaporProgress;
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     for (const particle of this.particles) {
-      if (elapsed < 700) {
+      if (elapsed < 7600) {
         this.resetParticle(particle);
-      } else if (elapsed < 3300 && particle.originX <= waveX) {
+      } else if (elapsed < 9400 && particle.originX <= waveX) {
         if (particle.vx === 0 && particle.vy === 0) {
           particle.vx = (Math.random() - 0.1) * 42 * dpr;
           particle.vy = (Math.random() - 0.55) * 28 * dpr;
@@ -173,7 +173,7 @@ export class VaporTextComponent implements AfterViewInit, OnChanges, OnDestroy {
 
       if (particle.alpha > 0.01) {
         ctx.fillStyle = `rgba(234, 247, 251, ${particle.alpha})`;
-        ctx.fillRect(particle.x / dpr, particle.y / dpr, 1.35, 1.35);
+        ctx.fillRect(particle.x / dpr, particle.y / dpr, 1.55, 1.55);
       }
     }
 
@@ -183,7 +183,7 @@ export class VaporTextComponent implements AfterViewInit, OnChanges, OnDestroy {
   private drawStatic(ctx: CanvasRenderingContext2D, dpr: number): void {
     for (const particle of this.particles) {
       ctx.fillStyle = `rgba(234, 247, 251, ${particle.alpha})`;
-      ctx.fillRect(particle.x / dpr, particle.y / dpr, 1.35, 1.35);
+      ctx.fillRect(particle.x / dpr, particle.y / dpr, 1.55, 1.55);
     }
   }
 

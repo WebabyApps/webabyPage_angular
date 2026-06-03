@@ -2,6 +2,51 @@
   padding-top: 84px;
 }
 
+.article-shader-section {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: calc(100vh - 84px);
+  background:
+    radial-gradient(circle at 34% 10%, rgba(79, 209, 197, 0.16), transparent 30%),
+    radial-gradient(circle at 76% 20%, rgba(125, 92, 255, 0.16), transparent 34%),
+    #05070d;
+}
+
+.article-shader-section app-aurora-shader {
+  z-index: 0;
+  opacity: 1;
+}
+
+.article-shader-section::before,
+.article-shader-section::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.article-shader-section::before {
+  z-index: 1;
+  background:
+    linear-gradient(90deg, rgba(5, 7, 13, 0.74), rgba(5, 7, 13, 0.2) 50%, rgba(5, 7, 13, 0.78)),
+    linear-gradient(180deg, rgba(5, 7, 13, 0.06), rgba(5, 7, 13, 0.76));
+}
+
+.article-shader-section::after {
+  z-index: 1;
+  background:
+    radial-gradient(circle at 45% 10%, rgba(79, 209, 197, 0.3), transparent 34%),
+    radial-gradient(circle at 68% 24%, rgba(125, 92, 255, 0.24), transparent 36%);
+  mix-blend-mode: screen;
+  opacity: 0.78;
+}
+
+.article-shader-section > .container {
+  position: relative;
+  z-index: 2;
+}
+
 .content-page--with-hero {
   padding-top: 0;
 }

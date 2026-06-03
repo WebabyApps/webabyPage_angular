@@ -1,20 +1,24 @@
 .blog-teaser {
-  margin: 4px auto 0;
+  margin: 0 auto;
   max-width: 920px;
+  width: 100%;
 }
 
 .section-lead {
   display: flex;
   justify-content: center;
-  max-width: 960px;
-  margin: 0 auto 28px;
+  width: 100%;
+  max-width: 920px;
+  margin: -4px auto 8px;
   color: #c5d6e4;
   text-align: center;
 }
 
 .section-lead__vapor {
-  --vapor-width: min(100%, 960px);
-  --vapor-height: clamp(92px, 10vw, 132px);
+  --vapor-width: min(100%, 920px);
+  --vapor-height: clamp(104px, 8vw, 132px);
+  flex-basis: auto;
+  max-width: 100%;
 }
 
 .teaser-list {

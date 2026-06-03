@@ -4,14 +4,16 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { BlogPost } from '../../content/content.models';
 import { ContentService } from '../../content/content.service';
 import { LocalizedRoutingService } from '../../i18n/localized-routing.service';
+import { AuroraShaderComponent } from '../../shared/aurora-shader/aurora-shader.component';
 
 @Component({
   selector: 'app-blog-detail',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, AuroraShaderComponent],
   template: `
     <main class="content-page">
-      <section class="section">
+      <section class="section article-shader-section">
+        <app-aurora-shader></app-aurora-shader>
         <div class="container">
           <ng-container *ngIf="post; else notFound">
             <a [routerLink]="localized.path('blog')" class="back-link">Wroc do bloga</a>

@@ -8,7 +8,6 @@ import { ProductsCarouselComponent } from '../../shared/products-carousel/produc
 import { AboutComponent } from '../../shared/about/about.component';
 import { ContactComponent } from '../../shared/contact/contact.component';
 import { BlogTeaserComponent } from '../../shared/blog-teaser/blog-teaser.component';
-import { ShaderLinesComponent } from '../../shared/shader-lines/shader-lines.component';
 import { VaporTextComponent } from '../../shared/vapor-text/vapor-text.component';
 import { CpuArchitectureComponent } from '../../shared/cpu-architecture/cpu-architecture.component';
 
@@ -20,7 +19,6 @@ import { CpuArchitectureComponent } from '../../shared/cpu-architecture/cpu-arch
     HeroComponent,
     ProductsCarouselComponent,
     BlogTeaserComponent,
-    ShaderLinesComponent,
     VaporTextComponent,
     CpuArchitectureComponent,
     AboutComponent,

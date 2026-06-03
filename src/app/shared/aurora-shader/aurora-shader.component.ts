@@ -11,13 +11,13 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'app-shader-lines',
+  selector: 'app-aurora-shader',
   standalone: true,
   template: '<canvas #canvas aria-hidden="true"></canvas>',
-  styleUrls: ['./shader-lines.component.scss'],
+  styleUrls: ['./aurora-shader.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ShaderLinesComponent implements AfterViewInit, OnDestroy {
+export class AuroraShaderComponent implements AfterViewInit, OnDestroy {
   @ViewChild('canvas', { static: true }) private readonly canvasRef!: ElementRef<HTMLCanvasElement>;
 
   private animationId = 0;
@@ -64,94 +64,69 @@ export class ShaderLinesComponent implements AfterViewInit, OnDestroy {
     const fragmentShader = this.compileShader(gl, gl.FRAGMENT_SHADER, `
       precision highp float;
 
-      uniform vec2 resolution;
       uniform float time;
+      uniform vec2 resolution;
 
-      const float overallSpeed = 0.2;
-      const float gridSmoothWidth = 0.015;
-      const float axisWidth = 0.05;
-      const float majorLineWidth = 0.025;
-      const float minorLineWidth = 0.0125;
-      const float majorLineFrequency = 5.0;
-      const float minorLineFrequency = 1.0;
-      const float scale = 5.0;
-      const vec4 lineColor = vec4(0.4, 0.2, 0.8, 1.0);
-      const float minLineWidth = 0.01;
-      const float maxLineWidth = 0.2;
-      const float lineSpeed = 1.0 * overallSpeed;
-      const float lineAmplitude = 1.0;
-      const float lineFrequency = 0.2;
-      const float warpSpeed = 0.2 * overallSpeed;
-      const float warpFrequency = 0.5;
-      const float warpAmplitude = 1.0;
-      const float offsetFrequency = 0.5;
-      const float offsetSpeed = 1.33 * overallSpeed;
-      const float minOffsetSpread = 0.6;
-      const float maxOffsetSpread = 2.0;
-      const int linesPerGroup = 16;
+      #define NUM_OCTAVES 3
 
-      #define drawCircle(pos, radius, coord) smoothstep(radius + gridSmoothWidth, radius, length(coord - (pos)))
-      #define drawSmoothLine(pos, halfWidth, t) smoothstep(halfWidth, 0.0, abs(pos - (t)))
-      #define drawCrispLine(pos, halfWidth, t) smoothstep(halfWidth + gridSmoothWidth, halfWidth, abs(pos - (t)))
-      #define drawPeriodicLine(freq, width, t) drawCrispLine(freq / 2.0, width, abs(mod(t, freq) - (freq) / 2.0))
-
-      float drawGridLines(float axis) {
-        return drawCrispLine(0.0, axisWidth, axis)
-          + drawPeriodicLine(majorLineFrequency, majorLineWidth, axis)
-          + drawPeriodicLine(minorLineFrequency, minorLineWidth, axis);
+      float rand(vec2 n) {
+        return fract(sin(dot(n, vec2(12.9898, 4.1414))) * 43758.5453);
       }
 
-      float drawGrid(vec2 space) {
-        return min(1.0, drawGridLines(space.x) + drawGridLines(space.y));
+      float noise(vec2 p) {
+        vec2 ip = floor(p);
+        vec2 u = fract(p);
+        u = u * u * (3.0 - 2.0 * u);
+
+        float res = mix(
+          mix(rand(ip), rand(ip + vec2(1.0, 0.0)), u.x),
+          mix(rand(ip + vec2(0.0, 1.0)), rand(ip + vec2(1.0, 1.0)), u.x),
+          u.y
+        );
+        return res * res;
       }
 
-      float random(float t) {
-        return (cos(t) + cos(t * 1.3 + 1.3) + cos(t * 1.4 + 1.4)) / 3.0;
-      }
+      float fbm(vec2 x) {
+        float v = 0.0;
+        float a = 0.3;
+        vec2 shift = vec2(100.0);
+        mat2 rot = mat2(cos(0.5), sin(0.5), -sin(0.5), cos(0.5));
 
-      float getPlasmaY(float x, float horizontalFade, float offset) {
-        return random(x * lineFrequency + time * lineSpeed) * horizontalFade * lineAmplitude + offset;
+        for (int i = 0; i < NUM_OCTAVES; ++i) {
+          v += a * noise(x);
+          x = rot * x * 2.0 + shift;
+          a *= 0.4;
+        }
+
+        return v;
       }
 
       void main() {
-        vec2 fragCoord = gl_FragCoord.xy;
-        vec2 uv = fragCoord.xy / resolution.xy;
-        vec2 space = (fragCoord - resolution.xy / 2.0) / resolution.x * 2.0 * scale;
+        vec2 shake = vec2(sin(time * 1.2) * 0.005, cos(time * 2.1) * 0.005);
+        vec2 p = ((gl_FragCoord.xy + shake * resolution.xy) - resolution.xy * 0.5) /
+          resolution.y * mat2(6.0, -4.0, 4.0, 6.0);
+        vec4 color = vec4(0.0);
+        float f = 2.0 + fbm(p + vec2(time * 1.2, 0.0)) * 0.5;
 
-        float horizontalFade = 1.0 - (cos(uv.x * 6.28) * 0.5 + 0.5);
-        float verticalFade = 1.0 - (cos(uv.y * 6.28) * 0.5 + 0.5);
-
-        space.y += random(space.x * warpFrequency + time * warpSpeed) * warpAmplitude * (0.5 + horizontalFade);
-        space.x += random(space.y * warpFrequency + time * warpSpeed + 2.0) * warpAmplitude * horizontalFade;
-
-        vec4 lines = vec4(0.0);
-        vec4 bgColor1 = vec4(0.05, 0.07, 0.16, 1.0);
-        vec4 bgColor2 = vec4(0.2, 0.08, 0.34, 1.0);
-
-        for (int l = 0; l < linesPerGroup; l++) {
-          float normalizedLineIndex = float(l) / float(linesPerGroup);
-          float offsetTime = time * offsetSpeed;
-          float offsetPosition = float(l) + space.x * offsetFrequency;
-          float rand = random(offsetPosition + offsetTime) * 0.5 + 0.5;
-          float halfWidth = mix(minLineWidth, maxLineWidth, rand * horizontalFade) / 2.0;
-          float offset = random(offsetPosition + offsetTime * (1.0 + normalizedLineIndex)) *
-            mix(minOffsetSpread, maxOffsetSpread, horizontalFade);
-          float linePosition = getPlasmaY(space.x, horizontalFade, offset);
-          float line = drawSmoothLine(linePosition, halfWidth, space.y) / 2.0 +
-            drawCrispLine(linePosition, halfWidth * 0.15, space.y);
-
-          float circleX = mod(float(l) + time * lineSpeed, 25.0) - 12.0;
-          vec2 circlePosition = vec2(circleX, getPlasmaY(circleX, horizontalFade, offset));
-          float circle = drawCircle(circlePosition, 0.01, space) * 4.0;
-
-          lines += (line + circle) * lineColor * rand;
+        for (float i = 0.0; i < 35.0; i++) {
+          vec2 v = p + cos(i * i + (time + p.x * 0.08) * 0.025 + i * vec2(13.0, 11.0)) * 3.5 +
+            vec2(sin(time * 3.0 + i) * 0.003, cos(time * 3.5 - i) * 0.003);
+          float tailNoise = fbm(v + vec2(time * 0.5, i)) * 0.3 * (1.0 - (i / 35.0));
+          vec4 aurora = vec4(
+            0.26 + 0.24 * sin(i * 0.2 + time * 0.4),
+            0.42 + 0.38 * cos(i * 0.3 + time * 0.5),
+            0.74 + 0.26 * sin(i * 0.4 + time * 0.3),
+            1.0
+          );
+          vec4 contribution = aurora * exp(sin(i * i + time * 0.8)) /
+            length(max(v, vec2(v.x * f * 0.015, v.y * 1.5)));
+          float thinness = smoothstep(0.0, 1.0, i / 35.0) * 0.6;
+          color += contribution * (1.0 + tailNoise * 0.8) * thinness;
         }
 
-        vec4 fragColor = mix(bgColor1, bgColor2, uv.x);
-        fragColor *= verticalFade;
-        fragColor += lines;
-
-        gl_FragColor = vec4(fragColor.rgb, 0.92);
+        color = max(color, vec4(0.0));
+        color = tanh(pow(color / 100.0, vec4(1.6)));
+        gl_FragColor = vec4(color.rgb * 1.55, 0.86);
       }
     `);
 
@@ -163,7 +138,6 @@ export class ShaderLinesComponent implements AfterViewInit, OnDestroy {
     gl.attachShader(program, vertexShader);
     gl.attachShader(program, fragmentShader);
     gl.linkProgram(program);
-
     if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
       return;
     }
