@@ -9,7 +9,7 @@ import bootstrap from './src/main.server';
 import { BLOG_POSTS, MEETUP_EVENTS } from './src/app/content/content.seed';
 import { PRODUCTS } from './src/app/shared/models/producs.data';
 
-const SITE_URL = 'https://webaby.io';
+const SITE_URL = process.env['SITE_URL'] ?? 'https://webaby.io';
 const SITEMAP_LANGS = ['pl', 'en', 'de'];
 const { Pool } = pg;
 loadLocalEnv();
@@ -39,7 +39,15 @@ export function app(): express.Express {
   const indexHtml = join(serverDistFolder, 'index.server.html');
 
   const commonEngine = new CommonEngine({
-    allowedHosts: ['webaby.io', 'www.webaby.io', 'localhost', '51.68.172.64'],
+    allowedHosts: [
+      'webaby.io',
+      'www.webaby.io',
+      'webabyapps.webaby.io',
+      'webabygames.webaby.io',
+      'localhost',
+      '127.0.0.1',
+      '51.68.172.64',
+    ],
   });
 
   server.set('view engine', 'html');

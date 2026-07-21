@@ -1,0 +1,118 @@
+name: webaby-apps runner
+
+on:
+  push:
+    branches: [ "webaby-apps-ai" ]
+  workflow_dispatch:
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+concurrency:
+  group: webaby-apps-prod
+  cancel-in-progress: true
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    env:
+      DEST_DIR: /var/www/webaby-apps/current
+      SSR_DIR: /opt/webaby-apps/current
+      SSR_PORT: "4001"
+      SERVICE_NAME: webaby-apps-ssr
+      SITE_URL: https://webabyapps.webaby.io
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      - name: Install deps
+        run: npm ci --legacy-peer-deps
+
+      - name: Build Angular SSR (browser + server)
+        run: npm run build:ssr
+
+      - name: Detect build output dirs
+        shell: bash
+        run: |
+          set -e
+          BROWSER_OUT=$(ls -d dist/*/browser 2>/dev/null || true)
+          SERVER_OUT=$(ls -d dist/*/server 2>/dev/null || true)
+          if [ -z "$BROWSER_OUT" ]; then echo "Brak dist/*/browser"; exit 1; fi
+          if [ -z "$SERVER_OUT" ]; then echo "Brak dist/*/server"; exit 1; fi
+          echo "BROWSER_OUT=$BROWSER_OUT" >> $GITHUB_ENV
+          echo "SERVER_OUT=$SERVER_OUT" >> $GITHUB_ENV
+          echo "browser: $BROWSER_OUT  |  server: $SERVER_OUT"
+
+      - name: Setup SSH agent
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Trust server host key
+        run: ssh-keyscan -Hv ${{ secrets.OVH_VPS_IP }} >> ~/.ssh/known_hosts
+
+      - name: SSH smoke test
+        run: ssh -o BatchMode=yes ubuntu@${{ secrets.OVH_VPS_IP }} "echo CONNECTED && hostname"
+
+      - name: Create dest dirs
+        run: |
+          ssh ubuntu@${{ secrets.OVH_VPS_IP }} \
+            "sudo mkdir -p '${{ env.DEST_DIR }}' && sudo mkdir -p '${{ env.SSR_DIR }}'"
+
+      - name: Check server disk usage
+        run: |
+          ssh ubuntu@${{ secrets.OVH_VPS_IP }} "
+            echo 'Disk usage:'; df -h / /var /var/www || true
+            echo 'Largest /var folders:'; sudo du -xh /var --max-depth=1 2>/dev/null | sort -h | tail -10"
+
+      - name: Rsync browser to $DEST_DIR
+        run: |
+          rsync -az --delete-before \
+            --rsync-path="sudo rsync" \
+            "${BROWSER_OUT}/" \
+            ubuntu@${{ secrets.OVH_VPS_IP }}:"${{ env.DEST_DIR }}/"
+
+      - name: Rsync server to $SSR_DIR
+        run: |
+          rsync -az --delete-before \
+            --rsync-path="sudo rsync" \
+            "${SERVER_OUT}/" \
+            ubuntu@${{ secrets.OVH_VPS_IP }}:"${{ env.SSR_DIR }}/"
+
+      - name: Fix permissions
+        run: |
+          ssh ubuntu@${{ secrets.OVH_VPS_IP }} "
+            sudo find '${{ env.DEST_DIR }}' -type d -exec chmod 755 {} \;
+            sudo find '${{ env.DEST_DIR }}' -type f -exec chmod 644 {} \;
+            sudo chown -R root:root '${{ env.DEST_DIR }}'
+            sudo find '${{ env.SSR_DIR }}' -type d -exec chmod 755 {} \;
+            sudo find '${{ env.SSR_DIR }}' -type f -exec chmod 755 {} \;
+            sudo chown -R ubuntu:ubuntu '${{ env.SSR_DIR }}'"
+
+      - name: Create / update systemd service
+        run: |
+          NODE_PATH=$(ssh ubuntu@${{ secrets.OVH_VPS_IP }} \
+            'ls /home/ubuntu/.nvm/versions/node/v22.*/bin/node 2>/dev/null | tail -1')
+          if [ -z "$NODE_PATH" ]; then echo "ERROR: brak node v22"; exit 1; fi
+          echo "Node path: $NODE_PATH"
+
+          UNIT="[Unit]\nDescription=Webaby Apps Angular SSR\nAfter=network.target\n\n[Service]\nType=simple\nUser=ubuntu\nWorkingDirectory=${{ env.SSR_DIR }}\nExecStart=${NODE_PATH} ${{ env.SSR_DIR }}/server.mjs\nRestart=on-failure\nRestartSec=5\nEnvironment=NODE_ENV=production\nEnvironment=PORT=${{ env.SSR_PORT }}\nEnvironment=BROWSER_DIST=${{ env.DEST_DIR }}\nEnvironment=SITE_URL=${{ env.SITE_URL }}\n\n[Install]\nWantedBy=multi-user.target"
+
+          ssh ubuntu@${{ secrets.OVH_VPS_IP }} \
+            "printf '${UNIT}' | sudo tee /etc/systemd/system/${{ env.SERVICE_NAME }}.service > /dev/null
+             sudo systemctl daemon-reload
+             sudo systemctl enable ${{ env.SERVICE_NAME }}
+             sudo systemctl restart ${{ env.SERVICE_NAME }}
+             sleep 2
+             sudo systemctl is-active ${{ env.SERVICE_NAME }}"
+
+      - name: Reload Nginx
+        run: ssh ubuntu@${{ secrets.OVH_VPS_IP }} "sudo nginx -t && sudo systemctl reload nginx"
