@@ -6,6 +6,7 @@ import { CurrentUser, AuthService } from '../../content/auth.service';
 import { ContentService } from '../../content/content.service';
 import { EventSignup, MeetupEvent } from '../../content/content.models';
 import { LocalizedRoutingService } from '../../i18n/localized-routing.service';
+import { IntroSplashService } from '../../shared/intro-splash/intro-splash.service';
 
 @Component({
   selector: 'app-profile',
@@ -69,6 +70,23 @@ import { LocalizedRoutingService } from '../../i18n/localized-routing.service';
             </div>
 
             <section class="admin-grid" *ngIf="user.isAdmin; else userEvents">
+              <div class="panel wide admin-settings">
+                <div>
+                  <h2>Homepage intro</h2>
+                  <p class="hint">Default is off. Enable it here when you want the intro to appear on the home page for this browser.</p>
+                </div>
+                <label class="switch-row">
+                  <input
+                    type="checkbox"
+                    name="introEnabled"
+                    [ngModel]="introEnabled"
+                    (ngModelChange)="setIntroEnabled($event)"
+                  />
+                  <span>{{ introEnabled ? 'Intro enabled' : 'Intro disabled' }}</span>
+                </label>
+                <a [routerLink]="localized.root()" [queryParams]="{ intro: '1' }" class="primary-link">Preview intro once</a>
+              </div>
+
               <form class="panel" (ngSubmit)="addPost()">
                 <h2>Add blog article</h2>
                 <label>Title<input name="postTitle" [(ngModel)]="postTitle" required /></label>
@@ -142,8 +160,14 @@ export class ProfileComponent {
   eventCapacity = 50;
   eventTags = '';
   eventDescription = '';
+  introEnabled = this.introSplash.isEnabled();
 
-  constructor(private readonly auth: AuthService, private readonly content: ContentService, readonly localized: LocalizedRoutingService) {
+  constructor(
+    private readonly auth: AuthService,
+    private readonly content: ContentService,
+    readonly localized: LocalizedRoutingService,
+    private readonly introSplash: IntroSplashService
+  ) {
     this.user = this.auth.currentUser;
     this.auth.user$.subscribe((user) => {
       this.user = user;
@@ -159,6 +183,13 @@ export class ProfileComponent {
 
   logout(): void {
     this.auth.logout();
+  }
+
+  setIntroEnabled(enabled: boolean): void {
+    this.introEnabled = enabled;
+    this.introSplash.setEnabled(enabled);
+    if (enabled) this.introSplash.reset();
+    this.message = enabled ? 'Homepage intro enabled for this browser.' : 'Homepage intro disabled.';
   }
 
   addPost(): void {

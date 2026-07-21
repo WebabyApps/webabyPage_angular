@@ -7,6 +7,7 @@ import { ChatBuddyComponent } from './shared/chat-buddy/chat-buddy.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { IntroSplashComponent } from './shared/intro-splash/intro-splash.component';
+import { IntroSplashService } from './shared/intro-splash/intro-splash.service';
 import { filter, map, startWith, distinctUntilChanged } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { SeoService } from './seo/seo.service';
@@ -31,6 +32,7 @@ export class AppComponent {
     private router: Router,
     @Inject(PLATFORM_ID) private platformId: Object,
     @Optional() private dialog: MatDialog, // opcjonalny — nie dostępny podczas SSR
+    private introSplash: IntroSplashService,
     seo: SeoService
   ) {
     seo.init();
@@ -60,7 +62,7 @@ export class AppComponent {
     const forceIntro = qp.get('intro') === '1';
     const hasProduct = qp.has('product');
 
-    return forceIntro || (this.isHomePath(path) && !fragment && !hasProduct);
+    return forceIntro || (this.introSplash.isEnabled() && this.isHomePath(path) && !fragment && !hasProduct);
   }
 
   private isHomePath(path: string): boolean {

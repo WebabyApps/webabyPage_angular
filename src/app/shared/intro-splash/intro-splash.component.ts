@@ -56,7 +56,7 @@ export class IntroSplashComponent {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   
     // ⬇️ NOWE: intro tylko na HOME **bez** hash-a (/#products itp. blokuje pokazywanie)
-    const shouldShow = ((isHome && !hash) || this.force) && !reduce && !this.svc.alreadySeen();
+    const shouldShow = (this.force || (this.svc.isEnabled() && isHome && !hash)) && !reduce && !this.svc.alreadySeen();
   
     if (shouldShow) {
       document.documentElement.classList.add('intro-active');

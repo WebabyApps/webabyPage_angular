@@ -20,6 +20,98 @@
 
   </div>
 
+  <svg
+    *ngIf="!compact"
+    class="hero-ai-overlay"
+    viewBox="0 0 1672 941"
+    preserveAspectRatio="xMidYMid slice"
+    aria-hidden="true"
+  >
+    <defs>
+      <linearGradient id="heroFlowBlue" x1="0" x2="1" y1="0" y2="0">
+        <stop offset="0%" stop-color="#6ee7ff" stop-opacity=".08" />
+        <stop offset="48%" stop-color="#7ab7ff" stop-opacity=".56" />
+        <stop offset="100%" stop-color="#a78bfa" stop-opacity=".18" />
+      </linearGradient>
+      <linearGradient id="heroFlowViolet" x1="0" x2="1" y1="0" y2="0">
+        <stop offset="0%" stop-color="#f0abfc" stop-opacity=".1" />
+        <stop offset="52%" stop-color="#c084fc" stop-opacity=".52" />
+        <stop offset="100%" stop-color="#38bdf8" stop-opacity=".18" />
+      </linearGradient>
+      <linearGradient id="heroBrandGradient" x1="0" x2="1" y1="0" y2="0">
+        <stop offset="0%" stop-color="#f8fbff" />
+        <stop offset="34%" stop-color="#91e8ff" />
+        <stop offset="66%" stop-color="#c084fc" />
+        <stop offset="100%" stop-color="#f0abfc" />
+      </linearGradient>
+      <filter id="heroTextGlow" x="-40%" y="-80%" width="180%" height="260%">
+        <feGaussianBlur stdDeviation="3" result="blur" />
+        <feMerge>
+          <feMergeNode in="blur" />
+          <feMergeNode in="SourceGraphic" />
+        </feMerge>
+      </filter>
+    </defs>
+
+    <g class="hero-flow hero-flow--understand">
+      <path class="hero-flow-line" d="M282 142 C396 150 492 203 580 314" />
+      <path class="hero-flow-glint" d="M282 142 C396 150 492 203 580 314" />
+      <circle class="hero-flow-pulse" r="4" />
+      <text class="hero-flow-label" x="284" y="152">UNDERSTAND</text>
+    </g>
+
+    <g class="hero-flow hero-flow--reason">
+      <path class="hero-flow-line hero-flow-line--violet" d="M310 242 C446 255 532 308 612 388" />
+      <path class="hero-flow-glint hero-flow-glint--violet" d="M310 242 C446 255 532 308 612 388" />
+      <circle class="hero-flow-pulse hero-flow-pulse--slow" r="4" />
+      <text class="hero-flow-label" x="309" y="254">REASON</text>
+    </g>
+
+    <g class="hero-flow hero-flow--generate">
+      <path class="hero-flow-line" d="M255 594 C388 586 520 548 662 505" />
+      <path class="hero-flow-glint" d="M255 594 C388 586 520 548 662 505" />
+      <circle class="hero-flow-pulse hero-flow-pulse--late" r="4" />
+      <text class="hero-flow-label" x="255" y="606">GENERATE</text>
+    </g>
+
+    <g class="hero-flow hero-flow--adapt">
+      <path class="hero-flow-line hero-flow-line--violet" d="M298 712 C435 689 548 610 674 542" />
+      <path class="hero-flow-glint hero-flow-glint--violet" d="M298 712 C435 689 548 610 674 542" />
+      <circle class="hero-flow-pulse hero-flow-pulse--slow hero-flow-pulse--late" r="4" />
+      <text class="hero-flow-label" x="298" y="724">ADAPT</text>
+    </g>
+
+    <g class="hero-llm-copy">
+      <text class="hero-brand-title" x="836" y="214" text-anchor="middle" xml:space="preserve">
+        <tspan class="hero-llm-letter hero-brand-web" style="--i: 0">W</tspan><tspan class="hero-llm-letter hero-brand-web" style="--i: 1">E</tspan><tspan class="hero-llm-letter hero-brand-bridge">B</tspan><tspan class="hero-llm-letter hero-brand-baby" style="--i: 0">A</tspan><tspan class="hero-llm-letter hero-brand-baby" style="--i: 1">B</tspan><tspan class="hero-llm-letter hero-brand-baby" style="--i: 2">Y</tspan>
+      </text>
+      <g class="hero-claim-copy">
+        <text class="hero-llm-title" x="836" y="184" text-anchor="middle" xml:space="preserve">
+          <tspan class="hero-llm-letter" style="--i: 0">L</tspan><tspan class="hero-llm-letter" style="--i: 1">L</tspan><tspan class="hero-llm-letter" style="--i: 2">M</tspan><tspan class="hero-llm-letter" style="--i: 3">-</tspan><tspan class="hero-llm-letter" style="--i: 4">P</tspan><tspan class="hero-llm-letter" style="--i: 5">O</tspan><tspan class="hero-llm-letter" style="--i: 6">W</tspan><tspan class="hero-llm-letter" style="--i: 7">E</tspan><tspan class="hero-llm-letter" style="--i: 8">R</tspan><tspan class="hero-llm-letter" style="--i: 9">E</tspan><tspan class="hero-llm-letter" style="--i: 10">D</tspan><tspan class="hero-llm-letter" style="--i: 11"> </tspan><tspan class="hero-llm-letter" dx="30" style="--i: 12">A</tspan><tspan class="hero-llm-letter" style="--i: 13">P</tspan><tspan class="hero-llm-letter" style="--i: 14">P</tspan><tspan class="hero-llm-letter" style="--i: 15">L</tspan><tspan class="hero-llm-letter" style="--i: 16">I</tspan><tspan class="hero-llm-letter" style="--i: 17">C</tspan><tspan class="hero-llm-letter" style="--i: 18">A</tspan><tspan class="hero-llm-letter" style="--i: 19">T</tspan><tspan class="hero-llm-letter" style="--i: 20">I</tspan><tspan class="hero-llm-letter" style="--i: 21">O</tspan><tspan class="hero-llm-letter" style="--i: 22">N</tspan><tspan class="hero-llm-letter" style="--i: 23">S</tspan>
+        </text>
+        <text class="hero-llm-subtitle" x="836" y="226" text-anchor="middle" xml:space="preserve">
+          <tspan class="hero-llm-letter" style="--i: 25">I</tspan><tspan class="hero-llm-letter" style="--i: 26">N</tspan><tspan class="hero-llm-letter" style="--i: 27">T</tspan><tspan class="hero-llm-letter" style="--i: 28">E</tspan><tspan class="hero-llm-letter" style="--i: 29">L</tspan><tspan class="hero-llm-letter" style="--i: 30">L</tspan><tspan class="hero-llm-letter" style="--i: 31">I</tspan><tspan class="hero-llm-letter" style="--i: 32">G</tspan><tspan class="hero-llm-letter" style="--i: 33">E</tspan><tspan class="hero-llm-letter" style="--i: 34">N</tspan><tspan class="hero-llm-letter" style="--i: 35">T</tspan><tspan class="hero-llm-letter" style="--i: 36">.</tspan><tspan class="hero-llm-letter" style="--i: 37"> </tspan><tspan class="hero-llm-letter" style="--i: 38">A</tspan><tspan class="hero-llm-letter" style="--i: 39">D</tspan><tspan class="hero-llm-letter" style="--i: 40">A</tspan><tspan class="hero-llm-letter" style="--i: 41">P</tspan><tspan class="hero-llm-letter" style="--i: 42">T</tspan><tspan class="hero-llm-letter" style="--i: 43">I</tspan><tspan class="hero-llm-letter" style="--i: 44">V</tspan><tspan class="hero-llm-letter" style="--i: 45">E</tspan><tspan class="hero-llm-letter" style="--i: 46">.</tspan><tspan class="hero-llm-letter" style="--i: 47"> </tspan><tspan class="hero-llm-letter" style="--i: 48">I</tspan><tspan class="hero-llm-letter" style="--i: 49">M</tspan><tspan class="hero-llm-letter" style="--i: 50">P</tspan><tspan class="hero-llm-letter" style="--i: 51">A</tspan><tspan class="hero-llm-letter" style="--i: 52">C</tspan><tspan class="hero-llm-letter" style="--i: 53">T</tspan><tspan class="hero-llm-letter" style="--i: 54">F</tspan><tspan class="hero-llm-letter" style="--i: 55">U</tspan><tspan class="hero-llm-letter" style="--i: 56">L</tspan><tspan class="hero-llm-letter" style="--i: 57">.</tspan>
+        </text>
+      </g>
+    </g>
+  </svg>
+
+  <div
+    *ngIf="!compact"
+    class="hero-model-stage"
+    #heroModelStage
+    [class.loaded]="heroModelReady"
+    [class.failed]="heroModelFailed"
+    aria-hidden="true"
+    (pointerenter)="setHeroModelHover(true)"
+    (pointerleave)="setHeroModelHover(false)"
+    (focusin)="setHeroModelHover(true)"
+    (focusout)="setHeroModelHover(false)"
+  >
+    <span class="hero-model-loading">loading</span>
+    <canvas class="hero-model-canvas" #heroModelCanvas></canvas>
+  </div>
+
   <div class="hero-content">
     <!-- BIG LOGO (hidden on compact pages) -->
 <a
