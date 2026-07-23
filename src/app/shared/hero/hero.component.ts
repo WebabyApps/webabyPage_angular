@@ -91,7 +91,17 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
 
     this.heroModelInitStarted = true;
     this.ngZone.runOutsideAngular(() => {
-      window.setTimeout(() => void this.initHeroModel(), 0);
+      const startModel = () => void this.initHeroModel();
+      const requestIdle = (window as any).requestIdleCallback as
+        | ((callback: () => void, options?: { timeout: number }) => number)
+        | undefined;
+
+      if (requestIdle) {
+        requestIdle(startModel, { timeout: 1200 });
+        return;
+      }
+
+      window.setTimeout(startModel, 500);
     });
   }
 
