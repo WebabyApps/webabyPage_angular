@@ -96,7 +96,7 @@ margin-top: 50px;
 }
 
 .hero:not(.compact) .hero-bg {
-  background: #020716 url('/assets/hero/background_ai_webaby_clean.png') 49% 43%/auto 108% no-repeat;
+  background: #020716 url('/assets/hero/background_ai_webaby_clean.png') 49% calc(43% + 6svh)/auto 108% no-repeat;
   background-image: url('/assets/hero/background_ai_webaby_clean.webp');
   opacity: 1;
 }
