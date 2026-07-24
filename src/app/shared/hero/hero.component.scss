@@ -334,8 +334,8 @@ margin-top: 50px;
 
 @media (max-width: 640px) {
   .hero:not(.compact) .hero-bg {
-    background-position: 49% 45%;
-    background-size: auto 108%;
+    background-position: 49% 50%;
+    background-size: auto 100%;
   }
 
   .hero-ai-overlay {
@@ -358,8 +358,8 @@ margin-top: 50px;
   }
 
   .hero-model-stage {
-    top: 54.6%;
-    left: 49.2%;
+    top: 51.6%;
+    left: 49.4%;
     width: clamp(170px, 48vw, 230px);
   }
 }
