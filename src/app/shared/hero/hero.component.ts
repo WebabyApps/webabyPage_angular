@@ -395,24 +395,31 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
     const pivot = this.heroModelPivot;
     if (pivot) {
       pivot.traverse((node: any) => {
-        node.geometry?.dispose?.();
+        this.disposeThreeResource(node.geometry);
         const materials = Array.isArray(node.material) ? node.material : node.material ? [node.material] : [];
         for (const material of materials) {
           for (const value of Object.values(material)) {
-            if (value && typeof value === 'object' && 'dispose' in value) {
-              (value as { dispose?: () => void }).dispose?.();
-            }
+            this.disposeThreeResource(value);
           }
-          material.dispose?.();
+          this.disposeThreeResource(material);
         }
       });
     }
 
-    this.heroModelRenderer?.dispose?.();
+    this.disposeThreeResource(this.heroModelRenderer);
     this.heroModelRenderer = undefined;
     this.heroModelScene = undefined;
     this.heroModelCamera = undefined;
     this.heroModelPivot = undefined;
+  }
+
+  private disposeThreeResource(resource: unknown): void {
+    if (!resource || typeof resource !== 'object') return;
+
+    const dispose = (resource as { dispose?: unknown }).dispose;
+    if (typeof dispose === 'function') {
+      dispose.call(resource);
+    }
   }
 
   private shortestAngleDelta(from: number, to: number): number {
