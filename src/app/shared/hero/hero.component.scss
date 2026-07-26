@@ -334,7 +334,9 @@ margin-top: 50px;
 
 @media (max-width: 640px) {
   .hero:not(.compact) .hero-bg {
-    background-position: 49% 50%;
+    background-position:
+      calc(49% + clamp(12px, 4vw, 18px))
+      calc(50% + clamp(36px, 5.5svh, 50px));
     background-size: auto 100%;
   }
 
