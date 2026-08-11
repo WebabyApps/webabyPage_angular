@@ -7,6 +7,8 @@ import { ContentService } from '../../content/content.service';
 import { EventSignup, MeetupEvent } from '../../content/content.models';
 import { LocalizedRoutingService } from '../../i18n/localized-routing.service';
 import { IntroSplashService } from '../../shared/intro-splash/intro-splash.service';
+import { HomepageSettings } from '../../content/homepage-settings.models';
+import { HomepageSettingsService } from '../../content/homepage-settings.service';
 
 @Component({
   selector: 'app-profile',
@@ -70,22 +72,85 @@ import { IntroSplashService } from '../../shared/intro-splash/intro-splash.servi
             </div>
 
             <section class="admin-grid" *ngIf="user.isAdmin; else userEvents">
-              <div class="panel wide admin-settings">
-                <div>
-                  <h2>Homepage intro</h2>
-                  <p class="hint">Default is off. Enable it here when you want the intro to appear on the home page for this browser.</p>
+              <form class="panel wide admin-settings" (ngSubmit)="saveHomepageSettings()">
+                <div class="settings-head">
+                  <div>
+                    <p class="meta">Strona główna</p>
+                    <h2>Widoczność i wygląd</h2>
+                    <p class="hint">Te ustawienia są globalne i obowiązują wszystkich odwiedzających webaby.io.</p>
+                  </div>
+                  <button type="submit" [disabled]="settingsSaving">
+                    {{ settingsSaving ? 'Zapisywanie…' : 'Zapisz ustawienia' }}
+                  </button>
                 </div>
-                <label class="switch-row">
-                  <input
-                    type="checkbox"
-                    name="introEnabled"
-                    [ngModel]="introEnabled"
-                    (ngModelChange)="setIntroEnabled($event)"
-                  />
-                  <span>{{ introEnabled ? 'Intro enabled' : 'Intro disabled' }}</span>
-                </label>
-                <a [routerLink]="localized.root()" [queryParams]="{ intro: '1' }" class="primary-link">Preview intro once</a>
-              </div>
+
+                <div class="settings-toggles">
+                  <label class="setting-card switch-row">
+                    <input
+                      type="checkbox"
+                      name="showBlog"
+                      [(ngModel)]="homepageSettings.showBlog"
+                    />
+                    <span>
+                      <strong>Sekcja bloga</strong>
+                      <small>{{ homepageSettings.showBlog ? 'Widoczna na stronie głównej' : 'Ukryta na stronie głównej' }}</small>
+                    </span>
+                  </label>
+
+                  <label class="setting-card switch-row">
+                    <input
+                      type="checkbox"
+                      name="showIntro"
+                      [(ngModel)]="homepageSettings.showIntro"
+                    />
+                    <span>
+                      <strong>Intro</strong>
+                      <small>{{ homepageSettings.showIntro ? 'Włączone dla pierwszej wizyty w sesji' : 'Wyłączone' }}</small>
+                    </span>
+                  </label>
+                </div>
+
+                <fieldset class="hero-picker">
+                  <legend>Hero strony głównej</legend>
+                  <label class="hero-option" [class.selected]="homepageSettings.heroVariant === 'classic'">
+                    <input type="radio" name="heroVariant" value="classic" [(ngModel)]="homepageSettings.heroVariant" />
+                    <span>
+                      <strong>Klasyczne Webaby</strong>
+                      <small>Obecne logo i klasyczne tło strony głównej.</small>
+                    </span>
+                    <a
+                      [routerLink]="localized.root()"
+                      [queryParams]="{ hero: 'classic' }"
+                      target="_blank"
+                      rel="noopener"
+                      (click)="$event.stopPropagation()"
+                    >Podgląd</a>
+                  </label>
+
+                  <label class="hero-option" [class.selected]="homepageSettings.heroVariant === 'apps'">
+                    <input type="radio" name="heroVariant" value="apps" [(ngModel)]="homepageSettings.heroVariant" />
+                    <span>
+                      <strong>Webaby Apps 3D</strong>
+                      <small>Animowany wariant z modelem GLB i warstwą AI.</small>
+                    </span>
+                    <a
+                      [routerLink]="localized.root()"
+                      [queryParams]="{ hero: 'apps' }"
+                      target="_blank"
+                      rel="noopener"
+                      (click)="$event.stopPropagation()"
+                    >Podgląd</a>
+                  </label>
+                </fieldset>
+
+                <div class="settings-actions">
+                  <a [routerLink]="localized.root()" [queryParams]="{ intro: '1' }" target="_blank" rel="noopener">
+                    Odtwórz intro w nowej karcie
+                  </a>
+                  <p class="success" *ngIf="settingsMessage">{{ settingsMessage }}</p>
+                  <p class="error" *ngIf="settingsError">{{ settingsError }}</p>
+                </div>
+              </form>
 
               <form class="panel" (ngSubmit)="addPost()">
                 <h2>Add blog article</h2>
@@ -160,18 +225,25 @@ export class ProfileComponent {
   eventCapacity = 50;
   eventTags = '';
   eventDescription = '';
-  introEnabled = this.introSplash.isEnabled();
+  homepageSettings: HomepageSettings = { ...this.homepageSettingsService.current };
+  settingsSaving = false;
+  settingsMessage = '';
+  settingsError = '';
 
   constructor(
     private readonly auth: AuthService,
     private readonly content: ContentService,
     readonly localized: LocalizedRoutingService,
-    private readonly introSplash: IntroSplashService
+    private readonly introSplash: IntroSplashService,
+    private readonly homepageSettingsService: HomepageSettingsService,
   ) {
     this.user = this.auth.currentUser;
     this.auth.user$.subscribe((user) => {
       this.user = user;
       this.loadAdminData();
+    });
+    this.homepageSettingsService.settings$.subscribe((settings) => {
+      this.homepageSettings = { ...settings };
     });
   }
 
@@ -185,11 +257,24 @@ export class ProfileComponent {
     this.auth.logout();
   }
 
-  setIntroEnabled(enabled: boolean): void {
-    this.introEnabled = enabled;
-    this.introSplash.setEnabled(enabled);
-    if (enabled) this.introSplash.reset();
-    this.message = enabled ? 'Homepage intro enabled for this browser.' : 'Homepage intro disabled.';
+  saveHomepageSettings(): void {
+    if (!this.user?.isAdmin || this.settingsSaving) return;
+
+    this.settingsSaving = true;
+    this.settingsMessage = '';
+    this.settingsError = '';
+    this.homepageSettingsService.update(this.homepageSettings, this.user.email).subscribe({
+      next: (settings) => {
+        this.homepageSettings = { ...settings };
+        this.settingsSaving = false;
+        this.settingsMessage = 'Ustawienia strony głównej zostały zapisane.';
+        if (settings.showIntro) this.introSplash.reset();
+      },
+      error: () => {
+        this.settingsSaving = false;
+        this.settingsError = 'Nie udało się zapisać ustawień. Sprawdź połączenie z API i uprawnienia administratora.';
+      },
+    });
   }
 
   addPost(): void {

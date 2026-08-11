@@ -1,12 +1,17 @@
 <ng-container *transloco="let t; scope: scope">
-<section class="hero" [class.compact]="compact">
+<section
+  class="hero"
+  [class.compact]="compact"
+  [class.hero--classic]="!showAppsHero"
+  [class.hero--apps]="showAppsHero"
+>
   <!-- background layer (keeps your starry bg, etc.) -->
   <div class="hero-bg">
 
   </div>
 
   <svg
-    *ngIf="!compact"
+    *ngIf="showAppsHero"
     class="hero-ai-overlay"
     viewBox="0 0 1672 941"
     preserveAspectRatio="xMidYMid slice"
@@ -82,7 +87,7 @@
   </svg>
 
   <div
-    *ngIf="!compact"
+    *ngIf="showAppsHero"
     class="hero-model-stage"
     #heroModelStage
     [class.loaded]="heroModelReady"

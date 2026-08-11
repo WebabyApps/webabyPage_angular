@@ -15,6 +15,7 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { TranslocoModule } from '@jsverse/transloco';
 import { QRCodeComponent } from 'angularx-qrcode';
+import { HomepageHeroVariant } from '../../content/homepage-settings.models';
 
 @Component({
   selector: 'app-hero',
@@ -38,6 +39,7 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
 
   heroModelReady = false;
   heroModelFailed = false;
+  private _variant: HomepageHeroVariant = 'classic';
 
   private _scope?: string;
   private _title?: string;
@@ -84,6 +86,8 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
     if (
       !this.isBrowser ||
       this.compact ||
+      !this.showAppsHero ||
+      this.heroModelDestroyed ||
       this.heroModelInitStarted ||
       !this.heroModelCanvas ||
       !this.heroModelStage
@@ -107,9 +111,24 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.heroModelDestroyed = true;
-    if (this.heroModelFrame) cancelAnimationFrame(this.heroModelFrame);
-    this.heroModelResizeObserver?.disconnect();
-    this.disposeHeroModel();
+    this.stopHeroModel();
+  }
+
+  @Input() set variant(value: HomepageHeroVariant | undefined) {
+    const next = value === 'apps' ? 'apps' : 'classic';
+    const wasApps = this.showAppsHero;
+    this._variant = next;
+
+    if (wasApps && !this.showAppsHero) this.stopHeroModel();
+    this.scheduleHeroModelInit();
+  }
+
+  get variant(): HomepageHeroVariant {
+    return this._variant;
+  }
+
+  get showAppsHero(): boolean {
+    return !this.compact && this._variant === 'apps';
   }
 
   setHeroModelHover(active: boolean): void {
@@ -293,7 +312,6 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
       const size = box.getSize(new THREE.Vector3());
       const maxFlatSize = Math.max(size.x, size.y) || 1;
       const modelScale = 1.62 / maxFlatSize;
-      const depthBoost = 3.2;
       const displayGroup = new THREE.Group();
       const logoMaterial = new THREE.MeshStandardMaterial({
         color: 0xffffff,
@@ -304,7 +322,9 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
         side: THREE.DoubleSide,
       });
 
-      model.scale.set(modelScale, modelScale, modelScale * depthBoost);
+      // Zachowaj naturalne proporcje GLB. Poprzednie mnożenie osi Z przez 3.2
+      // sztucznie wydłużało logo podczas obrotu.
+      model.scale.setScalar(modelScale);
       model.updateWorldMatrix(true, true);
       const scaledCenter = new THREE.Box3().setFromObject(model).getCenter(new THREE.Vector3());
       model.position.sub(scaledCenter);
@@ -411,6 +431,17 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
     this.heroModelScene = undefined;
     this.heroModelCamera = undefined;
     this.heroModelPivot = undefined;
+  }
+
+  private stopHeroModel(): void {
+    if (this.heroModelFrame) cancelAnimationFrame(this.heroModelFrame);
+    this.heroModelFrame = 0;
+    this.heroModelResizeObserver?.disconnect();
+    this.heroModelResizeObserver = undefined;
+    this.disposeHeroModel();
+    this.heroModelInitStarted = false;
+    this.heroModelReady = false;
+    this.heroModelFailed = false;
   }
 
   private disposeThreeResource(resource: unknown): void {

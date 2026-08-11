@@ -50,13 +50,15 @@ export class IntroSplashComponent {
     const hash = location.hash || '';
   
     // home’owe ścieżki
-    const isHome = path === '/' || path === '/home';
+    const isHome = path === '/' || path === '/home' || /^\/(pl|en|de)\/?$/.test(path);
   
     // szanuj prefers-reduced-motion
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   
     // ⬇️ NOWE: intro tylko na HOME **bez** hash-a (/#products itp. blokuje pokazywanie)
-    const shouldShow = (this.force || (this.svc.isEnabled() && isHome && !hash)) && !reduce && !this.svc.alreadySeen();
+    const shouldShow = !reduce && (
+      this.force || (this.svc.isEnabled() && isHome && !hash && !this.svc.alreadySeen())
+    );
   
     if (shouldShow) {
       document.documentElement.classList.add('intro-active');

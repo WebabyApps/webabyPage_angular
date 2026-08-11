@@ -8,6 +8,12 @@ import pg from 'pg';
 import bootstrap from './src/main.server';
 import { BLOG_POSTS, MEETUP_EVENTS } from './src/app/content/content.seed';
 import { PRODUCTS } from './src/app/shared/models/producs.data';
+import {
+  DEFAULT_HOMEPAGE_SETTINGS,
+  HomepageSettings,
+  INITIAL_HOMEPAGE_SETTINGS,
+  normalizeHomepageSettings,
+} from './src/app/content/homepage-settings.models';
 
 const SITE_URL = process.env['SITE_URL'] ?? 'https://webaby.io';
 const SITEMAP_LANGS = ['pl', 'en', 'de'];
@@ -19,6 +25,7 @@ const pool = process.env['DATABASE_URL']
       ssl: { rejectUnauthorized: true },
     })
   : null;
+let localHomepageSettings: HomepageSettings = { ...DEFAULT_HOMEPAGE_SETTINGS };
 
 type SitemapEntry = {
   loc: string;
@@ -58,6 +65,31 @@ export function app(): express.Express {
     try {
       const posts = await readBlogPosts();
       res.json(posts);
+    } catch (err) {
+      next(err);
+    }
+  });
+
+  server.get('/api/homepage-settings', async (_req, res, next) => {
+    try {
+      res
+        .set('Cache-Control', 'no-store')
+        .json(await readHomepageSettings());
+    } catch (err) {
+      next(err);
+    }
+  });
+
+  server.put('/api/homepage-settings', async (req, res, next) => {
+    try {
+      if (!isAdminRequest(req)) {
+        res.status(403).json({ message: 'Admin access required' });
+        return;
+      }
+
+      const settings = validateHomepageSettings(req.body);
+      const adminEmail = req.header('x-admin-email')?.trim().toLowerCase() ?? '';
+      res.json(await saveHomepageSettings(settings, adminEmail));
     } catch (err) {
       next(err);
     }
@@ -164,22 +196,26 @@ export function app(): express.Express {
     index: false,
   }));
 
-  server.get('**', (req, res, next) => {
+  server.get('**', async (req, res, next) => {
     const { protocol, originalUrl, baseUrl, headers } = req;
 
-    commonEngine
-      .render({
+    try {
+      const homepageSettings = await readHomepageSettings();
+      const html = await commonEngine.render({
         bootstrap,
         documentFilePath: indexHtml,
         url: `${protocol}://${headers.host}${originalUrl}`,
         publicPath: browserDistFolder,
-        providers: [{ provide: APP_BASE_HREF, useValue: baseUrl }],
-      })
-      .then((html) => res.send(html))
-      .catch((err) => {
-        console.error('SSR render error:', err);
-        next(err);
+        providers: [
+          { provide: APP_BASE_HREF, useValue: baseUrl },
+          { provide: INITIAL_HOMEPAGE_SETTINGS, useValue: homepageSettings },
+        ],
       });
+      res.send(html);
+    } catch (err) {
+      console.error('SSR render error:', err);
+      next(err);
+    }
   });
 
   return server;
@@ -210,6 +246,76 @@ function isAdminRequest(req: express.Request): boolean {
 function requirePool(): pg.Pool {
   if (!pool) throw new Error('DATABASE_URL is not configured');
   return pool;
+}
+
+async function readHomepageSettings(): Promise<HomepageSettings> {
+  if (!pool) return { ...localHomepageSettings };
+
+  try {
+    const result = await pool.query(`
+      select show_blog, show_intro, hero_variant
+      from public.homepage_settings
+      where id = 1
+      limit 1
+    `);
+
+    if (!result.rows[0]) return { ...DEFAULT_HOMEPAGE_SETTINGS };
+    return mapHomepageSettings(result.rows[0]);
+  } catch (error) {
+    // Pozwala wdrożyć kod przed migracją bez wyłączania całej strony SSR.
+    if (isUndefinedTableError(error)) return { ...DEFAULT_HOMEPAGE_SETTINGS };
+    throw error;
+  }
+}
+
+async function saveHomepageSettings(settings: HomepageSettings, adminEmail: string): Promise<HomepageSettings> {
+  if (!pool) {
+    localHomepageSettings = { ...settings };
+    return { ...localHomepageSettings };
+  }
+
+  const result = await pool.query(`
+    insert into public.homepage_settings
+      (id, show_blog, show_intro, hero_variant, updated_by_email, updated_at)
+    values (1, $1, $2, $3, $4, now())
+    on conflict (id) do update set
+      show_blog = excluded.show_blog,
+      show_intro = excluded.show_intro,
+      hero_variant = excluded.hero_variant,
+      updated_by_email = excluded.updated_by_email,
+      updated_at = now()
+    returning show_blog, show_intro, hero_variant
+  `, [settings.showBlog, settings.showIntro, settings.heroVariant, adminEmail]);
+
+  return mapHomepageSettings(result.rows[0]);
+}
+
+function validateHomepageSettings(value: unknown): HomepageSettings {
+  if (!value || typeof value !== 'object') {
+    throw new Error('Homepage settings payload is required');
+  }
+
+  const input = value as Partial<HomepageSettings>;
+  if (typeof input.showBlog !== 'boolean' || typeof input.showIntro !== 'boolean') {
+    throw new Error('showBlog and showIntro must be boolean values');
+  }
+  if (input.heroVariant !== 'classic' && input.heroVariant !== 'apps') {
+    throw new Error('heroVariant must be classic or apps');
+  }
+
+  return normalizeHomepageSettings(input);
+}
+
+function mapHomepageSettings(row: Record<string, any>): HomepageSettings {
+  return normalizeHomepageSettings({
+    showBlog: row['show_blog'],
+    showIntro: row['show_intro'],
+    heroVariant: row['hero_variant'],
+  });
+}
+
+function isUndefinedTableError(error: unknown): boolean {
+  return Boolean(error && typeof error === 'object' && (error as { code?: unknown }).code === '42P01');
 }
 
 async function readBlogPosts() {
