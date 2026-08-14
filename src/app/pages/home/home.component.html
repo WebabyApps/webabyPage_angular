@@ -1,8 +1,9 @@
 <!-- home.component.html -->
-<span id="main"></span>
-<app-hero></app-hero>
+<ng-container *ngIf="viewModel$ | async as settings">
+  <span id="main"></span>
+  <app-hero [variant]="settings.heroVariant" ngSkipHydration></app-hero>
 
-<main id="content">
+  <main id="content">
   <section id="products" class="section">
     <div class="container">
       <h2>{{ 'home.sections.products.title' | transloco }}</h2>
@@ -10,7 +11,7 @@
     </div>
   </section>
 
-  <section id="blog" class="section alt blog-section">
+  <section *ngIf="settings.showBlog" id="blog" class="section alt blog-section">
     <div class="container blog-section__content">
       <h2 class="blog-section__heading">
         <app-vapor-text
@@ -39,4 +40,5 @@
       <app-contact></app-contact>
     </div>
   </section>
-</main>
+  </main>
+</ng-container>

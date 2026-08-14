@@ -50,6 +50,7 @@ const localizedRoutes: Routes = [
   { path: 'events', component: EventsListComponent },
   { path: 'events/:slug', component: EventDetailComponent },
   { path: 'login', component: ProfileComponent },
+  { path: 'admin', component: ProfileComponent },
   { path: 'profile', redirectTo: 'login', pathMatch: 'full' },
 
   { path: 'privacy-policy', component: PrivacyPolicyEnComponent, resolve: { i18n: i18nResolver } },

@@ -100,12 +100,27 @@
 
 /* Mobile sizing */
 @media (max-width: 900px) {
-  .card { min-width: var(--slide-w-mobile); }
+  .card {
+    min-width: var(--slide-w-mobile);
+  }
+
   .car-arrow.left  { left: 4px; }
   .car-arrow.right { right: 4px; }
 }
 
 /* Opcjonalnie: schowaj strzałki na telefonie (swipe jest naturalny) */
 @media (max-width: 768px) {
+  :host {
+    --slide-w-mobile: 100%;
+  }
+
+  .car-track {
+    padding-inline: 0;
+  }
+
+  .card {
+    flex: 0 0 var(--slide-w-mobile);
+  }
+
   .car-arrow { display: none; }
 }

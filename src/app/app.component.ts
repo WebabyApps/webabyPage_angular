@@ -8,8 +8,9 @@ import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { IntroSplashComponent } from './shared/intro-splash/intro-splash.component';
 import { filter, map, startWith, distinctUntilChanged } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { combineLatest, Observable } from 'rxjs';
 import { SeoService } from './seo/seo.service';
+import { HomepageSettingsService } from './content/homepage-settings.service';
 
 @Component({
   selector: 'app-root',
@@ -31,14 +32,21 @@ export class AppComponent {
     private router: Router,
     @Inject(PLATFORM_ID) private platformId: Object,
     @Optional() private dialog: MatDialog, // opcjonalny — nie dostępny podczas SSR
+    homepageSettings: HomepageSettingsService,
     seo: SeoService
   ) {
     seo.init();
 
-    this.isHomeNoHashNoProduct$ = this.router.events.pipe(
+    const routeState$ = this.router.events.pipe(
       startWith(null),
       filter(e => !e || e instanceof NavigationEnd),
-      map(() => this.computeIntroVisibility()),
+    );
+
+    this.isHomeNoHashNoProduct$ = combineLatest([
+      routeState$,
+      homepageSettings.settings$,
+    ]).pipe(
+      map(([, settings]) => this.computeIntroVisibility(settings.showIntro)),
       distinctUntilChanged()
     );
 
@@ -50,7 +58,7 @@ export class AppComponent {
     }
   }
 
-  private computeIntroVisibility(): boolean {
+  private computeIntroVisibility(introEnabled: boolean): boolean {
     const url = this.router.url;
     const tree: UrlTree = this.router.parseUrl(url);
     const path = url.split('?')[0];
@@ -60,10 +68,10 @@ export class AppComponent {
     const forceIntro = qp.get('intro') === '1';
     const hasProduct = qp.has('product');
 
-    return forceIntro || (this.isHomePath(path) && !fragment && !hasProduct);
+    return forceIntro || (introEnabled && this.isHomePath(path) && !fragment && !hasProduct);
   }
 
   private isHomePath(path: string): boolean {
-    return path === '/' || path === '' || path === '/home';
+    return path === '/' || path === '' || path === '/home' || /^\/(pl|en|de)\/?$/.test(path);
   }
 }

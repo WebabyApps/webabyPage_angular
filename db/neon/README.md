@@ -23,6 +23,12 @@ Run this in the Neon SQL editor:
 
 If the SQL editor does not support `\i`, paste the contents of `001_initial_content.sql` and run it.
 
+To enable the homepage controls in the admin panel, also apply:
+
+```sql
+\i db/neon/005_homepage_settings.sql
+```
+
 ## Environment
 
 Do not put `DATABASE_URL` in Angular browser environment files. It must only be used by the SSR/API server.
