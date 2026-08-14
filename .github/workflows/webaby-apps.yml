@@ -36,6 +36,19 @@ jobs:
       - name: Install deps
         run: npm ci --legacy-peer-deps
 
+      - name: Validate production runtime secrets
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
+        run: |
+          test -n "$DATABASE_URL" || (echo "Missing DATABASE_URL secret" && exit 1)
+          test -n "$ADMIN_EMAIL" || (echo "Missing ADMIN_EMAIL secret" && exit 1)
+
+      - name: Apply Neon homepage settings migration
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: node scripts/apply-neon-migration.mjs db/neon/005_homepage_settings.sql
+
       - name: Build Angular SSR (browser + server)
         run: npm run build:ssr
 
@@ -66,6 +79,18 @@ jobs:
         run: |
           ssh ubuntu@${{ secrets.OVH_VPS_IP }} \
             "sudo mkdir -p '${{ env.DEST_DIR }}' && sudo mkdir -p '${{ env.SSR_DIR }}'"
+
+      - name: Install SSR runtime environment
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
+        run: |
+          umask 077
+          printf 'DATABASE_URL=%s\nADMIN_EMAIL=%s\n' "$DATABASE_URL" "$ADMIN_EMAIL" > /tmp/webaby-apps.env
+          scp /tmp/webaby-apps.env ubuntu@${{ secrets.OVH_VPS_IP }}:/tmp/webaby-apps.env
+          ssh ubuntu@${{ secrets.OVH_VPS_IP }} \
+            "sudo install -o root -g root -m 600 /tmp/webaby-apps.env /etc/webaby-apps.env && rm -f /tmp/webaby-apps.env"
+          rm -f /tmp/webaby-apps.env
 
       - name: Check server disk usage
         run: |
@@ -104,7 +129,7 @@ jobs:
           if [ -z "$NODE_PATH" ]; then echo "ERROR: brak node v22"; exit 1; fi
           echo "Node path: $NODE_PATH"
 
-          UNIT="[Unit]\nDescription=Webaby Apps Angular SSR\nAfter=network.target\n\n[Service]\nType=simple\nUser=ubuntu\nWorkingDirectory=${{ env.SSR_DIR }}\nExecStart=${NODE_PATH} ${{ env.SSR_DIR }}/server.mjs\nRestart=on-failure\nRestartSec=5\nEnvironment=NODE_ENV=production\nEnvironment=PORT=${{ env.SSR_PORT }}\nEnvironment=BROWSER_DIST=${{ env.DEST_DIR }}\nEnvironment=SITE_URL=${{ env.SITE_URL }}\n\n[Install]\nWantedBy=multi-user.target"
+          UNIT="[Unit]\nDescription=Webaby Apps Angular SSR\nAfter=network.target\n\n[Service]\nType=simple\nUser=ubuntu\nWorkingDirectory=${{ env.SSR_DIR }}\nExecStart=${NODE_PATH} ${{ env.SSR_DIR }}/server.mjs\nRestart=on-failure\nRestartSec=5\nEnvironment=NODE_ENV=production\nEnvironment=PORT=${{ env.SSR_PORT }}\nEnvironment=BROWSER_DIST=${{ env.DEST_DIR }}\nEnvironment=SITE_URL=${{ env.SITE_URL }}\nEnvironmentFile=/etc/webaby-apps.env\n\n[Install]\nWantedBy=multi-user.target"
 
           ssh ubuntu@${{ secrets.OVH_VPS_IP }} \
             "printf '${UNIT}' | sudo tee /etc/systemd/system/${{ env.SERVICE_NAME }}.service > /dev/null
@@ -116,3 +141,10 @@ jobs:
 
       - name: Reload Nginx
         run: ssh ubuntu@${{ secrets.OVH_VPS_IP }} "sudo nginx -t && sudo systemctl reload nginx"
+
+      - name: Production smoke tests
+        run: |
+          ssh ubuntu@${{ secrets.OVH_VPS_IP }} \
+            "curl --fail --silent --show-error http://127.0.0.1:${{ env.SSR_PORT }}/api/homepage-settings"
+          curl --fail --silent --show-error ${{ env.SITE_URL }}/ > /dev/null
+          curl --fail --silent --show-error ${{ env.SITE_URL }}/api/homepage-settings > /dev/null
