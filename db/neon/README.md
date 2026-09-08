@@ -27,6 +27,7 @@ To enable the homepage controls in the admin panel, also apply:
 
 ```sql
 \i db/neon/005_homepage_settings.sql
+\i db/neon/006_homepage_carousel_products.sql
 ```
 
 ## Environment

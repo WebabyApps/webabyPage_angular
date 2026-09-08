@@ -20,6 +20,8 @@ export const PRODUCTS: CardProduct[] = [
   { id: 'planetlingua',     slug: 'planetlingua',        img: 'assets/tutorials/planetlingua/planet-header.png', appUrl: 'https://planetlingua.webaby.io' }
 ];
 
+export const PRODUCT_SLUGS = PRODUCTS.map((product) => product.slug);
+
 export function getAppUrlBySlug(slug?: string): string | undefined {
   return PRODUCTS.find(p => p.slug === slug)?.appUrl;
 }
