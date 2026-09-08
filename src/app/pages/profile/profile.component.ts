@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { TranslocoModule } from '@jsverse/transloco';
 import { CurrentUser, AuthService } from '../../content/auth.service';
 import { ContentService } from '../../content/content.service';
 import { EventSignup, MeetupEvent } from '../../content/content.models';
@@ -9,11 +10,12 @@ import { LocalizedRoutingService } from '../../i18n/localized-routing.service';
 import { IntroSplashService } from '../../shared/intro-splash/intro-splash.service';
 import { HomepageSettings } from '../../content/homepage-settings.models';
 import { HomepageSettingsService } from '../../content/homepage-settings.service';
+import { PRODUCTS } from '../../shared/models/producs.data';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, RouterLink, TranslocoModule],
   template: `
     <main class="content-page">
       <section class="section">
@@ -77,7 +79,7 @@ import { HomepageSettingsService } from '../../content/homepage-settings.service
                   <div>
                     <p class="meta">Strona główna</p>
                     <h2>Widoczność i wygląd</h2>
-                    <p class="hint">Te ustawienia są globalne i obowiązują wszystkich odwiedzających webaby.io.</p>
+                    <p class="hint">Te ustawienia są wspólne dla webaby.io i webabyapps.webaby.io.</p>
                   </div>
                   <button type="submit" [disabled]="settingsSaving">
                     {{ settingsSaving ? 'Zapisywanie…' : 'Zapisz ustawienia' }}
@@ -141,6 +143,46 @@ import { HomepageSettingsService } from '../../content/homepage-settings.service
                       (click)="$event.stopPropagation()"
                     >Podgląd</a>
                   </label>
+                </fieldset>
+
+                <fieldset class="product-picker">
+                  <legend>Produkty w karuzeli</legend>
+                  <div class="product-picker__head">
+                    <p class="hint">
+                      Wybrano {{ homepageSettings.carouselProductSlugs.length }} z {{ carouselProducts.length }} produktów.
+                      Wybór obowiązuje na webaby.io i webabyapps.webaby.io.
+                    </p>
+                    <button
+                      type="button"
+                      class="secondary-button"
+                      [disabled]="homepageSettings.carouselProductSlugs.length === carouselProducts.length"
+                      (click)="selectAllCarouselProducts()"
+                    >Zaznacz wszystkie</button>
+                  </div>
+
+                  <div class="product-options">
+                    <label
+                      *ngFor="let product of carouselProducts"
+                      class="product-option"
+                      [class.selected]="isCarouselProductSelected(product.slug)"
+                    >
+                      <input
+                        type="checkbox"
+                        [name]="'carouselProduct_' + product.slug"
+                        [ngModel]="isCarouselProductSelected(product.slug)"
+                        (ngModelChange)="toggleCarouselProduct(product.slug, $event)"
+                      />
+                      <img
+                        [src]="product.img"
+                        [alt]="('home.products.' + product.id + '.title') | transloco"
+                        loading="lazy"
+                      />
+                      <span>
+                        <strong>{{ ('home.products.' + product.id + '.title') | transloco }}</strong>
+                        <small>{{ product.slug }}</small>
+                      </span>
+                    </label>
+                  </div>
                 </fieldset>
 
                 <div class="settings-actions">
@@ -229,6 +271,7 @@ export class ProfileComponent {
   settingsSaving = false;
   settingsMessage = '';
   settingsError = '';
+  readonly carouselProducts = PRODUCTS;
 
   constructor(
     private readonly auth: AuthService,
@@ -243,7 +286,7 @@ export class ProfileComponent {
       this.loadAdminData();
     });
     this.homepageSettingsService.settings$.subscribe((settings) => {
-      this.homepageSettings = { ...settings };
+      this.homepageSettings = this.cloneHomepageSettings(settings);
     });
   }
 
@@ -257,6 +300,38 @@ export class ProfileComponent {
     this.auth.logout();
   }
 
+  isCarouselProductSelected(slug: string): boolean {
+    return this.homepageSettings.carouselProductSlugs.includes(slug);
+  }
+
+  toggleCarouselProduct(slug: string, selected: boolean): void {
+    const current = this.homepageSettings.carouselProductSlugs;
+    if (!selected && current.length === 1 && current.includes(slug)) {
+      this.settingsError = 'Karuzela musi zawierać co najmniej jeden produkt.';
+      return;
+    }
+
+    const next = selected
+      ? [...new Set([...current, slug])]
+      : current.filter((productSlug) => productSlug !== slug);
+
+    this.homepageSettings = {
+      ...this.homepageSettings,
+      carouselProductSlugs: next,
+    };
+    this.settingsError = '';
+    this.settingsMessage = '';
+  }
+
+  selectAllCarouselProducts(): void {
+    this.homepageSettings = {
+      ...this.homepageSettings,
+      carouselProductSlugs: this.carouselProducts.map((product) => product.slug),
+    };
+    this.settingsError = '';
+    this.settingsMessage = '';
+  }
+
   saveHomepageSettings(): void {
     if (!this.user?.isAdmin || this.settingsSaving) return;
 
@@ -265,7 +340,7 @@ export class ProfileComponent {
     this.settingsError = '';
     this.homepageSettingsService.update(this.homepageSettings, this.user.email).subscribe({
       next: (settings) => {
-        this.homepageSettings = { ...settings };
+        this.homepageSettings = this.cloneHomepageSettings(settings);
         this.settingsSaving = false;
         this.settingsMessage = 'Ustawienia strony głównej zostały zapisane.';
         if (settings.showIntro) this.introSplash.reset();
@@ -349,5 +424,12 @@ export class ProfileComponent {
 
   private parseParagraphs(value: string): string[] {
     return value.split(/\n{2,}/).map((paragraph) => paragraph.trim()).filter(Boolean);
+  }
+
+  private cloneHomepageSettings(settings: HomepageSettings): HomepageSettings {
+    return {
+      ...settings,
+      carouselProductSlugs: [...settings.carouselProductSlugs],
+    };
   }
 }

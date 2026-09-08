@@ -7,7 +7,7 @@
   <section id="products" class="section">
     <div class="container">
       <h2>{{ 'home.sections.products.title' | transloco }}</h2>
-      <app-products-carousel></app-products-carousel>
+      <app-products-carousel [productSlugs]="settings.carouselProductSlugs"></app-products-carousel>
     </div>
   </section>
 
