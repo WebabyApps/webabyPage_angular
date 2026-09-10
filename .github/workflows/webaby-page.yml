@@ -46,7 +46,12 @@ jobs:
       - name: Apply Neon homepage settings migration
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        run: node scripts/apply-neon-migration.mjs db/neon/005_homepage_settings.sql
+        run: node scripts/apply-neon-migration.mjs db/neon/005_homepage_settings.sql db/neon/006_homepage_carousel_products.sql
+
+      - name: Configure browser admin email
+        env:
+          ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
+        run: node scripts/configure-admin-email.mjs
 
       - name: Build Angular SSR (browser + server)
         run: npm run build:ssr
