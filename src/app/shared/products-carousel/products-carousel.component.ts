@@ -4,6 +4,7 @@ import {
   OnDestroy,
   Component,
   ElementRef,
+  Input,
   ViewChild,
   Inject,
   PLATFORM_ID,
@@ -36,7 +37,21 @@ type CardProduct = {
 export class ProductsCarouselComponent implements AfterViewInit, OnInit, OnDestroy {
   @ViewChild('track', { static: false }) trackRef!: ElementRef<HTMLDivElement>;
 
-  products: CardProduct[] = PRODUCTS;
+  products: CardProduct[] = [...PRODUCTS];
+
+  @Input() set productSlugs(value: string[] | null | undefined) {
+    const requestedSlugs = new Set(Array.isArray(value) && value.length
+      ? value
+      : PRODUCTS.map((product) => product.slug));
+    const selectedProducts = PRODUCTS.filter((product) => requestedSlugs.has(product.slug));
+
+    this.products = selectedProducts.length ? selectedProducts : [...PRODUCTS];
+    this.buildLoopProducts();
+
+    if (isPlatformBrowser(this.platformId)) {
+      queueMicrotask(() => this.jumpToRealStart());
+    }
+  }
 
   // ✅ LOOP: lista z klonami (opcja A)
   loopProducts: CardProduct[] = [];

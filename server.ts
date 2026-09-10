@@ -253,7 +253,7 @@ async function readHomepageSettings(): Promise<HomepageSettings> {
 
   try {
     const result = await pool.query(`
-      select show_blog, show_intro, hero_variant
+      select show_blog, show_intro, hero_variant, carousel_product_slugs
       from public.homepage_settings
       where id = 1
       limit 1
@@ -276,16 +276,23 @@ async function saveHomepageSettings(settings: HomepageSettings, adminEmail: stri
 
   const result = await pool.query(`
     insert into public.homepage_settings
-      (id, show_blog, show_intro, hero_variant, updated_by_email, updated_at)
-    values (1, $1, $2, $3, $4, now())
+      (id, show_blog, show_intro, hero_variant, carousel_product_slugs, updated_by_email, updated_at)
+    values (1, $1, $2, $3, $4, $5, now())
     on conflict (id) do update set
       show_blog = excluded.show_blog,
       show_intro = excluded.show_intro,
       hero_variant = excluded.hero_variant,
+      carousel_product_slugs = excluded.carousel_product_slugs,
       updated_by_email = excluded.updated_by_email,
       updated_at = now()
-    returning show_blog, show_intro, hero_variant
-  `, [settings.showBlog, settings.showIntro, settings.heroVariant, adminEmail]);
+    returning show_blog, show_intro, hero_variant, carousel_product_slugs
+  `, [
+    settings.showBlog,
+    settings.showIntro,
+    settings.heroVariant,
+    settings.carouselProductSlugs,
+    adminEmail,
+  ]);
 
   return mapHomepageSettings(result.rows[0]);
 }
@@ -302,6 +309,16 @@ function validateHomepageSettings(value: unknown): HomepageSettings {
   if (input.heroVariant !== 'classic' && input.heroVariant !== 'apps') {
     throw new Error('heroVariant must be classic or apps');
   }
+  if (!Array.isArray(input.carouselProductSlugs) || !input.carouselProductSlugs.length) {
+    throw new Error('carouselProductSlugs must contain at least one product');
+  }
+
+  const allowedProductSlugs = new Set(PRODUCTS.map((product) => product.slug));
+  if (input.carouselProductSlugs.some(
+    (slug) => typeof slug !== 'string' || !allowedProductSlugs.has(slug),
+  )) {
+    throw new Error('carouselProductSlugs contains an unknown product');
+  }
 
   return normalizeHomepageSettings(input);
 }
@@ -311,6 +328,7 @@ function mapHomepageSettings(row: Record<string, any>): HomepageSettings {
     showBlog: row['show_blog'],
     showIntro: row['show_intro'],
     heroVariant: row['hero_variant'],
+    carouselProductSlugs: row['carousel_product_slugs'],
   });
 }
 
